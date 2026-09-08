@@ -136,7 +136,7 @@
         <li>Condiciones comerciales: [CONSULTAR CONDICIONES COMERCIALES]</li>
       </ul>
 
-      <a href="#contacto" class="btn btn-light">Quiero vender UpSky</a>
+      <a href="#contacto" class="btn btn-primary">Quiero vender UpSky</a>
     </div>
 
     <div class="b2b-media">
@@ -163,16 +163,22 @@
     </div>
 
     <form class="contact-form" id="contactForm">
-      <label>
-        ¿Qué estás buscando?
-        <select name="intent">
-          <option value="comprar">Quiero comprar UpSky</option>
-          <option value="vender">Quiero vender UpSky</option>
-          <option value="distribuir">Quiero distribuir UpSky</option>
-          <option value="proveedor">Soy proveedor</option>
-          <option value="otro">Otro</option>
-        </select>
-      </label>
+      <div class="field">
+        <span class="field-label" id="intentLabel">¿Qué estás buscando?</span>
+        <div class="custom-select" id="intentSelect">
+          <button type="button" class="custom-select-trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="intentLabel">
+            <span class="custom-select-value">Quiero comprar UpSky</span>
+          </button>
+          <ul class="custom-select-options" role="listbox" hidden>
+            <li role="option" data-value="comprar" aria-selected="true">Quiero comprar UpSky</li>
+            <li role="option" data-value="vender">Quiero vender UpSky</li>
+            <li role="option" data-value="distribuir">Quiero distribuir UpSky</li>
+            <li role="option" data-value="proveedor">Soy proveedor</li>
+            <li role="option" data-value="otro">Otro</li>
+          </ul>
+          <input type="hidden" name="intent" value="comprar">
+        </div>
+      </div>
 
       <label>
         Nombre
