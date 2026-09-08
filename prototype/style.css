@@ -63,6 +63,15 @@ a { color: inherit; text-decoration: none; }
 .placeholder-flavor { aspect-ratio: 1 / 1; margin-bottom: 16px; }
 .placeholder-b2b { aspect-ratio: 4 / 3; }
 
+/* ---------- Imagen real del hero ---------- */
+.hero-img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 38% 45%;
+  border-radius: var(--radius);
+}
+
 /* ---------- Logo ---------- */
 .logo {
   display: flex;
@@ -72,20 +81,8 @@ a { color: inherit; text-decoration: none; }
   font-size: 1.4rem;
   letter-spacing: 0.02em;
 }
-.brand-icon { width: 34px; height: 34px; flex-shrink: 0; }
-.logo-text em { font-style: normal; color: var(--primary-color); }
-
-/* Lockup completo (icono + wordmark + subtítulo), usado en el footer */
-.logo--full { flex-direction: column; gap: 6px; text-align: center; }
-.brand-icon--lg { width: 64px; height: 64px; }
-.logo-subtitle {
-  font-family: var(--font-body);
-  font-size: 0.68rem;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--text-color);
-}
+.logo-img { height: 36px; width: auto; }
+.logo-img--lg { height: 56px; }
 
 /* ---------- Buttons ---------- */
 .btn {
