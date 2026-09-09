@@ -28,11 +28,33 @@
 
     <a href="#contacto" class="btn btn-primary header-cta">Quiero vender UpSky</a>
 
+    <button class="cart-button" id="cartButton" aria-label="Ver carrito" aria-haspopup="dialog">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6h15l-1.5 9h-12z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 6L5 3H2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="9.5" cy="19.5" r="1.4" fill="currentColor"/><circle cx="17.5" cy="19.5" r="1.4" fill="currentColor"/></svg>
+      <span class="cart-count" id="cartCount" hidden>0</span>
+    </button>
+
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
+
+<!-- ========== CARRITO ========== -->
+<div class="cart-overlay" id="cartOverlay" hidden></div>
+<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-label="Carrito de compra" aria-hidden="true">
+  <div class="cart-drawer-header">
+    <h3>Tu carrito</h3>
+    <button class="cart-close" id="cartClose" aria-label="Cerrar carrito">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p class="cart-empty" id="cartEmpty">Todavía no agregaste productos.</p>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total-row"><span>Total</span><span id="cartTotal">$0</span></div>
+    <button class="btn btn-primary btn-block" id="checkoutBtn">Finalizar pedido por WhatsApp</button>
+    <button class="cart-clear" id="cartClear" type="button">Vaciar carrito</button>
+  </div>
+</aside>
 
 <!-- ========== HERO ========== -->
 <section class="hero" id="inicio">
@@ -111,43 +133,81 @@
   </div>
 </section>
 
-<!-- ========== CATÁLOGO / PRODUCTOS ========== -->
-<section class="section" id="catalogo">
+<!-- ========== CATÁLOGO / PRODUCTOS (tienda) ========== -->
+<section class="section section-shop" id="catalogo">
   <div class="container">
-    <p class="section-eyebrow">Catálogo</p>
-    <h2 class="section-title">Productos</h2>
-    <p class="section-lead">Así se arma un pedido de UP SKY, para consumidor final o por mayor.</p>
+    <div class="shop-header">
+      <div>
+        <p class="section-eyebrow">Catálogo</p>
+        <h2 class="section-title">Productos</h2>
+        <p class="section-lead">Elegí tus productos, agregalos al carrito y armamos el pedido por WhatsApp.</p>
+      </div>
+    </div>
 
     <h3 class="catalog-subhead">Consumidor final</h3>
-    <div class="price-grid">
-      <div class="price-card">
-        <p class="price-name">1 pack de energizante<span>6 botellas 355cc c/u</span></p>
-        <p class="price-value">$13.800</p>
-      </div>
-      <div class="price-card">
-        <p class="price-name">2 packs de energizante<span>6 botellas 355cc c/u</span></p>
-        <p class="price-value">$26.600</p>
-      </div>
-      <div class="price-card">
-        <p class="price-name">3 packs de energizante<span>6 botellas 355cc c/u</span></p>
-        <p class="price-value">$38.700</p>
-      </div>
-      <div class="price-card">
-        <p class="price-name">1 vaso UP SKY</p>
-        <p class="price-value">$2.500</p>
-      </div>
-      <div class="price-card">
-        <p class="price-name">3 vasos UP SKY</p>
-        <p class="price-value">$6.000</p>
-      </div>
-      <div class="price-card">
-        <p class="price-name">1 remera UP SKY</p>
-        <p class="price-value">$30.000</p>
-      </div>
-      <div class="price-card">
-        <p class="price-name">Combo premium<span>1 mochila, 2 botellas de energizante y 1 vaso</span></p>
-        <p class="price-value">$12.000</p>
-      </div>
+    <div class="product-grid">
+      <article class="product-card" data-id="pack1" data-name="1 pack de energizante (6 botellas 355cc)" data-price="13800">
+        <div class="placeholder placeholder-product-thumb">[ IMAGEN PACK 1 ]</div>
+        <div class="product-card-body">
+          <p class="price-name">1 pack de energizante<span>6 botellas 355cc c/u</span></p>
+          <p class="price-value">$13.800</p>
+          <button class="btn btn-outline btn-add" type="button">Agregar al carrito</button>
+        </div>
+      </article>
+
+      <article class="product-card" data-id="pack2" data-name="2 packs de energizante (6 botellas 355cc c/u)" data-price="26600">
+        <div class="placeholder placeholder-product-thumb">[ IMAGEN PACK 2 ]</div>
+        <div class="product-card-body">
+          <p class="price-name">2 packs de energizante<span>6 botellas 355cc c/u</span></p>
+          <p class="price-value">$26.600</p>
+          <button class="btn btn-outline btn-add" type="button">Agregar al carrito</button>
+        </div>
+      </article>
+
+      <article class="product-card" data-id="pack3" data-name="3 packs de energizante (6 botellas 355cc c/u)" data-price="38700">
+        <div class="placeholder placeholder-product-thumb">[ IMAGEN PACK 3 ]</div>
+        <div class="product-card-body">
+          <p class="price-name">3 packs de energizante<span>6 botellas 355cc c/u</span></p>
+          <p class="price-value">$38.700</p>
+          <button class="btn btn-outline btn-add" type="button">Agregar al carrito</button>
+        </div>
+      </article>
+
+      <article class="product-card" data-id="vaso1" data-name="1 vaso UP SKY" data-price="2500">
+        <div class="placeholder placeholder-product-thumb">[ IMAGEN VASO ]</div>
+        <div class="product-card-body">
+          <p class="price-name">1 vaso UP SKY</p>
+          <p class="price-value">$2.500</p>
+          <button class="btn btn-outline btn-add" type="button">Agregar al carrito</button>
+        </div>
+      </article>
+
+      <article class="product-card" data-id="vaso3" data-name="3 vasos UP SKY" data-price="6000">
+        <div class="placeholder placeholder-product-thumb">[ IMAGEN VASOS ]</div>
+        <div class="product-card-body">
+          <p class="price-name">3 vasos UP SKY</p>
+          <p class="price-value">$6.000</p>
+          <button class="btn btn-outline btn-add" type="button">Agregar al carrito</button>
+        </div>
+      </article>
+
+      <article class="product-card" data-id="remera" data-name="1 remera UP SKY" data-price="30000">
+        <div class="placeholder placeholder-product-thumb">[ IMAGEN REMERA ]</div>
+        <div class="product-card-body">
+          <p class="price-name">1 remera UP SKY</p>
+          <p class="price-value">$30.000</p>
+          <button class="btn btn-outline btn-add" type="button">Agregar al carrito</button>
+        </div>
+      </article>
+
+      <article class="product-card" data-id="combo" data-name="Combo premium (1 mochila, 2 botellas y 1 vaso)" data-price="12000">
+        <div class="placeholder placeholder-product-thumb">[ IMAGEN COMBO PREMIUM ]</div>
+        <div class="product-card-body">
+          <p class="price-name">Combo premium<span>1 mochila, 2 botellas de energizante y 1 vaso</span></p>
+          <p class="price-value">$12.000</p>
+          <button class="btn btn-outline btn-add" type="button">Agregar al carrito</button>
+        </div>
+      </article>
     </div>
     <div class="catalog-meta">
       <div>
@@ -156,13 +216,14 @@
       </div>
       <div>
         <p class="catalog-meta-label">Procedimiento</p>
-        <p>Llenar carrito → calcular envío → completar datos → pagar.</p>
+        <p>Agregá al carrito → revisá tu pedido → finalizá por WhatsApp.</p>
       </div>
     </div>
 
     <hr class="catalog-divider">
 
     <h3 class="catalog-subhead">Ventas por mayor</h3>
+    <p class="section-lead">Estas presentaciones se coordinan directo por formulario, no van al carrito.</p>
     <div class="price-grid">
       <div class="price-card">
         <p class="price-name">10 packs de energizante<span>6 botellas 355cc c/u</span></p>
