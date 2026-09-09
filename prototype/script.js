@@ -14,6 +14,25 @@ document.addEventListener("DOMContentLoaded", () => {
     link.addEventListener("click", () => mainNav.classList.remove("is-open"));
   });
 
+  // Aparición sutil al hacer scroll (sección "¿Qué es UP SKY?")
+  const revealEls = document.querySelectorAll(".qs-reveal");
+  if (revealEls.length && "IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    revealEls.forEach((el) => revealObserver.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add("is-visible"));
+  }
+
   // Formulario de contacto: en este prototipo no envía datos, solo muestra un aviso.
   const contactForm = document.getElementById("contactForm");
   const formNote = document.getElementById("formNote");
