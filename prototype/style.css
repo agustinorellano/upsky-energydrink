@@ -305,14 +305,14 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 32px;
 }
 .price-card {
-  background: var(--background-alt);
+  background: var(--background-color);
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
-  padding: 18px 20px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 10px;
 }
+.price-card-body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 10px; }
 .price-name { margin: 0; font-weight: 600; font-size: 0.95rem; }
 .price-name span { display: block; font-weight: 400; color: var(--text-muted); font-size: 0.82rem; margin-top: 4px; }
 .price-value { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; color: var(--primary-color); }
