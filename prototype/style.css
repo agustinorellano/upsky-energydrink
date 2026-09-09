@@ -406,22 +406,6 @@ a { color: inherit; text-decoration: none; }
   .qs-strip { margin-top: 40px; flex-wrap: wrap; }
 }
 
-/* ---------- Sabores ---------- */
-.flavor-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
-}
-.flavor-card {
-  background: var(--background-color);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius);
-  padding: 20px;
-}
-.flavor-card h3 { margin: 0 0 8px; font-family: var(--font-display); font-size: 1.2rem; }
-.flavor-card p { margin: 0; color: var(--text-muted); font-size: 0.92rem; }
-.flavor-card--soon { opacity: 0.6; }
-
 /* ---------- Catálogo / Productos ---------- */
 .catalog-subhead {
   font-family: var(--font-display);
@@ -848,11 +832,9 @@ a { color: inherit; text-decoration: none; }
   .contacto-inner {
     grid-template-columns: 1fr;
   }
-  .flavor-grid { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 560px) {
-  .flavor-grid { grid-template-columns: 1fr; }
   .hero-actions { flex-direction: column; }
   .hero-actions .btn { text-align: center; }
 }
