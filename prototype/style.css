@@ -294,7 +294,9 @@ a { color: inherit; text-decoration: none; }
   z-index: 1;
   max-width: 320px;
   width: 100%;
-  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.6));
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.5));
+  -webkit-mask-image: linear-gradient(to bottom, black 88%, transparent 99%);
+  mask-image: linear-gradient(to bottom, black 88%, transparent 99%);
 }
 .qs-caption {
   position: absolute;
