@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelectorAll(".btn-add").forEach((button) => {
       button.addEventListener("click", () => {
-        const card = button.closest(".product-card");
+        const card = button.closest("[data-id]");
         const id = card.dataset.id;
         const name = card.dataset.name;
         const price = Number(card.dataset.price);
@@ -209,16 +209,39 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
+    // Datos de envío: se piden siempre antes de mandar el pedido,
+    // sea un pedido chico o una compra por mayor.
+    const shippingForm = document.getElementById("shippingForm");
+
     checkoutBtn.addEventListener("click", () => {
       const ids = Object.keys(cart);
       if (ids.length === 0) return;
 
+      if (shippingForm && !shippingForm.reportValidity()) return;
+
       const lines = ids.map((id) => `- ${cart[id].name} x${cart[id].qty}`);
       const total = ids.reduce((sum, id) => sum + cart[id].qty * cart[id].price, 0);
-      const message =
+
+      let message =
         "Hola! Quiero hacer este pedido:\n" +
         lines.join("\n") +
         `\nTotal: ${formatPrice(total)}`;
+
+      if (shippingForm) {
+        const name = document.getElementById("shipName").value.trim();
+        const phone = document.getElementById("shipPhone").value.trim();
+        const address = document.getElementById("shipAddress").value.trim();
+        const city = document.getElementById("shipCity").value.trim();
+        const cp = document.getElementById("shipCP").value.trim();
+
+        message +=
+          "\n\nDatos de envío:\n" +
+          `Nombre: ${name}\n` +
+          `Teléfono: ${phone}\n` +
+          `Dirección: ${address}\n` +
+          `Localidad: ${city}\n` +
+          `Código postal: ${cp}`;
+      }
 
       window.open(
         `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,

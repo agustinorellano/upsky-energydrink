@@ -26,16 +26,18 @@
       <a href="#contacto">Contacto</a>
     </nav>
 
-    <a href="#contacto" class="btn btn-primary header-cta">Quiero vender UpSky</a>
+    <div class="header-actions">
+      <a href="#contacto" class="btn btn-primary header-cta">Quiero vender UpSky</a>
 
-    <button class="cart-button" id="cartButton" aria-label="Ver carrito" aria-haspopup="dialog">
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6h15l-1.5 9h-12z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 6L5 3H2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="9.5" cy="19.5" r="1.4" fill="currentColor"/><circle cx="17.5" cy="19.5" r="1.4" fill="currentColor"/></svg>
-      <span class="cart-count" id="cartCount" hidden>0</span>
-    </button>
+      <button class="cart-button" id="cartButton" aria-label="Ver carrito" aria-haspopup="dialog">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6h15l-1.5 9h-12z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 6L5 3H2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="9.5" cy="19.5" r="1.4" fill="currentColor"/><circle cx="17.5" cy="19.5" r="1.4" fill="currentColor"/></svg>
+        <span class="cart-count" id="cartCount" hidden>0</span>
+      </button>
 
-    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
-      <span></span><span></span><span></span>
-    </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -51,6 +53,18 @@
   </div>
   <div class="cart-footer">
     <div class="cart-total-row"><span>Total</span><span id="cartTotal">$0</span></div>
+
+    <form class="cart-shipping" id="shippingForm">
+      <p class="cart-shipping-label">Datos de envío</p>
+      <input type="text" id="shipName" placeholder="Nombre y apellido" autocomplete="name" required>
+      <input type="tel" id="shipPhone" placeholder="Teléfono" autocomplete="tel" required>
+      <input type="text" id="shipAddress" placeholder="Dirección (calle y número)" autocomplete="street-address" required>
+      <div class="cart-shipping-row">
+        <input type="text" id="shipCity" placeholder="Localidad" autocomplete="address-level2" required>
+        <input type="text" id="shipCP" placeholder="Código postal" autocomplete="postal-code" required>
+      </div>
+    </form>
+
     <button class="btn btn-primary btn-block" id="checkoutBtn">Finalizar pedido por WhatsApp</button>
     <button class="cart-clear" id="cartClear" type="button">Vaciar carrito</button>
   </div>
@@ -262,27 +276,30 @@
     <hr class="catalog-divider">
 
     <h3 class="catalog-subhead">Ventas por mayor</h3>
-    <p class="section-lead">Estas presentaciones se coordinan directo por formulario, no van al carrito.</p>
+    <p class="section-lead">También se agregan al carrito. Al finalizar el pedido completás tus datos de envío.</p>
     <div class="price-grid">
-      <div class="price-card">
+      <div class="price-card" data-id="mayor10" data-name="10 packs de energizante (6 botellas 355cc c/u)" data-price="125000">
         <div class="placeholder placeholder-product-thumb">[ IMAGEN 10 PACKS ]</div>
         <div class="price-card-body">
           <p class="price-name">10 packs de energizante<span>6 botellas 355cc c/u</span></p>
           <p class="price-value">$125.000</p>
+          <button class="btn btn-outline btn-add" type="button">Agregar al carrito</button>
         </div>
       </div>
-      <div class="price-card">
+      <div class="price-card" data-id="mayor50" data-name="50 packs de energizante (6 botellas 355cc c/u)" data-price="602550">
         <div class="placeholder placeholder-product-thumb">[ IMAGEN 50 PACKS ]</div>
         <div class="price-card-body">
           <p class="price-name">50 packs de energizante<span>6 botellas 355cc c/u</span></p>
           <p class="price-value">$602.550</p>
+          <button class="btn btn-outline btn-add" type="button">Agregar al carrito</button>
         </div>
       </div>
-      <div class="price-card">
+      <div class="price-card" data-id="mayorpallet" data-name="1 pallet (180 packs de 6 botellas 355cc c/u)" data-price="2106000">
         <div class="placeholder placeholder-product-thumb">[ IMAGEN PALLET ]</div>
         <div class="price-card-body">
           <p class="price-name">1 pallet<span>180 packs de 6 botellas 355cc c/u</span></p>
           <p class="price-value">$2.106.000</p>
+          <button class="btn btn-outline btn-add" type="button">Agregar al carrito</button>
         </div>
       </div>
     </div>
@@ -293,7 +310,7 @@
       </div>
       <div>
         <p class="catalog-meta-label">Procedimiento</p>
-        <p>Formulario de contacto y pedido.</p>
+        <p>Agregá al carrito → completá tus datos de envío → finalizá por WhatsApp.</p>
       </div>
     </div>
   </div>
