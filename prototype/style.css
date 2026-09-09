@@ -162,14 +162,15 @@ a { color: inherit; text-decoration: none; }
 .hero-copy { max-width: 560px; }
 .hero-media-panel {
   position: relative;
-  background-image: url("assets/hero-bottle-web.jpg");
+  background-image: url("assets/hero-bottle-2-web.jpg");
   background-size: cover;
-  background-position: 50% 15%;
+  background-position: 62% 20%;
+  background-color: var(--background-color);
 }
 .hero-media-fade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, var(--background-color), transparent 8%);
+  background: linear-gradient(to right, var(--background-color), transparent 12%);
 }
 .eyebrow {
   color: var(--primary-color);
@@ -213,7 +214,7 @@ a { color: inherit; text-decoration: none; }
 
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; min-height: 0; }
-  .hero-media-panel { height: 420px; order: -1; background-position: 50% 20%; }
+  .hero-media-panel { height: 420px; order: -1; background-position: 55% 15%; }
   .hero-media-fade { background: linear-gradient(to bottom, transparent 55%, var(--background-color)); }
   .hero-copy-panel { padding: 32px 24px 64px; }
 }
@@ -288,6 +289,55 @@ a { color: inherit; text-decoration: none; }
 .flavor-card h3 { margin: 0 0 8px; font-family: var(--font-display); font-size: 1.2rem; }
 .flavor-card p { margin: 0; color: var(--text-muted); font-size: 0.92rem; }
 .flavor-card--soon { opacity: 0.6; }
+
+/* ---------- Catálogo / Productos ---------- */
+.catalog-subhead {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.3rem;
+  letter-spacing: 0.01em;
+  margin: 0 0 20px;
+}
+.price-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.price-card {
+  background: var(--background-alt);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.price-name { margin: 0; font-weight: 600; font-size: 0.95rem; }
+.price-name span { display: block; font-weight: 400; color: var(--text-muted); font-size: 0.82rem; margin-top: 4px; }
+.price-value { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; color: var(--primary-color); }
+
+.catalog-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 56px;
+}
+.catalog-meta-label {
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 6px;
+}
+.catalog-meta p:last-child { margin: 0; color: var(--text-muted); font-size: 0.92rem; }
+
+.catalog-divider { border: none; border-top: 1px solid var(--border-color); margin: 0 0 48px; }
+
+@media (max-width: 600px) {
+  .catalog-meta { grid-template-columns: 1fr; gap: 20px; }
+}
 
 /* ---------- Marca ---------- */
 .marca-inner {
