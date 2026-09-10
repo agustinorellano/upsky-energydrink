@@ -19,7 +19,13 @@
 
     <nav class="main-nav" id="mainNav">
       <a href="index.html#producto">Producto</a>
-      <a href="catalogo.html">Catálogo</a>
+      <div class="nav-item">
+        <a href="catalogo.html" class="nav-item-link">Catálogo <svg class="nav-caret" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav-dropdown">
+          <a href="catalogo.html#minorista">Compra minorista</a>
+          <a href="catalogo.html#mayorista">Compra mayorista</a>
+        </div>
+      </div>
       <a href="eventos.html">Eventos</a>
       <a href="index.html#negocios">Para negocios</a>
       <a href="index.html#contacto">Contacto</a>
@@ -80,7 +86,7 @@
       </div>
     </div>
 
-    <h3 class="catalog-subhead">Consumidor final</h3>
+    <h3 class="catalog-subhead" id="minorista">Consumidor final</h3>
     <div class="product-grid">
       <article class="product-card" data-id="pack1" data-name="1 pack de energizante (6 botellas 355cc)" data-price="13800">
         <div class="placeholder placeholder-product-thumb">[ IMAGEN PACK 1 ]</div>
@@ -158,7 +164,7 @@
 
     <hr class="catalog-divider">
 
-    <h3 class="catalog-subhead">Ventas por mayor</h3>
+    <h3 class="catalog-subhead" id="mayorista">Ventas por mayor</h3>
     <p class="section-lead">También se agregan al carrito. Al finalizar el pedido completás tus datos de envío.</p>
     <div class="price-grid">
       <div class="price-card" data-id="mayor10" data-name="10 packs de energizante (6 botellas 355cc c/u)" data-price="125000">
