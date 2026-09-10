@@ -183,6 +183,42 @@ a { color: inherit; text-decoration: none; }
   pointer-events: auto;
   transform: translateX(-50%) translateY(0);
 }
+
+/* -- Dropdown con preview de tarjetas (ítem "Eventos") -- */
+.nav-dropdown--preview {
+  flex-direction: row;
+  min-width: 560px;
+  gap: 10px;
+}
+.nav-dropdown--preview .nav-preview-card {
+  display: flex;
+  flex-direction: column;
+  width: 172px;
+  padding: 0;
+  white-space: normal;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+}
+.nav-dropdown--preview .nav-preview-card:hover { background: rgba(255, 255, 255, 0.08); }
+.nav-preview-thumb {
+  aspect-ratio: 16 / 10;
+  border-radius: 0;
+  border-width: 0 0 1px;
+  font-size: 0.6rem;
+  padding: 6px;
+  line-height: 1.3;
+}
+.nav-preview-body { display: flex; flex-direction: column; gap: 3px; padding: 10px 12px 12px; }
+.nav-preview-date {
+  color: var(--primary-color);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.nav-preview-title { color: var(--text-color); font-size: 0.8rem; font-weight: 600; line-height: 1.3; }
+
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -931,6 +967,18 @@ a { color: inherit; text-decoration: none; }
   }
   .nav-dropdown a { padding: 0; font-size: 0.82rem; color: var(--text-muted); }
   .nav-dropdown a:hover { background: none; color: var(--text-color); }
+
+  .nav-dropdown--preview { flex-direction: column; width: 100%; gap: 10px; }
+  .nav-dropdown--preview .nav-preview-card {
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
+    background: transparent;
+  }
+  .nav-dropdown--preview .nav-preview-card:hover { background: transparent; }
+  .nav-preview-thumb { width: 56px; height: 56px; aspect-ratio: unset; flex-shrink: 0; font-size: 0.5rem; padding: 2px; }
+  .nav-preview-body { padding: 0; }
 
   .product-grid,
   .marca-inner,
