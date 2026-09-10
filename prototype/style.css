@@ -615,6 +615,31 @@ a { color: inherit; text-decoration: none; }
 }
 .trust-card p:last-child { margin: 0; color: var(--text-muted); }
 
+/* ---------- Eventos ---------- */
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 28px;
+}
+.event-card {
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.placeholder-event { aspect-ratio: 16 / 10; border-radius: 0; border-width: 0 0 1px; }
+.event-card-body { padding: 20px; }
+.event-date {
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 8px;
+}
+.event-card h3 { margin: 0 0 8px; font-family: var(--font-display); font-weight: 400; font-size: 1.15rem; }
+.event-card p:last-child { margin: 0; color: var(--text-muted); font-size: 0.9rem; }
+
 /* ---------- B2B ---------- */
 .section-b2b {
   background:
