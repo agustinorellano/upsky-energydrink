@@ -148,8 +148,6 @@ a { color: inherit; text-decoration: none; }
 /* -- Dropdown del ítem "Catálogo" -- */
 .nav-item { position: relative; display: flex; align-items: center; }
 .nav-item-link { display: flex; align-items: center; gap: 4px; }
-.nav-caret { display: inline-block; transition: transform 0.15s ease; }
-.nav-item:hover .nav-caret, .nav-item:focus-within .nav-caret { transform: rotate(180deg); }
 .nav-dropdown {
   position: absolute;
   top: calc(100% + 16px);
@@ -949,7 +947,6 @@ a { color: inherit; text-decoration: none; }
   .header-cta { display: none; }
 
   .nav-item { flex-direction: column; align-items: flex-start; width: 100%; }
-  .nav-caret { display: none; }
   .nav-dropdown {
     position: static;
     opacity: 1;
