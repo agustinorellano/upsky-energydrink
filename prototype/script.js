@@ -229,7 +229,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (shippingForm) {
         const name = document.getElementById("shipName").value.trim();
-        const phone = document.getElementById("shipPhone").value.trim();
         const address = document.getElementById("shipAddress").value.trim();
         const city = document.getElementById("shipCity").value.trim();
         const cp = document.getElementById("shipCP").value.trim();
@@ -237,7 +236,6 @@ document.addEventListener("DOMContentLoaded", () => {
         message +=
           "\n\nDatos de envío:\n" +
           `Nombre: ${name}\n` +
-          `Teléfono: ${phone}\n` +
           `Dirección: ${address}\n` +
           `Localidad: ${city}\n` +
           `Código postal: ${cp}`;
