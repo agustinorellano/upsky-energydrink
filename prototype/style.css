@@ -255,7 +255,7 @@ a { color: inherit; text-decoration: none; }
 .hero-bottle-img {
   position: relative;
   z-index: 1;
-  height: min(760px, 78vh);
+  height: min(960px, 90vh);
   width: auto;
   max-width: 100%;
   filter: drop-shadow(0 30px 45px rgba(0, 0, 0, 0.6));
