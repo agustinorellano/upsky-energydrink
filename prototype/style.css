@@ -388,18 +388,6 @@ a { color: inherit; text-decoration: none; }
 .qs-copy-top { grid-area: copytop; align-self: end; }
 .qs-copy-bottom { grid-area: copybottom; align-self: start; }
 
-/* -- Variante "v2": sticky-scroll (comparar contra la de arriba) -- */
-.qs-scrolly {
-  display: grid;
-  grid-template-columns: 0.95fr 1.25fr;
-  gap: 48px;
-  align-items: start;
-}
-.qs-sticky-media { position: sticky; top: 120px; align-self: start; }
-.qs-steps { display: flex; flex-direction: column; }
-.qs-step { min-height: 62vh; display: flex; flex-direction: column; justify-content: center; }
-.qs-step--last { min-height: 30vh; }
-
 /* -- Imagen -- */
 .qs-media { grid-area: media; position: relative; display: flex; justify-content: center; align-items: center; }
 .qs-glow {
@@ -549,11 +537,6 @@ a { color: inherit; text-decoration: none; }
   .qs-bottle { height: min(420px, 48vh); }
   .qs-attrs { grid-template-columns: 1fr; }
   .qs-strip { margin-top: 40px; flex-wrap: wrap; }
-
-  .qs-scrolly { grid-template-columns: 1fr; gap: 8px; }
-  .qs-sticky-media { position: static; }
-  .qs-step { min-height: 0; margin-bottom: 36px; }
-  .qs-step--last { margin-bottom: 0; }
 }
 
 /* ---------- Catálogo / Productos ---------- */
