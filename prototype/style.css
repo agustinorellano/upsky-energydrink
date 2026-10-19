@@ -607,7 +607,7 @@ a { color: inherit; text-decoration: none; }
   display: block;
   width: 100%;
   height: clamp(200px, 32vw, 380px);
-  object-fit: cover;
+  object-fit: contain;
   object-position: center 30%;
 }
 .shop-banner::after {
