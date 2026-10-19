@@ -308,7 +308,8 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (max-width: 900px) {
-  .hero { min-height: 560px; }
+  .hero { min-height: 620px; }
+  .hero-bg-img { object-position: 75% 38%; }
   .hero-bg-scrim {
     background: linear-gradient(
       180deg,
