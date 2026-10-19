@@ -232,7 +232,7 @@ a { color: inherit; text-decoration: none; }
 .hero {
   position: relative;
   overflow: hidden;
-  min-height: 640px;
+  min-height: clamp(640px, 48vw, 920px);
   display: flex;
   align-items: center;
 }
@@ -245,7 +245,7 @@ a { color: inherit; text-decoration: none; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 30%;
+  object-position: center 40%;
   display: block;
 }
 .hero-bg-scrim {
