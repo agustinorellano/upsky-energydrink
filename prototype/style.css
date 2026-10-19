@@ -721,6 +721,62 @@ a { color: inherit; text-decoration: none; }
 }
 .trust-card p:last-child { margin: 0; color: var(--text-muted); }
 
+/* -- Carrusel "Para todos los momentos de tu día" -- */
+.moments { margin-top: 64px; }
+.moments-eyebrow {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  text-transform: uppercase;
+  color: var(--text-color);
+  margin: 0 0 28px;
+}
+.moments-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.moments-track {
+  flex: 1;
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+.moments-track::-webkit-scrollbar { display: none; }
+.moments-slide {
+  flex: 0 0 auto;
+  width: min(360px, 78vw);
+  aspect-ratio: 4 / 5;
+  scroll-snap-align: start;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.moments-img { width: 100%; height: 100%; object-fit: cover; }
+.moments-placeholder { width: 100%; height: 100%; border-radius: var(--radius); }
+.moments-arrow {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-color);
+  background: var(--background-alt);
+  color: var(--text-color);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.moments-arrow:hover { border-color: var(--primary-color); color: var(--primary-color); }
+
+@media (max-width: 700px) {
+  .moments-arrow { display: none; }
+}
+
 /* ---------- Eventos ---------- */
 .event-grid {
   display: grid;

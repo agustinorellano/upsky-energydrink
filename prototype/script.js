@@ -14,6 +14,25 @@ document.addEventListener("DOMContentLoaded", () => {
     link.addEventListener("click", () => mainNav.classList.remove("is-open"));
   });
 
+  // Carrusel "Para todos los momentos de tu día"
+  const momentsTrack = document.getElementById("momentsTrack");
+  const momentsPrev = document.getElementById("momentsPrev");
+  const momentsNext = document.getElementById("momentsNext");
+
+  if (momentsTrack && momentsPrev && momentsNext) {
+    const scrollByAmount = () => {
+      const slide = momentsTrack.querySelector(".moments-slide");
+      const gap = 20;
+      return slide ? slide.getBoundingClientRect().width + gap : 300;
+    };
+    momentsPrev.addEventListener("click", () => {
+      momentsTrack.scrollBy({ left: -scrollByAmount(), behavior: "smooth" });
+    });
+    momentsNext.addEventListener("click", () => {
+      momentsTrack.scrollBy({ left: scrollByAmount(), behavior: "smooth" });
+    });
+  }
+
   // Aparición sutil al hacer scroll (sección "¿Qué es UP SKY?")
   const revealEls = document.querySelectorAll(".qs-reveal");
   if (revealEls.length && "IntersectionObserver" in window) {
