@@ -618,20 +618,31 @@ a { color: inherit; text-decoration: none; }
   margin-right: -50vw;
   margin-top: -88px;
   margin-bottom: 24px;
+  height: clamp(200px, 32vw, 380px);
   overflow: hidden;
 }
+.shop-banner::before {
+  content: "";
+  position: absolute;
+  inset: -30px;
+  background: url("assets/catalogo-banner.jpg") center / cover no-repeat;
+  filter: blur(40px) brightness(0.75) saturate(1.1);
+  transform: scale(1.1);
+}
 .shop-banner-img {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 100%;
-  height: clamp(200px, 32vw, 380px);
+  height: 100%;
   object-fit: contain;
   object-position: center;
-  background: #96004b;
 }
 .shop-banner::after {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 2;
   background: linear-gradient(to bottom, transparent 50%, var(--background-alt) 96%);
   pointer-events: none;
 }
