@@ -318,6 +318,12 @@ a { color: inherit; text-decoration: none; }
       rgba(10, 10, 12, 0.95) 100%
     );
   }
+  .eyebrow { font-size: 0.68rem; margin-bottom: 14px; }
+  .hero h1 { margin-bottom: 16px; }
+  .hero-title-sm { font-size: 1.25rem; }
+  .hero-title-lg { font-size: 2.3rem; }
+  .hero-sub { font-size: 0.95rem; margin-bottom: 24px; }
+  .btn-hero { padding: 13px 26px; font-size: 0.9rem; }
 }
 
 /* ---------- Sections (shared) ---------- */
