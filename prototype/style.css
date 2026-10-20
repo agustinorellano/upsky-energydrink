@@ -973,6 +973,38 @@ a { color: inherit; text-decoration: none; }
   color: rgba(255,255,255,0.7);
 }
 
+.b2b-steps {
+  list-style: none;
+  margin: 40px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.b2b-step { display: flex; flex-direction: column; gap: 14px; }
+.b2b-step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.b2b-step strong { display: block; margin-bottom: 4px; font-size: 1rem; }
+.b2b-step p { margin: 0; color: var(--text-muted); font-size: 0.9rem; line-height: 1.4; }
+
+@media (max-width: 900px) {
+  .b2b-steps { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .b2b-steps { grid-template-columns: 1fr; }
+}
+
 /* ---------- Contacto ---------- */
 .contacto-inner {
   display: grid;
