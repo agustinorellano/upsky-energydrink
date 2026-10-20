@@ -215,15 +215,30 @@ document.addEventListener("DOMContentLoaded", () => {
       persistAndRender();
     });
 
+    // Steppers de cantidad en las cards del catálogo
+    document.querySelectorAll(".qty-stepper").forEach((stepper) => {
+      const valueEl = stepper.querySelector(".qty-value");
+      stepper.querySelectorAll(".qty-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          let qty = Number(valueEl.textContent) || 1;
+          qty = btn.dataset.action === "increase" ? qty + 1 : Math.max(1, qty - 1);
+          valueEl.textContent = qty;
+        });
+      });
+    });
+
     document.querySelectorAll(".btn-add").forEach((button) => {
       button.addEventListener("click", () => {
         const card = button.closest("[data-id]");
         const id = card.dataset.id;
         const name = card.dataset.name;
         const price = Number(card.dataset.price);
+        const qtyEl = card.querySelector(".qty-value");
+        const addQty = qtyEl ? Number(qtyEl.textContent) || 1 : 1;
 
         if (!cart[id]) cart[id] = { name, price, qty: 0 };
-        cart[id].qty += 1;
+        cart[id].qty += addQty;
+        if (qtyEl) qtyEl.textContent = "1";
         persistAndRender();
       });
     });
