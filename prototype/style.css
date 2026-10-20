@@ -601,7 +601,7 @@ a { color: inherit; text-decoration: none; }
   margin-right: -50vw;
   margin-top: -88px;
   margin-bottom: 24px;
-  height: clamp(200px, 32vw, 380px);
+  height: clamp(320px, 38vw, 480px);
   overflow: hidden;
 }
 .shop-banner::before {
@@ -626,9 +626,21 @@ a { color: inherit; text-decoration: none; }
   position: absolute;
   inset: 0;
   z-index: 2;
-  background: linear-gradient(to bottom, transparent 50%, var(--background-alt) 96%);
+  background: linear-gradient(to bottom, transparent 40%, rgba(10, 10, 12, 0.85) 96%);
   pointer-events: none;
 }
+.shop-banner-caption {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--max-width);
+  padding: 0 24px;
+}
+.shop-banner-caption .section-title { color: #fff; }
+.shop-banner-caption .section-lead { color: #f0f0f2; max-width: 54ch; }
 
 .product-grid {
   display: grid;
