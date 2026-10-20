@@ -1023,7 +1023,7 @@ a { color: inherit; text-decoration: none; }
   overflow: hidden;
   margin-bottom: 32px;
 }
-.donde-banner video { display: block; width: 100%; height: clamp(220px, 32vw, 380px); object-fit: cover; object-position: center 40%; }
+.donde-banner video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #000; }
 
 /* ---------- Mapa ficticio de puntos de venta ---------- */
 .map-mock {
