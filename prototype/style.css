@@ -1018,46 +1018,6 @@ a { color: inherit; text-decoration: none; }
 .testimonial-author span { font-weight: 400; color: var(--text-muted); }
 .testimonial-disclaimer { margin: 24px 0 0; color: var(--text-muted); font-size: 0.78rem; }
 
-.donde-banner {
-  border-radius: var(--radius);
-  overflow: hidden;
-  margin-bottom: 32px;
-}
-.donde-banner video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #000; }
-
-/* ---------- Mapa ficticio de puntos de venta ---------- */
-.map-mock {
-  margin-top: 32px;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius);
-  background: var(--background-color);
-  overflow: hidden;
-}
-.map-mock svg { display: block; width: 100%; height: auto; }
-.map-street { stroke: rgba(255, 255, 255, 0.08); stroke-width: 2; }
-.map-street--avenue { stroke: rgba(255, 255, 255, 0.14); stroke-width: 3; }
-.map-pin-pulse {
-  fill: var(--primary-color);
-  opacity: 0.35;
-  animation: map-pulse 2.4s ease-out infinite;
-  transform-origin: center;
-}
-.map-pin-dot { fill: var(--primary-color); stroke: #0a0a0c; stroke-width: 2; }
-.map-pin-core { fill: #fff; }
-.map-pin-label {
-  fill: var(--text-color);
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 600;
-  dominant-baseline: middle;
-}
-@keyframes map-pulse {
-  0% { transform: scale(0.4); opacity: 0.5; }
-  100% { transform: scale(1.6); opacity: 0; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .map-pin-pulse { animation: none; opacity: 0; }
-}
 
 /* ---------- FAQ ---------- */
 .faq-list { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
