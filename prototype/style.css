@@ -250,19 +250,6 @@ a { color: inherit; text-decoration: none; }
   object-position: center 40%;
   display: block;
 }
-.hero-bg-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 40%;
-  display: none;
-}
-@media (min-width: 901px) {
-  .hero-bg-video { display: block; }
-  .hero-bg picture { display: none; }
-}
 .hero-bg-scrim {
   position: absolute;
   inset: 0;
@@ -1030,6 +1017,13 @@ a { color: inherit; text-decoration: none; }
 .testimonial-author { margin: 0; font-weight: 700; font-size: 0.88rem; }
 .testimonial-author span { font-weight: 400; color: var(--text-muted); }
 .testimonial-disclaimer { margin: 24px 0 0; color: var(--text-muted); font-size: 0.78rem; }
+
+.donde-banner {
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+.donde-banner video { display: block; width: 100%; height: clamp(220px, 32vw, 380px); object-fit: cover; object-position: center 40%; }
 
 /* ---------- Mapa ficticio de puntos de venta ---------- */
 .map-mock {
