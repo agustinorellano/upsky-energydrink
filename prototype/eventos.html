@@ -107,7 +107,7 @@
     <p class="section-lead">Activaciones, presencia en eventos y novedades de la marca. [Reemplazar con el contenido real de la sección Blog de upsky.com.ar]</p>
 
     <div class="event-grid">
-      <article class="event-card">
+      <article class="event-card" tabindex="0" role="button" aria-haspopup="dialog">
         <div class="placeholder placeholder-event">[ IMAGEN EVENTO 1 ]</div>
         <div class="event-card-body">
           <p class="event-date">[FECHA]</p>
@@ -116,7 +116,7 @@
         </div>
       </article>
 
-      <article class="event-card">
+      <article class="event-card" tabindex="0" role="button" aria-haspopup="dialog">
         <div class="placeholder placeholder-event">[ IMAGEN EVENTO 2 ]</div>
         <div class="event-card-body">
           <p class="event-date">[FECHA]</p>
@@ -125,7 +125,7 @@
         </div>
       </article>
 
-      <article class="event-card">
+      <article class="event-card" tabindex="0" role="button" aria-haspopup="dialog">
         <div class="placeholder placeholder-event">[ IMAGEN EVENTO 3 ]</div>
         <div class="event-card-body">
           <p class="event-date">[FECHA]</p>
@@ -136,6 +136,18 @@
     </div>
   </div>
 </section>
+
+<!-- ========== MODAL DE EVENTO (ver completo) ========== -->
+<div class="event-modal-overlay" id="eventModalOverlay" hidden></div>
+<div class="event-modal" id="eventModal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Detalle del evento">
+  <button class="event-modal-close" id="eventModalClose" aria-label="Cerrar">✕</button>
+  <div class="event-modal-media" id="eventModalMedia"></div>
+  <div class="event-modal-body">
+    <p class="event-date" id="eventModalDate"></p>
+    <h3 id="eventModalTitle"></h3>
+    <p id="eventModalDesc"></p>
+  </div>
+</div>
 
 <!-- ========== FOOTER ========== -->
 <footer class="site-footer">

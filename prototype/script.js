@@ -14,22 +14,49 @@ document.addEventListener("DOMContentLoaded", () => {
     link.addEventListener("click", () => mainNav.classList.remove("is-open"));
   });
 
-  // Carrusel "Para todos los momentos de tu día"
-  const momentsTrack = document.getElementById("momentsTrack");
-  const momentsPrev = document.getElementById("momentsPrev");
-  const momentsNext = document.getElementById("momentsNext");
+  // Modal "ver evento completo" (eventos.html)
+  const eventCards = document.querySelectorAll(".event-card");
+  const eventModal = document.getElementById("eventModal");
+  const eventModalOverlay = document.getElementById("eventModalOverlay");
+  const eventModalClose = document.getElementById("eventModalClose");
+  const eventModalMedia = document.getElementById("eventModalMedia");
+  const eventModalDate = document.getElementById("eventModalDate");
+  const eventModalTitle = document.getElementById("eventModalTitle");
+  const eventModalDesc = document.getElementById("eventModalDesc");
 
-  if (momentsTrack && momentsPrev && momentsNext) {
-    const scrollByAmount = () => {
-      const slide = momentsTrack.querySelector(".moments-slide");
-      const gap = 20;
-      return slide ? slide.getBoundingClientRect().width + gap : 300;
+  if (eventCards.length && eventModal && eventModalOverlay) {
+    const openEventModal = (card) => {
+      const media = card.querySelector(".placeholder-event, img");
+      eventModalMedia.innerHTML = media ? media.outerHTML : "";
+      eventModalDate.textContent = card.querySelector(".event-date")?.textContent || "";
+      eventModalTitle.textContent = card.querySelector("h3")?.textContent || "";
+      eventModalDesc.textContent = card.querySelector(".event-card-body p:last-child")?.textContent || "";
+      eventModalOverlay.hidden = false;
+      eventModal.classList.add("is-open");
+      eventModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
     };
-    momentsPrev.addEventListener("click", () => {
-      momentsTrack.scrollBy({ left: -scrollByAmount(), behavior: "smooth" });
+    const closeEventModal = () => {
+      eventModal.classList.remove("is-open");
+      eventModalOverlay.hidden = true;
+      eventModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    };
+
+    eventCards.forEach((card) => {
+      card.addEventListener("click", () => openEventModal(card));
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openEventModal(card);
+        }
+      });
     });
-    momentsNext.addEventListener("click", () => {
-      momentsTrack.scrollBy({ left: scrollByAmount(), behavior: "smooth" });
+
+    eventModalClose.addEventListener("click", closeEventModal);
+    eventModalOverlay.addEventListener("click", closeEventModal);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeEventModal();
     });
   }
 
