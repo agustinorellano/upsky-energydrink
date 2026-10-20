@@ -1,17 +1,34 @@
 // Interacciones mínimas del prototipo — nada de lógica de negocio real.
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Menú mobile
+  // Menú mobile (bottom sheet)
   const navToggle = document.getElementById("navToggle");
-  const mainNav = document.getElementById("mainNav");
+  const mobileNavSheet = document.getElementById("mobileNavSheet");
+  const mobileNavOverlay = document.getElementById("mobileNavOverlay");
+
+  const openMobileNav = () => {
+    mobileNavSheet?.classList.add("is-open");
+    mobileNavSheet?.setAttribute("aria-hidden", "false");
+    if (mobileNavOverlay) mobileNavOverlay.hidden = false;
+    document.body.style.overflow = "hidden";
+  };
+  const closeMobileNav = () => {
+    mobileNavSheet?.classList.remove("is-open");
+    mobileNavSheet?.setAttribute("aria-hidden", "true");
+    if (mobileNavOverlay) mobileNavOverlay.hidden = true;
+    document.body.style.overflow = "";
+  };
 
   navToggle?.addEventListener("click", () => {
-    mainNav.classList.toggle("is-open");
+    if (mobileNavSheet?.classList.contains("is-open")) closeMobileNav();
+    else openMobileNav();
   });
-
-  // Cierra el menú mobile al tocar un link
-  mainNav?.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => mainNav.classList.remove("is-open"));
+  mobileNavOverlay?.addEventListener("click", closeMobileNav);
+  mobileNavSheet?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeMobileNav);
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeMobileNav();
   });
 
   // Modal "ver evento completo" (eventos.html)
