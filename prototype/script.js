@@ -77,6 +77,24 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Atributos del producto: tap para desplegar más info (en desktop ya se
+  // despliega solo con hover vía CSS; esto cubre mobile/touch y teclado)
+  document.querySelectorAll(".qs-attr").forEach((attr) => {
+    attr.addEventListener("click", () => {
+      const wasOpen = attr.classList.contains("is-open");
+      document.querySelectorAll(".qs-attr.is-open").forEach((other) => {
+        if (other !== attr) other.classList.remove("is-open");
+      });
+      attr.classList.toggle("is-open", !wasOpen);
+    });
+    attr.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        attr.click();
+      }
+    });
+  });
+
   // Aparición sutil al hacer scroll (sección "¿Qué es UP SKY?")
   const revealEls = document.querySelectorAll(".qs-reveal");
   if (revealEls.length && "IntersectionObserver" in window) {
