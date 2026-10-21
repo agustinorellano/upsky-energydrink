@@ -800,6 +800,10 @@ a { color: inherit; text-decoration: none; }
 .kb-zoom.is-zoomed > img,
 .kb-zoom.is-zoomed > video { transform: scale(1.06); }
 
+/* El Hero es lo primero que se ve: zoom un poco más rápido y marcado para que se note */
+.hero-slide.kb-zoom > img { transition-duration: 10s; }
+.hero-slide.kb-zoom.is-zoomed > img { transform: scale(1.1); }
+
 @media (prefers-reduced-motion: reduce) {
   .kb-zoom > img,
   .kb-zoom > video { transition: none; }
