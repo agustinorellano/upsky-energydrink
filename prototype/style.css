@@ -741,10 +741,6 @@ a { color: inherit; text-decoration: none; }
   background: var(--pink);
 }
 
-@media (max-width: 900px) {
-  .qs-compare-slider { max-width: 100%; }
-}
-
 .qs-cta-row { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
 .qs-cta-link {
   color: var(--white);
