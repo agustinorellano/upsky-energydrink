@@ -496,7 +496,7 @@ a { color: inherit; text-decoration: none; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 14% 42%;
+  object-position: 30% 42%;
   display: block;
 }
 .qs-bg-scrim {
@@ -504,7 +504,7 @@ a { color: inherit; text-decoration: none; }
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(5, 5, 5, 0) 18%, rgba(5, 5, 5, 0.78) 38%, rgba(5, 5, 5, 0.98) 54%),
+    linear-gradient(90deg, rgba(5, 5, 5, 0) 24%, rgba(5, 5, 5, 0.8) 48%, rgba(5, 5, 5, 0.98) 66%),
     linear-gradient(180deg, rgba(5, 5, 5, 0.5) 0%, rgba(5, 5, 5, 0) 22%, rgba(5, 5, 5, 0) 68%, rgba(5, 5, 5, 0.92) 100%);
 }
 .qs-hero-copy {
@@ -642,6 +642,7 @@ a { color: inherit; text-decoration: none; }
   height: 42px;
   border-radius: 50%;
   border: 1.5px solid var(--pink);
+  background: var(--black);
   color: var(--pink);
   display: flex;
   align-items: center;
