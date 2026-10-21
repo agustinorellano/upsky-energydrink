@@ -206,6 +206,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Producto: flechas que navegan a la sección anterior/siguiente
+  document.querySelectorAll("[data-qs-arrow]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const section = btn.closest(".section");
+      if (!section) return;
+      const dir = btn.dataset.qsArrow;
+      const target = dir === "prev" ? section.previousElementSibling : section.nextElementSibling;
+      if (target) target.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
   // Header: se oculta al bajar y reaparece al subir
   const siteHeader = document.getElementById("header");
   if (siteHeader) {
