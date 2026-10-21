@@ -496,7 +496,7 @@ a { color: inherit; text-decoration: none; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 30% 42%;
+  object-position: 52% 42%;
   display: block;
 }
 .qs-bg-scrim {
@@ -510,15 +510,6 @@ a { color: inherit; text-decoration: none; }
 .qs-hero-copy {
   position: relative;
   z-index: 1;
-  width: min(620px, 100%);
-  margin: 0 0 0 auto;
-}
-
-.qs-grid {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
   width: min(620px, 100%);
   margin: 0 0 0 auto;
 }
@@ -621,13 +612,11 @@ a { color: inherit; text-decoration: none; }
     background: linear-gradient(180deg, rgba(5, 5, 5, 0) 55%, rgba(5, 5, 5, 0.95) 100%);
   }
   .qs-hero-copy { width: 100%; margin: 0; }
-  .qs-grid { margin: 0; width: 100%; }
   .qs-caption { display: none; }
   .qs-media-tagline, .qs-wordmark, .qs-media-cta, .qs-nav-arrow { display: none; }
 }
 
 /* -- Texto -- */
-.qs-divider { height: 1px; background: rgba(255, 255, 255, 0.12); margin: 0 0 28px; }
 .qs-title {
   font-family: var(--font-display);
   font-weight: 700;
@@ -728,42 +717,6 @@ a { color: inherit; text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
   .qs-attr-more { transition: none; }
 }
-
-.qs-cta-row { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
-.qs-cta-link {
-  color: var(--white);
-  font-weight: 600;
-  font-size: 0.95rem;
-  text-decoration: underline;
-  text-decoration-color: var(--pink);
-  text-underline-offset: 4px;
-}
-.qs-cta-link:hover { color: var(--pink); }
-
-.qs-nutrition {
-  margin-top: 28px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--radius);
-  padding: 16px 20px;
-}
-.qs-nutrition summary {
-  cursor: pointer;
-  list-style: none;
-  color: var(--white);
-  font-weight: 700;
-  font-size: 0.9rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-}
-.qs-nutrition summary::-webkit-details-marker { display: none; }
-.qs-nutrition summary::after { content: "+"; color: var(--pink); font-size: 1.2rem; font-weight: 400; }
-.qs-nutrition[open] summary::after { content: "–"; }
-.qs-nutrition table { width: 100%; border-collapse: collapse; margin-top: 16px; }
-.qs-nutrition td { padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: var(--gray); font-size: 0.88rem; }
-.qs-nutrition td:last-child { text-align: right; color: var(--white); font-weight: 600; }
-.qs-nutrition-note { margin: 14px 0 0; color: var(--gray); font-size: 0.76rem; line-height: 1.4; }
 
 /* Reveal sutil al hacer scroll (ver script.js) */
 .qs-reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
