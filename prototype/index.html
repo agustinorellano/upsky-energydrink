@@ -131,9 +131,20 @@
 
 <!-- ========== HERO ========== -->
 <section class="section hero" id="inicio">
-  <div class="hero-bg kb-zoom">
-    <img src="assets/hero-banner-nightout.jpg" alt="Modelo sosteniendo una botella de UpSky Energy Drink de noche" class="hero-bg-img">
+  <div class="hero-bg">
+    <div class="hero-slider" id="heroSlider">
+      <div class="hero-slide kb-zoom">
+        <img src="assets/hero-banner-nightout.jpg" alt="Modelo sosteniendo una botella de UpSky Energy Drink de noche" class="hero-bg-img">
+      </div>
+    </div>
     <div class="hero-bg-scrim"></div>
+    <button class="hero-arrow hero-arrow--prev" id="heroPrev" aria-label="Foto anterior" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button class="hero-arrow hero-arrow--next" id="heroNext" aria-label="Foto siguiente" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="hero-dots" id="heroDots" hidden></div>
   </div>
   <div class="container hero-grid">
     <div class="hero-copy">
@@ -346,35 +357,6 @@
   </div>
 </section>
 
-<!-- ========== TESTIMONIOS ========== -->
-<section class="section" id="testimonios">
-  <div class="container">
-    <p class="section-eyebrow">Lo que dicen</p>
-    <h2 class="section-title">Pensado para quien lo toma</h2>
-
-    <div class="testimonial-grid">
-      <article class="testimonial-card">
-        <p class="testimonial-stars">★★★★★</p>
-        <p class="testimonial-quote">"El sabor a frutilla es lo que más me gustó, no es empalagoso como otras energizantes. La tomo antes de entrenar y se nota la diferencia."</p>
-        <p class="testimonial-author">Lucía R. <span>— Concordia, Entre Ríos</span></p>
-      </article>
-
-      <article class="testimonial-card">
-        <p class="testimonial-stars">★★★★★</p>
-        <p class="testimonial-quote">"Empecé a venderla en mi kiosco hace un mes y ya es de las que más rotan. El packaging llama la atención en la heladera."</p>
-        <p class="testimonial-author">Martín G. <span>— Kiosco El Faro</span></p>
-      </article>
-
-      <article class="testimonial-card">
-        <p class="testimonial-stars">★★★★★</p>
-        <p class="testimonial-quote">"Buena relación precio-calidad y la botella de vidrio se banca el uso diario sin despintarse. Para mí es mejor que las marcas grandes."</p>
-        <p class="testimonial-author">Sofía M. <span>— Paraná, Entre Ríos</span></p>
-      </article>
-    </div>
-    <p class="testimonial-disclaimer">Testimonios ilustrativos del prototipo — reemplazar por reseñas reales de clientes.</p>
-  </div>
-</section>
-
 <!-- ========== FAQ ========== -->
 <section class="section" id="faq">
   <div class="container">
@@ -389,7 +371,7 @@
 
       <details class="faq-item">
         <summary>¿Dónde puedo comprarla si no quiero pedir por WhatsApp?</summary>
-        <p>Podés encontrarla en kioscos, autoservicios y supermercados adheridos en Concordia y alrededores. Mirá el mapa de puntos de venta más arriba.</p>
+        <p>Podés encontrarla en kioscos, autoservicios y supermercados adheridos en Concordia y alrededores. Escribinos y te decimos el punto de venta más cercano.</p>
       </details>
 
       <details class="faq-item">

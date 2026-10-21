@@ -131,6 +131,68 @@ document.addEventListener("DOMContentLoaded", () => {
     kbEls.forEach((el) => kbObserver.observe(el));
   }
 
+  // Hero: carrusel deslizable (swipe) con dots y flechas, solo si hay más de una foto
+  const heroSlider = document.getElementById("heroSlider");
+  if (heroSlider) {
+    const heroSlides = Array.from(heroSlider.querySelectorAll(".hero-slide"));
+    const heroDotsWrap = document.getElementById("heroDots");
+    const heroPrev = document.getElementById("heroPrev");
+    const heroNext = document.getElementById("heroNext");
+
+    if (heroSlides.length > 1) {
+      heroSlides.forEach((_, i) => {
+        const dot = document.createElement("button");
+        dot.className = "hero-dot" + (i === 0 ? " is-active" : "");
+        dot.type = "button";
+        dot.setAttribute("aria-label", "Ir a la foto " + (i + 1));
+        dot.addEventListener("click", () => goToHeroSlide(i));
+        heroDotsWrap.appendChild(dot);
+      });
+      heroDotsWrap.hidden = false;
+      heroPrev.hidden = false;
+      heroNext.hidden = false;
+
+      const heroDots = Array.from(heroDotsWrap.querySelectorAll(".hero-dot"));
+
+      function goToHeroSlide(i) {
+        const target = heroSlides[Math.max(0, Math.min(heroSlides.length - 1, i))];
+        target.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+      }
+
+      function currentHeroIndex() {
+        const sliderLeft = heroSlider.getBoundingClientRect().left;
+        let closest = 0;
+        let closestDist = Infinity;
+        heroSlides.forEach((slide, i) => {
+          const dist = Math.abs(slide.getBoundingClientRect().left - sliderLeft);
+          if (dist < closestDist) {
+            closestDist = dist;
+            closest = i;
+          }
+        });
+        return closest;
+      }
+
+      heroPrev.addEventListener("click", () => goToHeroSlide(currentHeroIndex() - 1));
+      heroNext.addEventListener("click", () => goToHeroSlide(currentHeroIndex() + 1));
+
+      if ("IntersectionObserver" in window) {
+        const heroDotObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+                const idx = heroSlides.indexOf(entry.target);
+                heroDots.forEach((d, i) => d.classList.toggle("is-active", i === idx));
+              }
+            });
+          },
+          { root: heroSlider, threshold: [0.6] }
+        );
+        heroSlides.forEach((s) => heroDotObserver.observe(s));
+      }
+    }
+  }
+
   // Formulario de contacto: en este prototipo no envía datos, solo muestra un aviso.
   const contactForm = document.getElementById("contactForm");
   const formNote = document.getElementById("formNote");
