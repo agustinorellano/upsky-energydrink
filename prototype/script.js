@@ -164,15 +164,6 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
-  // Producto: comparador deslizable vidrio vs. lata
-  const qsCompareSlider = document.getElementById("qsCompareSlider");
-  const qsCompareRange = document.getElementById("qsCompareRange");
-  if (qsCompareSlider && qsCompareRange) {
-    qsCompareRange.addEventListener("input", () => {
-      qsCompareSlider.style.setProperty("--pos", qsCompareRange.value + "%");
-    });
-  }
-
   // Hero: carrusel deslizable (swipe) con dots y flechas, solo si hay más de una foto
   const heroSlider = document.getElementById("heroSlider");
   if (heroSlider) {
