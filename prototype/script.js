@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const activeTarget = scrollTargets.find((t) => intersecting.has(t.sectionEl));
           setActiveNavLink(activeTarget ? activeTarget.linkEl : null);
         },
-        { rootMargin: "-45% 0px -45% 0px" }
+        { rootMargin: "-15% 0px -70% 0px", threshold: 0 }
       );
       scrollTargets.forEach(({ sectionEl }) => navScrollObserver.observe(sectionEl));
     }
