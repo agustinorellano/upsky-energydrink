@@ -131,6 +131,70 @@ document.addEventListener("DOMContentLoaded", () => {
     kbEls.forEach((el) => kbObserver.observe(el));
   }
 
+  // Sección Producto: la botella y las frutillas reaccionan al mouse y al scroll
+  const qsMedia = document.getElementById("qsMedia");
+  const qsBottleWrap = document.getElementById("qsBottleWrap");
+  const qsSection = document.getElementById("producto");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (qsMedia && qsBottleWrap && qsSection && !reduceMotion) {
+    const qsBerries = Array.from(qsMedia.querySelectorAll(".qs-berry"));
+    let mouseX = 0; // -1 a 1
+    let mouseY = 0; // -1 a 1
+    let scrollCentered = 0; // -1 a 1
+    let scrollTicking = false;
+
+    function applyQsTransforms() {
+      const bx = mouseX * 16;
+      const by = mouseY * 12 + scrollCentered * -16;
+      qsBottleWrap.style.transform =
+        `translate3d(${bx}px, ${by}px, 0) rotateX(${-mouseY * 6}deg) rotateY(${mouseX * 9}deg) rotateZ(${scrollCentered * 1.4}deg)`;
+
+      qsBerries.forEach((berry) => {
+        const depth = parseFloat(berry.dataset.depth) || 0.5;
+        const berryX = mouseX * 30 * depth;
+        const berryY = mouseY * 22 * depth + scrollCentered * 48 * depth;
+        berry.style.transform = `translate3d(${berryX}px, ${berryY}px, 0)`;
+      });
+    }
+
+    if (window.matchMedia("(pointer: fine)").matches) {
+      qsMedia.addEventListener("pointermove", (e) => {
+        const rect = qsMedia.getBoundingClientRect();
+        mouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        mouseY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+        applyQsTransforms();
+      });
+      qsMedia.addEventListener("pointerleave", () => {
+        mouseX = 0;
+        mouseY = 0;
+        applyQsTransforms();
+      });
+    }
+
+    function updateScrollProgress() {
+      scrollTicking = false;
+      const rect = qsSection.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const total = rect.height + vh;
+      const scrolled = vh - rect.top;
+      const progress = Math.min(1, Math.max(0, scrolled / total));
+      scrollCentered = (progress - 0.5) * 2;
+      applyQsTransforms();
+    }
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!scrollTicking) {
+          scrollTicking = true;
+          requestAnimationFrame(updateScrollProgress);
+        }
+      },
+      { passive: true }
+    );
+    updateScrollProgress();
+  }
+
   // Hero: carrusel deslizable (swipe) con dots y flechas, solo si hay más de una foto
   const heroSlider = document.getElementById("heroSlider");
   if (heroSlider) {
