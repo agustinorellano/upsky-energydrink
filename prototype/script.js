@@ -131,6 +131,80 @@ document.addEventListener("DOMContentLoaded", () => {
     kbEls.forEach((el) => kbObserver.observe(el));
   }
 
+  // Nav: blob flotante que marca la sección/página activa
+  const mainNav = document.getElementById("mainNav");
+  const navBlob = document.getElementById("navBlob");
+  if (mainNav && navBlob) {
+    const navLinkEls = Array.from(mainNav.querySelectorAll(":scope > a, .nav-item-link"));
+
+    function moveBlobTo(el) {
+      if (!el) {
+        navBlob.style.opacity = "0";
+        return;
+      }
+      const navRect = mainNav.getBoundingClientRect();
+      const elRect = el.getBoundingClientRect();
+      navBlob.style.left = `${elRect.left - navRect.left}px`;
+      navBlob.style.width = `${elRect.width}px`;
+      navBlob.style.opacity = "1";
+    }
+
+    function setActiveNavLink(el) {
+      navLinkEls.forEach((a) => a.classList.remove("is-active"));
+      if (el) el.classList.add("is-active");
+      moveBlobTo(el);
+    }
+
+    // Catálogo / Eventos / Para negocios: activo si es la página actual
+    // (normaliza la extensión .html por si el hosting sirve URLs "limpias")
+    const normalizePath = (p) => {
+      const clean = p.split("#")[0].replace(/\.html$/, "").replace(/\/$/, "");
+      return clean === "" ? "index" : clean.replace(/^\//, "");
+    };
+    const currentPath = normalizePath(window.location.pathname);
+    const pageLink = navLinkEls.find((a) => {
+      const href = a.getAttribute("href") || "";
+      return !href.startsWith("#") && normalizePath(href) === currentPath;
+    });
+    if (pageLink) setActiveNavLink(pageLink);
+
+    // Home: scroll-spy para Producto / Contacto
+    const scrollTargets = [
+      { id: "producto", selector: 'a[href="#producto"]' },
+      { id: "contacto", selector: 'a[href="#contacto"]' },
+    ]
+      .map(({ id, selector }) => {
+        const sectionEl = document.getElementById(id);
+        const linkEl = mainNav.querySelector(selector);
+        return sectionEl && linkEl ? { sectionEl, linkEl } : null;
+      })
+      .filter(Boolean);
+
+    if (scrollTargets.length && "IntersectionObserver" in window) {
+      const intersecting = new Set();
+      const navScrollObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              intersecting.add(entry.target);
+            } else {
+              intersecting.delete(entry.target);
+            }
+          });
+          const activeTarget = scrollTargets.find((t) => intersecting.has(t.sectionEl));
+          setActiveNavLink(activeTarget ? activeTarget.linkEl : null);
+        },
+        { rootMargin: "-45% 0px -45% 0px" }
+      );
+      scrollTargets.forEach(({ sectionEl }) => navScrollObserver.observe(sectionEl));
+    }
+
+    window.addEventListener("resize", () => {
+      const active = mainNav.querySelector(".is-active");
+      if (active) moveBlobTo(active);
+    });
+  }
+
   // Header: se oculta al bajar y reaparece al subir
   const siteHeader = document.getElementById("header");
   if (siteHeader) {
