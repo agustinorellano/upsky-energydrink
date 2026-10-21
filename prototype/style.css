@@ -1148,6 +1148,72 @@ img.placeholder-product-thumb { display: block; width: 100%; height: 100%; objec
   .marquee-icon svg { width: 14px; height: 14px; }
 }
 
+/* ---------- Instagram (feed) ---------- */
+.ig-split {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 56px;
+  align-items: center;
+}
+.ig-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.02;
+  font-size: clamp(2.2rem, 4.4vw, 3.6rem);
+  margin: 0 0 20px;
+}
+.ig-title-accent { color: var(--primary-color); }
+.ig-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.ig-actions .btn { display: inline-flex; align-items: center; gap: 10px; }
+.ig-actions .btn svg { width: 18px; height: 18px; }
+.ig-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.ig-tile {
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.ig-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.ig-tile-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5, 5, 5, 0);
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.25s ease, background 0.25s ease;
+}
+.ig-tile-overlay svg { width: 26px; height: 26px; }
+.ig-tile:hover img { transform: scale(1.08); }
+.ig-tile:hover .ig-tile-overlay,
+.ig-tile:focus-visible .ig-tile-overlay {
+  opacity: 1;
+  background: rgba(5, 5, 5, 0.45);
+}
+@media (max-width: 900px) {
+  .ig-split { grid-template-columns: 1fr; gap: 32px; }
+  .ig-grid { gap: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ig-tile img { transition: none; }
+  .ig-tile:hover img { transform: none; }
+}
+
 /* ---------- Carrito ---------- */
 .cart-button {
   position: relative;
