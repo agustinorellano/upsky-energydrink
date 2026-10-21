@@ -114,6 +114,23 @@ document.addEventListener("DOMContentLoaded", () => {
     revealEls.forEach((el) => el.classList.add("is-visible"));
   }
 
+  // Zoom lento ("Ken Burns") en las imágenes/video principales al entrar en pantalla
+  const kbEls = document.querySelectorAll(".kb-zoom");
+  if (kbEls.length && "IntersectionObserver" in window) {
+    const kbObserver = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-zoomed");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    kbEls.forEach((el) => kbObserver.observe(el));
+  }
+
   // Formulario de contacto: en este prototipo no envía datos, solo muestra un aviso.
   const contactForm = document.getElementById("contactForm");
   const formNote = document.getElementById("formNote");
