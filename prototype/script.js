@@ -139,6 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (qsMedia && qsBottleWrap && qsSection && !reduceMotion) {
     const qsBerries = Array.from(qsMedia.querySelectorAll(".qs-berry"));
+    const qsWordmark = document.getElementById("qsWordmark");
     let mouseX = 0; // -1 a 1
     let mouseY = 0; // -1 a 1
     let scrollCentered = 0; // -1 a 1
@@ -151,11 +152,34 @@ document.addEventListener("DOMContentLoaded", () => {
         `translate3d(${bx}px, ${by}px, 0) rotateX(${-mouseY * 6}deg) rotateY(${mouseX * 9}deg) rotateZ(${scrollCentered * 1.4}deg)`;
 
       qsBerries.forEach((berry) => {
+        const move = berry.querySelector(".qs-berry-move");
+        if (!move) return;
         const depth = parseFloat(berry.dataset.depth) || 0.5;
         const berryX = mouseX * 30 * depth;
         const berryY = mouseY * 22 * depth + scrollCentered * 48 * depth;
-        berry.style.transform = `translate3d(${berryX}px, ${berryY}px, 0)`;
+        move.style.transform = `translate3d(${berryX}px, ${berryY}px, 0)`;
       });
+
+      if (qsWordmark) {
+        qsWordmark.style.transform = `translate3d(calc(-50% + ${mouseX * -6}px), calc(-50% + ${scrollCentered * -10}px), 0)`;
+      }
+    }
+
+    if ("IntersectionObserver" in window) {
+      const qsEntranceObserver = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              qsMedia.classList.add("is-entered");
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+      qsEntranceObserver.observe(qsMedia);
+    } else {
+      qsMedia.classList.add("is-entered");
     }
 
     if (window.matchMedia("(pointer: fine)").matches) {
