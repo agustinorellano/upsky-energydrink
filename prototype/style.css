@@ -151,18 +151,18 @@ a { color: inherit; text-decoration: none; }
 }
 .main-nav a:hover { color: var(--text-color); }
 .main-nav a.is-active,
-.main-nav .nav-item-link.is-active { color: var(--primary-color); }
+.main-nav .nav-item-link.is-active { color: #fff; font-weight: 700; }
 
-/* -- Blob flotante que marca la sección/página activa -- */
+/* -- Blob flotante que marca la sección/página activa (mismo estilo que el CTA) -- */
 .nav-blob {
   position: absolute;
   top: 50%;
   left: 0;
-  height: 34px;
+  height: 36px;
   width: 0;
   border-radius: 999px;
-  background: rgba(236, 31, 122, 0.16);
-  border: 1px solid rgba(236, 31, 122, 0.4);
+  background: var(--primary-color);
+  box-shadow: 0 6px 16px rgba(236, 31, 122, 0.4);
   transform: translateY(-50%);
   opacity: 0;
   pointer-events: none;

@@ -142,10 +142,11 @@ document.addEventListener("DOMContentLoaded", () => {
         navBlob.style.opacity = "0";
         return;
       }
+      const padX = 16;
       const navRect = mainNav.getBoundingClientRect();
       const elRect = el.getBoundingClientRect();
-      navBlob.style.left = `${elRect.left - navRect.left}px`;
-      navBlob.style.width = `${elRect.width}px`;
+      navBlob.style.left = `${elRect.left - navRect.left - padX}px`;
+      navBlob.style.width = `${elRect.width + padX * 2}px`;
       navBlob.style.opacity = "1";
     }
 
