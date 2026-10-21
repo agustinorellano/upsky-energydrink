@@ -173,7 +173,6 @@ a { color: inherit; text-decoration: none; }
   .nav-blob { transition: opacity 0.2s ease; }
 }
 .header-actions { display: flex; align-items: center; gap: 14px; }
-.header-cta { white-space: nowrap; padding: 11px 22px; font-size: 0.88rem; font-weight: 800; }
 .logo-img { height: 38px; }
 
 /* -- Dropdown del ítem "Catálogo" -- */
@@ -1665,7 +1664,6 @@ img.placeholder-product-thumb { display: block; width: 100%; height: 100%; objec
 @media (max-width: 900px) {
   .main-nav { display: none; }
   .nav-toggle { display: flex; }
-  .header-cta { display: none; }
 
   .nav-item { flex-direction: column; align-items: flex-start; width: 100%; }
   .nav-dropdown {
