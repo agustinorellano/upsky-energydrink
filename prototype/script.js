@@ -131,6 +131,39 @@ document.addEventListener("DOMContentLoaded", () => {
     kbEls.forEach((el) => kbObserver.observe(el));
   }
 
+  // Header: se oculta al bajar y reaparece al subir
+  const siteHeader = document.getElementById("header");
+  if (siteHeader) {
+    let lastScrollY = window.scrollY;
+    let headerTicking = false;
+
+    function updateHeaderVisibility() {
+      headerTicking = false;
+      const currentY = window.scrollY;
+      const delta = currentY - lastScrollY;
+
+      if (currentY < 80) {
+        siteHeader.classList.remove("is-hidden");
+      } else if (delta > 4) {
+        siteHeader.classList.add("is-hidden");
+      } else if (delta < -4) {
+        siteHeader.classList.remove("is-hidden");
+      }
+      lastScrollY = currentY;
+    }
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!headerTicking) {
+          headerTicking = true;
+          requestAnimationFrame(updateHeaderVisibility);
+        }
+      },
+      { passive: true }
+    );
+  }
+
   // Producto: comparador deslizable vidrio vs. lata
   const qsCompareSlider = document.getElementById("qsCompareSlider");
   const qsCompareRange = document.getElementById("qsCompareRange");
