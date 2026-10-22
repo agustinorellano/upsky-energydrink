@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UP SKY Energy Drink - Prototipo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&family=Anton&display=swap">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -294,6 +294,39 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ========== PRUEBA: carrusel de escenas (no reemplaza Producto, es experimental) ========== -->
+<section class="section tt-section" aria-label="Prueba: carrusel de escenas de producto">
+  <div class="tt-stage" id="ttStage">
+    <div class="tt-grain" aria-hidden="true"></div>
+    <div class="tt-ghost" aria-hidden="true">UP SKY</div>
+    <p class="tt-brand">UP SKY · PRUEBA</p>
+
+    <div class="tt-carousel" id="ttCarousel">
+      <div class="tt-item" data-index="0"><img src="assets/bottle-cutout-01.png" alt="" draggable="false"></div>
+      <div class="tt-item" data-index="1"><img src="assets/bottle-cutout-02.png" alt="" draggable="false"></div>
+      <div class="tt-item" data-index="2"><img src="assets/bottle-cutout-03.png" alt="" draggable="false"></div>
+    </div>
+
+    <div class="tt-copy">
+      <p class="tt-kicker" id="ttKicker">UP SKY · Presentación</p>
+      <p class="tt-desc" id="ttDesc">Bebida energética de frutilla en botella de vidrio de 355cc. Fría, lista para acompañarte.</p>
+      <div class="tt-nav">
+        <button class="tt-arrow" type="button" id="ttPrev" aria-label="Escena anterior">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="tt-arrow" type="button" id="ttNext" aria-label="Escena siguiente">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <a href="#ficha" class="tt-discover">
+      VER FICHA
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
   </div>
 </section>
 

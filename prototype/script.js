@@ -809,4 +809,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
     renderCart();
   }
+
+  // Prueba: carrusel de escenas de producto (experimental)
+  const ttStage = document.getElementById("ttStage");
+  if (ttStage) {
+    const ttItems = Array.from(ttStage.querySelectorAll(".tt-item"));
+    const ttKicker = document.getElementById("ttKicker");
+    const ttDesc = document.getElementById("ttDesc");
+    const ttPrev = document.getElementById("ttPrev");
+    const ttNext = document.getElementById("ttNext");
+    const ttReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const ttSlides = [
+      { bg: "#c2185b", kicker: "UP SKY · Presentación", desc: "Bebida energética de frutilla en botella de vidrio de 355cc. Fría, lista para acompañarte." },
+      { bg: "#1565c0", kicker: "UP SKY · Fórmula", desc: "Taurina, cafeína y vitaminas B y C para sostener tu ritmo todo el día." },
+      { bg: "#6a1b9a", kicker: "UP SKY · Perspectiva", desc: "Sabor a frutilla intenso y fácil de tomar, en un formato de vidrio reciclable." },
+    ];
+
+    let ttActive = 0;
+    let ttAnimating = false;
+
+    function ttRender() {
+      const n = ttItems.length;
+      ttItems.forEach((item, i) => {
+        item.classList.remove("is-center", "is-left", "is-right");
+        if (i === ttActive) item.classList.add("is-center");
+        else if (i === (ttActive + n - 1) % n) item.classList.add("is-left");
+        else if (i === (ttActive + 1) % n) item.classList.add("is-right");
+      });
+      ttStage.style.backgroundColor = ttSlides[ttActive].bg;
+      if (ttKicker) ttKicker.textContent = ttSlides[ttActive].kicker;
+      if (ttDesc) ttDesc.textContent = ttSlides[ttActive].desc;
+    }
+
+    function ttNavigate(dir) {
+      if (ttAnimating) return;
+      ttAnimating = true;
+      const n = ttItems.length;
+      ttActive = dir === "next" ? (ttActive + 1) % n : (ttActive + n - 1) % n;
+      ttRender();
+      window.setTimeout(() => { ttAnimating = false; }, ttReduceMotion ? 0 : 650);
+    }
+
+    ttPrev && ttPrev.addEventListener("click", () => ttNavigate("prev"));
+    ttNext && ttNext.addEventListener("click", () => ttNavigate("next"));
+    ttRender();
+  }
 });
