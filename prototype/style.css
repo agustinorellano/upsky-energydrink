@@ -1503,27 +1503,17 @@ img.placeholder-product-thumb { display: block; width: 100%; height: 100%; objec
   cursor: pointer;
   padding: 2px;
 }
-.ugc-avatar { position: relative; width: 30px; height: 30px; }
-.ugc-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 1.5px solid rgba(255, 255, 255, 0.85); background: #fff; }
-.ugc-avatar-plus {
-  position: absolute;
-  left: 50%;
-  bottom: -7px;
-  transform: translateX(-50%);
-  width: 15px;
-  height: 15px;
+.ugc-action-icon-wrap {
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background: var(--primary-color);
-  color: #fff;
-  font-size: 0.7rem;
-  font-weight: 800;
-  line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1.5px solid #0f0f12;
+  background: rgba(20, 20, 24, 0.55);
+  backdrop-filter: blur(2px);
 }
-.ugc-action-icon { width: 20px; height: 20px; fill: none; stroke: currentColor; filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6)); transition: transform 0.15s ease; }
+.ugc-action-icon { width: 18px; height: 18px; fill: none; stroke: currentColor; transition: transform 0.15s ease; }
 .ugc-action-count { font-size: 0.68rem; font-weight: 700; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); }
 .ugc-action:hover .ugc-action-icon { transform: scale(1.12); }
 .ugc-like.is-liked .ugc-action-icon { fill: var(--primary-color); stroke: var(--primary-color); animation: ugc-like-pop 0.3s ease; }
