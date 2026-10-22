@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
         s.classList.toggle("is-done", idx < index);
         s.setAttribute("aria-selected", idx === index ? "true" : "false");
         const fill = s.querySelector(".qs-seq-step-fill");
-        if (fill && idx === index) fill.style.width = "0%";
+        if (fill && idx === index) fill.style.transform = "scaleX(0)";
       });
       elapsed = 0;
       startTime = performance.now();
@@ -233,7 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
         elapsed = now - startTime;
         const pct = Math.min(100, (elapsed / DURATION) * 100);
         const activeFill = steps[index] && steps[index].querySelector(".qs-seq-step-fill");
-        if (activeFill) activeFill.style.width = pct + "%";
+        if (activeFill) activeFill.style.transform = `scaleX(${pct / 100})`;
         if (elapsed >= DURATION) next();
       } else {
         startTime = now - elapsed;

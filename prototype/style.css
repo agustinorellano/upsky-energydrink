@@ -690,8 +690,8 @@ a { color: inherit; text-decoration: none; }
 .qs-seq-step.is-active .qs-seq-step-label,
 .qs-seq-step.is-done .qs-seq-step-label { color: var(--qs-text); }
 .qs-seq-step-bar { display: block; height: 2px; background: rgba(244, 241, 236, 0.16); position: relative; }
-.qs-seq-step-fill { position: absolute; inset: 0; width: 0%; background: var(--qs-accent); }
-.qs-seq-step.is-done .qs-seq-step-fill { width: 100%; }
+.qs-seq-step-fill { position: absolute; inset: 0; width: 100%; background: var(--qs-accent); transform: scaleX(0); transform-origin: left; }
+.qs-seq-step.is-done .qs-seq-step-fill { transform: scaleX(1); }
 .qs-seq-pause {
   flex-shrink: 0;
   width: 36px;
