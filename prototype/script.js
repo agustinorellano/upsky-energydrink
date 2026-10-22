@@ -837,7 +837,7 @@ document.addEventListener("DOMContentLoaded", () => {
         else if (i === (ttActive + n - 1) % n) item.classList.add("is-left");
         else if (i === (ttActive + 1) % n) item.classList.add("is-right");
       });
-      ttStage.style.backgroundColor = ttSlides[ttActive].bg;
+      ttStage.style.setProperty("--tt-accent", ttSlides[ttActive].bg);
       if (ttKicker) ttKicker.textContent = ttSlides[ttActive].kicker;
       if (ttDesc) ttDesc.textContent = ttSlides[ttActive].desc;
     }
