@@ -142,10 +142,16 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
       const padX = 16;
+      // `html { zoom: 0.9 }` ya escala lo que devuelve getBoundingClientRect;
+      // si seteamos esa distancia tal cual en un transform, el motor la vuelve
+      // a escalar por el zoom al renderizarla y la burbuja queda corta (más
+      // corta cuanto más lejos del borde izquierdo esté el ítem activo).
+      // Dividimos por el zoom para que, al re-escalarse, caiga en el lugar justo.
+      const zoom = parseFloat(getComputedStyle(document.documentElement).zoom) || 1;
       const navRect = mainNav.getBoundingClientRect();
       const elRect = el.getBoundingClientRect();
-      const x = elRect.left - navRect.left - padX;
-      navBlob.style.width = `${elRect.width + padX * 2}px`;
+      const x = (elRect.left - navRect.left - padX) / zoom;
+      navBlob.style.width = `${(elRect.width + padX * 2) / zoom}px`;
       navBlob.style.transform = `translate(${x}px, -50%)`;
       navBlob.style.opacity = "1";
     }
@@ -169,9 +175,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     if (pageLink) setActiveNavLink(pageLink);
 
-    // Home: scroll-spy para Producto / Contacto
+    // Home: scroll-spy para Inicio / Contacto
     const scrollTargets = [
-      { id: "producto", selector: 'a[href="#producto"]' },
+      { id: "inicio", selector: 'a[href="#inicio"]' },
       { id: "contacto", selector: 'a[href="#contacto"]' },
     ]
       .map(({ id, selector }) => {
@@ -204,6 +210,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const active = mainNav.querySelector(".is-active");
       if (active) moveBlobTo(active);
     });
+
+    // Reubica la burbuja cuando terminan de cargar las tipografías web: hasta
+    // ese momento el nav se mide con la fuente de reserva, que tiene un ancho
+    // distinto y deja la burbuja desplazada respecto al texto real.
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        const active = mainNav.querySelector(".is-active");
+        if (active) moveBlobTo(active);
+      });
+    }
   }
 
   // Producto: secuencia de 3 tomas (crossfade + Ken Burns + rasgos progresivos)
