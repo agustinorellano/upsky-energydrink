@@ -445,6 +445,19 @@ a { color: inherit; text-decoration: none; }
 /* ---------- Sections (shared) ---------- */
 .section { padding: 88px 0; }
 .section-alt { background: var(--background-alt); }
+.community-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  margin: 0 0 18px;
+  border-radius: 999px;
+  background: rgba(236, 31, 122, 0.12);
+  border: 1px solid rgba(236, 31, 122, 0.35);
+  color: var(--primary-color);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
 .section-eyebrow {
   color: var(--primary-color);
   font-weight: 700;
