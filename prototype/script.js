@@ -400,6 +400,28 @@ document.addEventListener("DOMContentLoaded", () => {
       window.addEventListener("touchmove", onDragMove, { passive: true });
       window.addEventListener("touchend", onDragEnd);
     }
+
+    // Comentarios y likes flotantes: posición aleatoria en cada aparición, siempre por encima del carrusel
+    const ugcComments = document.querySelector(".ugc-comments");
+    if (ugcComments && !reduceMotionUgc) {
+      const floaters = Array.from(ugcComments.querySelectorAll(".ugc-comment-bubble, .ugc-like-badge"));
+      let lastIndex = -1;
+      function popFloater() {
+        let i = Math.floor(Math.random() * floaters.length);
+        if (floaters.length > 1 && i === lastIndex) i = (i + 1) % floaters.length;
+        lastIndex = i;
+        const el = floaters[i];
+        const left = 6 + Math.random() * 76; // %
+        const top = 6 + Math.random() * 82; // %
+        el.classList.remove("is-popping");
+        el.style.left = `${left}%`;
+        el.style.top = `${top}%`;
+        void el.offsetWidth; // fuerza reflow para reiniciar la animación
+        el.classList.add("is-popping");
+      }
+      popFloater();
+      setInterval(popFloater, 1100);
+    }
   }
 
   document.querySelectorAll(".ugc-share").forEach((btn) => {

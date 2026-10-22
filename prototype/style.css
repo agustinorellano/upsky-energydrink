@@ -1606,7 +1606,7 @@ img.placeholder-product-thumb { display: block; width: 100%; height: 100%; objec
 .ugc-card--placeholder .placeholder { width: 100%; height: 100%; border-radius: 0; border: 1px dashed var(--border-color); }
 
 /* -- Comentarios flotantes tipo notificación, con efecto pop -- */
-.ugc-comments { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
+.ugc-comments { position: absolute; inset: 0; z-index: 2000; pointer-events: none; overflow: hidden; }
 .ugc-comment-bubble {
   position: absolute;
   padding: 6px 12px;
@@ -1619,23 +1619,18 @@ img.placeholder-product-thumb { display: block; width: 100%; height: 100%; objec
   white-space: nowrap;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
   opacity: 0;
-  animation: ugc-comment-pop 5s ease-in-out infinite;
+  left: 50%;
+  top: 50%;
 }
-/* Todas por debajo del ~48% de alto de la card: la cara queda siempre libre */
-.ugc-cb-1 { left: 4%;  top: 50%; animation-delay: 0s; }
-.ugc-cb-2 { left: 46%; top: 48%; animation-delay: 1.1s; }
-.ugc-cb-3 { left: 20%; top: 80%; animation-delay: 1.8s; }
-.ugc-cb-4 { left: 64%; top: 82%; animation-delay: 0.4s; }
-.ugc-cb-5 { left: 86%; top: 60%; animation-delay: 2.9s; }
-.ugc-lb-1 { left: 30%; top: 62%; animation-delay: 2.4s; }
-.ugc-lb-2 { left: 74%; top: 52%; animation-delay: 3.6s; }
-.ugc-lb-3 { left: 54%; top: 86%; animation-delay: 4.4s; }
+.ugc-comment-bubble.is-popping,
+.ugc-like-badge.is-popping {
+  animation: ugc-comment-pop 2.6s ease-in-out;
+}
 @keyframes ugc-comment-pop {
   0% { opacity: 0; transform: translateY(14px) scale(0.85); }
-  12% { opacity: 1; transform: translateY(0) scale(1); }
-  70% { opacity: 1; transform: translateY(-6px) scale(1); }
-  88% { opacity: 0; transform: translateY(-22px) scale(0.92); }
-  100% { opacity: 0; }
+  14% { opacity: 1; transform: translateY(0) scale(1); }
+  78% { opacity: 1; transform: translateY(-6px) scale(1); }
+  100% { opacity: 0; transform: translateY(-22px) scale(0.92); }
 }
 
 /* Badges tipo "icono de red" para los likes que van apareciendo */
@@ -1651,7 +1646,8 @@ img.placeholder-product-thumb { display: block; width: 100%; height: 100%; objec
   color: #fff;
   box-shadow: 0 6px 16px rgba(255, 45, 106, 0.45);
   opacity: 0;
-  animation: ugc-comment-pop 5s ease-in-out infinite;
+  left: 50%;
+  top: 50%;
 }
 .ugc-like-badge svg { width: 17px; height: 17px; }
 
