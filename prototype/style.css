@@ -1428,16 +1428,61 @@ img.placeholder-product-thumb { display: block; width: 100%; height: 100%; objec
   .event-preview-card .placeholder-event { min-height: 180px; }
 }
 
-/* ---------- Lifestyle (banner de video) ---------- */
-.lifestyle-banner {
+/* ---------- Lifestyle: grid UGC (videos tipo reel/TikTok) ---------- */
+.ugc-grid {
   margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 16px;
+}
+.ugc-card {
+  position: relative;
+  aspect-ratio: 9 / 16;
   border-radius: var(--radius);
   overflow: hidden;
+  background: #0f0f12;
 }
-.lifestyle-banner video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #000; }
+.ugc-card-media { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ugc-card-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 14px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0) 22%, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 0.75) 100%);
+  pointer-events: none;
+}
+.ugc-handle { color: #fff; font-size: 0.78rem; font-weight: 700; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); }
+.ugc-like {
+  align-self: flex-end;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 4px;
+}
+.ugc-like-icon { width: 26px; height: 26px; filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6)); transition: transform 0.15s ease; }
+.ugc-like-count { font-size: 0.72rem; font-weight: 700; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); }
+.ugc-like:hover .ugc-like-icon { transform: scale(1.12); }
+.ugc-like.is-liked .ugc-like-icon { fill: var(--primary-color); stroke: var(--primary-color); }
+.ugc-like.is-liked .ugc-like-icon { animation: ugc-like-pop 0.3s ease; }
+@keyframes ugc-like-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
 
-@media (min-width: 901px) {
-  .lifestyle-banner { max-width: 640px; margin-left: auto; margin-right: auto; }
+.ugc-card--placeholder .placeholder { width: 100%; height: 100%; border-radius: 0; border: 1px dashed var(--border-color); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ugc-like-icon, .ugc-like.is-liked .ugc-like-icon { animation: none; transition: none; }
 }
 
 

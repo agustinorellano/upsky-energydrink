@@ -281,6 +281,17 @@ document.addEventListener("DOMContentLoaded", () => {
     setActive(0);
   }
 
+  // Lifestyle: like simulado en las cards UGC
+  document.querySelectorAll(".ugc-like").forEach((btn) => {
+    const countEl = btn.querySelector(".ugc-like-count");
+    const base = parseInt(btn.dataset.baseLikes || "0", 10);
+    btn.addEventListener("click", () => {
+      const liked = btn.classList.toggle("is-liked");
+      btn.setAttribute("aria-pressed", liked ? "true" : "false");
+      if (countEl) countEl.textContent = String(base + (liked ? 1 : 0));
+    });
+  });
+
   // Header: se oculta al bajar y reaparece al subir
   const siteHeader = document.getElementById("header");
   if (siteHeader) {
