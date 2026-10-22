@@ -386,10 +386,12 @@ a { color: inherit; text-decoration: none; }
 .hero-copy { max-width: 560px; }
 .eyebrow {
   color: var(--primary-color);
+  font-family: var(--font-display);
   font-weight: 700;
-  font-size: 0.75rem;
-  letter-spacing: 0.22em;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
   margin: 0 0 22px;
 }
 .hero h1 {
@@ -435,7 +437,7 @@ a { color: inherit; text-decoration: none; }
       rgba(10, 10, 12, 1) 100%
     );
   }
-  .eyebrow { font-size: 0.68rem; margin-bottom: 14px; }
+  .eyebrow { font-size: 0.74rem; margin-bottom: 14px; }
   .hero h1 { margin-bottom: 16px; }
   .hero-title-sm { font-size: 1.25rem; }
   .hero-title-lg { font-size: 2.3rem; }
