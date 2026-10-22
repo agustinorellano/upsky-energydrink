@@ -77,25 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Atributos del producto: tap para desplegar más info (en desktop ya se
-  // despliega solo con hover vía CSS; esto cubre mobile/touch y teclado)
-  document.querySelectorAll(".qs-attr").forEach((attr) => {
-    attr.addEventListener("click", () => {
-      const wasOpen = attr.classList.contains("is-open");
-      document.querySelectorAll(".qs-attr.is-open").forEach((other) => {
-        if (other !== attr) other.classList.remove("is-open");
-      });
-      attr.classList.toggle("is-open", !wasOpen);
-    });
-    attr.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        attr.click();
-      }
-    });
-  });
-
-  // Aparición sutil al hacer scroll (sección "¿Qué es UP SKY?")
+  // Aparición sutil al hacer scroll (ficha de producto, etc.)
   const revealEls = document.querySelectorAll(".qs-reveal");
   if (revealEls.length && "IntersectionObserver" in window) {
     const revealObserver = new IntersectionObserver(
@@ -206,16 +188,98 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Producto: flechas que navegan a la sección anterior/siguiente
-  document.querySelectorAll("[data-qs-arrow]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const section = btn.closest(".section");
-      if (!section) return;
-      const dir = btn.dataset.qsArrow;
-      const target = dir === "prev" ? section.previousElementSibling : section.nextElementSibling;
-      if (target) target.scrollIntoView({ behavior: "smooth" });
+  // Producto: secuencia de 3 tomas (crossfade + Ken Burns + rasgos progresivos)
+  const qsSeq = document.getElementById("qsSeq");
+  if (qsSeq) {
+    const photos = Array.from(qsSeq.querySelectorAll(".qs-seq-photo"));
+    const panels = Array.from(qsSeq.querySelectorAll(".qs-seq-panel"));
+    const steps = Array.from(qsSeq.querySelectorAll(".qs-seq-step"));
+    const prevBtn = qsSeq.querySelector(".qs-seq-arrow--prev");
+    const nextBtn = qsSeq.querySelector(".qs-seq-arrow--next");
+    const pauseBtn = qsSeq.querySelector(".qs-seq-pause");
+    const liveEl = qsSeq.querySelector(".qs-seq-live");
+    const ctaBtns = Array.from(qsSeq.querySelectorAll("[data-qs-seq-next]"));
+    const DURATION = 7000;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const tomaNames = ["Presentación", "Fórmula", "Perspectiva"];
+    let index = 0;
+    let paused = false;
+    let hoverPaused = false;
+    let startTime = performance.now();
+    let elapsed = 0;
+
+    function setActive(i) {
+      index = (i + photos.length) % photos.length;
+      qsSeq.setAttribute("data-active", String(index));
+      photos.forEach((p, idx) => p.classList.toggle("is-active", idx === index));
+      panels.forEach((p, idx) => p.classList.toggle("is-active", idx === index));
+      steps.forEach((s, idx) => {
+        s.classList.toggle("is-active", idx === index);
+        s.classList.toggle("is-done", idx < index);
+        s.setAttribute("aria-selected", idx === index ? "true" : "false");
+        const fill = s.querySelector(".qs-seq-step-fill");
+        if (fill && idx === index) fill.style.width = "0%";
+      });
+      elapsed = 0;
+      startTime = performance.now();
+      if (liveEl) liveEl.textContent = `Toma ${String(index + 1).padStart(2, "0")}, ${tomaNames[index]}`;
+    }
+
+    function next() { setActive(index + 1); }
+    function prev() { setActive(index - 1); }
+
+    function tick(now) {
+      if (!paused && !hoverPaused && !reduceMotion) {
+        elapsed = now - startTime;
+        const pct = Math.min(100, (elapsed / DURATION) * 100);
+        const activeFill = steps[index] && steps[index].querySelector(".qs-seq-step-fill");
+        if (activeFill) activeFill.style.width = pct + "%";
+        if (elapsed >= DURATION) next();
+      } else {
+        startTime = now - elapsed;
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    nextBtn && nextBtn.addEventListener("click", next);
+    prevBtn && prevBtn.addEventListener("click", prev);
+    steps.forEach((s, idx) => s.addEventListener("click", () => setActive(idx)));
+    ctaBtns.forEach((btn) => btn.addEventListener("click", next));
+
+    if (pauseBtn) {
+      pauseBtn.addEventListener("click", () => {
+        paused = !paused;
+        pauseBtn.classList.toggle("is-paused", paused);
+        pauseBtn.setAttribute("aria-label", paused ? "Reanudar secuencia" : "Pausar secuencia");
+      });
+    }
+
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      qsSeq.addEventListener("mouseenter", () => { hoverPaused = true; });
+      qsSeq.addEventListener("mouseleave", () => { hoverPaused = false; });
+    }
+
+    qsSeq.setAttribute("tabindex", "-1");
+    qsSeq.addEventListener("keydown", (event) => {
+      if (event.target.matches("input, textarea")) return;
+      if (event.key === "ArrowRight") next();
+      else if (event.key === "ArrowLeft") prev();
     });
-  });
+
+    let touchStartX = null;
+    qsSeq.addEventListener("touchstart", (event) => {
+      touchStartX = event.target.closest("button, a") ? null : event.touches[0].clientX;
+    }, { passive: true });
+    qsSeq.addEventListener("touchend", (event) => {
+      if (touchStartX === null) return;
+      const dx = event.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 48) (dx < 0 ? next() : prev());
+      touchStartX = null;
+    }, { passive: true });
+
+    setActive(0);
+  }
 
   // Header: se oculta al bajar y reaparece al subir
   const siteHeader = document.getElementById("header");

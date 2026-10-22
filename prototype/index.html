@@ -158,109 +158,139 @@
   </div>
 </section>
 
-<!-- ========== "¿QUÉ ES UP SKY?" ========== -->
+<!-- ========== PRODUCTO: SECUENCIA DE 3 TOMAS ========== -->
 <section class="section qs-section" id="producto">
-  <div class="qs-hero-row">
-    <button class="qs-nav-arrow qs-nav-arrow--prev" type="button" data-qs-arrow="prev" aria-label="Ir a la sección anterior">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-    <button class="qs-nav-arrow qs-nav-arrow--next" type="button" data-qs-arrow="next" aria-label="Ir a la siguiente sección">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-
-    <div class="qs-bg kb-zoom qs-reveal" id="qsMedia">
-      <div class="qs-layer-canvas">
-        <img class="qs-layer-bg" src="assets/qs-bg-clean.webp" alt="Botella de UP SKY Energy Drink con frutillas frescas" loading="eager">
-        <img class="qs-layer-berry qs-berry-1 qs-float" src="assets/qs-strawberry-1.png" alt="" aria-hidden="true">
-        <img class="qs-layer-berry qs-berry-2 qs-float" src="assets/qs-strawberry-2.png" alt="" aria-hidden="true">
-        <img class="qs-layer-berry qs-berry-3 qs-float" src="assets/qs-strawberry-3.png" alt="" aria-hidden="true">
-        <img class="qs-layer-berry qs-berry-4 qs-float" src="assets/qs-strawberry-4.png" alt="" aria-hidden="true">
-        <img class="qs-layer-berry qs-berry-5 qs-float" src="assets/qs-strawberry-5.png" alt="" aria-hidden="true">
-        <img class="qs-layer-berry qs-berry-6 qs-float" src="assets/qs-strawberry-6.png" alt="" aria-hidden="true">
-      </div>
-      <div class="qs-bg-scrim"></div>
-      <p class="qs-media-tagline qs-reveal">Energía real.<br>Sin límites.</p>
-      <p class="qs-wordmark" aria-hidden="true"><span class="qs-wordmark-pink">UP</span> <span class="qs-wordmark-white">SKY</span></p>
-      <a href="catalogo.html" class="qs-media-cta qs-reveal">Conocé más <span aria-hidden="true">→</span></a>
-      <p class="qs-caption">Bebida energética. No consumir en exceso. Producto para mayores de 18 años.</p>
+  <div class="qs-seq" id="qsSeq" role="region" aria-roledescription="carrusel" aria-label="Secuencia de producto UP SKY">
+    <div class="qs-seq-stage">
+      <img class="qs-seq-photo is-active" data-toma="0" src="assets/toma-01.jpg" alt="Botella de UP SKY Energy Drink con frutillas, toma de presentación">
+      <img class="qs-seq-photo" data-toma="1" src="assets/toma-02.jpg" alt="Botella de UP SKY Energy Drink, acercamiento de tres cuartos" aria-hidden="true">
+      <img class="qs-seq-photo" data-toma="2" src="assets/toma-03.jpg" alt="Botella de UP SKY Energy Drink, perspectiva baja con reflejo" aria-hidden="true">
+      <div class="qs-seq-scrim"></div>
+      <button class="qs-seq-arrow qs-seq-arrow--prev" type="button" aria-label="Toma anterior">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="qs-seq-arrow qs-seq-arrow--next" type="button" aria-label="Toma siguiente">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
     </div>
 
-    <div class="qs-frame">
-      <div class="qs-hero-copy">
-        <h2 class="qs-title qs-reveal">
-          <span class="qs-title-line">Energía para</span>
-          <span class="qs-title-line qs-title-line--accent">Seguir tu ritmo.</span>
-        </h2>
-        <p class="qs-intro qs-reveal">Una bebida energética con sabor a frutilla, pensada para acompañarte en cualquier momento del día.</p>
+    <div class="qs-seq-panels">
+      <div class="qs-seq-panel is-active" data-toma="0">
+        <div class="qs-seq-panel-inner">
+          <p class="qs-seq-kicker">Energía real.<br>Sin límites.</p>
+          <p class="qs-seq-wordmark" aria-hidden="true"><span class="qs-ww-accent">UP</span><br><span class="qs-ww-dim">SKY</span></p>
+          <p class="qs-seq-line">Bebida energética de frutilla. Botella de vidrio 355 cc.</p>
+          <button class="qs-seq-cta" type="button" data-qs-seq-next>Conocé más <span aria-hidden="true">→</span></button>
+        </div>
+      </div>
 
-        <div class="qs-attrs">
-          <div class="qs-attr qs-attr--pink qs-reveal" tabindex="0">
-            <span class="qs-attr-icon">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z" fill="currentColor"/></svg>
-            </span>
-            <div>
-              <strong>Taurina + Cafeína</strong>
-              <p>Energía para acompañar tu ritmo.</p>
-              <div class="qs-attr-more">
-                <ul>
-                  <li>Aumenta el rendimiento físico y deportivo</li>
-                  <li>Favorece la concentración y el estado de alerta</li>
-                  <li>Propiedades antioxidantes</li>
-                </ul>
-              </div>
+      <div class="qs-seq-panel" data-toma="1">
+        <div class="qs-seq-panel-inner">
+          <p class="qs-seq-step-kicker">Toma 02 · Acercamiento</p>
+          <h2 class="qs-seq-title">Energía para<br><span class="qs-seq-accent">seguir tu ritmo.</span></h2>
+          <p class="qs-seq-lead">Una bebida energética con sabor a frutilla, pensada para acompañarte en cualquier momento del día.</p>
+          <div class="qs-seq-attrs">
+            <div class="qs-seq-attr">
+              <span class="qs-attr-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z" fill="currentColor"/></svg></span>
+              <div><strong>Taurina + Cafeína</strong><p>Energía para acompañar tu ritmo.</p></div>
+            </div>
+            <div class="qs-seq-attr">
+              <span class="qs-attr-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="9" width="18" height="6" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="12" y1="9" x2="12" y2="15" stroke="currentColor" stroke-width="1.6"/></svg></span>
+              <div><strong>Vitaminas B y C</strong><p>Complementan la fórmula para el día a día.</p></div>
             </div>
           </div>
+          <button class="qs-seq-cta" type="button" data-qs-seq-next>Conocé más <span aria-hidden="true">→</span></button>
+        </div>
+      </div>
 
-          <div class="qs-attr qs-attr--pink qs-reveal" tabindex="0">
-            <span class="qs-attr-icon">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="9" width="18" height="6" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="12" y1="9" x2="12" y2="15" stroke="currentColor" stroke-width="1.6"/></svg>
-            </span>
-            <div>
-              <strong>Vitaminas B y C</strong>
-              <p>Complementan la fórmula para el día a día.</p>
-              <div class="qs-attr-more">
-                <ul>
-                  <li>Reducen el cansancio y la fatiga</li>
-                  <li>Fortalecen el sistema inmunológico</li>
-                  <li>Propiedades antioxidantes</li>
-                </ul>
-              </div>
+      <div class="qs-seq-panel" data-toma="2">
+        <div class="qs-seq-panel-inner">
+          <p class="qs-seq-step-kicker">Toma 03 · Perspectiva</p>
+          <h2 class="qs-seq-title">El mismo ritmo.<br><span class="qs-seq-accent">Otra mirada.</span></h2>
+          <p class="qs-seq-lead">El vidrio, el sabor y el formato. De cerca, sin apurarlo.</p>
+          <div class="qs-seq-attrs">
+            <div class="qs-seq-attr">
+              <span class="qs-attr-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c4 0 7 3 7 7a7 7 0 0 1-14 0c0-4 3-7 7-7Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 5l1.5 2M12 4v2.2M15 5l-1.5 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+              <div><strong>Sabor a frutilla</strong><p>Un perfil de sabor intenso y fácil de tomar.</p></div>
+            </div>
+            <div class="qs-seq-attr">
+              <span class="qs-attr-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2h4v3l2 3v12a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V8l2-3V2Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+              <div><strong>Botella de vidrio 355 cc</strong><p>Un formato distintivo, reciclable y reutilizable.</p></div>
             </div>
           </div>
+          <a href="#ficha" class="qs-seq-cta">Conocé más <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
 
-          <div class="qs-attr qs-attr--pink qs-reveal" tabindex="0">
-            <span class="qs-attr-icon">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c4 0 7 3 7 7a7 7 0 0 1-14 0c0-4 3-7 7-7Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 5l1.5 2M12 4v2.2M15 5l-1.5 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-            </span>
-            <div>
-              <strong>Sabor a frutilla</strong>
-              <p>Un perfil de sabor intenso y fácil de tomar.</p>
-              <div class="qs-attr-more">
-                <ul>
-                  <li>Sabor a frutilla natural, no empalagoso</li>
-                  <li>Pensado para tomarse bien frío</li>
-                  <li>Se disfruta solo o combinado</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+    <div class="qs-seq-footer">
+      <p class="qs-seq-legal">Bebida energética. No consumir en exceso. Producto para mayores de 18 años.</p>
+      <div class="qs-seq-rail" role="tablist" aria-label="Tomas">
+        <button class="qs-seq-step is-active" type="button" role="tab" aria-selected="true" data-toma="0"><span class="qs-seq-step-label">01 Presentación</span><span class="qs-seq-step-bar"><span class="qs-seq-step-fill"></span></span></button>
+        <button class="qs-seq-step" type="button" role="tab" aria-selected="false" data-toma="1"><span class="qs-seq-step-label">02 Fórmula</span><span class="qs-seq-step-bar"><span class="qs-seq-step-fill"></span></span></button>
+        <button class="qs-seq-step" type="button" role="tab" aria-selected="false" data-toma="2"><span class="qs-seq-step-label">03 Perspectiva</span><span class="qs-seq-step-bar"><span class="qs-seq-step-fill"></span></span></button>
+      </div>
+      <button class="qs-seq-pause" type="button" aria-label="Pausar secuencia">
+        <svg class="qs-seq-icon-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/></svg>
+        <svg class="qs-seq-icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5l12 7-12 7V5Z" fill="currentColor"/></svg>
+      </button>
+    </div>
+    <p class="qs-seq-live sr-only" aria-live="polite"></p>
+  </div>
+</section>
 
-          <div class="qs-attr qs-attr--pink qs-reveal" tabindex="0">
-            <span class="qs-attr-icon">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2h4v3l2 3v12a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V8l2-3V2Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-            </span>
-            <div>
-              <strong>Botella de vidrio 355 cc</strong>
-              <p>Un formato distintivo, reciclable y reutilizable.</p>
-              <div class="qs-attr-more">
-                <ul>
-                  <li>100% reciclable y reutilizable</li>
-                  <li>No altera el sabor, a diferencia del aluminio</li>
-                  <li>Formato distintivo en la heladera</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+<!-- ========== FICHA DE PRODUCTO ========== -->
+<section class="section" id="ficha">
+  <div class="container">
+    <p class="section-eyebrow">Ficha técnica</p>
+    <h2 class="section-title">Cuatro rasgos. Una botella.</h2>
+    <div class="ficha-grid">
+      <div class="ficha-attr qs-reveal" tabindex="0">
+        <span class="qs-attr-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z" fill="currentColor"/></svg></span>
+        <div>
+          <strong>Taurina + Cafeína</strong>
+          <p>Energía para acompañar tu ritmo.</p>
+          <ul>
+            <li>Aumenta el rendimiento físico y deportivo</li>
+            <li>Favorece la concentración y el estado de alerta</li>
+            <li>Propiedades antioxidantes</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ficha-attr qs-reveal" tabindex="0">
+        <span class="qs-attr-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="9" width="18" height="6" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="12" y1="9" x2="12" y2="15" stroke="currentColor" stroke-width="1.6"/></svg></span>
+        <div>
+          <strong>Vitaminas B y C</strong>
+          <p>Complementan la fórmula para el día a día.</p>
+          <ul>
+            <li>Reducen el cansancio y la fatiga</li>
+            <li>Fortalecen el sistema inmunológico</li>
+            <li>Propiedades antioxidantes</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ficha-attr qs-reveal" tabindex="0">
+        <span class="qs-attr-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c4 0 7 3 7 7a7 7 0 0 1-14 0c0-4 3-7 7-7Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 5l1.5 2M12 4v2.2M15 5l-1.5 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+        <div>
+          <strong>Sabor a frutilla</strong>
+          <p>Un perfil de sabor intenso y fácil de tomar.</p>
+          <ul>
+            <li>Sabor a frutilla natural, no empalagoso</li>
+            <li>Pensado para tomarse bien frío</li>
+            <li>Se disfruta solo o combinado</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ficha-attr qs-reveal" tabindex="0">
+        <span class="qs-attr-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2h4v3l2 3v12a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V8l2-3V2Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+        <div>
+          <strong>Botella de vidrio 355 cc</strong>
+          <p>Un formato distintivo, reciclable y reutilizable.</p>
+          <ul>
+            <li>100% reciclable y reutilizable</li>
+            <li>No altera el sabor, a diferencia del aluminio</li>
+            <li>Formato distintivo en la heladera</li>
+          </ul>
         </div>
       </div>
     </div>
