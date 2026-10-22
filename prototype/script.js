@@ -293,6 +293,115 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Lifestyle: carrusel curvo de videos UGC (arco tipo cilindro, drag + momentum + auto-scroll)
+  const ugcCarousel = document.getElementById("ugcCarousel");
+  const ugcTrack = document.getElementById("ugcTrack");
+  if (ugcCarousel && ugcTrack) {
+    const cards = Array.from(ugcTrack.children);
+    const N = cards.length;
+    const reduceMotionUgc = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const AUTO_SPEED = 26; // px/s, auto-scroll hacia la izquierda
+    const CARD_W = 150;
+    const CARD_H = 267;
+    let pitch = 190; // separación base entre centros, recalculada en resize
+    let containerW = 0;
+    let scrollX = 0; // avanza con el tiempo y con el drag
+    let dragging = false;
+    let dragStartX = 0;
+    let dragStartScroll = 0;
+    let lastDragX = 0;
+    let lastDragT = 0;
+    let velocity = 0; // px/s, decae tras soltar
+    let lastFrameT = null;
+
+    function measure() {
+      containerW = ugcCarousel.clientWidth;
+      pitch = Math.max(132, Math.min(190, containerW / 6.2));
+    }
+    measure();
+    window.addEventListener("resize", measure);
+
+    function layout() {
+      const total = N * pitch;
+      const half = total / 2;
+      const maxD = Math.max(1, containerW / 2);
+      cards.forEach((card, i) => {
+        const raw = i * pitch - scrollX;
+        // envuelve dentro de (-half, half] para loop infinito sin duplicar nodos
+        let wrapped = ((raw % total) + total) % total;
+        if (wrapped > half) wrapped -= total;
+        const d = Math.min(1, Math.abs(wrapped) / maxD);
+        const scale = 1 + 0.46 * d * d; // crece hacia los bordes, como el interior de un cilindro
+        const x = wrapped;
+        const opacity = 1 - 0.55 * Math.pow(d, 3); // se desvanece apenas cerca del borde del marco
+        card.style.transform = `translate(${x}px, 0) scale(${scale})`;
+        card.style.zIndex = String(1000 - Math.round(d * 100));
+        card.style.opacity = String(Math.max(0.35, opacity));
+      });
+    }
+
+    function tick(now) {
+      if (lastFrameT === null) lastFrameT = now;
+      const dt = (now - lastFrameT) / 1000;
+      lastFrameT = now;
+      if (!reduceMotionUgc && !dragging) {
+        scrollX += AUTO_SPEED * dt;
+        if (Math.abs(velocity) > 2) {
+          scrollX += velocity * dt;
+          velocity *= Math.pow(0.05, dt); // decae ~95%/s tras soltar
+        } else {
+          velocity = 0;
+        }
+      }
+      layout();
+      requestAnimationFrame(tick);
+    }
+
+    // Posición inicial antes del primer frame animado (evita el flash en -9999px)
+    layout();
+    requestAnimationFrame(tick);
+
+    function pointerX(evt) {
+      return evt.touches ? evt.touches[0].clientX : evt.clientX;
+    }
+
+    function onDragStart(evt) {
+      if (reduceMotionUgc) return;
+      dragging = true;
+      velocity = 0;
+      ugcCarousel.classList.add("is-dragging");
+      const x = pointerX(evt);
+      dragStartX = x;
+      dragStartScroll = scrollX;
+      lastDragX = x;
+      lastDragT = performance.now();
+    }
+    function onDragMove(evt) {
+      if (!dragging) return;
+      const x = pointerX(evt);
+      scrollX = dragStartScroll - (x - dragStartX);
+      const now = performance.now();
+      const dt = (now - lastDragT) / 1000;
+      if (dt > 0) velocity = -(x - lastDragX) / dt;
+      lastDragX = x;
+      lastDragT = now;
+    }
+    function onDragEnd() {
+      if (!dragging) return;
+      dragging = false;
+      ugcCarousel.classList.remove("is-dragging");
+    }
+
+    if (!reduceMotionUgc) {
+      ugcCarousel.addEventListener("pointerdown", onDragStart);
+      window.addEventListener("pointermove", onDragMove);
+      window.addEventListener("pointerup", onDragEnd);
+      ugcCarousel.addEventListener("touchstart", onDragStart, { passive: true });
+      window.addEventListener("touchmove", onDragMove, { passive: true });
+      window.addEventListener("touchend", onDragEnd);
+    }
+  }
+
   document.querySelectorAll(".ugc-share").forEach((btn) => {
     btn.addEventListener("click", async () => {
       const shareUrl = window.location.href.split("#")[0] + "#lifestyle";

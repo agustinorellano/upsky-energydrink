@@ -1445,26 +1445,34 @@ img.placeholder-product-thumb { display: block; width: 100%; height: 100%; objec
   .event-preview-card .placeholder-event { min-height: 180px; }
 }
 
-/* ---------- Lifestyle: grid UGC (videos tipo reel/TikTok) ---------- */
+/* ---------- Lifestyle: carrusel curvo UGC (arco tipo cilindro, con drag + auto-scroll) ---------- */
 .ugc-grid-wrap { position: relative; margin-top: 32px; }
-.ugc-grid {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 16px;
-  overflow-x: auto;
-  padding-bottom: 4px;
-  scrollbar-width: none;
-}
-.ugc-grid::-webkit-scrollbar { display: none; }
-.ugc-card {
+.ugc-carousel {
   position: relative;
-  flex: 0 0 auto;
-  width: clamp(130px, 17vw, 210px);
-  aspect-ratio: 9 / 16;
+  height: clamp(230px, 28vw, 360px);
+  overflow: hidden;
+  cursor: grab;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.ugc-carousel.is-dragging { cursor: grabbing; }
+.ugc-carousel-track { position: absolute; inset: 0; }
+.ugc-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: 267px;
+  margin: -133.5px 0 0 -75px;
   border-radius: var(--radius);
   overflow: hidden;
   background: #0f0f12;
+  will-change: transform;
+  transform: translate(-9999px, 0); /* colocado por JS en el primer frame; evita el flash en (0,0) */
+}
+@media (prefers-reduced-motion: reduce) {
+  .ugc-carousel { cursor: default; }
 }
 .ugc-card-media { display: block; width: 100%; height: 100%; object-fit: cover; }
 .ugc-card-overlay {
@@ -1581,8 +1589,7 @@ img.placeholder-product-thumb { display: block; width: 100%; height: 100%; objec
 }
 
 @media (max-width: 760px) {
-  .ugc-grid { gap: 10px; justify-content: flex-start; scroll-snap-type: x proximity; }
-  .ugc-card { width: clamp(118px, 36vw, 160px); scroll-snap-align: start; }
+  .ugc-carousel { height: clamp(190px, 58vw, 260px); }
   .ugc-comments { display: none; }
 }
 
