@@ -1433,18 +1433,21 @@ img.placeholder-product-thumb { display: block; width: 100%; height: 100%; objec
   margin-top: 32px;
   display: flex;
   align-items: flex-start;
-  gap: 16px;
+  justify-content: center;
+  gap: 14px;
 }
 .ugc-col {
-  flex: 1;
+  flex: 0 1 auto;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  align-items: center;
+  gap: 14px;
 }
-.ugc-col--offset { margin-top: 56px; }
+.ugc-col--offset { margin-top: 40px; }
 .ugc-card {
   position: relative;
+  width: clamp(100px, 13vw, 150px);
   aspect-ratio: 9 / 16;
   border-radius: var(--radius);
   overflow: hidden;
@@ -1458,11 +1461,20 @@ img.placeholder-product-thumb { display: block; width: 100%; height: 100%; objec
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 14px;
+  padding: 10px;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0) 22%, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 0.75) 100%);
   pointer-events: none;
 }
-.ugc-handle { color: #fff; font-size: 0.78rem; font-weight: 700; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); }
+.ugc-handle {
+  display: block;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .ugc-like {
   align-self: flex-end;
   pointer-events: auto;
@@ -1476,7 +1488,7 @@ img.placeholder-product-thumb { display: block; width: 100%; height: 100%; objec
   cursor: pointer;
   padding: 4px;
 }
-.ugc-like-icon { width: 26px; height: 26px; filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6)); transition: transform 0.15s ease; }
+.ugc-like-icon { width: 20px; height: 20px; filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6)); transition: transform 0.15s ease; }
 .ugc-like-count { font-size: 0.72rem; font-weight: 700; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); }
 .ugc-like:hover .ugc-like-icon { transform: scale(1.12); }
 .ugc-like.is-liked .ugc-like-icon { fill: var(--primary-color); stroke: var(--primary-color); }
@@ -1490,9 +1502,10 @@ img.placeholder-product-thumb { display: block; width: 100%; height: 100%; objec
 .ugc-card--placeholder .placeholder { width: 100%; height: 100%; border-radius: 0; border: 1px dashed var(--border-color); }
 
 @media (max-width: 760px) {
-  .ugc-grid { flex-wrap: wrap; }
-  .ugc-col { flex: 1 1 calc(50% - 8px); }
-  .ugc-col--offset { margin-top: 32px; }
+  .ugc-grid { gap: 8px; }
+  .ugc-col { gap: 8px; }
+  .ugc-card { width: clamp(78px, 24vw, 110px); }
+  .ugc-col--offset { margin-top: 28px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
