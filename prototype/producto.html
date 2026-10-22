@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Producto — UP SKY Energy Drink</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header" id="header">
+  <div class="container header-inner">
+    <a href="index.html#inicio" class="logo">
+      <img src="assets/logo.png" alt="UpSky Energy Drink" class="logo-img">
+    </a>
+
+    <nav class="main-nav" id="mainNav">
+      <span class="nav-blob" id="navBlob" aria-hidden="true"></span>
+      <a href="producto.html">Producto</a>
+      <a href="catalogo.html">Catálogo</a>
+      <div class="nav-item">
+        <a href="eventos.html" class="nav-item-link">Eventos</a>
+        <div class="nav-dropdown nav-dropdown--preview">
+          <a class="nav-preview-card" href="eventos.html">
+            <span class="placeholder nav-preview-thumb">[ IMAGEN EVENTO 1 ]</span>
+            <span class="nav-preview-body">
+              <span class="nav-preview-date">[FECHA]</span>
+              <span class="nav-preview-title">[Título del evento o nota]</span>
+            </span>
+          </a>
+          <a class="nav-preview-card" href="eventos.html">
+            <span class="placeholder nav-preview-thumb">[ IMAGEN EVENTO 2 ]</span>
+            <span class="nav-preview-body">
+              <span class="nav-preview-date">[FECHA]</span>
+              <span class="nav-preview-title">[Título del evento o nota]</span>
+            </span>
+          </a>
+          <a class="nav-preview-card" href="eventos.html">
+            <span class="placeholder nav-preview-thumb">[ IMAGEN EVENTO 3 ]</span>
+            <span class="nav-preview-body">
+              <span class="nav-preview-date">[FECHA]</span>
+              <span class="nav-preview-title">[Título del evento o nota]</span>
+            </span>
+          </a>
+        </div>
+      </div>
+      <a href="negocios.html">Para negocios</a>
+      <a href="index.html#contacto">Contacto</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="cart-button" id="cartButton" aria-label="Ver carrito" aria-haspopup="dialog">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6h15l-1.5 9h-12z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 6L5 3H2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="9.5" cy="19.5" r="1.4" fill="currentColor"/><circle cx="17.5" cy="19.5" r="1.4" fill="currentColor"/></svg>
+        <span class="cart-count" id="cartCount" hidden>0</span>
+      </button>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ========== MENÚ MOBILE (bottom sheet) ========== -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay" hidden></div>
+<nav class="mobile-nav-sheet" id="mobileNavSheet" aria-hidden="true">
+  <a href="producto.html">Producto</a>
+  <a href="catalogo.html">Catálogo</a>
+  <div class="nav-item">
+    <a href="eventos.html" class="nav-item-link">Eventos</a>
+    <div class="nav-dropdown nav-dropdown--preview">
+      <a class="nav-preview-card" href="eventos.html">
+        <span class="placeholder nav-preview-thumb">[ IMAGEN EVENTO 1 ]</span>
+        <span class="nav-preview-body">
+          <span class="nav-preview-date">[FECHA]</span>
+          <span class="nav-preview-title">[Título del evento o nota]</span>
+        </span>
+      </a>
+      <a class="nav-preview-card" href="eventos.html">
+        <span class="placeholder nav-preview-thumb">[ IMAGEN EVENTO 2 ]</span>
+        <span class="nav-preview-body">
+          <span class="nav-preview-date">[FECHA]</span>
+          <span class="nav-preview-title">[Título del evento o nota]</span>
+        </span>
+      </a>
+      <a class="nav-preview-card" href="eventos.html">
+        <span class="placeholder nav-preview-thumb">[ IMAGEN EVENTO 3 ]</span>
+        <span class="nav-preview-body">
+          <span class="nav-preview-date">[FECHA]</span>
+          <span class="nav-preview-title">[Título del evento o nota]</span>
+        </span>
+      </a>
+    </div>
+  </div>
+  <a href="negocios.html">Para negocios</a>
+  <a href="index.html#contacto">Contacto</a>
+</nav>
+
+
+<!-- ========== CARRITO ========== -->
+<div class="cart-overlay" id="cartOverlay" hidden></div>
+<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-label="Carrito de compra" aria-hidden="true">
+  <div class="cart-drawer-header">
+    <h3>Tu carrito</h3>
+    <button class="cart-close" id="cartClose" aria-label="Cerrar carrito">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p class="cart-empty" id="cartEmpty">Todavía no agregaste productos.</p>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total-row"><span>Total</span><span id="cartTotal">$0</span></div>
+
+    <form class="cart-shipping" id="shippingForm">
+      <p class="cart-shipping-label">Datos de envío</p>
+      <input type="text" id="shipName" placeholder="Nombre y apellido" autocomplete="name" required>
+      <input type="text" id="shipAddress" placeholder="Dirección (calle y número)" autocomplete="street-address" required>
+      <div class="cart-shipping-row">
+        <input type="text" id="shipCity" placeholder="Localidad" autocomplete="address-level2" required>
+        <input type="text" id="shipCP" placeholder="Código postal" autocomplete="postal-code" required>
+      </div>
+    </form>
+
+    <button class="btn btn-primary btn-block" id="checkoutBtn">Finalizar pedido por WhatsApp</button>
+    <button class="cart-clear" id="cartClear" type="button">Vaciar carrito</button>
+  </div>
+</aside>
+
+<!-- ========== HERO DE PRODUCTO ========== -->
+<section class="section producto-hero">
+  <div class="container producto-hero-grid">
+    <div>
+      <p class="section-eyebrow">Ficha completa</p>
+      <h1 class="section-title">Todo sobre<br>UP SKY.</h1>
+      <p class="section-lead">Nutrición, ingredientes, modo de consumo y las preguntas que más nos hacen — todo en un solo lugar, para que sepas exactamente qué estás tomando.</p>
+      <a href="catalogo.html" class="btn btn-primary">Comprar UP SKY</a>
+    </div>
+    <img src="assets/toma-02.jpg" alt="Botella de UP SKY Energy Drink, acercamiento de tres cuartos" class="producto-hero-img">
+  </div>
+</section>
+
+<!-- ========== INFORMACIÓN NUTRICIONAL ========== -->
+<section class="section section-alt" id="nutricional">
+  <div class="container">
+    <p class="section-eyebrow">Información nutricional</p>
+    <h2 class="section-title">Qué tiene cada botella</h2>
+    <p class="section-lead">Valores de referencia por porción. [Reemplazar por los datos exactos del rótulo nutricional una vez cerrada la fórmula final.]</p>
+
+    <div class="nutri-table-wrap">
+      <table class="nutri-table">
+        <thead>
+          <tr>
+            <th scope="col">Valores de referencia</th>
+            <th scope="col">Por 100 ml</th>
+            <th scope="col">Por botella (355 cc)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Valor energético</th><td>50 kcal</td><td>177 kcal</td></tr>
+          <tr><th scope="row">Carbohidratos</th><td>12 g</td><td>43 g</td></tr>
+          <tr><th scope="row">&nbsp;&nbsp;de los cuales azúcares</th><td>11,5 g</td><td>41 g</td></tr>
+          <tr><th scope="row">Proteínas</th><td>0 g</td><td>0 g</td></tr>
+          <tr><th scope="row">Grasas totales</th><td>0 g</td><td>0 g</td></tr>
+          <tr><th scope="row">Sodio</th><td>22 mg</td><td>80 mg</td></tr>
+          <tr><th scope="row">Cafeína</th><td>22 mg</td><td>80 mg</td></tr>
+          <tr><th scope="row">Taurina</th><td>282 mg</td><td>1000 mg</td></tr>
+          <tr><th scope="row">Vitamina B3 (Niacina)</th><td>2,3 mg</td><td>8 mg</td></tr>
+          <tr><th scope="row">Vitamina B6</th><td>0,6 mg</td><td>2 mg</td></tr>
+          <tr><th scope="row">Vitamina B12</th><td>0,6 µg</td><td>2 µg</td></tr>
+          <tr><th scope="row">Vitamina C</th><td>2,8 mg</td><td>10 mg</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ========== INGREDIENTES ========== -->
+<section class="section" id="ingredientes">
+  <div class="container">
+    <p class="section-eyebrow">Ingredientes</p>
+    <h2 class="section-title">Qué lleva la fórmula</h2>
+    <p class="section-lead">Agua carbonatada, azúcar, taurina, cafeína, acidulante (ácido cítrico), regulador de acidez (citrato de sodio), saborizante natural de frutilla, vitaminas (niacina, B6, B12), antioxidante (ácido ascórbico/vitamina C) y colorante natural. [Reemplazar por el listado exacto y orden de declaración que exige el rótulo una vez cerrada la fórmula final.]</p>
+
+    <div class="ficha-grid">
+      <div class="ficha-attr">
+        <span class="qs-attr-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c4 0 7 3 7 7a7 7 0 0 1-14 0c0-4 3-7 7-7Z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+        <div>
+          <strong>Sin gluten</strong>
+          <p>Fórmula libre de gluten. [Confirmar certificación oficial.]</p>
+        </div>
+      </div>
+      <div class="ficha-attr">
+        <span class="qs-attr-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z" fill="currentColor"/></svg></span>
+        <div>
+          <strong>Taurina sintética</strong>
+          <p>No es de origen animal, apta para dietas vegetarianas.</p>
+        </div>
+      </div>
+      <div class="ficha-attr">
+        <span class="qs-attr-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="9" width="18" height="6" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="12" y1="9" x2="12" y2="15" stroke="currentColor" stroke-width="1.6"/></svg></span>
+        <div>
+          <strong>Sin conservantes agregados</strong>
+          <p>[Confirmar listado final de aditivos con el rótulo real.]</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MODO DE CONSUMO ========== -->
+<section class="section section-alt" id="consumo">
+  <div class="container">
+    <p class="section-eyebrow">Modo de consumo</p>
+    <h2 class="section-title">Cómo tomarla</h2>
+    <div class="ficha-grid">
+      <div class="ficha-attr">
+        <span class="qs-attr-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2h4v3l2 3v12a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V8l2-3V2Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+        <div>
+          <strong>Bien fría</strong>
+          <p>Se disfruta mejor helada, directo de la heladera o con hielo.</p>
+        </div>
+      </div>
+      <div class="ficha-attr">
+        <span class="qs-attr-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c4 0 7 3 7 7a7 7 0 0 1-14 0c0-4 3-7 7-7Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 5l1.5 2M12 4v2.2M15 5l-1.5 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+        <div>
+          <strong>Una porción por vez</strong>
+          <p>No se recomienda superar una botella por día.</p>
+        </div>
+      </div>
+      <div class="ficha-attr">
+        <span class="qs-attr-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+        <div>
+          <strong>No combinar con alcohol</strong>
+          <p>Como toda bebida energética, no se recomienda mezclarla con alcohol.</p>
+        </div>
+      </div>
+      <div class="ficha-attr">
+        <span class="qs-attr-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z" fill="currentColor"/></svg></span>
+        <div>
+          <strong>No apta para todos</strong>
+          <p>No recomendada para menores de 18 años, embarazadas ni personas sensibles a la cafeína.</p>
+        </div>
+      </div>
+    </div>
+    <p class="section-lead" style="margin-top:32px;">Bebida energética. No consumir en exceso. Producto para mayores de 18 años. Una vez abierta, se recomienda consumir en el día y conservar refrigerada.</p>
+  </div>
+</section>
+
+<!-- ========== FAQ DE PRODUCTO ========== -->
+<section class="section" id="producto-faq">
+  <div class="container">
+    <p class="section-eyebrow">Preguntas frecuentes</p>
+    <h2 class="section-title">Sobre la fórmula</h2>
+
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>¿Cuántas calorías tiene una botella de UP SKY?</summary>
+        <p>177 kcal por botella de 355 cc. [Valor de referencia — reemplazar por el dato exacto del rótulo.]</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>¿Es apta para celíacos?</summary>
+        <p>La fórmula no lleva ingredientes con gluten. [Confirmar certificación oficial antes de declararla "libre de gluten" en el envase.]</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>¿Cómo la conservo antes y después de abrirla?</summary>
+        <p>Sin abrir, conservar en lugar fresco y seco, al resguardo de la luz solar directa. Una vez abierta, se recomienda refrigerar y consumir dentro del día.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>¿Cuántas botellas puedo tomar por día?</summary>
+        <p>No se recomienda superar una porción (una botella) por día, en línea con el consumo responsable de cafeína.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>¿La taurina es de origen animal?</summary>
+        <p>No. La taurina que usamos es sintética, por lo que el producto es apto para dietas vegetarianas.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <a href="index.html#inicio" class="logo">
+      <img src="assets/logo.png" alt="UpSky Energy Drink" class="logo-img logo-img--lg">
+    </a>
+
+    <nav class="footer-nav">
+      <a href="producto.html">Producto</a>
+      <a href="catalogo.html">Catálogo</a>
+      <a href="eventos.html">Eventos</a>
+      <a href="negocios.html">Para negocios</a>
+      <a href="index.html#contacto">Contacto</a>
+    </nav>
+
+    <div class="footer-contact">
+      <a href="https://wa.me/5491160579579" target="_blank" rel="noopener" class="footer-contact-link">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.31.653 4.47 1.786 6.307L4 29l7.86-1.75A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3Zm0 21.818a9.78 9.78 0 0 1-4.99-1.363l-.358-.213-4.663 1.039 1.02-4.55-.234-.372A9.77 9.77 0 0 1 5.182 15c0-5.964 4.858-10.818 10.822-10.818S26.818 9.036 26.818 15 21.968 24.818 16.004 24.818Zm5.98-7.34c-.327-.164-1.938-.957-2.239-1.066-.3-.11-.518-.164-.737.163-.218.328-.845 1.066-1.036 1.285-.19.218-.382.246-.709.082-.327-.164-1.379-.508-2.627-1.62-.971-.866-1.627-1.935-1.818-2.263-.19-.328-.02-.505.144-.668.148-.147.327-.382.49-.573.164-.192.218-.328.327-.546.109-.219.055-.41-.027-.573-.082-.164-.737-1.775-1.01-2.431-.266-.64-.537-.554-.737-.564l-.628-.011c-.218 0-.573.082-.873.41-.3.327-1.145 1.12-1.145 2.73 0 1.61 1.173 3.166 1.336 3.385.164.219 2.31 3.527 5.598 4.945.782.338 1.393.54 1.869.69.785.25 1.5.215 2.065.13.63-.094 1.938-.792 2.211-1.557.273-.765.273-1.42.191-1.557-.082-.137-.3-.219-.627-.383Z" fill="currentColor"/></svg>
+        +54 9 11 6057-9579
+      </a>
+      <a href="https://www.instagram.com/upskyenergydrink/" target="_blank" rel="noopener" class="footer-contact-link">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        @upskyenergydrink
+      </a>
+    </div>
+
+    <p class="footer-legal">UpSky – Energy Drink – Marca registrada – 2025</p>
+  </div>
+</footer>
+
+<!-- ========== WHATSAPP FLOTANTE ========== -->
+<a
+  href="https://wa.me/5491160579579"
+  class="whatsapp-float"
+  target="_blank"
+  rel="noopener"
+  aria-label="Escribinos por WhatsApp"
+>
+  <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+    <path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.31.653 4.47 1.786 6.307L4 29l7.86-1.75A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3Zm0 21.818a9.78 9.78 0 0 1-4.99-1.363l-.358-.213-4.663 1.039 1.02-4.55-.234-.372A9.77 9.77 0 0 1 5.182 15c0-5.964 4.858-10.818 10.822-10.818S26.818 9.036 26.818 15 21.968 24.818 16.004 24.818Zm5.98-7.34c-.327-.164-1.938-.957-2.239-1.066-.3-.11-.518-.164-.737.163-.218.328-.845 1.066-1.036 1.285-.19.218-.382.246-.709.082-.327-.164-1.379-.508-2.627-1.62-.971-.866-1.627-1.935-1.818-2.263-.19-.328-.02-.505.144-.668.148-.147.327-.382.49-.573.164-.192.218-.328.327-.546.109-.219.055-.41-.027-.573-.082-.164-.737-1.775-1.01-2.431-.266-.64-.537-.554-.737-.564l-.628-.011c-.218 0-.573.082-.873.41-.3.327-1.145 1.12-1.145 2.73 0 1.61 1.173 3.166 1.336 3.385.164.219 2.31 3.527 5.598 4.945.782.338 1.393.54 1.869.69.785.25 1.5.215 2.065.13.63-.094 1.938-.792 2.211-1.557.273-.765.273-1.42.191-1.557-.082-.137-.3-.219-.627-.383Z" fill="currentColor"/>
+  </svg>
+</a>
+
+<script src="script.js"></script>
+</body>
+</html>
