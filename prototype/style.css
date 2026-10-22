@@ -669,7 +669,7 @@ a { color: inherit; text-decoration: none; }
   align-items: flex-start;
   opacity: 0;
   transform: translateY(12px);
-  animation: qs-attr-in 400ms ease forwards;
+  animation: qs-attr-in 250ms var(--ease-out) forwards;
 }
 .qs-seq-attr:nth-child(2) { animation-delay: 100ms; }
 @keyframes qs-attr-in { to { opacity: 1; transform: translateY(0); } }
@@ -799,8 +799,10 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* Reveal sutil al hacer scroll (ver script.js) */
-.qs-reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.qs-reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out); }
 .qs-reveal.is-visible { opacity: 1; transform: translateY(0); }
+.home-widgets .qs-reveal:nth-child(2) { transition-delay: 60ms; }
+.home-widgets .qs-reveal:nth-child(3) { transition-delay: 120ms; }
 
 @media (prefers-reduced-motion: reduce) {
   .qs-reveal { opacity: 1; transform: none; transition: none; }
@@ -875,9 +877,11 @@ a { color: inherit; text-decoration: none; }
   white-space: nowrap;
 }
 .shop-badges svg { width: 18px; height: 18px; color: var(--primary-color); flex-shrink: 0; }
-.shop-badges li:nth-child(1) svg { animation: badge-pulse 1.6s ease-in-out infinite; transform-origin: center; }
-.shop-badges li:nth-child(2) svg { animation: badge-bounce 1.8s ease-in-out infinite; }
-.shop-badges li:nth-child(3) svg { animation: badge-spin 7s linear infinite; transform-origin: center; }
+.shop-badges svg { animation-play-state: paused; }
+.shop-badges.is-in-view svg { animation-play-state: running; }
+.shop-badges li:nth-child(1) svg { animation: badge-pulse 1.6s ease-in-out 3; transform-origin: center; }
+.shop-badges li:nth-child(2) svg { animation: badge-bounce 1.8s ease-in-out 3; }
+.shop-badges li:nth-child(3) svg { animation: badge-spin 7s linear 1; transform-origin: center; }
 
 @keyframes badge-pulse {
   0%, 100% { transform: scale(1); opacity: 1; }
@@ -1216,7 +1220,7 @@ img.placeholder-product-thumb { display: block; width: 100%; height: 100%; objec
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.4s ease;
+  transition: transform 220ms var(--ease-out);
 }
 .ig-tile-overlay {
   position: absolute;

@@ -113,6 +113,23 @@ document.addEventListener("DOMContentLoaded", () => {
     kbEls.forEach((el) => kbObserver.observe(el));
   }
 
+  // Badges de confianza: animan unas vueltas al entrar en pantalla, no para siempre
+  const shopBadges = document.querySelector(".shop-badges");
+  if (shopBadges && "IntersectionObserver" in window) {
+    const badgeObserver = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-in-view");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    badgeObserver.observe(shopBadges);
+  }
+
   // Nav: blob flotante que marca la sección/página activa
   const mainNav = document.getElementById("mainNav");
   const navBlob = document.getElementById("navBlob");
