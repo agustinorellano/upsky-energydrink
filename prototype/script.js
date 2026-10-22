@@ -501,39 +501,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Header: se oculta al bajar y reaparece al subir
-  const siteHeader = document.getElementById("header");
-  if (siteHeader) {
-    let lastScrollY = window.scrollY;
-    let headerTicking = false;
-
-    function updateHeaderVisibility() {
-      headerTicking = false;
-      const currentY = window.scrollY;
-      const delta = currentY - lastScrollY;
-
-      if (currentY < 80) {
-        siteHeader.classList.remove("is-hidden");
-      } else if (delta > 4) {
-        siteHeader.classList.add("is-hidden");
-      } else if (delta < -4) {
-        siteHeader.classList.remove("is-hidden");
-      }
-      lastScrollY = currentY;
-    }
-
-    window.addEventListener(
-      "scroll",
-      () => {
-        if (!headerTicking) {
-          headerTicking = true;
-          requestAnimationFrame(updateHeaderVisibility);
-        }
-      },
-      { passive: true }
-    );
-  }
-
   // Hero: carrusel deslizable (swipe) con dots y flechas, solo si hay más de una foto
   const heroSlider = document.getElementById("heroSlider");
   if (heroSlider) {
