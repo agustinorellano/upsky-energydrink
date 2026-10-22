@@ -327,8 +327,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const N = cards.length;
     const reduceMotionUgc = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const AUTO_SPEED = 26; // px/s, auto-scroll hacia la izquierda
-    const CARD_W = 150;
-    const CARD_H = 267;
+    let cardW = 150; // ancho real de la card, medido en measure() (responsive vía CSS clamp)
     let pitch = 190; // separación base entre centros, recalculada en resize
     let containerW = 0;
     let scrollX = 0; // avanza con el tiempo y con el drag
@@ -342,7 +341,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function measure() {
       containerW = ugcCarousel.clientWidth;
-      pitch = Math.max(132, Math.min(190, containerW / 6.2));
+      cardW = cards[0].getBoundingClientRect().width || cardW;
+      // mismo rango relativo al ancho de card que en desktop (0.88x a 1.27x),
+      // así en mobile no se superponen ni pierden la curvatura del cilindro
+      pitch = Math.max(cardW * 0.88, Math.min(cardW * 1.2667, containerW / 6.2));
     }
     measure();
     window.addEventListener("resize", measure);
@@ -360,7 +362,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const scale = 1 + 0.46 * d * d; // crece hacia los bordes, como el interior de un cilindro
         const x = wrapped;
         const opacity = 1 - 0.55 * Math.pow(d, 3); // se desvanece apenas cerca del borde del marco
-        card.style.transform = `translate(${x}px, 0) scale(${scale})`;
+        card.style.transform = `translate(-50%, -50%) translate(${x}px, 0) scale(${scale})`;
         card.style.zIndex = String(1000 - Math.round(d * 100));
         card.style.opacity = String(Math.max(0.35, opacity));
       });
