@@ -1431,10 +1431,18 @@ img.placeholder-product-thumb { display: block; width: 100%; height: 100%; objec
 /* ---------- Lifestyle: grid UGC (videos tipo reel/TikTok) ---------- */
 .ugc-grid {
   margin-top: 32px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  display: flex;
+  align-items: flex-start;
   gap: 16px;
 }
+.ugc-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.ugc-col--offset { margin-top: 56px; }
 .ugc-card {
   position: relative;
   aspect-ratio: 9 / 16;
@@ -1480,6 +1488,12 @@ img.placeholder-product-thumb { display: block; width: 100%; height: 100%; objec
 }
 
 .ugc-card--placeholder .placeholder { width: 100%; height: 100%; border-radius: 0; border: 1px dashed var(--border-color); }
+
+@media (max-width: 760px) {
+  .ugc-grid { flex-wrap: wrap; }
+  .ugc-col { flex: 1 1 calc(50% - 8px); }
+  .ugc-col--offset { margin-top: 32px; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .ugc-like-icon, .ugc-like.is-liked .ugc-like-icon { animation: none; transition: none; }
