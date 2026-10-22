@@ -492,14 +492,56 @@ a { color: inherit; text-decoration: none; }
   /* Alto fijo (no top:0;bottom:0) para que no se recorte/zoome
      cuando una card de atributo se abre y agranda la columna de texto */
   height: clamp(560px, 92vh, 840px);
+  overflow: hidden;
   z-index: 0;
 }
-.qs-bg-img {
+/* Lienzo con el mismo aspect-ratio que la foto original (2000x848).
+   Todas las capas (fondo, botella, frutillas) se ubican con porcentajes
+   relativos a este lienzo, así quedan siempre alineadas entre sí sin
+   importar cuánto se recorte el lienzo por los costados. */
+.qs-layer-canvas {
+  position: relative;
+  width: auto;
+  height: 100%;
+  aspect-ratio: 2000 / 848;
+  margin: 0 auto;
+}
+.qs-layer-canvas > img {
+  position: absolute;
+  display: block;
+}
+.qs-layer-bg {
+  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: 52% 42%;
-  display: block;
+  object-fit: fill;
+}
+.qs-layer-bottle { left: 28%; top: 0%; width: 15%; height: 100%; }
+.qs-berry-1 { left: 86.35%; top: 9.79%; width: 11.4%; height: 28.18%; }
+.qs-berry-2 { left: 31.35%; top: 11.67%; width: 9.8%; height: 21.23%; }
+.qs-berry-3 { left: 4.45%; top: 27%; width: 24.7%; height: 45.99%; }
+.qs-berry-4 { left: 69%; top: 34.91%; width: 9.65%; height: 20.52%; }
+.qs-berry-5 { left: 46.25%; top: 57.55%; width: 16.35%; height: 28.54%; }
+.qs-berry-6 { left: 31.65%; top: 68.87%; width: 12.55%; height: 22.88%; }
+
+/* Frutillas sueltas: flotación sutil e independiente por pieza */
+@keyframes qs-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(var(--float-y, -10px)) rotate(var(--float-r, 2deg)); }
+}
+.qs-float {
+  animation: qs-float var(--float-dur, 5s) ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+}
+.qs-berry-1 { --float-dur: 5.4s; --float-delay: 0.2s; --float-y: -12px; --float-r: -3deg; }
+.qs-berry-2 { --float-dur: 4.6s; --float-delay: 1.1s; --float-y: -9px; --float-r: 2.5deg; }
+.qs-berry-3 { --float-dur: 6.2s; --float-delay: 0s; --float-y: -14px; --float-r: -2deg; }
+.qs-berry-4 { --float-dur: 5s; --float-delay: 1.8s; --float-y: -8px; --float-r: 3deg; }
+.qs-berry-5 { --float-dur: 5.8s; --float-delay: 0.6s; --float-y: -11px; --float-r: -2.5deg; }
+.qs-berry-6 { --float-dur: 4.9s; --float-delay: 1.4s; --float-y: -10px; --float-r: 2deg; }
+
+@media (prefers-reduced-motion: reduce) {
+  .qs-float { animation: none; }
 }
 .qs-bg-scrim {
   position: absolute;
@@ -617,7 +659,6 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 900px) {
   .qs-hero-row { min-height: 0; display: block; padding-top: 0; margin-bottom: 40px; }
   .qs-bg { position: relative; left: 0; right: 0; top: 0; bottom: auto; transform: none; width: 100%; height: clamp(280px, 85vw, 420px); margin-bottom: 28px; }
-  .qs-bg-img { object-position: 38% 50%; }
   .qs-bg-scrim {
     background: linear-gradient(180deg, rgba(5, 5, 5, 0) 55%, rgba(5, 5, 5, 0.95) 100%);
   }
@@ -740,13 +781,15 @@ a { color: inherit; text-decoration: none; }
 /* Zoom lento ("Ken Burns") al entrar en pantalla (ver script.js) */
 .kb-zoom { overflow: hidden; }
 .kb-zoom > img,
-.kb-zoom > video {
+.kb-zoom > video,
+.kb-zoom > .qs-layer-canvas {
   transform: scale(1);
   transition: transform 16s ease-out;
   will-change: transform;
 }
 .kb-zoom.is-zoomed > img,
-.kb-zoom.is-zoomed > video { transform: scale(1.06); }
+.kb-zoom.is-zoomed > video,
+.kb-zoom.is-zoomed > .qs-layer-canvas { transform: scale(1.06); }
 
 /* El Hero es lo primero que se ve: zoom un poco más rápido y marcado para que se note */
 .hero-slide.kb-zoom > img { transition-duration: 10s; }
