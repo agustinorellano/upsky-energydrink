@@ -163,11 +163,11 @@ a { color: inherit; text-decoration: none; }
   border-radius: 999px;
   background: var(--primary-color);
   box-shadow: 0 6px 16px rgba(236, 31, 122, 0.4);
-  transform: translateY(-50%);
+  transform: translate(0, -50%);
   opacity: 0;
   pointer-events: none;
   z-index: 0;
-  transition: left 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), width 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.25s ease;
+  transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.25s ease;
 }
 @media (prefers-reduced-motion: reduce) {
   .nav-blob { transition: opacity 0.2s ease; }
