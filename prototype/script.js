@@ -294,8 +294,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll(".ugc-share").forEach((btn) => {
     btn.addEventListener("click", async () => {
+      const shareUrl = window.location.href.split("#")[0] + "#lifestyle";
+      const shareData = {
+        title: "UP SKY Energy Drink",
+        text: "Mirá este video de la comunidad UP SKY",
+        url: shareUrl,
+      };
+
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+          return;
+        } catch (err) {
+          if (err && err.name === "AbortError") return; // el usuario cerró el panel de compartir
+        }
+      }
+
       try {
-        await navigator.clipboard.writeText(window.location.href.split("#")[0] + "#lifestyle");
+        await navigator.clipboard.writeText(shareUrl);
       } catch (err) {
         /* portapapeles no disponible: igual mostramos la confirmación visual */
       }
