@@ -1429,25 +1429,21 @@ img.placeholder-product-thumb { display: block; width: 100%; height: 100%; objec
 }
 
 /* ---------- Lifestyle: grid UGC (videos tipo reel/TikTok) ---------- */
+.ugc-grid-wrap { position: relative; margin-top: 32px; }
 .ugc-grid {
-  margin-top: 32px;
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  gap: 14px;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
 }
-.ugc-col {
-  flex: 0 1 auto;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-}
-.ugc-col--offset { margin-top: 40px; }
+.ugc-grid::-webkit-scrollbar { display: none; }
 .ugc-card {
   position: relative;
-  width: clamp(100px, 13vw, 150px);
+  flex: 0 0 auto;
+  width: clamp(130px, 17vw, 210px);
   aspect-ratio: 9 / 16;
   border-radius: var(--radius);
   overflow: hidden;
@@ -1461,51 +1457,85 @@ img.placeholder-product-thumb { display: block; width: 100%; height: 100%; objec
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 10px;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0) 22%, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 0.75) 100%);
+  padding: 12px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0) 22%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.8) 100%);
   pointer-events: none;
 }
 .ugc-handle {
   display: block;
   color: #fff;
-  font-size: 0.72rem;
+  font-size: 0.76rem;
   font-weight: 700;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.ugc-like {
-  align-self: flex-end;
+
+/* -- Barra de acciones: like / comentarios / compartir -- */
+.ugc-actions { align-self: flex-end; display: flex; flex-direction: column; gap: 12px; }
+.ugc-action {
   pointer-events: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   background: none;
   border: none;
   color: #fff;
   cursor: pointer;
-  padding: 4px;
+  padding: 2px;
 }
-.ugc-like-icon { width: 20px; height: 20px; filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6)); transition: transform 0.15s ease; }
-.ugc-like-count { font-size: 0.72rem; font-weight: 700; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); }
-.ugc-like:hover .ugc-like-icon { transform: scale(1.12); }
-.ugc-like.is-liked .ugc-like-icon { fill: var(--primary-color); stroke: var(--primary-color); }
-.ugc-like.is-liked .ugc-like-icon { animation: ugc-like-pop 0.3s ease; }
+.ugc-action-icon { width: 20px; height: 20px; fill: none; stroke: currentColor; filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6)); transition: transform 0.15s ease; }
+.ugc-action-count { font-size: 0.68rem; font-weight: 700; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); }
+.ugc-action:hover .ugc-action-icon { transform: scale(1.12); }
+.ugc-like.is-liked .ugc-action-icon { fill: var(--primary-color); stroke: var(--primary-color); animation: ugc-like-pop 0.3s ease; }
 @keyframes ugc-like-pop {
   0% { transform: scale(1); }
   40% { transform: scale(1.3); }
   100% { transform: scale(1); }
 }
+.ugc-share.is-copied .ugc-action-icon { stroke: var(--primary-color); }
 
 .ugc-card--placeholder .placeholder { width: 100%; height: 100%; border-radius: 0; border: 1px dashed var(--border-color); }
 
+/* -- Comentarios flotantes tipo notificación, con efecto pop -- */
+.ugc-comments { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
+.ugc-comment-bubble {
+  position: absolute;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(20, 20, 24, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  animation: ugc-comment-pop 5s ease-in-out infinite;
+}
+.ugc-cb-1 { left: 6%;  top: 10%;  animation-delay: 0s; }
+.ugc-cb-2 { left: 24%; top: -6%;  animation-delay: 1.4s; }
+.ugc-cb-3 { left: 2%;  top: 55%;  animation-delay: 2.6s; }
+.ugc-cb-4 { left: 22%; top: 78%;  animation-delay: 3.8s; }
+.ugc-cb-5 { left: 40%; top: 32%;  animation-delay: 5.2s; }
+@keyframes ugc-comment-pop {
+  0% { opacity: 0; transform: translateY(14px) scale(0.85); }
+  12% { opacity: 1; transform: translateY(0) scale(1); }
+  70% { opacity: 1; transform: translateY(-6px) scale(1); }
+  88% { opacity: 0; transform: translateY(-22px) scale(0.92); }
+  100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ugc-comment-bubble { animation: none; opacity: 1; }
+}
+
 @media (max-width: 760px) {
-  .ugc-grid { gap: 8px; }
-  .ugc-col { gap: 8px; }
-  .ugc-card { width: clamp(78px, 24vw, 110px); }
-  .ugc-col--offset { margin-top: 28px; }
+  .ugc-grid { gap: 10px; justify-content: flex-start; scroll-snap-type: x proximity; }
+  .ugc-card { width: clamp(118px, 36vw, 160px); scroll-snap-align: start; }
+  .ugc-comments { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -281,14 +281,31 @@ document.addEventListener("DOMContentLoaded", () => {
     setActive(0);
   }
 
-  // Lifestyle: like simulado en las cards UGC
+  // Lifestyle: interacciones simuladas en las cards UGC (like + compartir)
   document.querySelectorAll(".ugc-like").forEach((btn) => {
-    const countEl = btn.querySelector(".ugc-like-count");
-    const base = parseInt(btn.dataset.baseLikes || "0", 10);
+    const countEl = btn.querySelector(".ugc-action-count");
+    const base = parseInt(btn.dataset.base || "0", 10);
     btn.addEventListener("click", () => {
       const liked = btn.classList.toggle("is-liked");
       btn.setAttribute("aria-pressed", liked ? "true" : "false");
       if (countEl) countEl.textContent = String(base + (liked ? 1 : 0));
+    });
+  });
+
+  document.querySelectorAll(".ugc-share").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(window.location.href.split("#")[0] + "#lifestyle");
+      } catch (err) {
+        /* portapapeles no disponible: igual mostramos la confirmación visual */
+      }
+      btn.classList.add("is-copied");
+      btn.setAttribute("aria-label", "Enlace copiado");
+      window.clearTimeout(btn._ugcShareTimeout);
+      btn._ugcShareTimeout = window.setTimeout(() => {
+        btn.classList.remove("is-copied");
+        btn.setAttribute("aria-label", "Compartir");
+      }, 1600);
     });
   });
 
