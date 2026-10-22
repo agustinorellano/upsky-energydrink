@@ -445,6 +445,9 @@ a { color: inherit; text-decoration: none; }
 /* ---------- Sections (shared) ---------- */
 .section { padding: 88px 0; }
 .section-alt { background: var(--background-alt); }
+#lifestyle .container { text-align: center; }
+#lifestyle .community-badge { margin-left: auto; margin-right: auto; }
+#lifestyle .section-lead { margin-left: auto; margin-right: auto; }
 .community-badge {
   display: inline-flex;
   align-items: center;
