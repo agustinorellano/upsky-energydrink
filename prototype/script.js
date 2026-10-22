@@ -814,32 +814,37 @@ document.addEventListener("DOMContentLoaded", () => {
   const ttStage = document.getElementById("ttStage");
   if (ttStage) {
     const ttItems = Array.from(ttStage.querySelectorAll(".tt-item"));
-    const ttKicker = document.getElementById("ttKicker");
-    const ttDesc = document.getElementById("ttDesc");
+    const ttGlows = Array.from(ttStage.querySelectorAll(".tt-zone-glow"));
+    const ttHeadline = document.getElementById("ttHeadline");
+    const ttSub = document.getElementById("ttSub");
+    const ttSteps = Array.from(document.querySelectorAll("#ttSteps .tt-step"));
     const ttPrev = document.getElementById("ttPrev");
     const ttNext = document.getElementById("ttNext");
     const ttReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const ttSlides = [
-      { bg: "#c2185b", kicker: "UP SKY · Presentación", desc: "Bebida energética de frutilla en botella de vidrio de 355cc. Fría, lista para acompañarte." },
-      { bg: "#1565c0", kicker: "UP SKY · Fórmula", desc: "Taurina, cafeína y vitaminas B y C para sostener tu ritmo todo el día." },
-      { bg: "#6a1b9a", kicker: "UP SKY · Perspectiva", desc: "Sabor a frutilla intenso y fácil de tomar, en un formato de vidrio reciclable." },
+      { headline: "Energía que<br>te acompaña", sub: "Frutilla · 355 cc · Bien fría, mejor" },
+      { headline: "Taurina y<br>cafeína", sub: "Vitaminas B y C · Fórmula para tu ritmo" },
+      { headline: "Sabor a<br>frutilla", sub: "Vidrio reciclable · Fácil de tomar" },
     ];
 
     let ttActive = 0;
     let ttAnimating = false;
 
+    function ttAssignRole(el, i, n) {
+      el.classList.remove("is-center", "is-left", "is-right");
+      if (i === ttActive) el.classList.add("is-center");
+      else if (i === (ttActive + n - 1) % n) el.classList.add("is-left");
+      else if (i === (ttActive + 1) % n) el.classList.add("is-right");
+    }
+
     function ttRender() {
       const n = ttItems.length;
-      ttItems.forEach((item, i) => {
-        item.classList.remove("is-center", "is-left", "is-right");
-        if (i === ttActive) item.classList.add("is-center");
-        else if (i === (ttActive + n - 1) % n) item.classList.add("is-left");
-        else if (i === (ttActive + 1) % n) item.classList.add("is-right");
-      });
-      ttStage.style.setProperty("--tt-accent", ttSlides[ttActive].bg);
-      if (ttKicker) ttKicker.textContent = ttSlides[ttActive].kicker;
-      if (ttDesc) ttDesc.textContent = ttSlides[ttActive].desc;
+      ttItems.forEach((item, i) => ttAssignRole(item, i, n));
+      ttGlows.forEach((glow, i) => ttAssignRole(glow, i, n));
+      ttSteps.forEach((step, i) => step.classList.toggle("is-active", i === ttActive));
+      if (ttHeadline) ttHeadline.innerHTML = ttSlides[ttActive].headline;
+      if (ttSub) ttSub.textContent = ttSlides[ttActive].sub;
     }
 
     function ttNavigate(dir) {
@@ -854,5 +859,26 @@ document.addEventListener("DOMContentLoaded", () => {
     ttPrev && ttPrev.addEventListener("click", () => ttNavigate("prev"));
     ttNext && ttNext.addEventListener("click", () => ttNavigate("next"));
     ttRender();
+
+    // Características flotando esporádicamente del lado derecho
+    const ttAttrsWrap = document.getElementById("ttAttrs");
+    if (ttAttrsWrap && !ttReduceMotion) {
+      const ttAttrTexts = ["Taurina + Cafeína", "Vitaminas B y C", "Sabor a frutilla", "Botella de vidrio 355cc"];
+      let ttAttrLast = -1;
+      function ttPopAttr() {
+        let i = Math.floor(Math.random() * ttAttrTexts.length);
+        if (ttAttrTexts.length > 1 && i === ttAttrLast) i = (i + 1) % ttAttrTexts.length;
+        ttAttrLast = i;
+        const badge = document.createElement("span");
+        badge.className = "tt-attr-badge";
+        badge.textContent = ttAttrTexts[i];
+        badge.style.top = `${10 + Math.random() * 72}%`;
+        ttAttrsWrap.appendChild(badge);
+        requestAnimationFrame(() => badge.classList.add("is-popping"));
+        badge.addEventListener("animationend", () => badge.remove());
+      }
+      ttPopAttr();
+      window.setInterval(ttPopAttr, 2600);
+    }
   }
 });

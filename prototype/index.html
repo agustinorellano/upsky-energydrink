@@ -300,21 +300,26 @@
 <!-- ========== PRUEBA: carrusel de escenas (no reemplaza Producto, es experimental) ========== -->
 <section class="section tt-section" aria-label="Prueba: carrusel de escenas de producto">
   <div class="tt-stage" id="ttStage">
-    <div class="tt-glow" aria-hidden="true"></div>
-    <div class="tt-floor-glow" aria-hidden="true"></div>
-    <div class="tt-grain" aria-hidden="true"></div>
-    <div class="tt-ghost" aria-hidden="true">UP SKY</div>
-    <p class="tt-brand">UP SKY · PRUEBA</p>
-
-    <div class="tt-carousel" id="ttCarousel">
-      <div class="tt-item" data-index="0"><img src="assets/bottle-cutout-clean.png" alt="" draggable="false"></div>
-      <div class="tt-item" data-index="1"><img src="assets/bottle-cutout-clean.png" alt="" draggable="false"></div>
-      <div class="tt-item" data-index="2"><img src="assets/bottle-cutout-clean.png" alt="" draggable="false"></div>
+    <div class="tt-zones" id="ttZones" aria-hidden="true">
+      <div class="tt-zone-glow" data-index="0" data-zone="pink"></div>
+      <div class="tt-zone-glow" data-index="1" data-zone="blue"></div>
+      <div class="tt-zone-glow" data-index="2" data-zone="purple"></div>
     </div>
 
+    <div class="tt-grain" aria-hidden="true"></div>
+    <p class="tt-brand">UP SKY · EXPERIENCIA</p>
+
+    <div class="tt-carousel" id="ttCarousel">
+      <div class="tt-item" data-index="0" data-zone="pink"><img src="assets/bottle-cutout-clean.png" alt="" draggable="false"></div>
+      <div class="tt-item" data-index="1" data-zone="blue"><img src="assets/bottle-cutout-clean.png" alt="" draggable="false"></div>
+      <div class="tt-item" data-index="2" data-zone="purple"><img src="assets/bottle-cutout-clean.png" alt="" draggable="false"></div>
+    </div>
+
+    <div class="tt-attrs" id="ttAttrs" aria-hidden="true"></div>
+
     <div class="tt-copy">
-      <p class="tt-kicker" id="ttKicker">UP SKY · Presentación</p>
-      <p class="tt-desc" id="ttDesc">Bebida energética de frutilla en botella de vidrio de 355cc. Fría, lista para acompañarte.</p>
+      <h3 class="tt-headline" id="ttHeadline">Energía que<br>te acompaña</h3>
+      <p class="tt-sub" id="ttSub">Frutilla · 355 cc · Bien fría, mejor</p>
       <div class="tt-nav">
         <button class="tt-arrow" type="button" id="ttPrev" aria-label="Escena anterior">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -323,6 +328,12 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
+    </div>
+
+    <div class="tt-steps" id="ttSteps" aria-hidden="true">
+      <span class="tt-step is-active"></span>
+      <span class="tt-step"></span>
+      <span class="tt-step"></span>
     </div>
 
     <a href="#ficha" class="tt-discover">
