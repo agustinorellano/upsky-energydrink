@@ -814,7 +814,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const ttStage = document.getElementById("ttStage");
   if (ttStage) {
     const ttItems = Array.from(ttStage.querySelectorAll(".tt-item"));
-    const ttGlows = Array.from(ttStage.querySelectorAll(".tt-zone-glow"));
     const ttHeadline = document.getElementById("ttHeadline");
     const ttSub = document.getElementById("ttSub");
     const ttSteps = Array.from(document.querySelectorAll("#ttSteps .tt-step"));
@@ -841,7 +840,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function ttRender() {
       const n = ttItems.length;
       ttItems.forEach((item, i) => ttAssignRole(item, i, n));
-      ttGlows.forEach((glow, i) => ttAssignRole(glow, i, n));
       ttSteps.forEach((step, i) => step.classList.toggle("is-active", i === ttActive));
       if (ttHeadline) ttHeadline.innerHTML = ttSlides[ttActive].headline;
       if (ttSub) ttSub.textContent = ttSlides[ttActive].sub;
