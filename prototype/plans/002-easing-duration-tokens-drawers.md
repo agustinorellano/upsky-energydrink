@@ -1,6 +1,6 @@
 # 002 — Add shared easing/duration tokens, unify drawer transitions
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: 83da3e2
 - **Severity**: MEDIUM
 - **Category**: Cohesion & tokens (consolidates easing budget finding too)

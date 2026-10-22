@@ -1,6 +1,6 @@
 # 001 — Gate `:hover` states behind `(hover: hover) and (pointer: fine)`
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: 83da3e2
 - **Severity**: MEDIUM
 - **Category**: Accessibility
