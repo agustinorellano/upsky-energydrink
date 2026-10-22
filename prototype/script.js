@@ -283,13 +283,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Lifestyle: interacciones simuladas en las cards UGC (like + compartir)
-  document.querySelectorAll(".ugc-like").forEach((btn) => {
+  document.querySelectorAll(".ugc-like, .ugc-save").forEach((btn) => {
     const countEl = btn.querySelector(".ugc-action-count");
     const base = parseInt(btn.dataset.base || "0", 10);
+    const activeClass = btn.classList.contains("ugc-like") ? "is-liked" : "is-saved";
     btn.addEventListener("click", () => {
-      const liked = btn.classList.toggle("is-liked");
-      btn.setAttribute("aria-pressed", liked ? "true" : "false");
-      if (countEl) countEl.textContent = String(base + (liked ? 1 : 0));
+      const active = btn.classList.toggle(activeClass);
+      btn.setAttribute("aria-pressed", active ? "true" : "false");
+      if (countEl) countEl.textContent = String(base + (active ? 1 : 0));
+    });
+  });
+
+  document.querySelectorAll(".ugc-comment").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      btn.classList.remove("is-tapped");
+      void btn.offsetWidth;
+      btn.classList.add("is-tapped");
     });
   });
 

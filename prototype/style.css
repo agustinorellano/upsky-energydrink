@@ -1581,8 +1581,8 @@ img.placeholder-product-thumb { display: block; width: 100%; height: 100%; objec
   padding: 2px;
 }
 .ugc-action-icon-wrap {
-  width: 26px;
-  height: 26px;
+  width: 21px;
+  height: 21px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1590,18 +1590,32 @@ img.placeholder-product-thumb { display: block; width: 100%; height: 100%; objec
   background: rgba(20, 20, 24, 0.55);
   backdrop-filter: blur(2px);
 }
-.ugc-action-icon { width: 14px; height: 14px; fill: none; stroke: currentColor; transition: transform 0.15s ease; }
-.ugc-action-count { font-size: 0.68rem; font-weight: 700; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); }
+.ugc-action-icon { width: 11px; height: 11px; fill: none; stroke: currentColor; transition: transform 0.15s ease; }
+.ugc-action-count { font-size: 0.64rem; font-weight: 700; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); }
 @media (hover: hover) and (pointer: fine) {
   .ugc-action:hover .ugc-action-icon { transform: scale(1.12); }
 }
-.ugc-like.is-liked .ugc-action-icon { fill: var(--primary-color); stroke: var(--primary-color); animation: ugc-like-pop 0.3s ease; }
+.ugc-action:active .ugc-action-icon-wrap { transform: scale(0.88); }
+.ugc-like.is-liked .ugc-action-icon,
+.ugc-save.is-saved .ugc-action-icon { fill: var(--primary-color); stroke: var(--primary-color); animation: ugc-like-pop 0.3s ease; }
 @keyframes ugc-like-pop {
   0% { transform: scale(1); }
   40% { transform: scale(1.3); }
   100% { transform: scale(1); }
 }
 .ugc-share.is-copied .ugc-action-icon { stroke: var(--primary-color); }
+.ugc-comment.is-tapped .ugc-action-icon-wrap { animation: ugc-comment-tap 0.3s ease; }
+@keyframes ugc-comment-tap {
+  0% { transform: scale(1); }
+  40% { transform: scale(0.82); }
+  100% { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ugc-action:active .ugc-action-icon-wrap,
+  .ugc-like.is-liked .ugc-action-icon,
+  .ugc-save.is-saved .ugc-action-icon,
+  .ugc-comment.is-tapped .ugc-action-icon-wrap { animation: none; transform: none; }
+}
 
 .ugc-card--placeholder .placeholder { width: 100%; height: 100%; border-radius: 0; border: 1px dashed var(--border-color); }
 
