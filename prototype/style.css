@@ -2113,7 +2113,7 @@ img.placeholder-product-thumb { display: block; width: 100%; height: 100%; objec
 @media (prefers-reduced-motion: reduce) {
   .tt-item img { animation: none; }
 }
-.tt-item.is-center { left: 50%; height: 92%; bottom: 0; transform: translateX(-50%) scale(1.68); filter: none; opacity: 1; z-index: 20; }
+.tt-item.is-center { left: 50%; height: 78%; bottom: 0; transform: translateX(-50%) scale(1.05); filter: none; opacity: 1; z-index: 20; }
 .tt-item.is-left { left: 30%; height: 28%; bottom: 12%; transform: translateX(-50%) scale(1); filter: blur(2px); opacity: 0.85; z-index: 10; }
 .tt-item.is-right { left: 70%; height: 28%; bottom: 12%; transform: translateX(-50%) scale(1); filter: blur(2px); opacity: 0.85; z-index: 10; }
 
@@ -2166,7 +2166,7 @@ img.placeholder-product-thumb { display: block; width: 100%; height: 100%; objec
 
 @media (max-width: 640px) {
   .tt-stage { height: min(78vh, 620px); min-height: 460px; }
-  .tt-item.is-center { height: 60%; bottom: 22%; transform: translateX(-50%) scale(1.25); }
+  .tt-item.is-center { height: 55%; bottom: 20%; transform: translateX(-50%) scale(1.05); }
   .tt-item.is-left { left: 20%; height: 16%; bottom: 32%; }
   .tt-item.is-right { left: 80%; height: 16%; bottom: 32%; }
   .tt-copy { left: 20px; bottom: 24px; max-width: 220px; }
