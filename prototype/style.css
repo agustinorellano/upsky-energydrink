@@ -19,7 +19,7 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+html { scroll-behavior: smooth; scroll-padding-top: 110px; zoom: 0.9; }
 
 body {
   margin: 0;
