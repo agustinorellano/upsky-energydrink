@@ -1,6 +1,6 @@
 # 004 — Trigger decorative loops once on viewport entry instead of infinite
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: 83da3e2
 - **Severity**: LOW
 - **Category**: Purpose & frequency

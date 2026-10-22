@@ -1,6 +1,6 @@
 # 003 — Fix weak easing and over-budget durations on two UI entrances
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: 83da3e2
 - **Severity**: LOW
 - **Category**: Easing & duration

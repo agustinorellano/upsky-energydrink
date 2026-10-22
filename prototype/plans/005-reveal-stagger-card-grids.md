@@ -1,6 +1,6 @@
 # 005 — Add scroll reveal + stagger to card grids that currently teleport in
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: 83da3e2
 - **Severity**: LOW
 - **Category**: Missed opportunity
