@@ -421,6 +421,24 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 10px 30px rgba(236, 31, 122, 0.45);
 }
 
+/* Entrada del texto del hero: ya está en pantalla al cargar (no hace falta
+   scroll), así que se anima directo con una animation + delay escalonado
+   por elemento en vez del patrón .qs-reveal (pensado para IntersectionObserver). */
+.hero-reveal {
+  animation: hero-reveal-in 650ms var(--ease-out) both;
+}
+@keyframes hero-reveal-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-reveal { animation: hero-reveal-in-reduced 200ms ease both; }
+  @keyframes hero-reveal-in-reduced {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}
+
 @media (max-width: 900px) {
   .hero { min-height: 620px; }
   .hero-bg-img { object-position: 60% 25%; }
