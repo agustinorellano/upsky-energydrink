@@ -363,10 +363,14 @@ document.addEventListener("DOMContentLoaded", () => {
         activeIndex = index;
       }
 
+      const START_SCALE = 0.72;
+      const END_SCALE = 1.1;
+
       function render(progress) {
         const crossP = Math.min(1, Math.max(0, (progress - CROSS_START) / (CROSS_END - CROSS_START)));
         const eased = easeOutCubic(crossP);
-        bottleWrap.style.transform = `translate(${targetX * eased}px, -50%)`;
+        const scale = START_SCALE + (END_SCALE - START_SCALE) * eased;
+        bottleWrap.style.transform = `translate(${targetX * eased}px, -50%) scale(${scale})`;
         intro.style.opacity = String(1 - eased * 0.92);
 
         let index = -1;
