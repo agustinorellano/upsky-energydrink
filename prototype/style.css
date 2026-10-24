@@ -540,22 +540,17 @@ a { color: inherit; text-decoration: none; }
   overflow: hidden;
 }
 
-/* -- Fotos: crossfade de 800ms + Ken Burns sobre la activa -- */
+/* -- Fondo: un solo video persistente para las 3 tomas, con zoom lento
+   (ver .kb-zoom, mismo patrón que el hero y las cards UGC) -- */
 .qs-seq-stage { position: absolute; inset: 0; }
-.qs-seq-photo {
-  position: absolute;
-  inset: 0;
+.qs-seq-bg { position: absolute; inset: 0; z-index: 0; }
+.qs-seq-bg-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: 38% center;
   display: block;
-  opacity: 0;
-  transform: scale(1.04);
-  transition: opacity 400ms cubic-bezier(0.22, 1, 0.36, 1), transform 7000ms linear;
-  z-index: 0;
 }
-.qs-seq-photo.is-active { opacity: 1; transform: scale(1.12); z-index: 1; }
 
 .qs-seq-scrim {
   position: absolute;
@@ -782,7 +777,6 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .qs-seq-photo { transition: opacity 180ms ease; transform: none !important; }
   .qs-seq-attr { animation-duration: 1ms; }
 }
 
