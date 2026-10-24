@@ -315,6 +315,94 @@ document.addEventListener("DOMContentLoaded", () => {
     setActive(0);
   }
 
+  // Producto (producto.html): historia con scroll pinned — el producto
+  // queda fijo y el scroll arma una línea de tiempo. Solo se activa en
+  // desktop sin prefers-reduced-motion; si no, el layout vertical normal
+  // de la sección (ver style.css) ya es el contenido completo y visible.
+  const productStory = document.querySelector(".product-story");
+  if (productStory) {
+    const track = productStory.querySelector(".product-story-track");
+    const stage = productStory.querySelector(".product-story-stage");
+    const bottleWrap = productStory.querySelector(".product-story-bottle-wrap");
+    const intro = productStory.querySelector(".product-story-intro");
+    const blocks = Array.from(productStory.querySelectorAll(".product-story-block"));
+    const reduceMotionStory = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const canPinStory = window.matchMedia("(min-width: 901px)").matches && !reduceMotionStory;
+
+    if (canPinStory && track && stage && bottleWrap && intro && blocks.length) {
+      productStory.classList.add("is-pinned");
+
+      const CROSS_START = 0.12;
+      const CROSS_END = 0.4;
+      const BLOCK_END = blocks.map((_, i) => 0.4 + ((i + 1) / blocks.length) * 0.6);
+
+      let targetX = 0;
+      let activeIndex = -1;
+      let ticking = false;
+
+      function measure() {
+        const stageRect = stage.getBoundingClientRect();
+        const bottleRect = bottleWrap.getBoundingClientRect();
+        const startLeft = stageRect.width * 0.06;
+        const endLeft = stageRect.width * 0.92 - bottleRect.width;
+        targetX = Math.max(0, endLeft - startLeft);
+      }
+
+      function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+      function setActiveBlock(index) {
+        if (index === activeIndex) return;
+        const prev = blocks[activeIndex];
+        if (prev) {
+          prev.classList.remove("is-active");
+          prev.classList.add("is-leaving");
+          window.setTimeout(() => prev.classList.remove("is-leaving"), 520);
+        }
+        const next = blocks[index];
+        if (next) next.classList.add("is-active");
+        activeIndex = index;
+      }
+
+      function render(progress) {
+        const crossP = Math.min(1, Math.max(0, (progress - CROSS_START) / (CROSS_END - CROSS_START)));
+        const eased = easeOutCubic(crossP);
+        bottleWrap.style.transform = `translate(${targetX * eased}px, -50%)`;
+        intro.style.opacity = String(1 - eased * 0.92);
+
+        let index = -1;
+        if (progress >= CROSS_END) {
+          index = BLOCK_END.findIndex((end) => progress < end);
+          if (index === -1) index = blocks.length - 1;
+        }
+        setActiveBlock(index);
+      }
+
+      function computeProgress() {
+        const rect = track.getBoundingClientRect();
+        const scrollable = track.offsetHeight - window.innerHeight;
+        if (scrollable <= 0) return 0;
+        return Math.min(1, Math.max(0, -rect.top / scrollable));
+      }
+
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          render(computeProgress());
+          ticking = false;
+        });
+      }
+
+      measure();
+      render(computeProgress());
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", () => {
+        measure();
+        render(computeProgress());
+      });
+    }
+  }
+
   // Lifestyle: interacciones simuladas en las cards UGC (like + compartir)
   document.querySelectorAll(".ugc-like, .ugc-save").forEach((btn) => {
     const countEl = btn.querySelector(".ugc-action-count");
