@@ -323,30 +323,21 @@ document.addEventListener("DOMContentLoaded", () => {
   if (productStory) {
     const track = productStory.querySelector(".product-story-track");
     const stage = productStory.querySelector(".product-story-stage");
-    const bottleWrap = productStory.querySelector(".product-story-bottle-wrap");
+    const bottleEl = productStory.querySelector(".product-story-bottle");
     const intro = productStory.querySelector(".product-story-intro");
     const blocks = Array.from(productStory.querySelectorAll(".product-story-block"));
     const reduceMotionStory = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const canPinStory = window.matchMedia("(min-width: 901px)").matches && !reduceMotionStory;
 
-    if (canPinStory && track && stage && bottleWrap && intro && blocks.length) {
+    if (canPinStory && track && stage && bottleEl && intro && blocks.length) {
       productStory.classList.add("is-pinned");
 
       const CROSS_START = 0.12;
       const CROSS_END = 0.4;
       const BLOCK_END = blocks.map((_, i) => 0.4 + ((i + 1) / blocks.length) * 0.6);
 
-      let targetX = 0;
       let activeIndex = -1;
       let ticking = false;
-
-      function measure() {
-        const stageRect = stage.getBoundingClientRect();
-        const bottleRect = bottleWrap.getBoundingClientRect();
-        const startLeft = stageRect.width * 0.06;
-        const endLeft = stageRect.width * 0.92 - bottleRect.width;
-        targetX = Math.max(0, endLeft - startLeft);
-      }
 
       function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
 
@@ -363,14 +354,16 @@ document.addEventListener("DOMContentLoaded", () => {
         activeIndex = index;
       }
 
-      const START_SCALE = 0.72;
-      const END_SCALE = 1.1;
+      // El zoom se aplica al video (no a su contenedor, que ya es full-bleed)
+      // así al agrandarse recorta más de cerca en vez de dejar bordes vacíos.
+      const START_SCALE = 1;
+      const END_SCALE = 1.18;
 
       function render(progress) {
         const crossP = Math.min(1, Math.max(0, (progress - CROSS_START) / (CROSS_END - CROSS_START)));
         const eased = easeOutCubic(crossP);
         const scale = START_SCALE + (END_SCALE - START_SCALE) * eased;
-        bottleWrap.style.transform = `translate(${targetX * eased}px, -50%) scale(${scale})`;
+        bottleEl.style.transform = `scale(${scale})`;
         intro.style.opacity = String(1 - eased * 0.92);
 
         let index = -1;
@@ -397,13 +390,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
 
-      measure();
       render(computeProgress());
       window.addEventListener("scroll", onScroll, { passive: true });
-      window.addEventListener("resize", () => {
-        measure();
-        render(computeProgress());
-      });
+      window.addEventListener("resize", () => render(computeProgress()));
     }
   }
 
