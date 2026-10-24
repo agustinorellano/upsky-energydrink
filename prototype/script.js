@@ -323,13 +323,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (productStory) {
     const track = productStory.querySelector(".product-story-track");
     const stage = productStory.querySelector(".product-story-stage");
-    const bottleEl = productStory.querySelector(".product-story-bottle");
+    const bottleWrap = productStory.querySelector(".product-story-bottle-wrap");
+    const videos = Array.from(productStory.querySelectorAll(".product-story-bottle"));
     const intro = productStory.querySelector(".product-story-intro");
     const blocks = Array.from(productStory.querySelectorAll(".product-story-block"));
     const reduceMotionStory = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const canPinStory = window.matchMedia("(min-width: 901px)").matches && !reduceMotionStory;
 
-    if (canPinStory && track && stage && bottleEl && intro && blocks.length) {
+    if (canPinStory && track && stage && bottleWrap && videos.length && intro && blocks.length) {
       productStory.classList.add("is-pinned");
 
       const CROSS_START = 0.12;
@@ -337,6 +338,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const BLOCK_END = blocks.map((_, i) => 0.4 + ((i + 1) / blocks.length) * 0.6);
 
       let activeIndex = -1;
+      let activeVideoIndex = 0;
       let ticking = false;
 
       function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
@@ -354,7 +356,17 @@ document.addEventListener("DOMContentLoaded", () => {
         activeIndex = index;
       }
 
-      // El zoom se aplica al video (no a su contenedor, que ya es full-bleed)
+      // Cada bloque de texto tiene su propio clip (clip 0 = apertura/bloque
+      // 0, clip 1 = "Fórmula", clip 2 = "Formato"). Si todavía no llegó el
+      // clip de un bloque, reusa el último disponible en vez de romper.
+      function setActiveVideo(index) {
+        const clamped = Math.min(Math.max(index, 0), videos.length - 1);
+        if (clamped === activeVideoIndex) return;
+        videos.forEach((v, i) => v.classList.toggle("is-active", i === clamped));
+        activeVideoIndex = clamped;
+      }
+
+      // El zoom se aplica al contenedor del video (que ya es full-bleed),
       // así al agrandarse recorta más de cerca en vez de dejar bordes vacíos.
       const START_SCALE = 1;
       const END_SCALE = 1.18;
@@ -363,7 +375,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const crossP = Math.min(1, Math.max(0, (progress - CROSS_START) / (CROSS_END - CROSS_START)));
         const eased = easeOutCubic(crossP);
         const scale = START_SCALE + (END_SCALE - START_SCALE) * eased;
-        bottleEl.style.transform = `scale(${scale})`;
+        bottleWrap.style.transform = `scale(${scale})`;
         intro.style.opacity = String(1 - eased * 0.92);
 
         let index = -1;
@@ -372,6 +384,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (index === -1) index = blocks.length - 1;
         }
         setActiveBlock(index);
+        setActiveVideo(index);
       }
 
       function computeProgress() {

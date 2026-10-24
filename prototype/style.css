@@ -909,6 +909,7 @@ a { color: inherit; text-decoration: none; }
   text-align: center;
 }
 .product-story-bottle-wrap {
+  position: relative;
   width: 100vw;
   margin-left: calc(50% - 50vw);
   aspect-ratio: 2206 / 946;
@@ -918,10 +919,9 @@ a { color: inherit; text-decoration: none; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
-  transform-origin: center;
-  will-change: transform;
+  display: none;
 }
+.product-story-bottle.is-active { display: block; }
 .product-story-intro {
   margin: 0;
   font-family: var(--font-display);
@@ -981,8 +981,24 @@ a { color: inherit; text-decoration: none; }
     margin: 0;
     aspect-ratio: auto;
     overflow: hidden;
+    transform-origin: center;
+    will-change: transform;
     z-index: 1;
   }
+  /* El producto vive del lado izquierdo del encuadre (como el PNG
+     original); se corre el object-position para que quede ahí y no
+     centrado, dejando el lado derecho libre para el título. */
+  .product-story.is-pinned .product-story-bottle {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-position: 28% center;
+    display: block;
+    opacity: 0;
+    transition: opacity 650ms var(--ease-out);
+  }
+  .product-story.is-pinned .product-story-bottle.is-active { opacity: 1; }
   .product-story.is-pinned .product-story-scrim {
     display: block;
     position: absolute;
@@ -990,7 +1006,7 @@ a { color: inherit; text-decoration: none; }
     z-index: 2;
     pointer-events: none;
     background:
-      linear-gradient(90deg, rgba(10, 10, 12, 0.85) 0%, rgba(10, 10, 12, 0.45) 38%, rgba(10, 10, 12, 0) 62%),
+      linear-gradient(90deg, rgba(10, 10, 12, 0.55) 0%, rgba(10, 10, 12, 0.1) 26%, rgba(10, 10, 12, 0.1) 44%, rgba(10, 10, 12, 0.72) 60%, rgba(10, 10, 12, 0.95) 78%, rgba(10, 10, 12, 0.98) 100%),
       linear-gradient(to bottom, rgba(10, 10, 12, 0) 70%, rgba(10, 10, 12, 0.85) 100%);
   }
   .product-story.is-pinned .product-story-intro {
