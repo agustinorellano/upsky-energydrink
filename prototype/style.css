@@ -466,7 +466,7 @@ a { color: inherit; text-decoration: none; }
    con su contenido centrado verticalmente (ver .hero, que ya usaba
    este mismo patrón). */
 @media (min-width: 901px) {
-  .section {
+  .section:not(.marquee-section) {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
