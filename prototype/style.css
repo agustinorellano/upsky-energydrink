@@ -543,14 +543,14 @@ a { color: inherit; text-decoration: none; }
 
 .qs-seq-media {
   position: relative;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 2000 / 858;
   -webkit-mask-image: radial-gradient(ellipse 68% 68% at center, #000 62%, transparent 98%);
   mask-image: radial-gradient(ellipse 68% 68% at center, #000 62%, transparent 98%);
 }
 .qs-seq-bg-video {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center center;
   display: block;
 }
@@ -608,7 +608,7 @@ a { color: inherit; text-decoration: none; }
 
 @media (max-width: 900px) {
   .qs-seq { grid-template-columns: 1fr; gap: 32px; }
-  .qs-seq-media { order: -1; aspect-ratio: 16 / 11; }
+  .qs-seq-media { order: -1; }
   .qs-seq-copy { max-width: 100%; }
   .qs-seq-wordmark { font-size: clamp(2.6rem, 16vw, 4rem); }
 }
