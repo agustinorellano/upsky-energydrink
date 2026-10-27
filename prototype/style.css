@@ -731,6 +731,192 @@ a { color: inherit; text-decoration: none; }
 .nutri-table tbody tr:last-child th,
 .nutri-table tbody tr:last-child td { border-bottom: none; }
 
+/* ---------- Ficha técnica interactiva: notas y paneles dentro del accordion ---------- */
+.tech-panel-note { margin: 0 0 4px; color: var(--text-muted); font-size: 0.85rem; }
+.tech-panel-grid { margin-top: 24px; }
+details.faq-item .nutri-table-wrap { margin-top: 20px; }
+
+/* ---------- Ingredientes y beneficios: tarjetas interactivas ---------- */
+.ing-cards {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.ing-card {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background: var(--background-alt);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+.ing-card-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid var(--primary-color);
+  background: var(--background-color);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.ing-card-icon svg { width: 20px; height: 20px; }
+.ing-card-name { margin: 0 0 8px; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 1.05rem; color: var(--text-color); }
+.ing-card-desc { margin: 0 0 18px; color: var(--text-muted); font-size: 0.92rem; line-height: 1.5; flex-grow: 1; }
+.ing-card-toggle {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: auto;
+  color: var(--primary-color);
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+.ing-card-toggle-icon {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+.ing-card-toggle-icon::before,
+.ing-card-toggle-icon::after {
+  content: "";
+  position: absolute;
+  background: var(--primary-color);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.ing-card-toggle-icon::before { width: 14px; height: 2px; }
+.ing-card-toggle-icon::after { width: 2px; height: 14px; }
+.ing-card.is-open .ing-card-toggle-icon { transform: rotate(45deg); }
+@media (hover: hover) and (pointer: fine) {
+  .ing-card-toggle:hover { opacity: 0.8; }
+}
+.ing-card-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 380ms var(--ease-out);
+}
+.ing-card.is-open .ing-card-panel { grid-template-rows: 1fr; }
+.ing-card-panel-inner { overflow: hidden; min-height: 0; }
+.ing-card-panel-inner p { margin: 16px 0 0; padding-top: 16px; border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 0.88rem; line-height: 1.55; }
+.ing-card-panel-inner a { color: var(--primary-color); text-decoration: underline; }
+
+@media (max-width: 900px) {
+  .ing-cards { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .ing-cards { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ing-card-panel { transition: none; }
+  .ing-card-toggle-icon { transition: none; }
+}
+
+/* ---------- Vidrio y sustentabilidad ---------- */
+.sustain-list { margin-top: 24px; margin-bottom: 28px; }
+.sustain-list .ficha-attr { align-items: center; }
+.sustain-list .qs-attr-icon { border-color: var(--primary-color); color: var(--primary-color); }
+.sustain-list p { margin: 0; color: var(--text-color); font-size: 0.94rem; }
+
+/* ---------- Experiencia visual: 3 ambientes ---------- */
+.ambient-exp { overflow: hidden; }
+.ambient-stage {
+  position: relative;
+  margin-top: 40px;
+  height: clamp(420px, 60vw, 620px);
+  overflow: hidden;
+}
+.ambient-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 600ms var(--ease-out);
+}
+.ambient-bg.is-active { opacity: 1; }
+.ambient-bottle {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  height: 92%;
+  width: auto;
+  z-index: 2;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+}
+.ambient-tabs {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  background: rgba(7, 7, 8, 0.55);
+  border: 1px solid rgba(244, 241, 236, 0.18);
+  border-radius: 999px;
+  padding: 6px;
+}
+.ambient-tab {
+  border: none;
+  background: transparent;
+  color: rgba(245, 245, 247, 0.7);
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  padding: 10px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.ambient-tab.is-active { background: var(--primary-color); color: #fff; }
+@media (hover: hover) and (pointer: fine) {
+  .ambient-tab:not(.is-active):hover { color: #fff; }
+}
+@media (max-width: 560px) {
+  .ambient-stage { height: 70vh; min-height: 420px; }
+  .ambient-tab { padding: 9px 14px; font-size: 0.74rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ambient-bg { transition: none; }
+}
+
+/* ---------- Cierre y conversión ---------- */
+.producto-closing { background: var(--background-alt); }
+.producto-closing-inner { position: relative; text-align: center; display: flex; flex-direction: column; align-items: center; padding-top: 220px; }
+.producto-closing-img {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 280px;
+  width: auto;
+  border-radius: var(--radius);
+  object-fit: cover;
+  aspect-ratio: 3 / 4;
+}
+.producto-closing-inner .section-title { max-width: 560px; }
+@media (max-width: 560px) {
+  .producto-closing-img { height: 220px; }
+  .producto-closing-inner { padding-top: 180px; }
+}
+
 /* ===================================================================
    ---------- Producto: historia con scroll pinned ----------
    Mobile y prefers-reduced-motion: layout vertical normal, sin pin —
@@ -798,7 +984,7 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
-.product-story-block h3 {
+.product-story-block h2 {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 700;
@@ -905,7 +1091,7 @@ a { color: inherit; text-decoration: none; }
     transform: translateY(calc(-50% - 24px));
   }
   .product-story.is-pinned .product-story-eyebrow,
-  .product-story.is-pinned .product-story-block h3,
+  .product-story.is-pinned .product-story-block h2,
   .product-story.is-pinned .product-story-block p {
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
   }

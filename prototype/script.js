@@ -316,6 +316,36 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Producto (producto.html): tarjetas de ingredientes expandibles
+  document.querySelectorAll(".ing-card").forEach((card) => {
+    const toggle = card.querySelector(".ing-card-toggle");
+    const label = toggle && toggle.querySelector("span");
+    if (!toggle) return;
+    toggle.addEventListener("click", () => {
+      const isOpen = card.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      if (label) label.textContent = isOpen ? "Ver menos" : "Ver más";
+    });
+  });
+
+  // Producto (producto.html): experiencia de 3 ambientes (magenta/azul/violeta)
+  const ambientStage = document.getElementById("ambientStage");
+  if (ambientStage) {
+    const bgs = Array.from(ambientStage.querySelectorAll(".ambient-bg"));
+    const tabs = Array.from(ambientStage.querySelectorAll(".ambient-tab"));
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const target = tab.dataset.ambient;
+        bgs.forEach((bg) => bg.classList.toggle("is-active", bg.dataset.ambient === target));
+        tabs.forEach((t) => {
+          const active = t === tab;
+          t.classList.toggle("is-active", active);
+          t.setAttribute("aria-selected", active ? "true" : "false");
+        });
+      });
+    });
+  }
+
   // Lifestyle: interacciones simuladas en las cards UGC (like + compartir)
   document.querySelectorAll(".ugc-like, .ugc-save").forEach((btn) => {
     const countEl = btn.querySelector(".ugc-action-count");
