@@ -593,9 +593,11 @@ a { color: inherit; text-decoration: none; }
   }
   .qs-seq-frame {
     position: relative;
-    width: 100%;
+    width: 82%;
     height: auto;
     aspect-ratio: 1920 / 1080;
+    -webkit-mask-image: radial-gradient(ellipse 78% 78% at center, #000 62%, transparent 100%);
+    mask-image: radial-gradient(ellipse 78% 78% at center, #000 62%, transparent 100%);
   }
   .qs-seq-bg-video {
     position: absolute;
