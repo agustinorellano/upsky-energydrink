@@ -918,187 +918,39 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
 }
 
 /* ===================================================================
-   ---------- Producto: historia con scroll pinned ----------
-   Mobile y prefers-reduced-motion: layout vertical normal, sin pin —
-   es el estado base real (no un fallback decorativo): si el JS no
-   corre, esto es exactamente lo que se ve, nada depende de él para
-   ser visible. El pin con línea de tiempo por scroll es una mejora
-   progresiva que script.js activa agregando .is-pinned solo en
-   desktop sin reduced-motion. Usa los mismos tokens de color que el
-   resto del sitio (no el fondo claro del referente tipo Apple).
+   ---------- Producto: hero cinematográfico (clip único, estático) ----------
+   Full-bleed, sin scroll-jacking: mismo patrón que .hero-bg/.hero-bg-scrim
+   y que el #producto del home (.qs-seq-media).
    =================================================================== */
 .product-story {
   position: relative;
-  background: var(--background-alt);
-  overflow: clip;
-}
-.product-story-pin {
-  position: relative;
-  min-height: 70vh;
-  display: flex;
-  align-items: center;
-  padding: 72px 0;
-}
-.product-story-stage {
-  position: relative;
-  width: 100%;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 36px;
-  text-align: center;
-}
-.product-story-bottle-wrap {
-  position: relative;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  aspect-ratio: 2206 / 946;
   overflow: hidden;
+  background: var(--background-alt);
+  min-height: clamp(420px, 56vw, 640px);
+  display: flex;
+  align-items: center;
 }
-.product-story-bottle {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: none;
+.product-story-media { position: absolute; inset: 0; z-index: 0; }
+.product-story-video { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+.product-story-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(10, 10, 12, 0.7) 0%, rgba(10, 10, 12, 0.25) 45%, rgba(10, 10, 12, 0) 68%),
+    linear-gradient(to bottom, rgba(10, 10, 12, 0) 62%, rgba(10, 10, 12, 0.6) 100%);
 }
-.product-story-bottle.is-active { display: block; }
+.product-story .container { position: relative; z-index: 2; }
 .product-story-intro {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 700;
   text-transform: uppercase;
   line-height: 1;
-  font-size: clamp(2rem, 6vw, 3.2rem);
+  font-size: clamp(2.2rem, 6vw, 4rem);
   color: var(--text-color);
-}
-.product-story-copy { display: flex; flex-direction: column; gap: 32px; max-width: 460px; }
-.product-story-block { display: flex; flex-direction: column; gap: 10px; }
-.product-story-eyebrow {
-  margin: 0;
-  color: var(--primary-color);
-  font-weight: 700;
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-.product-story-block h2 {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 700;
-  text-transform: uppercase;
-  line-height: 1.15;
-  font-size: clamp(1.3rem, 3vw, 1.9rem);
-  color: var(--text-color);
-}
-.product-story-block p { margin: 0; color: var(--text-muted); font-size: 1rem; line-height: 1.55; }
-.product-story-scrim { display: none; }
-
-/* ---- Desktop: el video queda fijo de fondo, a pantalla completa, y el
-   scroll arma una línea de tiempo (zoom del video + texto que se cruza) ---- */
-@media (min-width: 901px) {
-  .product-story.is-pinned .product-story-track { height: 340vh; }
-  .product-story.is-pinned .product-story-pin {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    min-height: 0;
-    padding: 0;
-    overflow: hidden;
-  }
-  .product-story.is-pinned .product-story-stage {
-    height: 100%;
-    display: block;
-    text-align: left;
-    padding: 0;
-    max-width: none;
-    margin: 0;
-  }
-  .product-story.is-pinned .product-story-bottle-wrap {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    aspect-ratio: auto;
-    overflow: hidden;
-    transform-origin: center;
-    will-change: transform;
-    z-index: 1;
-  }
-  /* El producto vive del lado izquierdo del encuadre (como el PNG
-     original); se corre el object-position para que quede ahí y no
-     centrado, dejando el lado derecho libre para el título. */
-  .product-story.is-pinned .product-story-bottle {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-position: 28% center;
-    display: block;
-    opacity: 0;
-    transition: opacity 650ms var(--ease-out);
-  }
-  .product-story.is-pinned .product-story-bottle.is-active { opacity: 1; }
-  .product-story.is-pinned .product-story-scrim {
-    display: block;
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-    background:
-      linear-gradient(90deg, rgba(10, 10, 12, 0.55) 0%, rgba(10, 10, 12, 0.1) 26%, rgba(10, 10, 12, 0.1) 44%, rgba(10, 10, 12, 0.72) 60%, rgba(10, 10, 12, 0.95) 78%, rgba(10, 10, 12, 0.98) 100%),
-      linear-gradient(to bottom, rgba(10, 10, 12, 0) 70%, rgba(10, 10, 12, 0.85) 100%);
-  }
-  .product-story.is-pinned .product-story-intro {
-    position: absolute;
-    z-index: 3;
-    top: 50%;
-    right: 8%;
-    transform: translateY(-50%);
-    font-size: clamp(2.6rem, 5vw, 4.4rem);
-    will-change: opacity;
-    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
-  }
-  .product-story.is-pinned .product-story-copy {
-    position: absolute;
-    z-index: 3;
-    top: 50%;
-    left: 8%;
-    transform: translateY(-50%);
-    width: min(34vw, 440px);
-    display: block;
-  }
-  .product-story.is-pinned .product-story-block {
-    position: absolute;
-    inset: auto auto auto 0;
-    top: 50%;
-    width: 100%;
-    transform: translateY(calc(-50% + 24px));
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out);
-  }
-  .product-story.is-pinned .product-story-block.is-active {
-    opacity: 1;
-    transform: translateY(-50%);
-    pointer-events: auto;
-  }
-  .product-story.is-pinned .product-story-block.is-leaving {
-    opacity: 0;
-    transform: translateY(calc(-50% - 24px));
-  }
-  .product-story.is-pinned .product-story-eyebrow,
-  .product-story.is-pinned .product-story-block h2,
-  .product-story.is-pinned .product-story-block p {
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .product-story-block { opacity: 1 !important; transform: none !important; }
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
 }
 
 /* Zoom lento ("Ken Burns") al entrar en pantalla (ver script.js) */
