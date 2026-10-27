@@ -549,46 +549,72 @@ a { color: inherit; text-decoration: none; }
   justify-content: flex-end;
   padding-bottom: 56px;
 }
-@media (min-width: 901px) {
-  .qs-section { justify-content: center; padding-bottom: 0; }
-}
 
-.qs-seq-media {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
+/* -- Mobile (base): el video recorta hacia la botella (el texto
+   quemado en el render queda fuera del encuadre), así que el texto
+   se repite como overlay HTML real, abajo. -- */
+.qs-seq-media { position: absolute; inset: 0; z-index: 0; }
+.qs-seq-frame { width: 100%; height: 100%; }
 .qs-seq-bg-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center center;
+  object-position: 58% center;
   display: block;
 }
+.qs-seq-cta-wrap { display: none; }
 
 .qs-seq-scrim {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(7, 7, 8, 0) 80%, rgba(7, 7, 8, 0.9) 100%),
-    linear-gradient(
-      90deg,
-      rgba(7, 7, 8, 0.92) 0%,
-      rgba(7, 7, 8, 0.78) 26%,
-      rgba(7, 7, 8, 0.3) 52%,
-      rgba(7, 7, 8, 0) 72%
-    );
+  background: linear-gradient(180deg, rgba(7, 7, 8, 0) 42%, rgba(7, 7, 8, 0.78) 68%, rgba(7, 7, 8, 0.96) 100%);
 }
 
-.qs-section .container {
+.qs-seq-mobile-copy {
   position: relative;
   z-index: 2;
+  max-width: 420px;
 }
 
-.qs-seq-copy {
-  max-width: 420px;
+/* -- Desktop: el video se muestra completo (sin recortar), en su
+   proporción real, para no tapar el texto que ya viene renderizado
+   en el clip. El CTA real se superpone en el hueco que dejamos
+   libre al pedirle el render. -- */
+@media (min-width: 901px) {
+  .qs-section { justify-content: center; padding-bottom: 0; }
+  .qs-seq-media {
+    position: relative;
+    inset: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .qs-seq-frame {
+    position: relative;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1920 / 1080;
+  }
+  .qs-seq-bg-video {
+    position: absolute;
+    inset: 0;
+    object-position: center center;
+  }
+  .qs-seq-scrim { display: none; }
+  .qs-seq-mobile-copy { display: none; }
+
+  .qs-seq-cta-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    position: absolute;
+    left: 7.3%;
+    top: 70%;
+    max-width: 300px;
+  }
 }
 
 .qs-seq-kicker {
@@ -640,16 +666,6 @@ a { color: inherit; text-decoration: none; }
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
-}
-
-@media (max-width: 900px) {
-  .qs-seq-bg-video { object-position: center 30%; }
-  .qs-seq-scrim {
-    background:
-      linear-gradient(180deg, rgba(7, 7, 8, 0) 42%, rgba(7, 7, 8, 0.78) 68%, rgba(7, 7, 8, 0.96) 100%);
-  }
-  .qs-seq-copy { max-width: 100%; }
-  .qs-seq-wordmark { font-size: clamp(2.6rem, 16vw, 4rem); }
 }
 
 /* Reveal sutil al hacer scroll (ver script.js) */
