@@ -239,10 +239,12 @@ document.addEventListener("DOMContentLoaded", () => {
   if (ambientStage) {
     const bgs = Array.from(ambientStage.querySelectorAll(".ambient-bg"));
     const tabs = Array.from(ambientStage.querySelectorAll(".ambient-tab"));
+    const infos = Array.from(document.querySelectorAll(".ambient-info"));
     tabs.forEach((tab) => {
       tab.addEventListener("click", () => {
         const target = tab.dataset.ambient;
         bgs.forEach((bg) => bg.classList.toggle("is-active", bg.dataset.ambient === target));
+        infos.forEach((info) => info.classList.toggle("is-active", info.dataset.ambient === target));
         tabs.forEach((t) => {
           const active = t === tab;
           t.classList.toggle("is-active", active);

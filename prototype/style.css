@@ -927,12 +927,21 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
 .sustain-list p { margin: 0; color: var(--text-color); font-size: 0.94rem; }
 
 /* ---------- Experiencia visual: 3 ambientes ---------- */
-.ambient-exp { overflow: hidden; }
+.ambient-exp { overflow: visible; }
 .ambient-stage {
   position: relative;
-  margin-top: 40px;
-  height: clamp(420px, 60vw, 620px);
+  margin: 56px auto 0;
+  width: min(100%, 420px);
+  aspect-ratio: 9 / 16;
+  max-height: 78vh;
+}
+.ambient-frame {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 32px;
   overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
 }
 .ambient-bg {
   position: absolute;
@@ -946,12 +955,44 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
 .ambient-bottle {
   position: absolute;
   left: 50%;
-  bottom: 0;
+  bottom: -6%;
   transform: translateX(-50%);
-  height: 92%;
+  height: 112%;
   width: auto;
   z-index: 2;
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+  pointer-events: none;
+  filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.55));
+}
+.ambient-info {
+  position: absolute;
+  z-index: 3;
+  left: 24px;
+  top: 28px;
+  right: 50%;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 400ms var(--ease-out), transform 400ms var(--ease-out);
+  pointer-events: none;
+}
+.ambient-info.is-active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.ambient-info-tag {
+  display: inline-block;
+  margin: 0 0 8px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(7, 7, 8, 0.55);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.ambient-info-text {
+  margin: 0;
+  color: #fff;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
 }
 .ambient-tabs {
   position: absolute;
@@ -984,7 +1025,8 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
   .ambient-tab:not(.is-active):hover { color: #fff; }
 }
 @media (max-width: 560px) {
-  .ambient-stage { height: 70vh; min-height: 420px; }
+  .ambient-stage { width: min(100%, 340px); max-height: 72vh; }
+  .ambient-frame { border-radius: 26px; }
   .ambient-tab { padding: 9px 14px; font-size: 0.74rem; }
 }
 @media (prefers-reduced-motion: reduce) {
