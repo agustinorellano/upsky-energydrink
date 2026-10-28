@@ -766,18 +766,15 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
 .ing-card.is-open { border-color: var(--primary-color); box-shadow: 0 0 0 1px var(--primary-color); }
 .ing-card-icon {
   flex-shrink: 0;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1.5px solid var(--primary-color);
-  background: var(--background-color);
+  width: 40px;
+  height: 40px;
   color: var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 16px;
 }
-.ing-card-icon svg { width: 20px; height: 20px; }
+.ing-card-icon svg { width: 36px; height: 36px; }
 .ing-card-name { margin: 0 0 8px; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 1.05rem; color: var(--text-color); }
 .ing-card-desc { margin: 0 0 18px; color: var(--text-muted); font-size: 0.92rem; line-height: 1.5; flex-grow: 1; }
 .ing-card-toggle {
@@ -829,13 +826,13 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
 .ing-card-panel-inner a { color: var(--primary-color); text-decoration: underline; }
 
 @media (min-width: 1100px) {
-  .ing-hub-visual { display: block; position: relative; height: 420px; }
+  .ing-hub-visual { display: block; position: relative; height: 540px; }
   .ing-hub-bottle-wrap {
     position: absolute;
     left: 50%;
-    bottom: 40px;
+    bottom: 30px;
     transform: translateX(-50%);
-    width: clamp(560px, 48vw, 820px);
+    width: clamp(620px, 54vw, 920px);
   }
   .ing-hub-bottle {
     width: 100%;
@@ -845,8 +842,8 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
     display: block;
     transform: scale(0.92);
     opacity: 0;
-    -webkit-mask-image: radial-gradient(ellipse 66% 66% at center, #000 58%, transparent 98%);
-    mask-image: radial-gradient(ellipse 66% 66% at center, #000 58%, transparent 98%);
+    -webkit-mask-image: radial-gradient(ellipse 60% 60% at center, #000 40%, transparent 92%);
+    mask-image: radial-gradient(ellipse 60% 60% at center, #000 40%, transparent 92%);
     transition: transform 700ms var(--ease-out), opacity 600ms var(--ease-out);
   }
   .ing-hub.is-visible .ing-hub-bottle { transform: scale(1); opacity: 1; }
