@@ -597,6 +597,7 @@ a { color: inherit; text-decoration: none; }
     position: absolute;
     inset: 0;
     object-position: center center;
+    transform: scale(0.84);
   }
   .qs-seq-scrim { display: none; }
   .qs-seq-mobile-copy { display: none; }
