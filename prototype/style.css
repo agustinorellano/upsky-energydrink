@@ -615,7 +615,7 @@ a { color: inherit; text-decoration: none; }
     gap: 16px;
     position: absolute;
     left: 7.3%;
-    top: 70%;
+    top: 10%;
     max-width: 300px;
   }
 }
