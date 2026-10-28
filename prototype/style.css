@@ -928,12 +928,17 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
 
 /* ---------- Experiencia visual: 3 ambientes ---------- */
 .ambient-exp { overflow: visible; }
+.ambient-wrap {
+  margin-top: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .ambient-stage {
   position: relative;
-  margin: 56px auto 0;
-  width: min(100%, 420px);
-  aspect-ratio: 9 / 16;
-  max-height: 78vh;
+  width: min(100%, 560px);
+  aspect-ratio: 4 / 5;
+  max-height: 72vh;
 }
 .ambient-frame {
   position: absolute;
@@ -955,9 +960,9 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
 .ambient-bottle {
   position: absolute;
   left: 50%;
-  bottom: -6%;
+  bottom: -2%;
   transform: translateX(-50%);
-  height: 112%;
+  height: 96%;
   width: auto;
   z-index: 2;
   pointer-events: none;
@@ -966,9 +971,9 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
 .ambient-info {
   position: absolute;
   z-index: 3;
-  left: 24px;
+  left: 28px;
   top: 28px;
-  right: 50%;
+  right: 58%;
   opacity: 0;
   transform: translateY(-10px);
   transition: opacity 400ms var(--ease-out), transform 400ms var(--ease-out);
@@ -995,11 +1000,9 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
 }
 .ambient-tabs {
-  position: absolute;
+  position: relative;
   z-index: 3;
-  left: 50%;
-  bottom: 28px;
-  transform: translateX(-50%);
+  margin-top: 28px;
   display: flex;
   gap: 10px;
   background: rgba(7, 7, 8, 0.55);
@@ -1025,8 +1028,11 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
   .ambient-tab:not(.is-active):hover { color: #fff; }
 }
 @media (max-width: 560px) {
-  .ambient-stage { width: min(100%, 340px); max-height: 72vh; }
+  .ambient-stage { aspect-ratio: 3 / 4; max-height: 60vh; }
   .ambient-frame { border-radius: 26px; }
+  .ambient-bottle { height: 88%; }
+  .ambient-info { right: 62%; top: 20px; left: 18px; }
+  .ambient-info-text { font-size: 0.82rem; }
   .ambient-tab { padding: 9px 14px; font-size: 0.74rem; }
 }
 @media (prefers-reduced-motion: reduce) {

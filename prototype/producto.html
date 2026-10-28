@@ -391,32 +391,34 @@
     <p class="section-lead">La botella no cambia — el clima, sí. Elegí un ambiente.</p>
   </div>
 
-  <div class="ambient-stage" id="ambientStage">
-    <div class="ambient-frame">
-      <div class="ambient-bg is-active" data-ambient="magenta" style="background-image:url('assets/tt-bg-pink.jpg')" aria-hidden="true"></div>
-      <div class="ambient-bg" data-ambient="azul" style="background-image:url('assets/tt-bg-blue.jpg')" aria-hidden="true"></div>
-      <div class="ambient-bg" data-ambient="violeta" style="background-image:url('assets/tt-bg-purple.jpg')" aria-hidden="true"></div>
+  <div class="ambient-wrap" id="ambientStage">
+    <div class="ambient-stage">
+      <div class="ambient-frame">
+        <div class="ambient-bg is-active" data-ambient="magenta" style="background-image:url('assets/tt-bg-pink.jpg')" aria-hidden="true"></div>
+        <div class="ambient-bg" data-ambient="azul" style="background-image:url('assets/tt-bg-blue.jpg')" aria-hidden="true"></div>
+        <div class="ambient-bg" data-ambient="violeta" style="background-image:url('assets/tt-bg-purple.jpg')" aria-hidden="true"></div>
 
-      <div class="ambient-info is-active" data-ambient="magenta">
-        <p class="ambient-info-tag">Tu día a día</p>
-        <p class="ambient-info-text">355 cc de energía real, para cualquier momento.</p>
+        <div class="ambient-info is-active" data-ambient="magenta">
+          <p class="ambient-info-tag">Tu día a día</p>
+          <p class="ambient-info-text">355 cc de energía real, para cualquier momento.</p>
+        </div>
+        <div class="ambient-info" data-ambient="azul">
+          <p class="ambient-info-tag">Tus salidas</p>
+          <p class="ambient-info-text">Taurina y cafeína para acompañar la noche de principio a fin.</p>
+        </div>
+        <div class="ambient-info" data-ambient="violeta">
+          <p class="ambient-info-tag">Tu entrenamiento</p>
+          <p class="ambient-info-text">Vitaminas del complejo B que ayudan a sostener el esfuerzo.</p>
+        </div>
       </div>
-      <div class="ambient-info" data-ambient="azul">
-        <p class="ambient-info-tag">Tus salidas</p>
-        <p class="ambient-info-text">Taurina y cafeína para acompañar la noche de principio a fin.</p>
-      </div>
-      <div class="ambient-info" data-ambient="violeta">
-        <p class="ambient-info-tag">Tu entrenamiento</p>
-        <p class="ambient-info-text">Vitaminas del complejo B que ayudan a sostener el esfuerzo.</p>
-      </div>
-
-      <div class="ambient-tabs" role="tablist" aria-label="Elegir ambiente">
-        <button class="ambient-tab is-active" type="button" role="tab" aria-selected="true" data-ambient="magenta">Magenta</button>
-        <button class="ambient-tab" type="button" role="tab" aria-selected="false" data-ambient="azul">Azul</button>
-        <button class="ambient-tab" type="button" role="tab" aria-selected="false" data-ambient="violeta">Violeta</button>
-      </div>
+      <img src="assets/product-story-bottle.png" alt="Botella de UP SKY Energy Drink" class="ambient-bottle">
     </div>
-    <img src="assets/product-story-bottle.png" alt="Botella de UP SKY Energy Drink" class="ambient-bottle">
+
+    <div class="ambient-tabs" role="tablist" aria-label="Elegir ambiente">
+      <button class="ambient-tab is-active" type="button" role="tab" aria-selected="true" data-ambient="magenta">Magenta</button>
+      <button class="ambient-tab" type="button" role="tab" aria-selected="false" data-ambient="azul">Azul</button>
+      <button class="ambient-tab" type="button" role="tab" aria-selected="false" data-ambient="violeta">Violeta</button>
+    </div>
   </div>
 </section>
 
