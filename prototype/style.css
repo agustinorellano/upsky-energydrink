@@ -585,10 +585,11 @@ a { color: inherit; text-decoration: none; }
    libre al pedirle el render. -- */
 @media (min-width: 901px) {
   .qs-section { justify-content: center; padding-bottom: 0; }
-  .qs-seq-media { position: absolute; inset: 0; }
+  .qs-seq-media { position: relative; width: 100%; }
   .qs-seq-frame {
-    position: absolute;
-    inset: 0;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2560 / 1440;
     -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
     mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
   }
@@ -603,12 +604,24 @@ a { color: inherit; text-decoration: none; }
   .qs-seq-cta-wrap {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
+    text-align: right;
     gap: 16px;
     position: absolute;
-    left: 7.3%;
-    top: 10%;
-    max-width: 300px;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 280px;
+    z-index: 2;
+  }
+  .qs-seq-cta-wrap .qs-seq-cta {
+    background: var(--qs-accent);
+    border-color: var(--qs-accent);
+    color: #fff;
+    box-shadow: 0 10px 28px rgba(236, 31, 122, 0.4);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .qs-seq-cta-wrap .qs-seq-cta:hover { background: var(--primary-color-dark); border-color: var(--primary-color-dark); }
   }
 }
 
