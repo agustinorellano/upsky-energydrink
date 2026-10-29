@@ -113,6 +113,28 @@ document.addEventListener("DOMContentLoaded", () => {
     kbEls.forEach((el) => kbObserver.observe(el));
   }
 
+  // Reproducir/pausar los videos autoplay según si están a la vista:
+  // en mobile, varios <video autoplay> compitiendo apenas carga la
+  // página suelen hacer que el navegador se niegue a reproducir
+  // alguno; forzamos el play() recién cuando cada uno entra en pantalla.
+  const autoplayVideos = document.querySelectorAll("video[autoplay]");
+  if (autoplayVideos.length && "IntersectionObserver" in window) {
+    const videoObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+          if (entry.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+    autoplayVideos.forEach((video) => videoObserver.observe(video));
+  }
+
   // Badges de confianza: animan unas vueltas al entrar en pantalla, no para siempre
   const shopBadges = document.querySelector(".shop-badges");
   if (shopBadges && "IntersectionObserver" in window) {
