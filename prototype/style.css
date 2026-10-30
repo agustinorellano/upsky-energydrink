@@ -2699,6 +2699,10 @@ body.page-product .section-alt { background: var(--background-alt); }
   .pp-hero-media-mobile { display: none; }
   .pp-hero-media-desktop { display: block; }
 }
+/* Variante con foto dramática a página completa (fondo propio oscuro) en vez
+   del recorte de botella sobre blanco. */
+.pp-hero-media--dark .pp-hero-media-inner { background: #0a0a0c; }
+.pp-hero-media--dark .pp-hero-media-inner img { object-fit: cover; }
 @media (max-width: 900px) {
   .pp-hero-grid { grid-template-columns: 1fr; text-align: center; gap: 28px; }
   .pp-hero-eyebrow { justify-content: center; }
