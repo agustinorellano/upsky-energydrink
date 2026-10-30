@@ -767,8 +767,13 @@ a { color: inherit; text-decoration: none; }
 .home-widgets .qs-reveal:nth-child(2) { transition-delay: 60ms; }
 .home-widgets .qs-reveal:nth-child(3) { transition-delay: 120ms; }
 
+/* Variante con leve escala, para imágenes/bloques en vez de texto */
+.qs-reveal--scale { transform: translateY(0) scale(0.96); }
+.qs-reveal--scale.is-visible { transform: scale(1); }
+
 @media (prefers-reduced-motion: reduce) {
-  .qs-reveal { opacity: 1; transform: none; transition: none; }
+  .qs-reveal,
+  .qs-reveal--scale { opacity: 1; transform: none; transition: none; }
 }
 
 /* ---------- Ficha de producto (los 4 rasgos juntos, debajo de la secuencia) ---------- */
@@ -893,10 +898,19 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
   padding: 24px;
   display: flex;
   flex-direction: column;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  /* Une la transición de entrada (.qs-reveal: opacity/transform) con la
+     de hover (border-color/box-shadow/translate) en una sola declaración:
+     si quedaran en reglas separadas, la cascada descarta una de las dos
+     por completo en vez de combinarlas. "translate" es una propiedad
+     aparte de "transform" a propósito, para que el delay escalonado de
+     abajo no alcance también al hover. */
+  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out),
+    border-color 0.2s ease, box-shadow 0.2s ease, translate 0.2s var(--ease-out);
 }
 @media (hover: hover) and (pointer: fine) {
   .ing-card:hover { border-color: var(--primary-color); box-shadow: 0 0 0 1px var(--primary-color); }
+  .ing-cards--home .ing-card:hover { translate: 0 -4px; }
+  .ing-cards--home .ing-card:hover .ing-card-icon { scale: 1.1; }
 }
 .ing-card.is-open { border-color: var(--primary-color); box-shadow: 0 0 0 1px var(--primary-color); }
 .ing-card-icon {
@@ -908,7 +922,17 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
   align-items: center;
   justify-content: center;
   margin-bottom: 16px;
+  transition: scale 0.2s var(--ease-out);
 }
+/* Entrada escalonada de las tarjetas del home. El delay se da en una
+   lista con un valor por cada propiedad transicionada en .ing-card
+   (ver arriba: opacity, transform, border-color, box-shadow, translate)
+   para que solo retrase la entrada y no también el hover. */
+.ing-cards--home .ing-card:nth-child(1) { transition-delay: 0ms, 0ms, 0s, 0s, 0s; }
+.ing-cards--home .ing-card:nth-child(2) { transition-delay: 60ms, 60ms, 0s, 0s, 0s; }
+.ing-cards--home .ing-card:nth-child(3) { transition-delay: 120ms, 120ms, 0s, 0s, 0s; }
+.ing-cards--home .ing-card:nth-child(4) { transition-delay: 180ms, 180ms, 0s, 0s, 0s; }
+.ing-cards--home .ing-card:nth-child(5) { transition-delay: 240ms, 240ms, 0s, 0s, 0s; }
 .ing-card-icon svg { width: 36px; height: 36px; }
 .ing-card-name { margin: 0 0 8px; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 1.05rem; color: var(--text-color); }
 .ing-card-desc { margin: 0 0 18px; color: var(--text-muted); font-size: 0.92rem; line-height: 1.5; flex-grow: 1; }
@@ -1051,6 +1075,8 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
   .ing-hub-stem,
   .ing-hub-spine,
   .ing-card::before { transition: none !important; }
+  .ing-card { translate: none !important; }
+  .ing-card-icon { scale: 1 !important; }
 }
 
 @media (max-width: 900px) {
