@@ -379,7 +379,7 @@ a { color: inherit; text-decoration: none; }
   z-index: 1;
   width: 100%;
 }
-.hero-copy { max-width: 560px; }
+.hero-copy { max-width: 560px; margin-top: clamp(140px, 22vw, 260px); }
 .eyebrow {
   color: var(--primary-color);
   font-family: var(--font-display);
