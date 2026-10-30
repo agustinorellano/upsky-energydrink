@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="page-product">
 
 <!-- ========== HEADER ========== -->
 <header class="site-header" id="header">
@@ -130,111 +130,194 @@
   </div>
 </aside>
 
-<!-- ========== HERO CINEMATOGRÁFICO (clip único, estático) ========== -->
-<section class="section product-story">
-  <div class="product-story-media kb-zoom">
-    <video class="product-story-video" autoplay muted loop playsinline poster="assets/product-story-clip1-poster.jpg" aria-label="Botella de UP SKY Energy Drink, toma cinematográfica">
-      <source src="assets/product-story-clip1.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="product-story-scrim" aria-hidden="true"></div>
-  <div class="container">
-    <h1 class="product-story-intro">UP SKY<br>Energy Drink</h1>
+<!-- ========== HERO ========== -->
+<section class="pp-hero" id="producto-hero">
+  <div class="container pp-hero-grid">
+    <div class="pp-hero-copy">
+      <p class="pp-hero-eyebrow hero-reveal">Energía que te mantiene en movimiento</p>
+      <h1 class="pp-hero-title hero-reveal" style="animation-delay:80ms">Más energía<br>en cada <span>instante.</span></h1>
+      <p class="pp-hero-lead hero-reveal" style="animation-delay:160ms">UP SKY es una bebida energizante que te impulsa cuando más lo necesitás. Con sabor natural a frutilla y una combinación de ingredientes pensada para acompañarte en cada momento.</p>
+      <div class="hero-actions pp-hero-actions hero-reveal" style="animation-delay:240ms">
+        <a href="#nutricional" class="btn btn-primary">Conocé el producto →</a>
+      </div>
+    </div>
+    <div class="pp-hero-media qs-reveal qs-reveal--scale">
+      <div class="pp-hero-media-inner kb-zoom">
+        <img src="assets/story-sabor-bottle.jpg" alt="Botella de UP SKY Energy Drink flotando con splash magenta y frutillas sobre fondo blanco" class="pp-hero-media-mobile">
+        <video class="pp-hero-media-desktop" autoplay muted loop playsinline poster="assets/story-sabor-bottle-poster.jpg" aria-label="Botella de UP SKY Energy Drink flotando con splash magenta y frutillas sobre fondo blanco">
+          <source src="assets/story-sabor-bottle.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ========== INGREDIENTES Y BENEFICIOS ========== -->
-<section class="section" id="ingredientes">
+<!-- ========== INFORMACIÓN NUTRICIONAL ========== -->
+<section class="section" id="nutricional">
   <div class="container">
-    <p class="section-eyebrow">Fórmula</p>
-    <h2 class="section-title">Más que energía.<br>Descubrí qué hay detrás de UP SKY.</h2>
-    <p class="section-lead">Tocá cada ingrediente para conocer su función en la fórmula. Las cantidades exactas por botella están en la <a href="#ficha-tecnica">ficha técnica</a>.</p>
+    <p class="section-eyebrow">Información nutricional</p>
+    <h2 class="section-title">Conocé qué contiene UP SKY.</h2>
 
-    <div class="ing-hub qs-reveal" id="ingHub">
-      <div class="ing-hub-visual" aria-hidden="true">
-        <div class="ing-hub-bottle-wrap">
-          <img src="assets/ing-hub-bottle.webp" alt="" class="ing-hub-bottle">
-        </div>
-        <div class="ing-hub-stem"></div>
-        <div class="ing-hub-spine"></div>
+    <div class="pp-nutri-grid qs-reveal">
+      <div class="pp-nutri-chip">
+        <span class="pp-nutri-chip-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z" fill="currentColor"/></svg></span>
+        <p class="pp-nutri-chip-value">177 kcal</p>
+        <p class="pp-nutri-chip-label">Energía / botella</p>
       </div>
-
-      <div class="ing-cards">
-      <article class="ing-card">
-        <span class="ing-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3 3 6 7 6 11a6 6 0 0 1-12 0c0-4 3-8 6-11Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
-        <h3 class="ing-card-name">Taurina</h3>
-        <p class="ing-card-desc">Aminoácido que el organismo produce de forma natural. Forma parte de la fórmula de UP SKY junto con la cafeína.</p>
-        <button class="ing-card-toggle" type="button" aria-expanded="false">
-          <span>Ver más</span>
-          <span class="ing-card-toggle-icon" aria-hidden="true"></span>
-        </button>
-        <div class="ing-card-panel">
-          <div class="ing-card-panel-inner">
-            <p>Es uno de los componentes más habituales en las bebidas energéticas. No le atribuimos beneficios deportivos ni efectos que no estén demostrados: cumple una función específica dentro de la formulación del producto. La cantidad exacta por botella figura en la <a href="#ficha-tecnica">ficha técnica</a>.</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="ing-card">
-        <span class="ing-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10h11a3 3 0 0 1 0 6H4v-6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M17 11.5h1.5a2.5 2.5 0 0 1 0 5H17" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7 7c0-1.2.8-1.6.8-2.6S7 3 7 3M10.5 7c0-1.2.8-1.6.8-2.6S10.5 3 10.5 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
-        <h3 class="ing-card-name">Cafeína</h3>
-        <p class="ing-card-desc">Puede contribuir al estado de alerta y ayudar a reducir temporalmente la sensación de cansancio.</p>
-        <button class="ing-card-toggle" type="button" aria-expanded="false">
-          <span>Ver más</span>
-          <span class="ing-card-toggle-icon" aria-hidden="true"></span>
-        </button>
-        <div class="ing-card-panel">
-          <div class="ing-card-panel-inner">
-            <p>Es un estimulante natural, presente también en el café, el té y el mate. Recomendamos un consumo responsable: no superar una botella por día. La cantidad exacta por botella figura en la <a href="#ficha-tecnica">ficha técnica</a>.</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="ing-card">
-        <span class="ing-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="7" r="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="7" r="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="16" r="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
-        <h3 class="ing-card-name">Vitaminas B</h3>
-        <p class="ing-card-desc">Determinadas vitaminas del grupo B contribuyen al metabolismo energético normal.</p>
-        <button class="ing-card-toggle" type="button" aria-expanded="false">
-          <span>Ver más</span>
-          <span class="ing-card-toggle-icon" aria-hidden="true"></span>
-        </button>
-        <div class="ing-card-panel">
-          <div class="ing-card-panel-inner">
-            <p>UP SKY incluye niacina (B3), B6 y B12 en su fórmula. Son parte del grupo de vitaminas que, según su función fisiológica reconocida, contribuyen al metabolismo energético normal del organismo. Las cantidades exactas figuran en la <a href="#ficha-tecnica">ficha técnica</a>.</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="ing-card">
-        <span class="ing-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3.5 0 6 2.8 6 6.3 0 4.3-3.2 8-6 11.7-2.8-3.7-6-7.4-6-11.7C6 5.8 8.5 3 12 3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 7.5v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
-        <h3 class="ing-card-name">Vitamina C</h3>
-        <p class="ing-card-desc">Contribuye a la protección celular frente al daño oxidativo y al funcionamiento normal del sistema inmunitario.</p>
-        <button class="ing-card-toggle" type="button" aria-expanded="false">
-          <span>Ver más</span>
-          <span class="ing-card-toggle-icon" aria-hidden="true"></span>
-        </button>
-        <div class="ing-card-panel">
-          <div class="ing-card-panel-inner">
-            <p>Antioxidante presente en la fórmula de UP SKY. Cumple funciones reconocidas en la protección de las células frente al estrés oxidativo y en el funcionamiento normal del sistema inmunitario. La cantidad exacta por botella figura en la <a href="#ficha-tecnica">ficha técnica</a>.</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="ing-card">
-        <span class="ing-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c4 0 7 3 7 7a7 7 0 0 1-14 0c0-4 3-7 7-7Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 5l1.5 2M12 4v2.2M15 5l-1.5 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
-        <h3 class="ing-card-name">Sabores y aromas naturales</h3>
-        <p class="ing-card-desc">Le dan a UP SKY su perfil de sabor a frutilla. No aportan valor nutricional adicional.</p>
-        <button class="ing-card-toggle" type="button" aria-expanded="false">
-          <span>Ver más</span>
-          <span class="ing-card-toggle-icon" aria-hidden="true"></span>
-        </button>
-        <div class="ing-card-panel">
-          <div class="ing-card-panel-inner">
-            <p>Definen el perfil sensorial de la bebida: aroma, color y sabor a frutilla natural. Por ahora es el único sabor disponible; estamos evaluando nuevas variantes a futuro.</p>
-          </div>
-        </div>
-      </article>
+      <div class="pp-nutri-chip">
+        <span class="pp-nutri-chip-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10h11a3 3 0 0 1 0 6H4v-6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M17 11.5h1.5a2.5 2.5 0 0 1 0 5H17" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+        <p class="pp-nutri-chip-value">80 mg</p>
+        <p class="pp-nutri-chip-label">Cafeína / botella</p>
       </div>
+      <div class="pp-nutri-chip">
+        <span class="pp-nutri-chip-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="7" r="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="7" r="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="16" r="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+        <p class="pp-nutri-chip-value">B3 · B6 · B12</p>
+        <p class="pp-nutri-chip-label">Vitaminas</p>
+      </div>
+      <div class="pp-nutri-chip">
+        <span class="pp-nutri-chip-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3.5 0 6 2.8 6 6.3 0 4.3-3.2 8-6 11.7-2.8-3.7-6-7.4-6-11.7C6 5.8 8.5 3 12 3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+        <p class="pp-nutri-chip-value">41 g</p>
+        <p class="pp-nutri-chip-label">Azúcares / botella</p>
+      </div>
+    </div>
+
+    <div class="pp-nutri-cols qs-reveal">
+      <div class="pp-nutri-table-card">
+        <h3>Datos por porción</h3>
+        <p class="pp-nutri-table-note">Porción: 355 ml (una botella).</p>
+        <div class="pp-nutri-table-wrap">
+          <table class="pp-nutri-table">
+            <thead>
+              <tr><th>Valores de referencia</th><th>Por 100 ml</th><th>Por botella</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Valor energético</th><td>50 kcal</td><td>177 kcal</td></tr>
+              <tr><th scope="row">Carbohidratos</th><td>12 g</td><td>43 g</td></tr>
+              <tr><th scope="row">de los cuales azúcares</th><td>11,5 g</td><td>41 g</td></tr>
+              <tr><th scope="row">Proteínas</th><td>0 g</td><td>0 g</td></tr>
+              <tr><th scope="row">Grasas totales</th><td>0 g</td><td>0 g</td></tr>
+              <tr><th scope="row">Sodio</th><td>22 mg</td><td>80 mg</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="pp-nutri-table-note" style="margin-top:14px">Ficha completa, con cafeína, taurina y vitaminas, en <a href="#ficha-tecnica">ficha técnica</a>.</p>
+      </div>
+      <div class="pp-nutri-ing-card">
+        <h3>Ingredientes principales</h3>
+        <div class="pp-nutri-ing-media">
+          <img src="assets/bottle-cutout-clean.png" alt="Botella de UP SKY Energy Drink, detalle de etiqueta" style="object-fit:contain;background:var(--background-alt)">
+        </div>
+        <p class="pp-nutri-ing-list">Agua carbonatada, azúcar, taurina, cafeína, saborizante natural de frutilla, vitaminas (niacina, B6, B12) y vitamina C, entre otros.</p>
+        <div class="pp-nutri-badges">
+          <span class="pp-nutri-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z" fill="currentColor"/></svg>Taurina sintética (apta vegetarianos)</span>
+          <span class="pp-nutri-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c4 0 7 3 7 7a7 7 0 0 1-14 0c0-4 3-7 7-7Z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Botella de vidrio reciclable</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== LA FÓRMULA DETRÁS DE UP SKY ========== -->
+<section class="section section-alt" id="formula">
+  <div class="container">
+    <div class="pp-formula-head">
+      <div>
+        <p class="section-eyebrow">Fórmula</p>
+        <h2 class="section-title" style="margin-bottom:0">La fórmula detrás de UP SKY</h2>
+      </div>
+      <p>Una combinación de ingredientes y nutrientes que acompañan tu energía, tu enfoque y tu día a día.</p>
+    </div>
+
+    <div class="pp-formula-grid">
+      <article class="pp-formula-card pp-formula-card--lg qs-reveal">
+        <img src="https://res-prod.buzzy.now/file-service/bb7e9f41-68af-4cb1-ba82-8303dfec507a.png" alt="Frutilla fresca">
+        <div class="pp-formula-card-body">
+          <span class="pp-formula-num">01</span>
+          <h3 class="pp-formula-name">Frutilla</h3>
+          <p class="pp-formula-desc">UP SKY está saborizada naturalmente con frutilla, aportando un perfil frutal y fresco.</p>
+        </div>
+      </article>
+      <article class="pp-formula-card pp-formula-card--md qs-reveal">
+        <img src="https://res-prod.buzzy.now/file-service/f88b7754-af15-4beb-b659-c7a449782aa3.png" alt="Representación molecular de la taurina">
+        <div class="pp-formula-card-body">
+          <span class="pp-formula-num">02</span>
+          <h3 class="pp-formula-name">Taurina</h3>
+          <p class="pp-formula-desc">Compuesto orgánico presente naturalmente en distintos alimentos y tejidos. Participa en diversas funciones fisiológicas.</p>
+        </div>
+      </article>
+      <article class="pp-formula-card pp-formula-card--sm qs-reveal">
+        <img src="https://res-prod.buzzy.now/file-service/777297f4-1c95-40ed-9ea2-356be1185cdf.png" alt="Representación molecular de la cafeína">
+        <div class="pp-formula-card-body">
+          <span class="pp-formula-num">03</span>
+          <h3 class="pp-formula-name">Cafeína</h3>
+          <p class="pp-formula-desc">Estimulante que contribuye al estado de alerta y ayuda a mantener la concentración.</p>
+        </div>
+      </article>
+      <article class="pp-formula-card pp-formula-card--sm qs-reveal">
+        <img src="https://res-prod.buzzy.now/file-service/a9a2f549-d677-4be9-b22d-bb39ee75f725.png" alt="Representación molecular de la vitamina C">
+        <div class="pp-formula-card-body">
+          <span class="pp-formula-num">04</span>
+          <h3 class="pp-formula-name">Vitamina C</h3>
+          <p class="pp-formula-desc">Participa en la formación de colágeno, contribuye al sistema inmunitario y cumple función antioxidante.</p>
+        </div>
+      </article>
+      <article class="pp-formula-card pp-formula-card--sm qs-reveal">
+        <img src="https://res-prod.buzzy.now/file-service/a5cc51b5-6aef-412a-acd0-e36c0550a2ad.png" alt="Representación molecular de las vitaminas B3 y B6">
+        <div class="pp-formula-card-body">
+          <span class="pp-formula-num">05</span>
+          <h3 class="pp-formula-name">Vitaminas B3 y B6</h3>
+          <p class="pp-formula-desc">Participan en el metabolismo energético y contribuyen al funcionamiento normal del sistema nervioso.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ========== NO ES SOLO UNA BEBIDA ========== -->
+<section class="section" id="identidad">
+  <div class="container pp-bebida qs-reveal">
+    <div class="pp-bebida-media kb-zoom">
+      <img src="assets/product-pack1.jpg" alt="Pack de botellas UP SKY Energy Drink con hielo">
+    </div>
+    <div class="pp-bebida-copy">
+      <h2 class="section-title" style="margin-bottom:14px">No es solo <span>una bebida.</span></h2>
+      <p>UP SKY combina sabor, energía y una identidad pensada para acompañarte en cada momento. Más energía, más foco, más vos.</p>
+      <a href="catalogo.html" class="btn btn-primary" style="align-self:flex-start">Conocé más →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PROBÁ LA ENERGÍA ========== -->
+<section class="section section-alt" id="momentos">
+  <div class="container">
+    <p class="section-eyebrow">Momentos</p>
+    <h2 class="section-title">Probá la energía</h2>
+
+    <div class="pp-moments-grid">
+      <article class="pp-moment-card qs-reveal">
+        <img src="assets/toma-01.jpg" alt="Energía UP SKY">
+        <div class="pp-moment-body">
+          <span class="pp-moment-num">01</span>
+          <h3 class="pp-moment-title">Energía</h3>
+          <p class="pp-moment-text">Rendí al máximo, siempre.</p>
+        </div>
+      </article>
+      <article class="pp-moment-card qs-reveal">
+        <img src="assets/moment-fitness-2.jpg" alt="Enfoque UP SKY">
+        <div class="pp-moment-body">
+          <span class="pp-moment-num">02</span>
+          <h3 class="pp-moment-title">Enfoque</h3>
+          <p class="pp-moment-text">Concentrate en lo importante.</p>
+        </div>
+      </article>
+      <article class="pp-moment-card qs-reveal">
+        <img src="assets/moment-fitness.jpg" alt="Rendimiento UP SKY">
+        <div class="pp-moment-body">
+          <span class="pp-moment-num">03</span>
+          <h3 class="pp-moment-title">Rendimiento</h3>
+          <p class="pp-moment-text">Tu mejor versión, todos los días.</p>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -248,8 +331,8 @@
 
     <div class="faq-list tech-panel-list">
       <details class="faq-item">
-        <summary>Información nutricional</summary>
-        <p class="tech-panel-note">Valores de referencia por porción. [Reemplazar por los datos exactos del rótulo nutricional una vez cerrada la fórmula final.]</p>
+        <summary>Tabla nutricional completa</summary>
+        <p class="tech-panel-note">Incluye cafeína, taurina y vitaminas. Valores de referencia por porción.</p>
         <div class="nutri-table-wrap">
           <table class="nutri-table">
             <thead>
@@ -488,6 +571,22 @@
         <summary>¿Hacen envíos fuera de Concordia?</summary>
         <p>Sí, hacemos envíos. Escribinos por WhatsApp o completá el formulario de contacto para coordinar.</p>
       </details>
+    </div>
+  </div>
+</section>
+
+<!-- ========== BANNER COMERCIAL ========== -->
+<section class="section" id="comprar">
+  <div class="container">
+    <div class="pp-banner qs-reveal">
+      <div class="pp-banner-copy">
+        <h2 class="section-title" style="margin-bottom:0">Tu próxima dosis de <span>energía</span> te espera.</h2>
+        <p>Descubrí UP SKY y encontrá tu sabor favorito. Elegí el tuyo y llevá tu energía al siguiente nivel.</p>
+        <a href="catalogo.html" class="btn btn-primary">Comprar ahora →</a>
+      </div>
+      <div class="pp-banner-media">
+        <img src="assets/bottle-cutout-clean.png" alt="Botella de UP SKY Energy Drink">
+      </div>
     </div>
   </div>
 </section>
