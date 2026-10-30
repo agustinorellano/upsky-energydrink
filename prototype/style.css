@@ -536,21 +536,16 @@ a { color: inherit; text-decoration: none; }
 .curve-divider--top { top: 0; }
 .curve-divider--bottom { bottom: 0; }
 
-/* -- Curva tipo "sonrisa" vía elipse CSS (sin SVG): el zoom global
-   del sitio rompe el path curvo de los SVG estirados en algunas
-   secciones, así que acá usamos un óvalo con border-radius, que
-   no tiene ese problema. -- */
-.curve-ellipse {
+/* -- Transición en degradé entre secciones (sin curva). -- */
+.fade-divider {
   position: absolute;
-  left: -10%;
-  width: 120%;
-  height: 140px;
-  border-radius: 50%;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 160px;
   pointer-events: none;
   z-index: 2;
 }
-.curve-ellipse--bottom { bottom: -70px; }
-.curve-ellipse--top { top: -70px; }
 
 /* En desktop cada sección ocupa como mínimo una pantalla completa,
    con su contenido centrado verticalmente (ver .hero, que ya usaba
