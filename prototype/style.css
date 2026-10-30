@@ -535,6 +535,7 @@ a { color: inherit; text-decoration: none; }
 .curve-divider svg { width: 100%; height: 100%; display: block; }
 .curve-divider--top { top: 0; }
 .curve-divider--bottom { bottom: 0; }
+.hero .curve-divider { height: 60px; }
 
 /* En desktop cada sección ocupa como mínimo una pantalla completa,
    con su contenido centrado verticalmente (ver .hero, que ya usaba
