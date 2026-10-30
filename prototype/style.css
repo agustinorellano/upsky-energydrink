@@ -804,6 +804,7 @@ a { color: inherit; text-decoration: none; }
 }
 .story-lead { color: var(--text-muted); font-size: 1.02rem; max-width: 46ch; margin: 0 0 28px; }
 .story-media-placeholder { aspect-ratio: 4 / 5; }
+.story-media-img { width: 100%; height: 100%; object-fit: contain; }
 .faq-list--home { margin-top: 0; }
 @media (max-width: 860px) {
   .story-split { grid-template-columns: 1fr; gap: 32px; text-align: center; }
