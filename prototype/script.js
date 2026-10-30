@@ -256,48 +256,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Producto (producto.html): experiencia de 3 ambientes (magenta/azul/violeta)
-  const ambientStage = document.getElementById("ambientStage");
-  if (ambientStage) {
-    const bgs = Array.from(ambientStage.querySelectorAll(".ambient-bg"));
-    const tabs = Array.from(ambientStage.querySelectorAll(".ambient-tab"));
-    const infos = Array.from(document.querySelectorAll(".ambient-info"));
-    const order = tabs.map((t) => t.dataset.ambient);
-
-    const setActive = (target) => {
-      bgs.forEach((bg) => bg.classList.toggle("is-active", bg.dataset.ambient === target));
-      infos.forEach((info) => info.classList.toggle("is-active", info.dataset.ambient === target));
-      tabs.forEach((t) => {
-        const active = t.dataset.ambient === target;
-        t.classList.toggle("is-active", active);
-        t.setAttribute("aria-selected", active ? "true" : "false");
-      });
-    };
-
-    tabs.forEach((tab) => {
-      tab.addEventListener("click", () => setActive(tab.dataset.ambient));
-    });
-
-    // Swipe horizontal (mobile) para cambiar de ambiente
-    const stage = ambientStage.querySelector(".ambient-stage");
-    if (stage) {
-      let touchStartX = 0;
-      stage.addEventListener("touchstart", (e) => {
-        touchStartX = e.changedTouches[0].clientX;
-      }, { passive: true });
-      stage.addEventListener("touchend", (e) => {
-        const dx = e.changedTouches[0].clientX - touchStartX;
-        if (Math.abs(dx) < 40) return;
-        const current = tabs.find((t) => t.classList.contains("is-active"));
-        const currentIndex = order.indexOf(current ? current.dataset.ambient : order[0]);
-        const nextIndex = dx < 0
-          ? (currentIndex + 1) % order.length
-          : (currentIndex - 1 + order.length) % order.length;
-        setActive(order[nextIndex]);
-      }, { passive: true });
-    }
-  }
-
   // Lifestyle: interacciones simuladas en las cards UGC (like + compartir)
   document.querySelectorAll(".ugc-like, .ugc-save").forEach((btn) => {
     const countEl = btn.querySelector(".ugc-action-count");
