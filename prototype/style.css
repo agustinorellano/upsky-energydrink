@@ -521,6 +521,21 @@ a { color: inherit; text-decoration: none; }
 .story-number--center { justify-content: center; }
 .story-number-bar { width: 30px; height: 2px; background: var(--primary-color); flex-shrink: 0; }
 
+/* -- Divisores curvos entre secciones (ver .closing-curve, mismo
+   patrón generalizado para usar en cualquier borde de sección). -- */
+.curve-divider {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  line-height: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.curve-divider svg { width: 100%; height: 100%; display: block; }
+.curve-divider--top { top: 0; }
+.curve-divider--bottom { bottom: 0; }
+
 /* En desktop cada sección ocupa como mínimo una pantalla completa,
    con su contenido centrado verticalmente (ver .hero, que ya usaba
    este mismo patrón). */
@@ -2253,6 +2268,19 @@ img.placeholder-event { display: block; width: 100%; object-fit: cover; border: 
   background: var(--primary-color);
   padding: 110px 0 130px;
 }
+.closing-curve {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  line-height: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.closing-curve svg { width: 100%; height: 100%; display: block; }
+.closing-curve path { fill: var(--background-color); }
+.closing-curve--top { top: 0; }
+.closing-curve--bottom { bottom: 0; }
 .closing-inner {
   position: relative;
   z-index: 2;
