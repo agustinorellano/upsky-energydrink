@@ -536,17 +536,6 @@ a { color: inherit; text-decoration: none; }
 .curve-divider--top { top: 0; }
 .curve-divider--bottom { bottom: 0; }
 
-/* -- Transición en degradé entre secciones (sin curva). -- */
-.fade-divider {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 90px;
-  pointer-events: none;
-  z-index: 2;
-}
-
 /* En desktop cada sección ocupa como mínimo una pantalla completa,
    con su contenido centrado verticalmente (ver .hero, que ya usaba
    este mismo patrón). */
