@@ -2620,7 +2620,8 @@ img.placeholder-event { display: block; width: 100%; object-fit: cover; border: 
 }
 
 /* ===================================================================
-   PÁGINA PRODUCTO — tema claro premium (fondo blanco todo el recorrido)
+   PÁGINA PRODUCTO — premium, blanco de base con secciones oscuras
+   alternadas (ver .pp-dark) para dar ritmo al recorrido.
    =================================================================== */
 body.page-product {
   --background-color: #ffffff;
@@ -2632,6 +2633,18 @@ body.page-product {
   color: var(--text-color);
 }
 body.page-product .section-alt { background: var(--background-alt); }
+
+/* -- Secciones oscuras alternadas dentro de la página de producto -- */
+body.page-product .pp-dark {
+  --background-color: #0a0a0c;
+  --background-alt: #131316;
+  --text-color: #f5f5f7;
+  --text-muted: #a3a3ab;
+  --border-color: #2a2a2f;
+  position: relative;
+  background: var(--background-color);
+  color: var(--text-color);
+}
 
 /* -- Hero -- */
 .pp-hero {
@@ -2723,7 +2736,7 @@ body.page-product .section-alt { background: var(--background-alt); }
   border-radius: 18px;
   padding: 22px 16px;
   text-align: center;
-  background: #fff;
+  background: var(--background-color);
 }
 .pp-nutri-chip-icon {
   width: 40px;
@@ -2747,7 +2760,7 @@ body.page-product .section-alt { background: var(--background-alt); }
 .pp-nutri-ing-card {
   border: 1px solid var(--border-color);
   border-radius: 20px;
-  background: #fff;
+  background: var(--background-color);
   padding: 28px;
 }
 .pp-nutri-table-card h3,
@@ -2884,18 +2897,22 @@ body.page-product .section-alt { background: var(--background-alt); }
   position: relative;
   border-radius: 28px;
   overflow: hidden;
-  background: linear-gradient(120deg, #fff0f6 0%, #ffffff 55%, #fdf2f8 100%);
-  border: 1px solid var(--border-color);
+  background: linear-gradient(120deg, var(--primary-color-dark) 0%, var(--primary-color) 100%);
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   padding: 0 56px;
   min-height: 320px;
 }
-.pp-banner-copy h2 span { color: var(--primary-color); }
-.pp-banner-copy p { color: var(--text-muted); max-width: 42ch; margin: 14px 0 26px; }
+.pp-banner-copy h2 { color: #fff; }
+.pp-banner-copy h2 span { color: #0a0a0c; }
+.pp-banner-copy p { color: rgba(255,255,255,0.88); max-width: 42ch; margin: 14px 0 26px; }
+.pp-banner-copy .btn-primary { background: #fff; color: #0a0a0c; }
+@media (hover: hover) and (pointer: fine) {
+  .pp-banner-copy .btn-primary:hover { background: #f4f4f6; }
+}
 .pp-banner-media { position: relative; height: 100%; display: flex; align-items: center; justify-content: center; }
-.pp-banner-media img { width: auto; max-width: min(100%, 260px); height: auto; max-height: 280px; object-fit: contain; filter: drop-shadow(0 30px 40px rgba(236,31,122,0.25)); }
+.pp-banner-media img { width: auto; max-width: min(100%, 260px); height: auto; max-height: 280px; object-fit: contain; filter: drop-shadow(0 30px 40px rgba(0,0,0,0.25)); }
 @media (max-width: 860px) {
   .pp-banner { grid-template-columns: 1fr; padding: 40px 28px; text-align: center; }
   .pp-banner-copy p { margin-left: auto; margin-right: auto; }
