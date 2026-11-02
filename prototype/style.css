@@ -2630,6 +2630,19 @@ body.page-product .pp-dark {
   position: relative;
   background: var(--background-color);
   color: var(--text-color);
+  /* Corte diagonal en vez de línea recta: el fondo blanco de body
+     asoma en las esquinas recortadas, dando el efecto de filo
+     inclinado entre esta sección oscura y las blancas de al lado. */
+  clip-path: polygon(0 56px, 100% 0, 100% calc(100% - 56px), 0 100%);
+  padding-top: 140px;
+  padding-bottom: 140px;
+}
+@media (max-width: 640px) {
+  body.page-product .pp-dark {
+    clip-path: polygon(0 28px, 100% 0, 100% calc(100% - 28px), 0 100%);
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
 }
 
 /* -- Hero -- */
