@@ -529,11 +529,14 @@ a { color: inherit; text-decoration: none; }
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 130px;
+  height: 280px;
   pointer-events: none;
   z-index: 2;
 }
 .fade-divider--top { top: 0; bottom: auto; }
+@media (max-width: 760px) {
+  .fade-divider { height: 180px; }
+}
 
 /* En desktop cada sección ocupa como mínimo una pantalla completa,
    con su contenido centrado verticalmente (ver .hero, que ya usaba
