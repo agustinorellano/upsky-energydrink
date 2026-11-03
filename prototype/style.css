@@ -303,7 +303,7 @@ a { color: inherit; text-decoration: none; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 40%;
+  object-position: 18% 40%;
   display: block;
 }
 .hero-bg-scrim {
@@ -311,6 +311,10 @@ a { color: inherit; text-decoration: none; }
   inset: 0;
   pointer-events: none;
   background:
+    /* Velo parejo sobre todo el video: lo apaga un poco para que se
+       sienta parte del fondo oscuro de la marca, no un video "pegado"
+       encima. */
+    linear-gradient(rgba(10, 10, 12, 0.22), rgba(10, 10, 12, 0.22)),
     linear-gradient(
       180deg,
       rgba(10, 10, 12, 0) 82%,
@@ -529,13 +533,13 @@ a { color: inherit; text-decoration: none; }
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 280px;
+  height: 140px;
   pointer-events: none;
   z-index: 2;
 }
 .fade-divider--top { top: 0; bottom: auto; }
 @media (max-width: 760px) {
-  .fade-divider { height: 180px; }
+  .fade-divider { height: 100px; }
 }
 
 /* En desktop cada sección ocupa como mínimo una pantalla completa,
@@ -1271,7 +1275,7 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
 .hero-slide.kb-zoom > img,
 .hero-slide.kb-zoom > video { transition-duration: 10s; }
 .hero-slide.kb-zoom.is-zoomed > img,
-.hero-slide.kb-zoom.is-zoomed > video { transform: scale(1.04); }
+.hero-slide.kb-zoom.is-zoomed > video { transform: scale(1.015); }
 
 @media (prefers-reduced-motion: reduce) {
   .kb-zoom > img,
