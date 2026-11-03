@@ -135,6 +135,22 @@ document.addEventListener("DOMContentLoaded", () => {
     autoplayVideos.forEach((video) => videoObserver.observe(video));
   }
 
+  // Hero de producto.html: flotación + glow activos solo mientras esa
+  // sección está en pantalla (a diferencia del reveal de .qs-reveal, que
+  // dispara una vez y se queda; acá se prende y apaga con el scroll).
+  const liveHeroMedia = document.querySelector(".pp-hero-media--live");
+  if (liveHeroMedia && "IntersectionObserver" in window) {
+    const liveHeroObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          entry.target.classList.toggle("is-active", entry.isIntersecting);
+        });
+      },
+      { threshold: 0.35 }
+    );
+    liveHeroObserver.observe(liveHeroMedia);
+  }
+
   // Badges de confianza: animan unas vueltas al entrar en pantalla, no para siempre
   const shopBadges = document.querySelector(".shop-badges");
   if (shopBadges && "IntersectionObserver" in window) {
