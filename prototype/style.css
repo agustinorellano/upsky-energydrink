@@ -528,19 +528,22 @@ a { color: inherit; text-decoration: none; }
 /* -- Transición en degradé entre secciones del home: una franja en el
    borde que funde el color de la sección actual con un velo magenta
    de marca y termina en el color de la siguiente sección. -- */
-.fade-divider {
+/* -- Divisores curvos entre secciones del home (excepto el hero, que
+   queda con corte directo). Curva simétrica tipo "sonrisa": mismos
+   endpoints a ambos lados, sin el bug de endpoints asimétricos que
+   generaba un pico/sliver (ver historial). -- */
+.curve-divider {
   position: absolute;
   left: 0;
-  bottom: 0;
   width: 100%;
-  height: 140px;
-  pointer-events: none;
+  height: 120px;
+  line-height: 0;
   z-index: 2;
+  pointer-events: none;
 }
-.fade-divider--top { top: 0; bottom: auto; }
-@media (max-width: 760px) {
-  .fade-divider { height: 100px; }
-}
+.curve-divider svg { width: 100%; height: 100%; display: block; }
+.curve-divider--top { top: 0; }
+.curve-divider--bottom { bottom: 0; }
 
 /* En desktop cada sección ocupa como mínimo una pantalla completa,
    con su contenido centrado verticalmente (ver .hero, que ya usaba
