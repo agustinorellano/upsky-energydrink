@@ -2828,46 +2828,118 @@ body.page-product .pp-dark {
 /* -- La fórmula detrás de UP SKY -- */
 .pp-formula-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 36px; flex-wrap: wrap; }
 .pp-formula-head p { color: var(--text-muted); max-width: 44ch; margin: 0; }
-.pp-formula-grid {
+/* -- La fórmula: lista a la izquierda + panel animado a la derecha,
+   sin fotos reales — cada ingrediente tiene su propio ícono/diseño
+   minimalista que aparece al pasar el mouse o hacer click. -- */
+.pp-formula-interactive {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 16px;
-  align-items: start;
+  grid-template-columns: minmax(220px, 320px) 1fr;
+  gap: 48px;
+  align-items: stretch;
 }
-/* Tarjetas tipo "publicación": imagen como banner arriba, texto en un
-   bloque sólido abajo (sin texto superpuesto a la foto). */
-.pp-formula-card {
-  border-radius: 20px;
+.pp-formula-list { display: flex; flex-direction: column; }
+.pp-formula-list-item {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 18px 4px;
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  position: relative;
+  font-family: inherit;
+}
+.pp-formula-list-item::before {
+  content: "";
+  position: absolute;
+  left: -16px;
+  top: 50%;
+  translate: 0 -50%;
+  width: 3px;
+  height: 0%;
+  background: var(--primary-color);
+  transition: height 0.3s var(--ease-out);
+}
+.pp-formula-list-item.is-active::before { height: 60%; }
+.pp-formula-list-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  transition: color 0.25s ease;
+}
+.pp-formula-list-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  transition: color 0.25s ease, translate 0.25s var(--ease-out);
+  letter-spacing: 0.01em;
+}
+.pp-formula-list-item:hover .pp-formula-list-name,
+.pp-formula-list-item.is-active .pp-formula-list-name { color: var(--text-color); translate: 4px 0; }
+.pp-formula-list-item.is-active .pp-formula-list-num { color: var(--primary-color); }
+
+.pp-formula-stage {
+  position: relative;
+  min-height: 420px;
+  border-radius: 28px;
   overflow: hidden;
   background: #0a0a0c;
   border: 1px solid var(--border-color);
+}
+.pp-formula-panel {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
-  grid-column: span 2;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px;
+  opacity: 0;
+  translate: 0 14px;
+  transition: opacity 0.45s var(--ease-out), translate 0.45s var(--ease-out);
+  pointer-events: none;
 }
-/* Fila 2 centrada: la 4ta y 5ta tarjeta (únicas de la segunda fila) quedan
-   centradas en vez de pegadas a la izquierda con un hueco vacío al lado. */
-.pp-formula-card:nth-child(4) { grid-column: 2 / span 2; }
-.pp-formula-card:nth-child(5) { grid-column: 4 / span 2; }
-.pp-formula-card-media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: #0a0a0c; }
-.pp-formula-card-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  /* Unifica fotos reales y renders 3D bajo un mismo tratamiento sutil,
-     para que no se sientan de dos bancos de imágenes distintos. */
-  filter: saturate(1.05) contrast(1.03);
+.pp-formula-panel.is-active { opacity: 1; translate: 0 0; pointer-events: auto; }
+.pp-formula-panel-visual {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+  color: var(--primary-color);
 }
-.pp-formula-card-body { padding: 18px 20px 22px; color: #fff; }
-.pp-formula-num { font-family: var(--font-display); font-weight: 700; font-size: 0.78rem; color: var(--primary-color); display: block; margin-bottom: 4px; }
-.pp-formula-name { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 1.1rem; margin: 0 0 6px; }
-.pp-formula-desc { font-size: 0.86rem; line-height: 1.5; color: rgba(255,255,255,0.72); }
-@media (max-width: 900px) {
-  .pp-formula-grid { grid-template-columns: repeat(2, 1fr); }
-  .pp-formula-card,
-  .pp-formula-card:nth-child(4),
-  .pp-formula-card:nth-child(5) { grid-column: span 2; }
+.pp-formula-panel-visual svg { width: 76px; height: 76px; position: relative; z-index: 1; }
+.pp-formula-panel-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 20, 147, 0.35) 0%, rgba(255, 20, 147, 0.08) 55%, rgba(255, 20, 147, 0) 75%);
+}
+.pp-formula-panel-num { font-family: var(--font-display); font-weight: 700; font-size: 0.78rem; color: var(--primary-color); letter-spacing: 0.08em; margin-bottom: 6px; }
+.pp-formula-panel-title { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 1.6rem; color: #fff; margin: 0 0 12px; }
+.pp-formula-panel-desc { font-size: 0.98rem; line-height: 1.55; color: rgba(255,255,255,0.72); max-width: 42ch; }
+@media (prefers-reduced-motion: reduce) {
+  .pp-formula-panel { transition: opacity 0.2s linear; translate: 0 0 !important; }
+}
+@media (max-width: 760px) {
+  .pp-formula-interactive { grid-template-columns: 1fr; gap: 24px; }
+  .pp-formula-list { flex-direction: row; flex-wrap: wrap; gap: 8px 18px; }
+  .pp-formula-list-item { border-bottom: none; padding: 6px 4px; }
+  .pp-formula-list-item::before { left: 50%; top: auto; bottom: -6px; translate: -50% 0; width: 0%; height: 2px; }
+  .pp-formula-list-item.is-active::before { width: 70%; height: 2px; }
+  .pp-formula-stage { min-height: 320px; }
+  .pp-formula-panel { padding: 32px 24px; }
+  .pp-formula-panel-visual { width: 120px; height: 120px; margin-bottom: 18px; }
+  .pp-formula-panel-visual svg { width: 58px; height: 58px; }
+  .pp-formula-panel-title { font-size: 1.3rem; }
 }
 
 /* -- No es solo una bebida -- */

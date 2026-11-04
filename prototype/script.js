@@ -272,6 +272,30 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Producto (producto.html): "La fórmula" — lista a la izquierda, panel
+  // animado a la derecha. Cambia con click (todos los dispositivos) y
+  // también al pasar el mouse en desktop (donde hover tiene sentido).
+  const formulaList = document.querySelector(".pp-formula-list");
+  if (formulaList) {
+    const items = formulaList.querySelectorAll(".pp-formula-list-item");
+    const panels = document.querySelectorAll(".pp-formula-panel");
+    const hoverCapable = window.matchMedia("(hover: hover)").matches;
+    const activateFormula = (targetId) => {
+      items.forEach((item) => {
+        const isActive = item.dataset.target === targetId;
+        item.classList.toggle("is-active", isActive);
+        item.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+      panels.forEach((panel) => panel.classList.toggle("is-active", panel.id === targetId));
+    };
+    items.forEach((item) => {
+      item.addEventListener("click", () => activateFormula(item.dataset.target));
+      if (hoverCapable) {
+        item.addEventListener("mouseenter", () => activateFormula(item.dataset.target));
+      }
+    });
+  }
+
   // Lifestyle: interacciones simuladas en las cards UGC (like + compartir)
   document.querySelectorAll(".ugc-like, .ugc-save").forEach((btn) => {
     const countEl = btn.querySelector(".ugc-action-count");

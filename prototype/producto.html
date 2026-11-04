@@ -231,47 +231,81 @@
       <p>Una combinación de ingredientes y nutrientes que acompañan tu energía, tu enfoque y tu día a día.</p>
     </div>
 
-    <div class="pp-formula-grid">
-      <article class="pp-formula-card qs-reveal">
-        <div class="pp-formula-card-media"><img src="https://res-prod.buzzy.now/file-service/bb7e9f41-68af-4cb1-ba82-8303dfec507a.png" alt="Frutilla fresca"></div>
-        <div class="pp-formula-card-body">
-          <span class="pp-formula-num">01</span>
-          <h3 class="pp-formula-name">Frutilla</h3>
-          <p class="pp-formula-desc">UP SKY está saborizada naturalmente con frutilla, aportando un perfil frutal y fresco.</p>
+    <div class="pp-formula-interactive qs-reveal">
+      <div class="pp-formula-list" role="tablist" aria-label="Ingredientes de la fórmula">
+        <button type="button" class="pp-formula-list-item is-active" data-target="f-frutilla" role="tab" aria-selected="true">
+          <span class="pp-formula-list-num">01</span>
+          <span class="pp-formula-list-name">Frutilla</span>
+        </button>
+        <button type="button" class="pp-formula-list-item" data-target="f-taurina" role="tab" aria-selected="false">
+          <span class="pp-formula-list-num">02</span>
+          <span class="pp-formula-list-name">Taurina</span>
+        </button>
+        <button type="button" class="pp-formula-list-item" data-target="f-cafeina" role="tab" aria-selected="false">
+          <span class="pp-formula-list-num">03</span>
+          <span class="pp-formula-list-name">Cafeína</span>
+        </button>
+        <button type="button" class="pp-formula-list-item" data-target="f-antioxidante" role="tab" aria-selected="false">
+          <span class="pp-formula-list-num">04</span>
+          <span class="pp-formula-list-name">Antioxidante natural</span>
+        </button>
+        <button type="button" class="pp-formula-list-item" data-target="f-vitaminas" role="tab" aria-selected="false">
+          <span class="pp-formula-list-num">05</span>
+          <span class="pp-formula-list-name">Vitaminas B3 y B6</span>
+        </button>
+      </div>
+
+      <div class="pp-formula-stage">
+        <div class="pp-formula-panel is-active" id="f-frutilla" role="tabpanel">
+          <div class="pp-formula-panel-visual" aria-hidden="true">
+            <span class="pp-formula-panel-glow"></span>
+            <svg viewBox="0 0 120 120"><path d="M60 28c18 0 32 16 32 38 0 24-16 44-32 50-16-6-32-26-32-50 0-22 14-38 32-38Z" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M60 28c-4-8-14-12-22-10 2 8 10 14 18 14M60 28c4-8 14-12 22-10-2 8-10 14-18 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="48" cy="55" r="2" fill="currentColor"/><circle cx="68" cy="52" r="2" fill="currentColor"/><circle cx="60" cy="70" r="2" fill="currentColor"/><circle cx="46" cy="80" r="2" fill="currentColor"/><circle cx="74" cy="72" r="2" fill="currentColor"/><circle cx="58" cy="92" r="2" fill="currentColor"/></svg>
+          </div>
+          <span class="pp-formula-panel-num">01</span>
+          <h3 class="pp-formula-panel-title">Frutilla</h3>
+          <p class="pp-formula-panel-desc">UP SKY está saborizada naturalmente con frutilla, aportando un perfil frutal y fresco.</p>
         </div>
-      </article>
-      <article class="pp-formula-card qs-reveal">
-        <div class="pp-formula-card-media"><img src="https://res-prod.buzzy.now/file-service/f88b7754-af15-4beb-b659-c7a449782aa3.png" alt="Representación molecular de la taurina"></div>
-        <div class="pp-formula-card-body">
-          <span class="pp-formula-num">02</span>
-          <h3 class="pp-formula-name">Taurina</h3>
-          <p class="pp-formula-desc">Compuesto orgánico presente naturalmente en distintos alimentos y tejidos. Participa en diversas funciones fisiológicas.</p>
+
+        <div class="pp-formula-panel" id="f-taurina" role="tabpanel">
+          <div class="pp-formula-panel-visual" aria-hidden="true">
+            <span class="pp-formula-panel-glow"></span>
+            <svg viewBox="0 0 120 120"><line x1="40" y1="70" x2="60" y2="40" stroke="currentColor" stroke-width="2.5"/><line x1="60" y1="40" x2="85" y2="55" stroke="currentColor" stroke-width="2.5"/><line x1="40" y1="70" x2="35" y2="95" stroke="currentColor" stroke-width="2.5"/><line x1="60" y1="40" x2="60" y2="20" stroke="currentColor" stroke-width="2.5"/><circle cx="40" cy="70" r="9" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="60" cy="40" r="7" fill="currentColor"/><circle cx="85" cy="55" r="9" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="35" cy="95" r="7" fill="currentColor"/><circle cx="60" cy="20" r="6" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
+          </div>
+          <span class="pp-formula-panel-num">02</span>
+          <h3 class="pp-formula-panel-title">Taurina</h3>
+          <p class="pp-formula-panel-desc">Compuesto orgánico presente naturalmente en distintos alimentos y tejidos. Participa en diversas funciones fisiológicas.</p>
         </div>
-      </article>
-      <article class="pp-formula-card qs-reveal">
-        <div class="pp-formula-card-media"><img src="https://res-prod.buzzy.now/file-service/777297f4-1c95-40ed-9ea2-356be1185cdf.png" alt="Representación molecular de la cafeína"></div>
-        <div class="pp-formula-card-body">
-          <span class="pp-formula-num">03</span>
-          <h3 class="pp-formula-name">Cafeína</h3>
-          <p class="pp-formula-desc">Estimulante que contribuye al estado de alerta y ayuda a mantener la concentración.</p>
+
+        <div class="pp-formula-panel" id="f-cafeina" role="tabpanel">
+          <div class="pp-formula-panel-visual" aria-hidden="true">
+            <span class="pp-formula-panel-glow"></span>
+            <svg viewBox="0 0 120 120"><path d="M66 18 36 62h18l-8 40 34-48H62l4-36Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/></svg>
+          </div>
+          <span class="pp-formula-panel-num">03</span>
+          <h3 class="pp-formula-panel-title">Cafeína</h3>
+          <p class="pp-formula-panel-desc">Estimulante que contribuye al estado de alerta y ayuda a mantener la concentración.</p>
         </div>
-      </article>
-      <article class="pp-formula-card qs-reveal">
-        <div class="pp-formula-card-media"><img src="https://res-prod.buzzy.now/file-service/a9a2f549-d677-4be9-b22d-bb39ee75f725.png" alt="Representación molecular del ácido ascórbico"></div>
-        <div class="pp-formula-card-body">
-          <span class="pp-formula-num">04</span>
-          <h3 class="pp-formula-name">Antioxidante natural</h3>
-          <p class="pp-formula-desc">Ácido ascórbico, que ayuda a preservar la frescura y el sabor de la fórmula.</p>
+
+        <div class="pp-formula-panel" id="f-antioxidante" role="tabpanel">
+          <div class="pp-formula-panel-visual" aria-hidden="true">
+            <span class="pp-formula-panel-glow"></span>
+            <svg viewBox="0 0 120 120"><path d="M60 18c22 6 36 22 36 46 0 26-16 44-36 50-20-6-36-24-36-50 0-24 14-40 36-46Z" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M60 36v56M60 50l-14 10M60 66l14 10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          </div>
+          <span class="pp-formula-panel-num">04</span>
+          <h3 class="pp-formula-panel-title">Antioxidante natural</h3>
+          <p class="pp-formula-panel-desc">Ácido ascórbico, que ayuda a preservar la frescura y el sabor de la fórmula.</p>
         </div>
-      </article>
-      <article class="pp-formula-card qs-reveal">
-        <div class="pp-formula-card-media"><img src="https://res-prod.buzzy.now/file-service/a5cc51b5-6aef-412a-acd0-e36c0550a2ad.png" alt="Representación molecular de las vitaminas B3 y B6"></div>
-        <div class="pp-formula-card-body">
-          <span class="pp-formula-num">05</span>
-          <h3 class="pp-formula-name">Vitaminas B3 y B6</h3>
-          <p class="pp-formula-desc">Ácido nicotínico (B3) y piridoxina (B6), que contribuyen al metabolismo energético y al funcionamiento normal del sistema nervioso.</p>
+
+        <div class="pp-formula-panel" id="f-vitaminas" role="tabpanel">
+          <div class="pp-formula-panel-visual" aria-hidden="true">
+            <span class="pp-formula-panel-glow"></span>
+            <svg viewBox="0 0 120 120"><path d="M46 20c2 14 8 20 22 22-14 2-20 8-22 22-2-14-8-20-22-22 14-2 20-8 22-22Z" fill="currentColor"/><path d="M84 56c1.4 9 5 12.6 14 14-9 1.4-12.6 5-14 14-1.4-9-5-12.6-14-14 9-1.4 12.6-5 14-14Z" fill="currentColor" opacity="0.65"/></svg>
+          </div>
+          <span class="pp-formula-panel-num">05</span>
+          <h3 class="pp-formula-panel-title">Vitaminas B3 y B6</h3>
+          <p class="pp-formula-panel-desc">Ácido nicotínico (B3) y piridoxina (B6), que contribuyen al metabolismo energético y al funcionamiento normal del sistema nervioso.</p>
         </div>
-      </article>
+      </div>
     </div>
   </div>
 </section>
