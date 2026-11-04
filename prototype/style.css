@@ -2916,7 +2916,13 @@ body.page-product .pp-dark {
   margin-bottom: 28px;
   color: var(--primary-color);
 }
-.pp-formula-panel-visual svg { width: 76px; height: 76px; position: relative; z-index: 1; }
+.pp-formula-panel-visual svg { width: 54px; height: 54px; position: relative; z-index: 1; }
+.pp-formula-panel-ring {
+  position: absolute;
+  inset: 10%;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(255, 20, 147, 0.55);
+}
 .pp-formula-panel-glow {
   position: absolute;
   inset: 0;
@@ -2938,7 +2944,7 @@ body.page-product .pp-dark {
   .pp-formula-stage { min-height: 320px; }
   .pp-formula-panel { padding: 32px 24px; }
   .pp-formula-panel-visual { width: 120px; height: 120px; margin-bottom: 18px; }
-  .pp-formula-panel-visual svg { width: 58px; height: 58px; }
+  .pp-formula-panel-visual svg { width: 42px; height: 42px; }
   .pp-formula-panel-title { font-size: 1.3rem; }
 }
 
