@@ -2857,17 +2857,16 @@ body.page-product .pp-dark {
   height: 100%;
   object-fit: cover;
   z-index: 0;
-  /* Unifica fotos reales y renders 3D (muchos vienen sobre fondo claro)
-     bajo el mismo tratamiento oscuro/duotono magenta, para que la tarjeta
-     se integre al resto de producto.html en vez de quedar "flotando" clara. */
-  filter: grayscale(0.55) contrast(1.1) brightness(0.55) saturate(1.1);
+  /* Unifica fotos reales y renders 3D bajo el mismo tratamiento duotono
+     magenta/oscuro, para que no se sientan de dos bancos de imágenes. */
+  filter: grayscale(0.55) contrast(1.08) brightness(0.82) saturate(1.05);
 }
 .pp-formula-card::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(155deg, rgba(255, 20, 147, 0.4) 0%, rgba(10, 6, 12, 0.75) 100%);
-  mix-blend-mode: multiply;
+  background: linear-gradient(155deg, rgba(255, 20, 147, 0.5) 0%, rgba(20, 8, 20, 0.55) 100%);
+  mix-blend-mode: color;
   z-index: 1;
 }
 .pp-formula-card::after {
