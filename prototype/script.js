@@ -113,11 +113,81 @@ document.addEventListener("DOMContentLoaded", () => {
     kbEls.forEach((el) => kbObserver.observe(el));
   }
 
-  // Reproducir/pausar los videos autoplay según si están a la vista:
-  // en mobile, varios <video autoplay> compitiendo apenas carga la
-  // página suelen hacer que el navegador se niegue a reproducir
-  // alguno; forzamos el play() recién cuando cada uno entra en pantalla.
-  const autoplayVideos = document.querySelectorAll("video[autoplay]");
+  // Hero "Revelación": la botella gira una sola vez al cargar y queda de
+  // frente. Si el navegador bloquea el autoplay (ahorro de batería, etc.)
+  // o el usuario pidió menos movimiento, se muestra directo el cuadro final.
+  const heroRev = document.querySelector(".hero-rev");
+  const heroRevVideo = document.getElementById("heroRevealVideo");
+  if (heroRev && heroRevVideo) {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Versión liviana del video en pantallas chicas (el atributo `media`
+    // de <source> no está soportado en todos los navegadores).
+    heroRevVideo.src = window.matchMedia("(max-width: 700px)").matches
+      ? heroRevVideo.dataset.srcMobile
+      : heroRevVideo.dataset.src;
+    const showEndFrame = () => {
+      heroRevVideo.poster = heroRevVideo.dataset.endPoster;
+      const seekToEnd = () => {
+        if (heroRevVideo.duration) heroRevVideo.currentTime = heroRevVideo.duration - 0.05;
+      };
+      if (heroRevVideo.readyState >= 1) seekToEnd();
+      else heroRevVideo.addEventListener("loadedmetadata", seekToEnd, { once: true });
+      heroRev.classList.add("is-revealed");
+    };
+    heroRevVideo.addEventListener("ended", () => heroRev.classList.add("is-revealed"));
+    if (reduceMotion) {
+      // Sin animación: queda la foto del cuadro final (no se descarga el video).
+      heroRevVideo.poster = heroRevVideo.dataset.endPoster;
+      heroRev.classList.add("is-revealed");
+    } else {
+      const playPromise = heroRevVideo.play();
+      if (playPromise) playPromise.catch(showEndFrame);
+    }
+
+    // El WhatsApp flotante aparece recién al dejar atrás el hero.
+    document.body.classList.add("has-hero-rev");
+    const togglePastHero = () =>
+      document.body.classList.toggle("is-past-hero", window.scrollY > heroRev.offsetHeight * 0.6);
+    window.addEventListener("scroll", togglePastHero, { passive: true });
+    togglePastHero();
+
+    // Progreso de scroll dentro del hero → variable CSS --p (0 a 1).
+    let ticking = false;
+    const updateHeroProgress = () => {
+      ticking = false;
+      const h = heroRev.offsetHeight || 1;
+      const p = Math.min(Math.max(window.scrollY / (h * 0.85), 0), 1);
+      heroRev.style.setProperty("--p", p.toFixed(3));
+    };
+    if (!reduceMotion) {
+      window.addEventListener("scroll", () => {
+        if (!ticking && window.scrollY < heroRev.offsetHeight * 1.2) {
+          ticking = true;
+          requestAnimationFrame(updateHeroProgress);
+        }
+      }, { passive: true });
+      updateHeroProgress();
+    }
+
+    // El aura sigue levemente al cursor (solo mouse/trackpad).
+    if (!reduceMotion && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      heroRev.addEventListener("pointermove", (e) => {
+        const r = heroRev.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        heroRev.style.setProperty("--ax", `${(x * 40).toFixed(1)}px`);
+        heroRev.style.setProperty("--ay", `${(y * 30).toFixed(1)}px`);
+      });
+    }
+  }
+
+  // Videos decorativos (data-autoplay + preload="none"): no se descargan
+  // al cargar la página; se reproducen recién cuando entran en pantalla y
+  // se pausan al salir. Sin IntersectionObserver, se reproducen directo.
+  const autoplayVideos = document.querySelectorAll("video[data-autoplay], video[autoplay]");
+  if (autoplayVideos.length && !("IntersectionObserver" in window)) {
+    autoplayVideos.forEach((video) => video.play().catch(() => {}));
+  }
   if (autoplayVideos.length && "IntersectionObserver" in window) {
     const videoObserver = new IntersectionObserver(
       (entries) => {
