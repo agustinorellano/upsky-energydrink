@@ -272,28 +272,55 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Producto (producto.html): "La fórmula" — lista a la izquierda, panel
-  // animado a la derecha. Cambia con click (todos los dispositivos) y
-  // también al pasar el mouse en desktop (donde hover tiene sentido).
-  const formulaList = document.querySelector(".pp-formula-list");
-  if (formulaList) {
-    const items = formulaList.querySelectorAll(".pp-formula-list-item");
-    const panels = document.querySelectorAll(".pp-formula-panel");
-    const hoverCapable = window.matchMedia("(hover: hover)").matches;
-    const activateFormula = (targetId) => {
-      items.forEach((item) => {
-        const isActive = item.dataset.target === targetId;
-        item.classList.toggle("is-active", isActive);
-        item.setAttribute("aria-selected", isActive ? "true" : "false");
+  // Producto (producto.html): "La fórmula" — selector a la izquierda, panel
+  // animado a la derecha. Cambia con click/teclado en cualquier dispositivo
+  // y al pasar el mouse en desktop; el visual reacciona levemente al cursor.
+  const fxList = document.querySelector(".fx-list");
+  if (fxList) {
+    const fxItems = Array.from(fxList.querySelectorAll(".fx-item"));
+    const fxSlides = document.querySelectorAll(".fx-slide");
+    const fxPanel = document.querySelector(".fx-panel");
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const activateFx = (item, { focus = false } = {}) => {
+      fxItems.forEach((it) => {
+        const on = it === item;
+        it.classList.toggle("is-active", on);
+        it.setAttribute("aria-selected", on ? "true" : "false");
+        it.tabIndex = on ? 0 : -1;
       });
-      panels.forEach((panel) => panel.classList.toggle("is-active", panel.id === targetId));
-    };
-    items.forEach((item) => {
-      item.addEventListener("click", () => activateFormula(item.dataset.target));
-      if (hoverCapable) {
-        item.addEventListener("mouseenter", () => activateFormula(item.dataset.target));
+      fxSlides.forEach((s) => s.classList.toggle("is-active", s.id === item.dataset.target));
+      if (focus) item.focus();
+      if (fxList.scrollWidth > fxList.clientWidth) {
+        item.scrollIntoView({ inline: "center", block: "nearest", behavior: calm ? "auto" : "smooth" });
       }
+    };
+    fxItems.forEach((item, i) => {
+      item.addEventListener("click", () => activateFx(item));
+      if (finePointer) item.addEventListener("mouseenter", () => activateFx(item));
+      item.addEventListener("keydown", (e) => {
+        const next = { ArrowDown: i + 1, ArrowRight: i + 1, ArrowUp: i - 1, ArrowLeft: i - 1, Home: 0, End: fxItems.length - 1 }[e.key];
+        if (next === undefined) return;
+        e.preventDefault();
+        activateFx(fxItems[(next + fxItems.length) % fxItems.length], { focus: true });
+      });
     });
+    if (finePointer && !calm && fxPanel) {
+      let raf = 0;
+      fxPanel.addEventListener("pointermove", (e) => {
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          raf = 0;
+          const r = fxPanel.getBoundingClientRect();
+          fxPanel.style.setProperty("--px", ((e.clientX - r.left) / r.width - 0.5).toFixed(3));
+          fxPanel.style.setProperty("--py", ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
+        });
+      });
+      fxPanel.addEventListener("pointerleave", () => {
+        fxPanel.style.setProperty("--px", 0);
+        fxPanel.style.setProperty("--py", 0);
+      });
+    }
   }
 
   // Lifestyle: interacciones simuladas en las cards UGC (like + compartir)

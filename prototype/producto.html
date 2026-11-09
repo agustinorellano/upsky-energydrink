@@ -171,90 +171,112 @@
 </section>
 
 <!-- ========== LA FÓRMULA DETRÁS DE UP SKY ========== -->
-<section class="section" id="formula">
+<section class="section fx" id="formula">
+  <svg class="fx-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><radialGradient id="fx-s1" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#ffc4e3"/><stop offset=".34" stop-color="#F41483"/><stop offset="1" stop-color="#47021f"/></radialGradient><radialGradient id="fx-s2" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#ffffff"/><stop offset=".38" stop-color="#ff8fc9"/><stop offset="1" stop-color="#a30e5c"/></radialGradient><linearGradient id="fx-bond" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff6fb8" stop-opacity=".75"/><stop offset="1" stop-color="#F41483" stop-opacity=".45"/></linearGradient><radialGradient id="fx-halo"><stop offset="0" stop-color="#F41483" stop-opacity=".55"/><stop offset="1" stop-color="#F41483" stop-opacity="0"/></radialGradient></defs></svg>
   <div class="container">
-    <div class="pp-formula-head">
+    <header class="fx-head qs-reveal">
       <div>
-        <p class="section-eyebrow">Fórmula</p>
-        <h2 class="section-title" style="margin-bottom:0">La fórmula detrás de UP SKY</h2>
+        <p class="fx-eyebrow">Fórmula</p>
+        <h2 class="fx-title">La fórmula detrás de <span class="fx-brand">UP SKY</span></h2>
       </div>
-      <p>Una combinación de ingredientes y nutrientes que acompañan tu energía, tu enfoque y tu día a día.</p>
-    </div>
+      <p class="fx-lead">Una combinación de ingredientes y nutrientes que acompañan tu energía, tu enfoque y tu día a día.</p>
+    </header>
 
-    <div class="pp-formula-interactive qs-reveal">
-      <div class="pp-formula-list" role="tablist" aria-label="Ingredientes de la fórmula">
-        <button type="button" class="pp-formula-list-item is-active" data-target="f-frutilla" role="tab" aria-selected="true">
-          <span class="pp-formula-list-num">01</span>
-          <span class="pp-formula-list-name">Frutilla</span>
+    <div class="fx-main qs-reveal">
+      <div class="fx-list" role="tablist" aria-label="Ingredientes de la fórmula" aria-orientation="vertical">
+        <button type="button" class="fx-item is-active" id="fx-tab-frutilla" role="tab" aria-selected="true" aria-controls="fx-frutilla" tabindex="0" data-target="fx-frutilla">
+          <span class="fx-item-num">01</span>
+          <span class="fx-item-name">Frutilla</span>
+          <svg class="fx-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <button type="button" class="pp-formula-list-item" data-target="f-taurina" role="tab" aria-selected="false">
-          <span class="pp-formula-list-num">02</span>
-          <span class="pp-formula-list-name">Taurina</span>
+        <button type="button" class="fx-item" id="fx-tab-taurina" role="tab" aria-selected="false" aria-controls="fx-taurina" tabindex="-1" data-target="fx-taurina">
+          <span class="fx-item-num">02</span>
+          <span class="fx-item-name">Taurina</span>
+          <svg class="fx-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <button type="button" class="pp-formula-list-item" data-target="f-cafeina" role="tab" aria-selected="false">
-          <span class="pp-formula-list-num">03</span>
-          <span class="pp-formula-list-name">Cafeína</span>
+        <button type="button" class="fx-item" id="fx-tab-vitc" role="tab" aria-selected="false" aria-controls="fx-vitc" tabindex="-1" data-target="fx-vitc">
+          <span class="fx-item-num">03</span>
+          <span class="fx-item-name">Vitamina C</span>
+          <svg class="fx-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <button type="button" class="pp-formula-list-item" data-target="f-antioxidante" role="tab" aria-selected="false">
-          <span class="pp-formula-list-num">04</span>
-          <span class="pp-formula-list-name">Antioxidante natural</span>
+        <button type="button" class="fx-item" id="fx-tab-antioxidante" role="tab" aria-selected="false" aria-controls="fx-antioxidante" tabindex="-1" data-target="fx-antioxidante">
+          <span class="fx-item-num">04</span>
+          <span class="fx-item-name">Antioxidante natural</span>
+          <svg class="fx-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <button type="button" class="pp-formula-list-item" data-target="f-vitaminas" role="tab" aria-selected="false">
-          <span class="pp-formula-list-num">05</span>
-          <span class="pp-formula-list-name">Vitaminas B3 y B6</span>
+        <button type="button" class="fx-item" id="fx-tab-vitaminas" role="tab" aria-selected="false" aria-controls="fx-vitaminas" tabindex="-1" data-target="fx-vitaminas">
+          <span class="fx-item-num">05</span>
+          <span class="fx-item-name">Vitaminas B3 y B6</span>
+          <svg class="fx-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
 
-      <div class="pp-formula-stage">
-        <div class="pp-formula-panel is-active" id="f-frutilla" role="tabpanel">
-          <div class="pp-formula-panel-visual" aria-hidden="true">
-            <span class="pp-formula-panel-glow"></span><span class="pp-formula-panel-ring"></span>
-            <svg viewBox="0 0 120 120"><path d="M60 28c18 0 32 16 32 38 0 24-16 44-32 50-16-6-32-26-32-50 0-22 14-38 32-38Z" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M60 28c-4-8-14-12-22-10 2 8 10 14 18 14M60 28c4-8 14-12 22-10-2 8-10 14-18 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="48" cy="55" r="2" fill="currentColor"/><circle cx="68" cy="52" r="2" fill="currentColor"/><circle cx="60" cy="70" r="2" fill="currentColor"/><circle cx="46" cy="80" r="2" fill="currentColor"/><circle cx="74" cy="72" r="2" fill="currentColor"/><circle cx="58" cy="92" r="2" fill="currentColor"/></svg>
+      <div class="fx-panel">
+        <article class="fx-slide is-active" id="fx-frutilla" role="tabpanel" aria-labelledby="fx-tab-frutilla">
+          <div class="fx-art fx-art--photo" aria-hidden="true">
+            <!-- Reemplazable: cualquier render/foto de frutillas sobre fondo negro -->
+            <img src="assets/pp-hero-video-poster.jpg" alt="" width="1470" height="630" loading="lazy" decoding="async">
           </div>
-          <span class="pp-formula-panel-num">01</span>
-          <h3 class="pp-formula-panel-title">Frutilla</h3>
-          <p class="pp-formula-panel-desc">UP SKY está saborizada naturalmente con frutilla, aportando un perfil frutal y fresco.</p>
-        </div>
-
-        <div class="pp-formula-panel" id="f-taurina" role="tabpanel">
-          <div class="pp-formula-panel-visual" aria-hidden="true">
-            <span class="pp-formula-panel-glow"></span><span class="pp-formula-panel-ring"></span>
-            <svg viewBox="0 0 120 120"><line x1="40" y1="70" x2="60" y2="40" stroke="currentColor" stroke-width="2.5"/><line x1="60" y1="40" x2="85" y2="55" stroke="currentColor" stroke-width="2.5"/><line x1="40" y1="70" x2="35" y2="95" stroke="currentColor" stroke-width="2.5"/><line x1="60" y1="40" x2="60" y2="20" stroke="currentColor" stroke-width="2.5"/><circle cx="40" cy="70" r="9" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="60" cy="40" r="7" fill="currentColor"/><circle cx="85" cy="55" r="9" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="35" cy="95" r="7" fill="currentColor"/><circle cx="60" cy="20" r="6" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
+          <div class="fx-info">
+            <p class="fx-num">01</p>
+            <h3 class="fx-name">Frutilla</h3>
+            <p class="fx-desc">UP SKY está saborizada naturalmente con frutilla, aportando un perfil frutal y fresco.</p>
+            <p class="fx-desc fx-desc--sub">Una fruta de aroma intenso y color inconfundible, base del sabor original de la bebida.</p>
+            <span class="fx-chip">Sabor natural</span>
           </div>
-          <span class="pp-formula-panel-num">02</span>
-          <h3 class="pp-formula-panel-title">Taurina</h3>
-          <p class="pp-formula-panel-desc">Compuesto orgánico presente naturalmente en distintos alimentos y tejidos. Participa en diversas funciones fisiológicas.</p>
-        </div>
-
-        <div class="pp-formula-panel" id="f-cafeina" role="tabpanel">
-          <div class="pp-formula-panel-visual" aria-hidden="true">
-            <span class="pp-formula-panel-glow"></span><span class="pp-formula-panel-ring"></span>
-            <svg viewBox="0 0 120 120"><path d="M66 18 36 62h18l-8 40 34-48H62l4-36Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/></svg>
+        </article>
+        <article class="fx-slide" id="fx-taurina" role="tabpanel" aria-labelledby="fx-tab-taurina">
+          <div class="fx-art" aria-hidden="true">
+            <!-- Placeholder 3D en SVG: reemplazable por un render (img) manteniendo la clase fx-art -->
+            <svg viewBox="0 0 320 320" aria-hidden="true"><line x1="170" y1="150" x2="170" y2="88" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="170" y1="150" x2="228" y2="188" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="170" y1="150" x2="112" y2="190" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="170" y1="150" x2="122" y2="112" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="122" y1="112" x2="78" y2="160" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="78" y1="160" x2="48" y2="214" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><circle cx="122" cy="112" r="15" fill="url(#fx-s1)"/><ellipse cx="117.5" cy="106.6" rx="4.5" ry="2.6" fill="#fff" opacity=".42" transform="rotate(-28 117.5 106.6)"/><circle cx="78" cy="160" r="15" fill="url(#fx-s1)"/><ellipse cx="73.5" cy="154.6" rx="4.5" ry="2.6" fill="#fff" opacity=".42" transform="rotate(-28 73.5 154.6)"/><circle cx="170" cy="88" r="18" fill="url(#fx-s1)"/><ellipse cx="164.6" cy="81.5" rx="5.4" ry="3.1" fill="#fff" opacity=".42" transform="rotate(-28 164.6 81.5)"/><circle cx="228" cy="188" r="18" fill="url(#fx-s1)"/><ellipse cx="222.6" cy="181.5" rx="5.4" ry="3.1" fill="#fff" opacity=".42" transform="rotate(-28 222.6 181.5)"/><circle cx="112" cy="190" r="18" fill="url(#fx-s1)"/><ellipse cx="106.6" cy="183.5" rx="5.4" ry="3.1" fill="#fff" opacity=".42" transform="rotate(-28 106.6 183.5)"/><circle cx="48" cy="214" r="21" fill="url(#fx-s2)"/><ellipse cx="41.7" cy="206.4" rx="6.3" ry="3.6" fill="#fff" opacity=".42" transform="rotate(-28 41.7 206.4)"/><circle cx="170" cy="150" r="32" fill="url(#fx-s2)"/><ellipse cx="160.4" cy="138.5" rx="9.6" ry="5.4" fill="#fff" opacity=".42" transform="rotate(-28 160.4 138.5)"/></svg>
           </div>
-          <span class="pp-formula-panel-num">03</span>
-          <h3 class="pp-formula-panel-title">Cafeína</h3>
-          <p class="pp-formula-panel-desc">Estimulante que contribuye al estado de alerta y ayuda a mantener la concentración.</p>
-        </div>
-
-        <div class="pp-formula-panel" id="f-antioxidante" role="tabpanel">
-          <div class="pp-formula-panel-visual" aria-hidden="true">
-            <span class="pp-formula-panel-glow"></span><span class="pp-formula-panel-ring"></span>
-            <svg viewBox="0 0 120 120"><path d="M60 18c22 6 36 22 36 46 0 26-16 44-36 50-20-6-36-24-36-50 0-24 14-40 36-46Z" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M60 36v56M60 50l-14 10M60 66l14 10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          <div class="fx-info">
+            <p class="fx-num">02</p>
+            <h3 class="fx-name">Taurina</h3>
+            <p class="fx-desc">Compuesto orgánico presente naturalmente en distintos alimentos y tejidos. Participa en diversas funciones fisiológicas.</p>
+            <p class="fx-desc fx-desc--sub">La que usamos es sintética, por lo que es apta para dietas vegetarianas.</p>
+            <span class="fx-chip">400 mg cada 100 ml</span>
           </div>
-          <span class="pp-formula-panel-num">04</span>
-          <h3 class="pp-formula-panel-title">Antioxidante natural</h3>
-          <p class="pp-formula-panel-desc">Ácido ascórbico, que ayuda a preservar la frescura y el sabor de la fórmula.</p>
-        </div>
-
-        <div class="pp-formula-panel" id="f-vitaminas" role="tabpanel">
-          <div class="pp-formula-panel-visual" aria-hidden="true">
-            <span class="pp-formula-panel-glow"></span><span class="pp-formula-panel-ring"></span>
-            <svg viewBox="0 0 120 120"><path d="M46 20c2 14 8 20 22 22-14 2-20 8-22 22-2-14-8-20-22-22 14-2 20-8 22-22Z" fill="currentColor"/><path d="M84 56c1.4 9 5 12.6 14 14-9 1.4-12.6 5-14 14-1.4-9-5-12.6-14-14 9-1.4 12.6-5 14-14Z" fill="currentColor" opacity="0.65"/></svg>
+        </article>
+        <article class="fx-slide" id="fx-vitc" role="tabpanel" aria-labelledby="fx-tab-vitc">
+          <div class="fx-art" aria-hidden="true">
+            <!-- Placeholder 3D en SVG: reemplazable por un render (img) manteniendo la clase fx-art -->
+            <svg viewBox="0 0 320 320" aria-hidden="true"><line x1="120" y1="110" x2="168" y2="145" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="168" y1="145" x2="149" y2="200" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="149" y1="200" x2="91" y2="200" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="91" y1="200" x2="72" y2="145" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="72" y1="145" x2="120" y2="110" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="168" y1="145" x2="212" y2="118" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="212" y1="118" x2="266" y2="78" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="212" y1="118" x2="274" y2="152" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="212" y1="118" x2="212" y2="210" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="72" y1="145" x2="60" y2="100" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="91" y1="200" x2="88" y2="246" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="149" y1="200" x2="168" y2="246" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><circle cx="60" cy="100" r="12" fill="url(#fx-s1)"/><ellipse cx="56.4" cy="95.7" rx="3.6" ry="2.0" fill="#fff" opacity=".42" transform="rotate(-28 56.4 95.7)"/><circle cx="88" cy="246" r="12" fill="url(#fx-s1)"/><ellipse cx="84.4" cy="241.7" rx="3.6" ry="2.0" fill="#fff" opacity=".42" transform="rotate(-28 84.4 241.7)"/><circle cx="168" cy="246" r="12" fill="url(#fx-s1)"/><ellipse cx="164.4" cy="241.7" rx="3.6" ry="2.0" fill="#fff" opacity=".42" transform="rotate(-28 164.4 241.7)"/><circle cx="266" cy="78" r="13" fill="url(#fx-s1)"/><ellipse cx="262.1" cy="73.3" rx="3.9" ry="2.2" fill="#fff" opacity=".42" transform="rotate(-28 262.1 73.3)"/><circle cx="274" cy="152" r="13" fill="url(#fx-s1)"/><ellipse cx="270.1" cy="147.3" rx="3.9" ry="2.2" fill="#fff" opacity=".42" transform="rotate(-28 270.1 147.3)"/><circle cx="212" cy="210" r="13" fill="url(#fx-s1)"/><ellipse cx="208.1" cy="205.3" rx="3.9" ry="2.2" fill="#fff" opacity=".42" transform="rotate(-28 208.1 205.3)"/><circle cx="168" cy="145" r="15" fill="url(#fx-s1)"/><ellipse cx="163.5" cy="139.6" rx="4.5" ry="2.6" fill="#fff" opacity=".42" transform="rotate(-28 163.5 139.6)"/><circle cx="149" cy="200" r="15" fill="url(#fx-s1)"/><ellipse cx="144.5" cy="194.6" rx="4.5" ry="2.6" fill="#fff" opacity=".42" transform="rotate(-28 144.5 194.6)"/><circle cx="91" cy="200" r="15" fill="url(#fx-s1)"/><ellipse cx="86.5" cy="194.6" rx="4.5" ry="2.6" fill="#fff" opacity=".42" transform="rotate(-28 86.5 194.6)"/><circle cx="72" cy="145" r="15" fill="url(#fx-s1)"/><ellipse cx="67.5" cy="139.6" rx="4.5" ry="2.6" fill="#fff" opacity=".42" transform="rotate(-28 67.5 139.6)"/><circle cx="212" cy="118" r="15" fill="url(#fx-s1)"/><ellipse cx="207.5" cy="112.6" rx="4.5" ry="2.6" fill="#fff" opacity=".42" transform="rotate(-28 207.5 112.6)"/><circle cx="120" cy="110" r="20" fill="url(#fx-s2)"/><ellipse cx="114.0" cy="102.8" rx="6.0" ry="3.4" fill="#fff" opacity=".42" transform="rotate(-28 114.0 102.8)"/></svg>
           </div>
-          <span class="pp-formula-panel-num">05</span>
-          <h3 class="pp-formula-panel-title">Vitaminas B3 y B6</h3>
-          <p class="pp-formula-panel-desc">Ácido nicotínico (B3) y piridoxina (B6), que contribuyen al metabolismo energético y al funcionamiento normal del sistema nervioso.</p>
-        </div>
+          <div class="fx-info">
+            <p class="fx-num">03</p>
+            <h3 class="fx-name">Vitamina C</h3>
+            <p class="fx-desc">Ácido ascórbico, una vitamina que participa en la formación de colágeno y contribuye al funcionamiento normal del sistema inmunitario.</p>
+            <p class="fx-desc fx-desc--sub">Presente en la fórmula de UP SKY junto con el resto de los ingredientes.</p>
+            <span class="fx-chip">Ácido ascórbico</span>
+          </div>
+        </article>
+        <article class="fx-slide" id="fx-antioxidante" role="tabpanel" aria-labelledby="fx-tab-antioxidante">
+          <div class="fx-art" aria-hidden="true">
+            <!-- Placeholder 3D en SVG: reemplazable por un render (img) manteniendo la clase fx-art -->
+            <svg viewBox="0 0 320 320" aria-hidden="true"><circle cx="160" cy="160" r="70" fill="url(#fx-halo)"/><g class="fx-orbit"><ellipse cx="160" cy="160" rx="112" ry="40" fill="none" stroke="url(#fx-bond)" stroke-width="2.5" transform="rotate(24 160 160)"/><ellipse cx="160" cy="160" rx="112" ry="40" fill="none" stroke="url(#fx-bond)" stroke-width="2.5" transform="rotate(-36 160 160)"/><ellipse cx="160" cy="160" rx="112" ry="40" fill="none" stroke="url(#fx-bond)" stroke-width="2.5" transform="rotate(86 160 160)"/><circle cx="262" cy="111" r="13" fill="url(#fx-s2)"/><ellipse cx="258.1" cy="106.3" rx="3.9" ry="2.2" fill="#fff" opacity=".42" transform="rotate(-28 258.1 106.3)"/><circle cx="60" cy="206" r="12" fill="url(#fx-s1)"/><ellipse cx="56.4" cy="201.7" rx="3.6" ry="2.0" fill="#fff" opacity=".42" transform="rotate(-28 56.4 201.7)"/><circle cx="176" cy="48" r="11" fill="url(#fx-s1)"/><ellipse cx="172.7" cy="44.0" rx="3.3" ry="1.9" fill="#fff" opacity=".42" transform="rotate(-28 172.7 44.0)"/><circle cx="118" cy="276" r="10" fill="url(#fx-s2)"/><ellipse cx="115.0" cy="272.4" rx="3.0" ry="1.7" fill="#fff" opacity=".42" transform="rotate(-28 115.0 272.4)"/></g><circle cx="160" cy="160" r="36" fill="url(#fx-s2)"/><ellipse cx="149.2" cy="147.0" rx="10.8" ry="6.1" fill="#fff" opacity=".42" transform="rotate(-28 149.2 147.0)"/></svg>
+          </div>
+          <div class="fx-info">
+            <p class="fx-num">04</p>
+            <h3 class="fx-name">Antioxidante natural</h3>
+            <p class="fx-desc">Ácido ascórbico, que ayuda a preservar la frescura y el sabor de la fórmula.</p>
+            <p class="fx-desc fx-desc--sub">Protege la bebida sin cambiar su sabor, desde la elaboración hasta que la abrís.</p>
+            <span class="fx-chip">Preserva el sabor</span>
+          </div>
+        </article>
+        <article class="fx-slide" id="fx-vitaminas" role="tabpanel" aria-labelledby="fx-tab-vitaminas">
+          <div class="fx-art" aria-hidden="true">
+            <!-- Placeholder 3D en SVG: reemplazable por un render (img) manteniendo la clase fx-art -->
+            <svg viewBox="0 0 320 320" aria-hidden="true"><circle cx="112" cy="176" r="32" fill="none" stroke="url(#fx-bond)" stroke-width="2.5"/><circle cx="214" cy="104" r="24" fill="none" stroke="url(#fx-bond)" stroke-width="2.5"/><line x1="112" y1="118" x2="162" y2="147" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="162" y1="147" x2="162" y2="205" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="162" y1="205" x2="112" y2="234" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="112" y1="234" x2="62" y2="205" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="62" y1="205" x2="62" y2="147" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="62" y1="147" x2="112" y2="118" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="250" y1="83" x2="250" y2="125" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="250" y1="125" x2="214" y2="146" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="214" y1="146" x2="178" y2="125" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="178" y1="125" x2="178" y2="83" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="178" y1="83" x2="214" y2="62" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="214" y1="62" x2="250" y2="83" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="112" y1="118" x2="178" y2="125" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="162" y1="205" x2="60" y2="262" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="62" y1="205" x2="168" y2="262" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><line x1="214" y1="146" x2="270" y2="196" stroke="url(#fx-bond)" stroke-width="6" stroke-linecap="round"/><circle cx="168" cy="262" r="11" fill="url(#fx-s1)"/><ellipse cx="164.7" cy="258.0" rx="3.3" ry="1.9" fill="#fff" opacity=".42" transform="rotate(-28 164.7 258.0)"/><circle cx="270" cy="196" r="11" fill="url(#fx-s1)"/><ellipse cx="266.7" cy="192.0" rx="3.3" ry="1.9" fill="#fff" opacity=".42" transform="rotate(-28 266.7 192.0)"/><circle cx="250" cy="83" r="12" fill="url(#fx-s1)"/><ellipse cx="246.4" cy="78.7" rx="3.6" ry="2.0" fill="#fff" opacity=".42" transform="rotate(-28 246.4 78.7)"/><circle cx="250" cy="125" r="12" fill="url(#fx-s1)"/><ellipse cx="246.4" cy="120.7" rx="3.6" ry="2.0" fill="#fff" opacity=".42" transform="rotate(-28 246.4 120.7)"/><circle cx="214" cy="146" r="12" fill="url(#fx-s1)"/><ellipse cx="210.4" cy="141.7" rx="3.6" ry="2.0" fill="#fff" opacity=".42" transform="rotate(-28 210.4 141.7)"/><circle cx="178" cy="83" r="12" fill="url(#fx-s1)"/><ellipse cx="174.4" cy="78.7" rx="3.6" ry="2.0" fill="#fff" opacity=".42" transform="rotate(-28 174.4 78.7)"/><circle cx="214" cy="62" r="12" fill="url(#fx-s1)"/><ellipse cx="210.4" cy="57.7" rx="3.6" ry="2.0" fill="#fff" opacity=".42" transform="rotate(-28 210.4 57.7)"/><circle cx="60" cy="262" r="12" fill="url(#fx-s1)"/><ellipse cx="56.4" cy="257.7" rx="3.6" ry="2.0" fill="#fff" opacity=".42" transform="rotate(-28 56.4 257.7)"/><circle cx="112" cy="118" r="15" fill="url(#fx-s1)"/><ellipse cx="107.5" cy="112.6" rx="4.5" ry="2.6" fill="#fff" opacity=".42" transform="rotate(-28 107.5 112.6)"/><circle cx="162" cy="147" r="15" fill="url(#fx-s1)"/><ellipse cx="157.5" cy="141.6" rx="4.5" ry="2.6" fill="#fff" opacity=".42" transform="rotate(-28 157.5 141.6)"/><circle cx="162" cy="205" r="15" fill="url(#fx-s1)"/><ellipse cx="157.5" cy="199.6" rx="4.5" ry="2.6" fill="#fff" opacity=".42" transform="rotate(-28 157.5 199.6)"/><circle cx="62" cy="205" r="15" fill="url(#fx-s1)"/><ellipse cx="57.5" cy="199.6" rx="4.5" ry="2.6" fill="#fff" opacity=".42" transform="rotate(-28 57.5 199.6)"/><circle cx="62" cy="147" r="15" fill="url(#fx-s1)"/><ellipse cx="57.5" cy="141.6" rx="4.5" ry="2.6" fill="#fff" opacity=".42" transform="rotate(-28 57.5 141.6)"/><circle cx="178" cy="125" r="17" fill="url(#fx-s2)"/><ellipse cx="172.9" cy="118.9" rx="5.1" ry="2.9" fill="#fff" opacity=".42" transform="rotate(-28 172.9 118.9)"/><circle cx="112" cy="234" r="21" fill="url(#fx-s2)"/><ellipse cx="105.7" cy="226.4" rx="6.3" ry="3.6" fill="#fff" opacity=".42" transform="rotate(-28 105.7 226.4)"/></svg>
+          </div>
+          <div class="fx-info">
+            <p class="fx-num">05</p>
+            <h3 class="fx-name">Vitaminas B3 y B6</h3>
+            <p class="fx-desc">Ácido nicotínico (B3) y piridoxina (B6), que contribuyen al metabolismo energético y al funcionamiento normal del sistema nervioso.</p>
+            <p class="fx-desc fx-desc--sub">Dos vitaminas del complejo B, declaradas en el rótulo del producto.</p>
+            <span class="fx-chip">B3 3 mg · B6 0,6 mg cada 100 ml</span>
+          </div>
+        </article>
       </div>
     </div>
   </div>
