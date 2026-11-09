@@ -505,7 +505,7 @@ a { color: inherit; text-decoration: none; }
 /* El fondo "blanco" del video/imagen generado por IA no es blanco puro
    (~#fafafa); igualamos el fondo de la sección para que no se note el
    recuadro de la imagen contra el blanco puro. */
-#el-sabor { --background-color: #fafafa; }
+#el-sabor { --background-color: #f3f3f3; }
 
 /* -- Numeración editorial tipo "01 — El producto" que marca cada
    bloque de la narrativa del home. -- */
