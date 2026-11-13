@@ -2782,8 +2782,7 @@ body.page-product .pp-dark {
 /* ===================================================================
    LA FÓRMULA DETRÁS DE UP SKY — selector editorial + panel oscuro
    Fondo blanco, panel negro con luz magenta. Cada ingrediente tiene su
-   propio visual (.fx-art): foto para frutilla, moléculas 3D en SVG para
-   el resto (reemplazables por renders sin tocar el resto del CSS).
+   solo texto por ahora (los visuales por ingrediente se agregarán después).
    =================================================================== */
 .fx {
   --fx-mag: #F41483;
@@ -2803,7 +2802,6 @@ body.page-product .pp-dark {
 .fx::before { width: 560px; height: 560px; right: -180px; top: -160px; background: radial-gradient(circle, rgba(244, 20, 131, 0.11), transparent 68%); animation: fx-drift 16s ease-in-out infinite; }
 .fx::after { width: 480px; height: 480px; left: -200px; bottom: -200px; background: radial-gradient(circle, rgba(244, 20, 131, 0.08), transparent 68%); animation: fx-drift 20s ease-in-out infinite reverse; }
 @keyframes fx-drift { 0%, 100% { translate: 0 0; } 50% { translate: -24px 18px; } }
-.fx-defs { position: absolute; }
 .fx .container { position: relative; z-index: 1; }
 
 /* -- Encabezado -- */
@@ -2947,68 +2945,16 @@ body.page-product .pp-dark {
 .fx-slide {
   grid-area: 1 / 1;
   display: grid;
-  grid-template-columns: 46fr 54fr;
   align-items: center;
-  min-height: clamp(430px, 38vw, 520px);
+  min-height: clamp(360px, 32vw, 440px);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.45s ease, visibility 0s 0.45s;
 }
 .fx-slide.is-active { opacity: 1; visibility: visible; transition: opacity 0.5s ease; }
 
-/* Visual */
-.fx-art {
-  position: relative;
-  align-self: stretch;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  opacity: 0;
-  translate: -22px 0;
-  scale: 0.96;
-  transition: opacity 0.6s var(--ease-out), translate 0.7s var(--ease-out), scale 0.7s var(--ease-out);
-}
-.fx-slide.is-active .fx-art { opacity: 1; translate: 0 0; scale: 1; }
-.fx-art:not(.fx-art--photo)::before {
-  content: "";
-  position: absolute;
-  width: 78%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(244, 20, 131, 0.3), rgba(244, 20, 131, 0.06) 55%, transparent 72%);
-}
-.fx-art svg {
-  width: min(94%, 400px);
-  height: auto;
-  overflow: visible;
-  filter: drop-shadow(0 26px 30px rgba(244, 20, 131, 0.32));
-  transform: translate(calc(var(--px, 0) * 14px), calc(var(--py, 0) * 10px));
-  transition: transform 0.5s var(--ease-out);
-}
-.fx-slide.is-active .fx-art svg { animation: fx-float 7s ease-in-out infinite; }
-@keyframes fx-float { 0%, 100% { translate: 0 0; rotate: -1deg; } 50% { translate: 0 -12px; rotate: 1.5deg; } }
-.fx-orbit { transform-origin: 160px 160px; animation: fx-spin 26s linear infinite; }
-.fx-slide:not(.is-active) .fx-orbit { animation-play-state: paused; }
-@keyframes fx-spin { to { transform: rotate(360deg); } }
-
-.fx-art--photo img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 50%;
-  -webkit-mask-image: linear-gradient(90deg, #000 58%, transparent 100%), linear-gradient(180deg, transparent 0, #000 16%, #000 84%, transparent 100%);
-          mask-image: linear-gradient(90deg, #000 58%, transparent 100%), linear-gradient(180deg, transparent 0, #000 16%, #000 84%, transparent 100%);
-  -webkit-mask-composite: source-in;
-          mask-composite: intersect;
-  transform: translate(calc(var(--px, 0) * -10px), calc(var(--py, 0) * -8px));
-}
-.fx-slide.is-active .fx-art--photo img { animation: fx-photo 14s ease-in-out infinite; }
-@keyframes fx-photo { 0%, 100% { scale: 1.02; } 50% { scale: 1.07; } }
-
 /* Información */
-.fx-info { padding: clamp(28px, 4vw, 60px) clamp(28px, 4.4vw, 64px) clamp(28px, 4vw, 60px) 0; }
+.fx-info { max-width: 640px; padding: clamp(32px, 4.6vw, 68px) clamp(28px, 5vw, 76px); }
 .fx-info > * { opacity: 0; translate: 0 16px; transition: opacity 0.5s var(--ease-out), translate 0.65s var(--ease-out); }
 .fx-slide.is-active .fx-info > * { opacity: 1; translate: 0 0; }
 .fx-slide.is-active .fx-info > :nth-child(1) { transition-delay: 0.14s; }
@@ -3064,8 +3010,6 @@ body.page-product .pp-dark {
   .fx-head { grid-template-columns: minmax(0, 58%) minmax(0, 36%); }
   .fx-item { padding: 13px 12px 13px 10px; gap: 11px; }
   .fx-item-name { font-size: 1.02rem; }
-  .fx-slide { grid-template-columns: 42fr 58fr; }
-  .fx-info { padding-right: 32px; }
 }
 
 /* -- Mobile: selector horizontal, panel debajo -- */
@@ -3098,27 +3042,17 @@ body.page-product .pp-dark {
   .fx-item-num { width: 28px; height: 28px; font-size: 0.76rem; }
   .fx-item-name { font-size: 0.92rem; white-space: nowrap; }
   .fx-panel { border-radius: 26px; }
-  .fx-slide { grid-template-columns: 1fr; grid-template-rows: 230px auto; align-items: start; min-height: 0; }
-  .fx-art { translate: 0 -14px; }
-  .fx-art svg { width: 210px; }
-  .fx-art--photo img {
-    -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
-            mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
-    object-position: 50% 45%;
-  }
-  .fx-info { padding: 4px 24px 32px; }
+  .fx-slide { align-items: start; min-height: 0; }
+  .fx-info { padding: 30px 24px 32px; }
   .fx-name { font-size: clamp(2.1rem, 9.5vw, 2.8rem); margin-bottom: 16px; }
   .fx-desc { font-size: 0.98rem; }
 }
 
 /* -- Reduced motion -- */
 @media (prefers-reduced-motion: reduce) {
-  .fx::before, .fx::after,
-  .fx-slide.is-active .fx-art svg,
-  .fx-slide.is-active .fx-art--photo img,
-  .fx-orbit { animation: none; }
-  .fx-slide, .fx-art, .fx-info > *, .fx-item, .fx-item-num { transition-duration: 0.01ms; transition-delay: 0s !important; }
-  .fx-art, .fx-info > * { translate: 0 0; scale: 1; }
+  .fx::before, .fx::after { animation: none; }
+  .fx-slide, .fx-info > *, .fx-item, .fx-item-num { transition-duration: 0.01ms; transition-delay: 0s !important; }
+  .fx-info > * { translate: 0 0; }
 }
 
 /* -- No es solo una bebida -- */
