@@ -1404,52 +1404,93 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
 
 .shop-banner {
   position: relative;
-  width: 100vw;
+  /* html tiene zoom: 0.9, que también escala las unidades vw: se compensa
+     para que el banner llegue de borde a borde. */
+  width: calc(100vw / 0.9);
   left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  margin-left: calc(-50vw / 0.9);
   margin-top: -96px;
-  margin-bottom: 24px;
-  aspect-ratio: 1916 / 821;
-  max-height: 780px;
+  margin-bottom: 40px;
+  min-height: clamp(440px, 34vw, 560px);
+  display: flex;
+  align-items: center;
+  padding-top: 96px;
   overflow: hidden;
+  background:
+    radial-gradient(34% 70% at 82% 55%, rgba(236, 31, 122, 0.34), transparent 70%),
+    radial-gradient(26% 50% at 96% 8%, rgba(236, 31, 122, 0.2), transparent 70%),
+    linear-gradient(115deg, #0a0a0c 35%, #17050f 100%);
 }
-@media (max-width: 700px) {
-  .shop-banner { aspect-ratio: 1 / 1; margin-bottom: 8px; }
-  .shop-banner-caption .section-lead { display: none; }
-  .shop-banner-caption { bottom: 22px; }
-  .shop-banner-img { object-position: 78% center; }
-}
+/* Cuando se cargue la imagen del banner: llena todo el recuadro. */
 .shop-banner-img {
-  position: relative;
-  z-index: 1;
-  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: 70% center;
 }
-.shop-banner::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background: linear-gradient(to bottom, transparent 40%, rgba(10, 10, 12, 0.85) 96%);
-  pointer-events: none;
-}
 .shop-banner-caption {
-  position: absolute;
+  position: relative;
   z-index: 3;
-  left: 50%;
-  bottom: 28px;
-  transform: translateX(-50%);
   width: 100%;
   max-width: var(--max-width);
+  margin: 0 auto;
   padding: 0 24px;
 }
-.shop-banner-caption .section-title { color: #fff; }
-.shop-banner-caption .section-lead { color: #f0f0f2; max-width: 54ch; }
+.shop-hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 0 0 18px;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--primary-color);
+}
+.shop-hero-eyebrow::after { content: ""; width: 130px; height: 1px; background: var(--primary-color); opacity: 0.8; }
+.shop-hero-title {
+  margin: 0 0 20px;
+  font-family: "Archivo", "Oswald", sans-serif;
+  font-style: italic;
+  font-weight: 900;
+  font-stretch: 125%;
+  text-transform: uppercase;
+  line-height: 0.96;
+  letter-spacing: -0.01em;
+  font-size: clamp(2.6rem, 6.2vw, 5.4rem);
+  color: #fff;
+}
+.shop-hero-title span { display: block; }
+.shop-hero-accent { color: var(--primary-color); }
+.shop-hero-lead {
+  margin: 0 0 32px;
+  max-width: 34ch;
+  font-size: clamp(1.05rem, 1.7vw, 1.35rem);
+  line-height: 1.35;
+  color: #e8e8ec;
+}
+.shop-hero-cta {
+  padding: 18px 34px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  box-shadow: 0 12px 34px rgba(236, 31, 122, 0.4);
+}
+.shop-hero-cta svg { width: 18px; height: 18px; margin-left: 10px; vertical-align: -3px; transition: translate 0.25s var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .shop-hero-cta:hover svg { translate: 4px 0; }
+}
+@media (max-width: 700px) {
+  .shop-banner { min-height: 460px; align-items: flex-end; padding-bottom: 36px; margin-bottom: 24px; }
+  .shop-hero-title { font-size: clamp(2.3rem, 11.5vw, 3.2rem); }
+  .shop-hero-lead { max-width: none; }
+  .shop-hero-cta { width: 100%; justify-content: center; }
+}
 
 .product-grid {
   display: grid;
