@@ -1402,7 +1402,7 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
 .section-shop { background: var(--background-alt); border-bottom: 1px solid var(--border-color); }
 .shop-header { margin-bottom: 8px; }
 
-.shop-banner {
+.page-banner {
   position: relative;
   /* html tiene zoom: 0.9, que también escala las unidades vw: se compensa
      para que el banner llegue de borde a borde. */
@@ -1422,7 +1422,7 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
 /* El fondo vive en una capa propia que se degrada hacia el color de la
    página arriba y abajo, así no queda una línea de corte contra la
    sección. El texto y el botón no se ven afectados por el degradé. */
-.shop-banner::before {
+.page-banner::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -1433,8 +1433,11 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
   -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 58%, transparent 100%);
           mask-image: linear-gradient(180deg, #000 0%, #000 58%, transparent 100%);
 }
+/* Banner de página (catálogo, eventos, negocios). Variante --top: va como
+   primer bloque de la página, sin margen inferior. */
+.page-banner--top { margin-bottom: 0; }
 /* Cuando se cargue la imagen del banner: llena todo el recuadro. */
-.shop-banner-img {
+.page-banner-img {
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -1443,7 +1446,7 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
   object-fit: cover;
   object-position: 70% center;
 }
-.shop-banner-caption {
+.page-banner-caption {
   position: relative;
   z-index: 3;
   width: 100%;
@@ -1451,7 +1454,7 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
   margin: 0 auto;
   padding: 0 24px;
 }
-.shop-hero-eyebrow {
+.page-hero-eyebrow {
   display: flex;
   align-items: center;
   gap: 18px;
@@ -1463,8 +1466,8 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
   text-transform: uppercase;
   color: var(--primary-color);
 }
-.shop-hero-eyebrow::after { content: ""; width: 130px; height: 1px; background: var(--primary-color); opacity: 0.8; }
-.shop-hero-title {
+.page-hero-eyebrow::after { content: ""; width: 130px; height: 1px; background: var(--primary-color); opacity: 0.8; }
+.page-hero-title {
   margin: 0 0 20px;
   font-family: "Archivo", "Oswald", sans-serif;
   font-style: italic;
@@ -1476,16 +1479,16 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
   font-size: clamp(2.6rem, 6.2vw, 5.4rem);
   color: #fff;
 }
-.shop-hero-title span { display: block; }
-.shop-hero-accent { color: var(--primary-color); }
-.shop-hero-lead {
+.page-hero-title span { display: block; }
+.page-hero-accent { color: var(--primary-color); }
+.page-hero-lead {
   margin: 0 0 32px;
   max-width: 34ch;
   font-size: clamp(1.05rem, 1.7vw, 1.35rem);
   line-height: 1.35;
   color: #e8e8ec;
 }
-.shop-hero-cta {
+.page-hero-cta {
   padding: 18px 34px;
   font-weight: 800;
   font-size: 0.95rem;
@@ -1493,15 +1496,15 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
   text-transform: uppercase;
   box-shadow: 0 12px 34px rgba(236, 31, 122, 0.4);
 }
-.shop-hero-cta svg { width: 18px; height: 18px; margin-left: 10px; vertical-align: -3px; transition: translate 0.25s var(--ease-out); }
+.page-hero-cta svg { width: 18px; height: 18px; margin-left: 10px; vertical-align: -3px; transition: translate 0.25s var(--ease-out); }
 @media (hover: hover) and (pointer: fine) {
-  .shop-hero-cta:hover svg { translate: 4px 0; }
+  .page-hero-cta:hover svg { translate: 4px 0; }
 }
 @media (max-width: 700px) {
-  .shop-banner { min-height: 480px; align-items: flex-end; padding-bottom: 44px; margin-bottom: 8px; }
-  .shop-hero-title { font-size: clamp(2.3rem, 11.5vw, 3.2rem); }
-  .shop-hero-lead { max-width: none; }
-  .shop-hero-cta { width: 100%; justify-content: center; }
+  .page-banner { min-height: 480px; align-items: flex-end; padding-bottom: 44px; margin-bottom: 8px; }
+  .page-hero-title { font-size: clamp(2.3rem, 11.5vw, 3.2rem); }
+  .page-hero-lead { max-width: none; }
+  .page-hero-cta { width: 100%; justify-content: center; }
 }
 
 .product-grid {
@@ -3221,7 +3224,7 @@ body.page-product .pp-dark {
 .b2b-img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius); }
 
 /* -- Eventos: estado "próximamente" -- */
-.events-soon { min-height: 70vh; display: flex; align-items: center; }
+.events-soon { min-height: 0; padding-top: 40px; display: flex; align-items: center; }
 .events-soon-inner { max-width: 760px; }
 .events-soon .section-title { font-size: clamp(2.2rem, 5vw, 3.6rem); }
 
