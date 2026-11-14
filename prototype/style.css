@@ -3243,3 +3243,49 @@ body.page-product .pp-dark {
 .b2b-img.product-tile-brand img,
 .pp-bebida-tile img { width: min(34%, 220px); }
 .pp-bebida-tile { aspect-ratio: 4 / 3; }
+
+
+/* -- Negocios: sección "Por qué UP SKY" (premium) -- */
+.section-b2b {
+  background:
+    radial-gradient(ellipse 50% 60% at 90% 0%, rgba(236,31,122,.16), transparent 70%),
+    #0a0a0c;
+  border: 0;
+  padding: clamp(72px, 9vw, 120px) 0;
+}
+.bx-head { display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: end; }
+.bx-title {
+  font-family: 'Oswald', sans-serif; font-weight: 600; text-transform: uppercase;
+  font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: 1.02; margin: 0; color: #fff;
+}
+.bx-title span { color: var(--primary, #ec1f7a); }
+.bx-lead { color: rgba(255,255,255,.72); font-size: 1.08rem; line-height: 1.6; margin: 0 0 28px; max-width: 44ch; }
+.bx-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); margin: 56px 0 0;
+  border-top: 1px solid rgba(255,255,255,.12); border-bottom: 1px solid rgba(255,255,255,.12);
+}
+.bx-stats > div { padding: 30px 28px; border-left: 1px solid rgba(255,255,255,.12); }
+.bx-stats > div:first-child { border-left: 0; padding-left: 0; }
+.bx-stats dt { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: clamp(2.2rem, 4.4vw, 3.4rem); line-height: 1; color: #fff; }
+.bx-stats dd { margin: 10px 0 0; color: rgba(255,255,255,.6); font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; }
+.bx-grid { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.bx-card {
+  padding: 28px 24px 30px; border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+  border: 1px solid rgba(255,255,255,.1);
+  transition: border-color .25s, transform .25s;
+}
+.bx-card:hover { border-color: rgba(236,31,122,.55); transform: translateY(-3px); }
+.bx-ico { width: 38px; height: 38px; color: var(--primary, #ec1f7a); margin-bottom: 22px; }
+.bx-card h3 { margin: 0 0 8px; font-size: 1.05rem; color: #fff; font-weight: 700; }
+.bx-card p { margin: 0; color: rgba(255,255,255,.65); font-size: .92rem; line-height: 1.55; }
+@media (max-width: 960px) {
+  .bx-head { grid-template-columns: 1fr; gap: 28px; }
+  .bx-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .bx-stats { grid-template-columns: 1fr; }
+  .bx-stats > div { border-left: 0; padding: 22px 0; border-top: 1px solid rgba(255,255,255,.12); }
+  .bx-stats > div:first-child { border-top: 0; }
+  .bx-grid { grid-template-columns: 1fr; }
+}
