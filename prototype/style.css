@@ -3224,3 +3224,19 @@ body.page-product .pp-dark {
 .events-soon { min-height: 70vh; display: flex; align-items: center; }
 .events-soon-inner { max-width: 760px; }
 .events-soon .section-title { font-size: clamp(2.2rem, 5vw, 3.6rem); }
+
+/* -- Hero del home: contenido pendiente. Degradé de marca (negro con luz
+   magenta) en lugar del video, listo para reemplazar por la imagen/video. -- */
+.hero-slide--pending {
+  background:
+    radial-gradient(38% 64% at 80% 48%, rgba(236, 31, 122, 0.42), transparent 100%),
+    radial-gradient(30% 50% at 96% 100%, rgba(236, 31, 122, 0.2), transparent 100%),
+    linear-gradient(115deg, #0a0a0c 38%, #1a0612 100%);
+}
+
+/* -- Recuadros con el logo mientras falta la foto (versión grande) -- */
+.b2b-img.product-tile-brand,
+.pp-bebida-tile { min-height: 260px; width: 100%; height: 100%; }
+.b2b-img.product-tile-brand img,
+.pp-bebida-tile img { width: min(34%, 220px); }
+.pp-bebida-tile { aspect-ratio: 4 / 3; }

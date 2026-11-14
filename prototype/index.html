@@ -88,10 +88,9 @@
 <section class="section hero" id="inicio">
   <div class="hero-bg">
     <div class="hero-slider" id="heroSlider">
-      <div class="hero-slide">
-        <video class="hero-bg-img" autoplay muted loop playsinline poster="assets/qs-story-hero-poster.jpg" aria-label="UP SKY Energy Drink. Energía real, sin límites. Bebida energética de frutilla, botella de vidrio 355 cc.">
-          <source src="assets/qs-story-hero.mp4" type="video/mp4">
-        </video>
+      <div class="hero-slide hero-slide--pending">
+        <!-- VIDEO / IMAGEN DEL HERO PENDIENTE: al cargarlo, reemplazar este div por
+             <video class="hero-bg-img" autoplay muted loop playsinline poster="..."> o <img class="hero-bg-img">. -->
       </div>
     </div>
     <div class="hero-bg-scrim"></div>
@@ -199,7 +198,7 @@
     <div class="home-widgets">
       <article class="product-card qs-reveal">
         <div class="product-card-media">
-          <img src="assets/product-pack1.jpg" alt="Pack de 6 botellas de UP SKY Energy Drink" class="placeholder-product-thumb" loading="lazy" width="1672" height="941">
+          <div class="product-tile-brand placeholder-product-thumb" role="img" aria-label="Pack de 6 botellas UP SKY"><img src="assets/logo.png" alt="" width="370" height="255" loading="lazy"></div>
         </div>
         <div class="product-card-body">
           <p class="price-name">1 pack de energizante<span>6 botellas 355cc c/u</span></p>
@@ -222,7 +221,7 @@
       <article class="product-card qs-reveal">
         <div class="product-card-media">
           <span class="product-badge">Para negocios</span>
-          <img src="assets/product-pack1.jpg" alt="Pack de 6 botellas de UP SKY Energy Drink" class="placeholder-product-thumb" loading="lazy" width="1672" height="941">
+          <div class="product-tile-brand placeholder-product-thumb" role="img" aria-label="Pack de 6 botellas UP SKY"><img src="assets/logo.png" alt="" width="370" height="255" loading="lazy"></div>
         </div>
         <div class="product-card-body">
           <p class="price-name">10 packs de energizante<span>6 botellas 355cc c/u</span></p>
