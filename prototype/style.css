@@ -1399,7 +1399,7 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
 }
 
 /* Sección tienda: fondo propio para separarla claramente del resto */
-.section-shop { background: var(--background-alt); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+.section-shop { background: var(--background-alt); border-bottom: 1px solid var(--border-color); }
 .shop-header { margin-bottom: 8px; }
 
 .shop-banner {
@@ -1415,11 +1415,23 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
   display: flex;
   align-items: center;
   padding-top: 96px;
+  padding-bottom: 64px;
   overflow: hidden;
+  isolation: isolate;
+}
+/* El fondo vive en una capa propia que se degrada hacia el color de la
+   página arriba y abajo, así no queda una línea de corte contra la
+   sección. El texto y el botón no se ven afectados por el degradé. */
+.shop-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
   background:
-    radial-gradient(34% 70% at 82% 55%, rgba(236, 31, 122, 0.34), transparent 70%),
-    radial-gradient(26% 50% at 96% 8%, rgba(236, 31, 122, 0.2), transparent 70%),
+    radial-gradient(32% 38% at 80% 46%, rgba(236, 31, 122, 0.34), transparent 100%),
     linear-gradient(115deg, #0a0a0c 35%, #17050f 100%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 58%, transparent 100%);
+          mask-image: linear-gradient(180deg, #000 0%, #000 58%, transparent 100%);
 }
 /* Cuando se cargue la imagen del banner: llena todo el recuadro. */
 .shop-banner-img {
@@ -1486,7 +1498,7 @@ details.faq-item .nutri-table-wrap { margin-top: 20px; }
   .shop-hero-cta:hover svg { translate: 4px 0; }
 }
 @media (max-width: 700px) {
-  .shop-banner { min-height: 460px; align-items: flex-end; padding-bottom: 36px; margin-bottom: 24px; }
+  .shop-banner { min-height: 480px; align-items: flex-end; padding-bottom: 44px; margin-bottom: 8px; }
   .shop-hero-title { font-size: clamp(2.3rem, 11.5vw, 3.2rem); }
   .shop-hero-lead { max-width: none; }
   .shop-hero-cta { width: 100%; justify-content: center; }
