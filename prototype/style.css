@@ -3439,3 +3439,6 @@ body.page-product .site-footer { margin-top: -56px; position: relative; }
 .quick-buy-thumb { flex: none; width: 100%; height: auto; aspect-ratio: 16 / 10; border-radius: 16px; }
 .quick-buy-thumb img { width: 34%; }
 .quick-buy-name { font-size: 1.1rem; }
+
+.quick-buy-thumb:has(> img[src*="pack-energizante"]) { background: #0a0a0c; }
+.quick-buy-thumb > img[src*="pack-energizante"] { width: 100%; height: 100%; object-fit: cover; }
