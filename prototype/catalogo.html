@@ -91,13 +91,36 @@
       <!-- IMAGEN DEL BANNER PENDIENTE: al cargarla, agregar acá un
            <img src="assets/..." alt="..." class="page-banner-img"> (panorámica ~2,3:1,
            producto a la derecha y el lado izquierdo oscuro para el texto). -->
-      <div class="page-banner-caption">
-        <p class="page-hero-eyebrow">UP SKY · Catálogo</p>
-        <h1 class="page-hero-title"><span>Elegí tu</span> <span class="page-hero-accent">energía.</span></h1>
-        <p class="page-hero-lead">Descubrí todos los formatos de UP SKY y encontrá tu próxima dosis de energía.</p>
-        <a href="https://wa.me/5491160579579?text=Hola%21%20Quiero%20hacer%20un%20pedido%20de%20UP%20SKY.%20%C2%BFMe%20ayudan%3F" target="_blank" rel="noopener" class="btn btn-primary page-hero-cta">Pedir por WhatsApp
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+      <div class="page-banner-caption page-banner-caption--split">
+        <div class="page-banner-copy">
+          <p class="page-hero-eyebrow">UP SKY · Catálogo</p>
+          <h1 class="page-hero-title"><span>Elegí tu</span> <span class="page-hero-accent">energía.</span></h1>
+          <p class="page-hero-lead">Descubrí todos los formatos de UP SKY y encontrá tu próxima dosis de energía.</p>
+          <a href="https://wa.me/5491160579579?text=Hola%21%20Quiero%20hacer%20un%20pedido%20de%20UP%20SKY.%20%C2%BFMe%20ayudan%3F" target="_blank" rel="noopener" class="btn btn-primary page-hero-cta">Pedir por WhatsApp
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+        <!-- Compra rápida: usa data-id="pack1", así suma al mismo carrito que la card del catálogo. -->
+        <aside class="quick-buy" data-id="pack1" data-name="1 pack de energizante (6 botellas 355cc)" data-price="13800" aria-label="Compra rápida">
+          <p class="quick-buy-tag">Compra rápida</p>
+          <div class="quick-buy-main">
+            <div class="quick-buy-thumb product-tile-brand" role="img" aria-label="Pack de 6 botellas UP SKY"><img src="assets/logo.png" alt="" width="370" height="255" loading="lazy"></div>
+            <div>
+              <p class="quick-buy-name">1 pack de energizante</p>
+              <p class="quick-buy-sub">6 botellas 355 cc c/u</p>
+            </div>
+          </div>
+          <div class="quick-buy-row">
+            <p class="quick-buy-price">$13.800</p>
+            <div class="qty-stepper">
+              <button type="button" class="qty-btn" data-action="decrease" aria-label="Restar">−</button>
+              <span class="qty-value">1</span>
+              <button type="button" class="qty-btn" data-action="increase" aria-label="Sumar">+</button>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-add quick-buy-btn" type="button">Agregar al carrito</button>
+        </aside>
       </div>
     </div>
 

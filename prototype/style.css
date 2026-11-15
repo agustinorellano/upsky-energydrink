@@ -3407,3 +3407,29 @@ body.page-product .site-footer { margin-top: -56px; position: relative; }
 @media (max-width: 900px) { .pp-hero-media--light .pp-hero-media-inner .pp-hero-media-desktop { display: none; } }
 /* Sin el brillo rosado de fondo: el video (ahora blanco) queda sobre blanco liso. */
 .pp-hero::before { display: none; }
+
+/* Catálogo: banner con card de compra rápida a la derecha. */
+.page-banner-caption--split { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 56px; align-items: center; }
+.quick-buy {
+  padding: 24px; border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+  border: 1px solid rgba(255,255,255,.14);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  box-shadow: 0 24px 60px rgba(0,0,0,.45);
+  display: flex; flex-direction: column; gap: 18px;
+}
+.quick-buy-tag { margin: 0; font-size: .75rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--primary-color); }
+.quick-buy-main { display: flex; align-items: center; gap: 14px; }
+.quick-buy-thumb { flex: 0 0 76px; width: 76px; height: 76px; border-radius: 14px; overflow: hidden; display: grid; place-items: center; }
+.quick-buy-thumb img { width: 62%; height: auto; }
+.quick-buy-name { margin: 0; font-weight: 700; color: #fff; font-size: 1.02rem; }
+.quick-buy-sub { margin: 2px 0 0; color: rgba(255,255,255,.62); font-size: .86rem; }
+.quick-buy-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.quick-buy-price { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 2rem; line-height: 1; color: #fff; }
+.quick-buy .qty-stepper { color: #fff; }
+.quick-buy-btn { width: 100%; text-align: center; padding: 14px 20px; }
+@media (max-width: 900px) {
+  .page-banner-caption--split { grid-template-columns: 1fr; gap: 32px; }
+  .page-banner:has(.quick-buy) { min-height: 0; align-items: flex-start; }
+  .quick-buy { max-width: 440px; }
+}
