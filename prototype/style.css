@@ -3389,3 +3389,21 @@ body.page-product .site-footer { margin-top: -56px; position: relative; }
 .pp-hero-media--light .pp-hero-media-inner video { object-fit: cover; }
 .pp-hero-media--light { display: flex; justify-content: flex-end; }
 @media (max-width: 900px) { .pp-hero-media--light { justify-content: center; } .pp-hero-media--light .pp-hero-media-inner { max-height: 520px; margin: 0 auto; } }
+
+/* Producto: el video sale sobre el fondo blanco de la página (sin tarjeta gris). El brillo
+   sube el gris del video (#eee) a blanco; un difuminado corto en los bordes lo termina de fundir. */
+.pp-hero-media--light .pp-hero-media-inner { background: transparent; border-radius: 0; overflow: visible; }
+.pp-hero-media--light .pp-hero-media-inner img,
+.pp-hero-media--light .pp-hero-media-inner video {
+  filter: brightness(1.072);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%), linear-gradient(180deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+  -webkit-mask-composite: source-in;
+          mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%), linear-gradient(180deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+          mask-composite: intersect;
+}
+.pp-hero-media--light .pp-hero-media-inner img,
+.pp-hero-media--light .pp-hero-media-inner video { mix-blend-mode: multiply; }
+@media (min-width: 901px) { .pp-hero-media--light .pp-hero-media-inner .pp-hero-media-mobile { display: none; } }
+@media (max-width: 900px) { .pp-hero-media--light .pp-hero-media-inner .pp-hero-media-desktop { display: none; } }
+/* Sin el brillo rosado de fondo: el video (ahora blanco) queda sobre blanco liso. */
+.pp-hero::before { display: none; }
