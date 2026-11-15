@@ -3433,3 +3433,9 @@ body.page-product .site-footer { margin-top: -56px; position: relative; }
   .page-banner:has(.quick-buy) { min-height: 0; align-items: flex-start; }
   .quick-buy { max-width: 440px; }
 }
+
+/* Compra rápida: imagen grande arriba, datos debajo. */
+.quick-buy-main { flex-direction: column; align-items: stretch; gap: 14px; }
+.quick-buy-thumb { flex: none; width: 100%; height: auto; aspect-ratio: 16 / 10; border-radius: 16px; }
+.quick-buy-thumb img { width: 34%; }
+.quick-buy-name { font-size: 1.1rem; }
