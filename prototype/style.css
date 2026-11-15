@@ -3468,3 +3468,45 @@ body.page-product .site-footer { margin-top: -56px; position: relative; }
 @media (hover: hover) and (pointer: fine) { .scroll-cue:hover { color: #fff; } }
 @media (prefers-reduced-motion: reduce) { .scroll-cue svg { animation: none; } }
 @media (max-width: 900px) { .scroll-cue { display: none; } }
+
+/* ---------- Productos destacados: "liquid glass" ---------- */
+.home-widgets { position: relative; isolation: isolate; }
+/* Manchas de color que se mueven despacio detrás del vidrio (es lo que el vidrio refracta). */
+.home-widgets::before,
+.home-widgets::after {
+  content: ""; position: absolute; z-index: -1; border-radius: 50%; filter: blur(46px); pointer-events: none;
+  animation: lg-drift 14s ease-in-out infinite alternate;
+}
+.home-widgets::before { width: 46%; height: 70%; left: 4%; top: 6%; background: radial-gradient(circle, rgba(236,31,122,.55), rgba(236,31,122,0) 70%); }
+.home-widgets::after { width: 40%; height: 60%; right: 6%; bottom: 0; background: radial-gradient(circle, rgba(255,120,170,.5), rgba(255,120,170,0) 70%); animation-duration: 18s; animation-direction: alternate-reverse; }
+@keyframes lg-drift { from { transform: translate3d(-6%, -4%, 0) scale(1); } to { transform: translate3d(10%, 8%, 0) scale(1.18); } }
+
+.home-widgets .product-card {
+  position: relative; border-radius: 26px; padding: 10px;
+  background: linear-gradient(145deg, rgba(255,255,255,.62), rgba(255,255,255,.28));
+  -webkit-backdrop-filter: blur(20px) saturate(1.7); backdrop-filter: blur(20px) saturate(1.7);
+  border: 1px solid rgba(255,255,255,.75);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.95), inset 0 -1px 0 rgba(236,31,122,.12), 0 18px 40px rgba(60,10,35,.14);
+  transition: transform .45s var(--ease-out), box-shadow .45s var(--ease-out);
+  overflow: hidden;
+}
+/* Brillo especular que sigue al cursor. */
+.home-widgets .product-card::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0;
+  background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 0%), rgba(255,255,255,.42), rgba(255,255,255,0) 62%);
+  transition: opacity .35s;
+}
+.home-widgets .product-card-media { border-radius: 18px; overflow: hidden; }
+.home-widgets .product-card-body { padding-left: 10px; padding-right: 10px; }
+@media (hover: hover) and (pointer: fine) {
+  .home-widgets .product-card:hover { transform: translateY(-6px); box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(236,31,122,.2), 0 28px 56px rgba(60,10,35,.2); }
+  .home-widgets .product-card:hover::after { opacity: 1; }
+}
+@media (max-width: 760px) {
+  .home-widgets .product-card { padding: 6px; border-radius: 20px; }
+  .home-widgets .product-card-media { flex-basis: 88px; border-radius: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-widgets::before, .home-widgets::after { animation: none; }
+  .home-widgets .product-card { transition: none; }
+}

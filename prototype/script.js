@@ -809,3 +809,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
+// Efecto "liquid glass" en las cards de productos destacados: el brillo
+// especular sigue al cursor (solo con mouse; sin movimiento reducido).
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  document.querySelectorAll(".home-widgets .product-card").forEach((card) => {
+    card.addEventListener("pointermove", (e) => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty("--mx", `${((e.clientX - r.left) / r.width) * 100}%`);
+      card.style.setProperty("--my", `${((e.clientY - r.top) / r.height) * 100}%`);
+    });
+    card.addEventListener("pointerleave", () => {
+      card.style.removeProperty("--mx");
+      card.style.removeProperty("--my");
+    });
+  });
+});
