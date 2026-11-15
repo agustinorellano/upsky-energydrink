@@ -3359,7 +3359,7 @@ body.page-product .site-footer { margin-top: -56px; position: relative; }
 /* Hero del home: foto a la derecha, fundida con el negro hacia el texto y abajo. */
 .hero-photo {
   position: absolute; top: 0; right: 0; height: 100%; width: auto; max-width: 62%;
-  object-fit: cover; object-position: 17% 50%; filter: brightness(.88) saturate(.95);
+  object-fit: cover; object-position: 50% 30%;
   -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 45%), linear-gradient(180deg, #000 0%, #000 70%, transparent 100%);
   -webkit-mask-composite: source-in;
           mask-image: linear-gradient(90deg, transparent 0%, #000 45%), linear-gradient(180deg, #000 0%, #000 70%, transparent 100%);
