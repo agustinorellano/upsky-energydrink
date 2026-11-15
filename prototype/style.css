@@ -3442,3 +3442,17 @@ body.page-product .site-footer { margin-top: -56px; position: relative; }
 
 .quick-buy-thumb:has(> img[src*="pack-energizante"]) { background: #0a0a0c; }
 .quick-buy-thumb > img[src*="pack-energizante"] { width: 100%; height: 100%; object-fit: cover; }
+
+/* Compra rápida: la foto ocupa el ancho de la card y se funde hacia abajo con su fondo. */
+.quick-buy { position: relative; overflow: hidden; }
+.quick-buy-tag { position: absolute; top: 22px; left: 24px; z-index: 2; text-shadow: 0 1px 8px rgba(0,0,0,.7); }
+.quick-buy-main { gap: 0; }
+.quick-buy-thumb {
+  margin: -24px -24px -46px; width: auto; aspect-ratio: 3 / 2; border-radius: 0; background: none;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 52%, transparent 100%);
+          mask-image: linear-gradient(180deg, #000 0%, #000 52%, transparent 100%);
+}
+.quick-buy-main > div:last-child { position: relative; z-index: 1; }
+.quick-buy-thumb:has(> img[src*="pack-energizante"]) { background: none; }
+.quick-buy-thumb { aspect-ratio: 1 / 1; margin-bottom: -64px; }
+.quick-buy-thumb > img { object-position: 50% 60%; }
