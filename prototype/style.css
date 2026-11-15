@@ -3380,3 +3380,12 @@ body.page-product .site-footer { margin-top: -56px; position: relative; }
       linear-gradient(180deg, #000 0%, #000 70%, transparent 100%);
   }
 }
+
+/* Hero de Producto: video de la botella girando sobre fondo claro (mismo gris que el video). */
+.pp-hero-media--light .pp-hero-media-inner {
+  background: #eeeeee; aspect-ratio: 3 / 4; max-height: 620px; margin-left: auto; width: auto;
+}
+.pp-hero-media--light .pp-hero-media-inner img,
+.pp-hero-media--light .pp-hero-media-inner video { object-fit: cover; }
+.pp-hero-media--light { display: flex; justify-content: flex-end; }
+@media (max-width: 900px) { .pp-hero-media--light { justify-content: center; } .pp-hero-media--light .pp-hero-media-inner { max-height: 520px; margin: 0 auto; } }
