@@ -3325,3 +3325,24 @@ body.page-product .pp-dark {
    el blanco del body: el footer sube para taparlo. */
 body.page-product .site-footer { margin-top: -56px; position: relative; }
 @media (max-width: 640px) { body.page-product .site-footer { margin-top: -28px; } }
+
+/* Negocios: franja de imagen de marca, fundida con el negro por los 4 lados. */
+.bx-visual { overflow: hidden; background: linear-gradient(180deg, #0a0a0c 0%, #0a0a0c 40%, #131316 100%); padding: 0 0 20px; }
+.bx-visual img {
+  display: block; width: 100%; max-width: 1100px; margin: 0 auto;
+  height: auto; aspect-ratio: 16 / 9; object-fit: cover;
+  filter: brightness(.92) contrast(1.05);
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0%, #000 18%, #000 82%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+  -webkit-mask-composite: source-in;
+          mask-image:
+    linear-gradient(90deg, transparent 0%, #000 18%, #000 82%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+          mask-composite: intersect;
+}
+@media (max-width: 700px) {
+  .bx-visual img { max-width: none; width: 160%; margin-left: -28%; height: auto;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+            mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%); }
+}
