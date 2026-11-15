@@ -3355,3 +3355,20 @@ body.page-product .site-footer { margin-top: -56px; position: relative; }
   .home-widgets .price-name { font-size: .92rem; }
   .home-widgets .price-value { font-size: 1.15rem; }
 }
+
+/* Hero del home: foto a la derecha, fundida con el negro hacia el texto y abajo. */
+.hero-photo {
+  position: absolute; top: 0; right: 0; height: 100%; width: auto; max-width: 62%;
+  object-fit: cover; object-position: 50% 30%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 45%), linear-gradient(180deg, #000 0%, #000 70%, transparent 100%);
+  -webkit-mask-composite: source-in;
+          mask-image: linear-gradient(90deg, transparent 0%, #000 45%), linear-gradient(180deg, #000 0%, #000 70%, transparent 100%);
+          mask-composite: intersect;
+}
+@media (max-width: 700px) {
+  .hero-photo { width: 100%; max-width: none; opacity: .5; object-position: 60% 20%;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 40%, transparent 100%);
+            mask-image: linear-gradient(180deg, #000 0%, #000 40%, transparent 100%); }
+}
+.hero-side-label { display: none; } /* se superponía con la foto del hero */
+@media (max-width: 700px) { .hero-photo { opacity: .35; } }
