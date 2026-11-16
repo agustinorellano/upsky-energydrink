@@ -77,6 +77,7 @@
   const IC = {
     chat: '<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="10" fill="currentColor"/><path d="M11 58c0-11.6 9.4-19 21-19s21 7.4 21 19z" fill="currentColor"/><path d="M19 25v-2a13 13 0 0 1 26 0v2" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"/><rect x="14.5" y="24" width="7" height="11" rx="3.5" fill="currentColor"/><rect x="42.5" y="24" width="7" height="11" rx="3.5" fill="currentColor"/><path d="M46 34c0 6-4 8-9 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="35" cy="42" r="2.6" fill="currentColor"/></svg>',
     bolt: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z" fill="currentColor"/></svg>',
+    reset: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.6-5.9M4 4v4.5h4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     close: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
     send: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12 20 4l-4 16-4-6z" fill="currentColor"/></svg>',
     wa: '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.31.653 4.47 1.786 6.307L4 29l7.86-1.75A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3Zm5.98 14.478c-.327-.164-1.938-.957-2.239-1.066-.3-.11-.518-.164-.737.163-.218.328-.845 1.066-1.036 1.285-.19.218-.382.246-.709.082-.327-.164-1.379-.508-2.627-1.62-.971-.866-1.627-1.935-1.818-2.263-.19-.328-.02-.505.144-.668.148-.147.327-.382.49-.573.164-.192.218-.328.327-.546.109-.219.055-.41-.027-.573-.082-.164-.737-1.775-1.01-2.431-.266-.64-.537-.554-.737-.564l-.628-.011c-.218 0-.573.082-.873.41-.3.327-1.145 1.12-1.145 2.73 0 1.61 1.173 3.166 1.336 3.385.164.219 2.31 3.527 5.598 4.945.782.338 1.393.54 1.869.69.785.25 1.5.215 2.065.13.63-.094 1.938-.792 2.211-1.557.273-.765.273-1.42.191-1.557-.082-.137-.3-.219-.627-.383Z" fill="currentColor"/></svg>',
@@ -99,8 +100,9 @@
   panel.setAttribute("aria-hidden", "true");
   panel.innerHTML = `
     <header class="ua-head">
-      <span class="ua-avatar">${IC.chat}</span>
-      <div class="ua-head-t"><strong>Asistente UP SKY</strong><small>Respuestas al instante</small></div>
+      <span class="ua-avatar">${IC.chat}<i class="ua-online" aria-hidden="true"></i></span>
+      <div class="ua-head-t"><strong>Asistente UP SKY</strong><small>Respondo al instante</small></div>
+      <button type="button" class="ua-x ua-reset" aria-label="Volver a empezar" title="Volver a empezar">${IC.reset}</button>
       <button type="button" class="ua-x" aria-label="Cerrar el asistente">${IC.close}</button>
     </header>
     <div class="ua-log" id="uaLog" aria-live="polite"></div>
@@ -143,6 +145,7 @@
   };
   const setChips = (list) => {
     chips.innerHTML = "";
+    chips.scrollLeft = 0;
     list.forEach((c) => {
       const b = document.createElement("button");
       b.type = "button";
@@ -176,6 +179,17 @@
     { label: "Hablar con una persona", run: () => go("persona") },
   ];
   const back = (extra = []) => [...extra, { label: "Volver al menú", run: () => go("menu") }];
+
+  const priceRows = (rows) => `<div class="ua-prices">${rows.map((r) => `<div class="ua-price"><img src="${r.img}" alt="" loading="lazy"><div><b>${r.name}</b><small>${r.note}</small></div><em>${r.price}</em></div>`).join("")}</div>`;
+  const PRICES = () => priceRows([
+    { img: PRODUCTS.pack.img, name: "Pack de 6 botellas", note: "5% OFF desde 5 packs · máx. 10", price: money(PRODUCTS.pack.price) },
+    { img: PRODUCTS["vaso-negro"].img, name: "Vaso UP SKY", note: "5% OFF desde 5 · 10% OFF desde 10", price: money(PRODUCTS["vaso-negro"].price) },
+    { img: PRODUCTS.remera.img, name: "Remera UP SKY", note: "3% OFF desde 5 · 6% OFF desde 10", price: money(PRODUCTS.remera.price) },
+  ]);
+  const PRICES_MAYOR = () => priceRows([
+    { img: PRODUCTS.pack.img, name: "30 packs de energizante", note: "4% OFF desde 31 packs · consultá por WhatsApp", price: money(PRODUCTS.mayor30.price) },
+    { img: "assets/logo.png", name: "1 pallet · 192 packs", note: "6 botellas de 355 cc c/u", price: "$2.304.000" },
+  ]);
 
   const linkBtn = (href, label, ext) => `<a class="ua-link" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ""}>${label}</a>`;
 
@@ -214,7 +228,7 @@
     },
     precios: async () => {
       state.topic = "precios"; refreshHuman("Quería consultar precios.");
-      await say(T.precios + "<br><br>" + T.pago.split(".")[0] + ".");
+      await say("Estos son los precios, <b>sin envío</b>:" + PRICES() + '<p class="ua-note">Pago por transferencia bancaria únicamente.</p>');
       setChips([{ label: "Quiero pedir", primary: true, run: () => go("pedir") }, { label: "Precios por mayor", run: () => go("mayor") }, ...back()]);
     },
     producto: async () => {
@@ -243,7 +257,7 @@
     },
     mayor: async () => {
       state.topic = "precios por mayor"; refreshHuman("Soy comercio y quiero precios por mayor.");
-      await say(T.mayor, (m) => m.insertAdjacentHTML("beforeend", productCards(["mayor30"])));
+      await say("Precios por mayor, <b>sin envío</b>:" + PRICES_MAYOR() + '<p class="ua-note">Distribución en Concordia y alrededores. Pago por transferencia bancaria.</p>', (m) => m.insertAdjacentHTML("beforeend", productCards(["mayor30"])));
       log.querySelectorAll(".ua-add").forEach((b) => { if (!b._b) { b._b = 1; b.addEventListener("click", () => addToCart(b.dataset.k, 1, b)); } });
       setChips([{ label: "Ver Negocios", primary: true, run: () => { location.href = onPage("negocios") ? "#mayorista" : "negocios.html#mayorista"; if (onPage("negocios")) close(); } }, { label: "Hablar con una persona", run: () => go("persona") }, ...back()]);
     },
@@ -355,7 +369,12 @@
     document.documentElement.classList.remove("ua-open");
   }
   launcher.addEventListener("click", () => (state.open ? close() : open()));
-  panel.querySelector(".ua-x").addEventListener("click", close);
+  panel.querySelector(".ua-x:not(.ua-reset)").addEventListener("click", close);
+  panel.querySelector(".ua-reset").addEventListener("click", () => {
+    log.innerHTML = ""; chips.innerHTML = ""; state.unknown = 0; state.topic = ""; state.busy = false; state.started = false;
+    refreshHuman(); open(); state.started = true;
+    (async () => { await say("Empezamos de nuevo. ¿Qué necesitás?"); setChips(MENU()); })();
+  });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && state.open) close(); });
 
   const mount = () => {

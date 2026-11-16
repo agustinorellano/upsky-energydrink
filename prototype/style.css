@@ -4566,3 +4566,51 @@ html.ua-open .ua-launcher, html.ua-open .whatsapp-float, html.ua-open .wa-nudge 
 .wa-nudge { bottom: 104px !important; }
 @media (max-width: 900px) { .ua-launcher { width: 60px; height: 60px; right: 14px; bottom: 14px; } .ua-launcher svg { width: 34px; height: 34px; } }
 .ua-launcher svg, .ua-avatar svg { transform: translateY(-1px); }
+
+/* ===== Asistente · mejoras estéticas ===== */
+/* 1) Barra de scroll fina y oscura */
+.ua-log { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.22) transparent; }
+.ua-log::-webkit-scrollbar { width: 6px; }
+.ua-log::-webkit-scrollbar-track { background: transparent; }
+.ua-log::-webkit-scrollbar-thumb { background: rgba(255,255,255,.2); border-radius: 99px; }
+.ua-log::-webkit-scrollbar-button { display: none; }
+/* 1) Precios como tarjeta */
+.ua-prices { display: grid; gap: 8px; margin: 10px 0 2px; }
+.ua-price { display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 14px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); }
+.ua-price img { width: 44px; height: 44px; object-fit: cover; border-radius: 10px; background: #0a0a0c; }
+.ua-price b { display: block; font-size: .86rem; line-height: 1.2; }
+.ua-price small { display: block; margin-top: 2px; font-size: .7rem; line-height: 1.3; color: rgba(255,255,255,.58); }
+.ua-price em { font-style: normal; font-family: var(--font-display); font-weight: 700; font-size: 1.12rem; color: var(--primary-color); white-space: nowrap; }
+.ua-note { margin: 10px 0 0; font-size: .76rem; color: rgba(255,255,255,.6); }
+/* 2) Botones de respuesta en una sola fila deslizable */
+.ua-chips { flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; max-height: none; padding: 8px 14px 12px; scrollbar-width: none; scroll-snap-type: x proximity;
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); }
+.ua-chips::-webkit-scrollbar { display: none; }
+.ua-chip { flex: none; scroll-snap-align: start; white-space: nowrap; }
+/* 2) Encabezado sin línea dura, avatar con anillo y punto "en línea" */
+.ua-head { background: linear-gradient(180deg, rgba(236,31,122,.3), rgba(236,31,122,0)); border-bottom: 0; padding-bottom: 20px; }
+.ua-avatar { position: relative; box-shadow: 0 0 0 3px rgba(255,255,255,.14), 0 8px 20px rgba(236,31,122,.45); }
+.ua-online { position: absolute; right: -1px; bottom: -1px; width: 12px; height: 12px; border-radius: 50%; background: #3ddc84; border: 2.5px solid #17171b; }
+.ua-head-t small::before { display: none; }
+.ua-log { padding-top: 6px; }
+/* 2) Pie de WhatsApp como botón */
+.ua-human { margin: 0 14px 14px; padding: 11px 14px; border: 1px solid rgba(37,211,102,.45); border-radius: 999px; background: rgba(37,211,102,.08); color: #fff; }
+@media (hover: hover) and (pointer: fine) { .ua-human:hover { background: rgba(37,211,102,.18); border-color: #25d366; } }
+/* 3) Burbujas con más contraste y entrada escalonada */
+.ua-msg--bot { background: #26262d; border-color: rgba(255,255,255,.1); box-shadow: 0 6px 18px rgba(0,0,0,.28); }
+.ua-msg--me { background: linear-gradient(135deg, #f0328a, #d4126a); box-shadow: 0 6px 18px rgba(236,31,122,.28); }
+.ua-msg { line-height: 1.55; }
+.ua-msg b { font-family: var(--font-display); font-weight: 700; letter-spacing: .01em; font-size: 1.04em; }
+.ua-prices .ua-price, .ua-cards .ua-card { animation: ua-in .4s var(--ease-out) backwards; }
+.ua-prices .ua-price:nth-child(2), .ua-cards .ua-card:nth-child(2) { animation-delay: .08s; }
+.ua-prices .ua-price:nth-child(3), .ua-cards .ua-card:nth-child(3) { animation-delay: .16s; }
+.ua-cards .ua-card:nth-child(4) { animation-delay: .24s; }
+/* 3) Campo de texto: gris, y se enciende al escribir */
+.ua-form input { border-color: rgba(255,255,255,.12); }
+.ua-form input:focus { border-color: rgba(255,255,255,.28); }
+.ua-form input:not(:placeholder-shown) { border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(236,31,122,.18); }
+/* 4) Botón de reiniciar */
+.ua-reset { background: transparent; }
+.ua-reset svg { width: 18px; height: 18px; }
+@media (prefers-reduced-motion: reduce) { .ua-prices .ua-price, .ua-cards .ua-card { animation: none; } }
+.ua-price img[src*="logo"] { object-fit: contain; padding: 5px; }
