@@ -4025,3 +4025,22 @@ body.page-product .site-header {
   .pp-hero-media--light .pp-hero-media-inner { width: auto; height: 340px; max-height: none; aspect-ratio: 3 / 4; margin: 0 auto; }
   .pp-hero-grid { gap: 12px; }
 }
+
+/* Hero de Producto en celular: dos columnas como en escritorio (texto a la izquierda, botella a la derecha). */
+@media (max-width: 900px) {
+  .pp-hero { padding-top: 112px; padding-bottom: 56px; }
+  .pp-hero-grid { grid-template-columns: minmax(0, 1.18fr) minmax(0, .82fr); align-items: center; gap: 4px; text-align: left; }
+  .pp-hero-eyebrow { justify-content: flex-start; font-size: .56rem; letter-spacing: .08em; gap: 6px; margin-bottom: 10px; }
+  .pp-hero-eyebrow::before { width: 14px; }
+  .pp-hero-title { font-size: clamp(1.55rem, 7.4vw, 2.1rem); line-height: 1; margin-bottom: 12px; }
+  .pp-hero-lead { margin: 0 0 16px; font-size: .78rem; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+  .pp-hero-actions { justify-content: flex-start; }
+  .pp-hero-actions .btn { padding: 10px 16px; font-size: .74rem; }
+  .pp-hero-media--light { justify-content: center; }
+  .pp-hero-media--light .pp-hero-media-inner { height: auto; width: 100%; max-width: 200px; aspect-ratio: 3 / 4; margin: 0 -8px 0 0; }
+}
+@media (max-width: 900px) {
+  .pp-hero-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); }
+  .pp-hero-media--light .pp-hero-media-inner { max-width: 230px; margin-right: -14px; }
+  .pp-hero-actions .btn { width: auto; }
+}
