@@ -4324,3 +4324,12 @@ body.page-product .site-header {
 }
 /* Eventos (hero blanco): el nav translúcido se veía gris sobre el blanco; queda negro sólido, como en Producto. */
 body:has(.ev-hero--light) .site-header { background: #0a0a0c; -webkit-backdrop-filter: none; backdrop-filter: none; border-color: rgba(255,255,255,.1); box-shadow: 0 14px 34px rgba(0,0,0,.35); }
+
+/* Producto · botella inclinada: más zoom y máscara que NO recorta la tapa (queda sólida, sin degradé). */
+.pp-hero-media--light .pp-hero-media-inner { transform: rotate(14deg) scale(1.38); }
+.pp-hero-media--light .pp-hero-media-inner img,
+.pp-hero-media--light .pp-hero-media-inner video {
+  -webkit-mask-image: radial-gradient(ellipse 40% 70% at 50% 50%, #000 82%, transparent 100%);
+          mask-image: radial-gradient(ellipse 40% 70% at 50% 50%, #000 82%, transparent 100%);
+}
+@media (max-width: 900px) { .pp-hero-media--light .pp-hero-media-inner { transform: rotate(14deg) scale(1.2); } }
