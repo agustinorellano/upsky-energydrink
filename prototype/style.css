@@ -4549,3 +4549,7 @@ html.ua-open .ua-launcher, html.ua-open .whatsapp-float, html.ua-open .wa-nudge 
 .ua-launcher { bottom: 24px; }
 .wa-nudge { bottom: 96px !important; }
 @media (max-width: 900px) { .ua-launcher { bottom: 16px; } }
+
+/* Los z-index internos de los carruseles (hasta 1000 en Comunidad) pasaban por encima del asistente, el carrito y el menú.
+   Se encierran en su propio contexto de apilado. */
+.ugc-grid-wrap, .ugc-carousel, .tt-stage, .ev-carousel { isolation: isolate; }
