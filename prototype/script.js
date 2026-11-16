@@ -1031,12 +1031,25 @@ document.addEventListener("DOMContentLoaded", () => {
   // Sin mouse (celular/tablet): la foto se mueve sola, con un vaivén suave en 3D.
   if (!hasMouse) {
     let on = true, t0 = performance.now();
+    let fx = 0, fy = 0, finger = false, fingerT = 0, fcx = 0, fcy = 0; // el dedo también inclina la foto
     new IntersectionObserver((en) => { on = en[0].isIntersecting; }, { threshold: 0.05 }).observe(hero);
+    const setFinger = (e) => {
+      const r = hero.getBoundingClientRect(), t = e.touches[0];
+      fx = ((t.clientX - r.left) / r.width - 0.5) * 2;
+      fy = ((t.clientY - r.top) / r.height - 0.5) * 2;
+      finger = true; fingerT = performance.now();
+    };
+    hero.addEventListener("touchstart", setFinger, { passive: true });
+    hero.addEventListener("touchmove", setFinger, { passive: true });
     const idle = (now) => {
       if (on && !document.hidden) {
         const t = (now - t0) / 1000;
-        const x = Math.sin(t * 0.8) * 0.95;
-        const y = Math.cos(t * 0.55) * 0.7;
+        if (finger && now - fingerT > 1800) finger = false;
+        const ax = Math.sin(t * 0.8) * 0.95, ay = Math.cos(t * 0.55) * 0.7;
+        const tx = finger ? fx : ax, ty = finger ? fy : ay;
+        fcx += (tx - fcx) * (finger ? 0.14 : 0.06);
+        fcy += (ty - fcy) * (finger ? 0.14 : 0.06);
+        const x = fcx, y = fcy;
         photo.style.transform =
           `perspective(900px) rotateY(${(x * 8).toFixed(2)}deg) rotateX(${(-y * 6).toFixed(2)}deg) ` +
           `translate3d(${(x * 10).toFixed(1)}px, ${(y * 8).toFixed(1)}px, 0) scale(1.05)`;
