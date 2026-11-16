@@ -4410,3 +4410,18 @@ body:has(.ev-hero--light) .site-header { background: #0a0a0c; -webkit-backdrop-f
   .ag-cta-plus { width: 52px; height: 52px; }
   .ag-cta-btn { width: 100%; text-align: center; }
 }
+
+/* ===== Negocios minimalista: primero la compra; el paso a paso va después y compacto ===== */
+body:has(#mayorista) #mayorista { padding-top: 56px; }
+.bx-pay-note { margin: 8px 0 0; font-size: .85rem; color: var(--text-muted); }
+.bx-how { padding: 40px 0 72px; }
+.bx-how-steps { list-style: none; margin: 0 0 18px; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.bx-how-steps li { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 16px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); }
+.bx-how-steps span { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-size: .8rem; font-weight: 800; background: var(--primary-color); color: #fff; }
+.bx-how-steps b { font-size: .9rem; line-height: 1.25; }
+.bx-how-note { margin: 0; font-size: .88rem; color: var(--text-muted); }
+.bx-how-note a { color: var(--primary-color); font-weight: 700; }
+@media (max-width: 860px) { .bx-how-steps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .bx-how-steps { grid-template-columns: 1fr; gap: 8px; } }
+body:has(#mayorista) #mayorista { padding-top: 40px; padding-bottom: 24px; }
+.bx-how { padding: 24px 0 64px; }
