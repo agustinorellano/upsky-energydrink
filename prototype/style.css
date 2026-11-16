@@ -4218,3 +4218,19 @@ body.page-product .site-header {
   .ev-actions .ev-more { flex: 1; justify-content: center; }
   .ev-hero--light .ev-track::before, .ev-hero--light .ev-track::after { display: none; }
 }
+
+/* Flechas del carrusel de eventos. */
+.ev-carousel { position: relative; }
+.ev-arrow {
+  position: absolute; z-index: 6; top: 50%; transform: translateY(-50%);
+  width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255,255,255,.9); cursor: pointer; display: grid; place-items: center;
+  color: #0a0a0c; background: rgba(255,255,255,.82); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  box-shadow: 0 8px 22px rgba(120,10,60,.25);
+  transition: background .2s, color .2s, transform .2s var(--ease-out);
+}
+.ev-arrow svg { width: 22px; height: 22px; }
+.ev-arrow--prev { left: max(12px, calc(50% - 600px)); } .ev-arrow--next { right: max(12px, calc(50% - 600px)); }
+.ev-arrow:active { transform: translateY(-50%) scale(.92); }
+.ev-arrow:focus-visible { outline: 2px solid var(--primary-color); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) { .ev-arrow:hover { background: var(--primary-color); color: #fff; border-color: var(--primary-color); } }
+@media (max-width: 760px) { .ev-arrow { width: 40px; height: 40px; top: 36%; } .ev-arrow--prev { left: 8px; } .ev-arrow--next { right: 8px; } }

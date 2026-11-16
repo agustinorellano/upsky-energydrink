@@ -1135,6 +1135,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   slides.forEach((s, i) => s.addEventListener("click", (e) => { if (i !== cur) { e.preventDefault(); go(i, true); } }));
   pills.forEach((p, i) => p.addEventListener("click", () => go(i, true)));
+  document.getElementById("evPrev")?.addEventListener("click", () => go(cur - 1, true));
+  document.getElementById("evNext")?.addEventListener("click", () => go(cur + 1, true));
   hero.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight") go(cur + 1, true);
     if (e.key === "ArrowLeft") go(cur - 1, true);
