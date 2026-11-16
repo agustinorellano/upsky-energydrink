@@ -869,3 +869,79 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+// Botón "Compartir" sobre la imagen de cada card (catálogo y mayorista).
+// Móvil: hoja nativa de compartir. Escritorio: copia el enlace directo a la card.
+document.addEventListener("DOMContentLoaded", () => {
+  const cards = document.querySelectorAll(".product-grid [data-id], .price-grid [data-id]");
+  if (!cards.length) return;
+
+  let toast;
+  const showToast = (msg) => {
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.className = "share-toast";
+      toast.setAttribute("role", "status");
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.classList.add("is-visible");
+    clearTimeout(showToast.t);
+    showToast.t = setTimeout(() => toast.classList.remove("is-visible"), 2200);
+  };
+
+  const copy = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.cssText = "position:fixed;opacity:0";
+      document.body.appendChild(ta);
+      ta.select();
+      let ok = false;
+      try { ok = document.execCommand("copy"); } catch { /* sin portapapeles */ }
+      ta.remove();
+      return ok;
+    }
+  };
+
+  cards.forEach((card) => {
+    const media = card.querySelector(".product-card-media");
+    if (!media) return;
+    if (!card.id) card.id = card.dataset.id;
+    const name = card.dataset.name || "UP SKY";
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "share-btn";
+    btn.setAttribute("aria-label", `Compartir ${name}`);
+    btn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="6" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="18" cy="19" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m8.3 10.8 7.4-4.4M8.3 13.2l7.4 4.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+    media.appendChild(btn);
+
+    btn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const url = `${location.origin}${location.pathname}#${card.id}`;
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: "UP SKY Energy Drink", text: name, url });
+          return;
+        } catch (err) {
+          if (err && err.name === "AbortError") return;
+        }
+      }
+      showToast((await copy(url)) ? "Enlace copiado" : "No se pudo copiar el enlace");
+    });
+  });
+
+  // Si llegan desde un enlace compartido, llevar a la card y resaltarla un momento.
+  const target = location.hash && document.getElementById(location.hash.slice(1));
+  if (target && target.matches("[data-id]")) {
+    setTimeout(() => {
+      target.scrollIntoView({ behavior: "smooth", block: "center" });
+      target.classList.add("is-shared-target");
+      setTimeout(() => target.classList.remove("is-shared-target"), 2400);
+    }, 400);
+  }
+});
