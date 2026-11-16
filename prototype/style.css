@@ -4638,3 +4638,11 @@ html.ua-open .ua-launcher, html.ua-open .whatsapp-float, html.ua-open .wa-nudge 
 .ua-form input:placeholder-shown + button { background: rgba(255,255,255,.1); color: rgba(255,255,255,.45); }
 .ua-form input:not(:placeholder-shown) + button { background: var(--primary-color); color: #fff; box-shadow: 0 6px 16px rgba(236,31,122,.4); }
 @media (hover: hover) and (pointer: fine) { .ua-form input:not(:placeholder-shown) + button:hover { transform: translateY(-2px); background: #ff3490; } }
+
+/* Indicador de scroll del hero del home también en escritorio. */
+@media (min-width: 701px) {
+  .hero-cue { position: absolute; z-index: 4; left: 50%; bottom: 56px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0;
+    color: rgba(255,255,255,.8); font-size: .72rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; }
+  .hero-cue svg { width: 26px; height: 26px; color: var(--primary-color); animation: cue-bounce 1.8s var(--ease-in-out) infinite; }
+}
+@media (hover: hover) and (pointer: fine) { .hero-cue:hover { color: #fff; } }
