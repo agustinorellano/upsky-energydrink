@@ -1023,8 +1023,9 @@ document.addEventListener("DOMContentLoaded", () => {
 // siguiendo el cursor (con suavizado). Solo con mouse y sin "reducir movimiento".
 document.addEventListener("DOMContentLoaded", () => {
   const hero = document.querySelector(".hero");
-  const photo = hero && hero.querySelector(".hero-photo");
-  if (!photo) return;
+  const photos = hero ? Array.from(hero.querySelectorAll(".hero-photo")) : [];
+  if (!photos.length) return;
+  const setT = (v) => photos.forEach((p) => { p.style.transform = v; });
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const hasMouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
@@ -1050,9 +1051,9 @@ document.addEventListener("DOMContentLoaded", () => {
         fcx += (tx - fcx) * (finger ? 0.14 : 0.06);
         fcy += (ty - fcy) * (finger ? 0.14 : 0.06);
         const x = fcx, y = fcy;
-        photo.style.transform =
+        setT(
           `perspective(900px) rotateY(${(x * 8).toFixed(2)}deg) rotateX(${(-y * 6).toFixed(2)}deg) ` +
-          `translate3d(${(x * 10).toFixed(1)}px, ${(y * 8).toFixed(1)}px, 0) scale(1.05)`;
+          `translate3d(${(x * 10).toFixed(1)}px, ${(y * 8).toFixed(1)}px, 0) scale(1.05)`);
       }
       requestAnimationFrame(idle);
     };
@@ -1067,9 +1068,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const loop = () => {
     cx += (tx - cx) * 0.08;
     cy += (ty - cy) * 0.08;
-    photo.style.transform =
+    setT(
       `perspective(1100px) rotateY(${(cx * MAX_ROT).toFixed(2)}deg) rotateX(${(-cy * MAX_ROT).toFixed(2)}deg) ` +
-      `translate3d(${(cx * MAX_SHIFT).toFixed(1)}px, ${(cy * MAX_SHIFT * 0.7).toFixed(1)}px, 0) scale(1.03)`;
+      `translate3d(${(cx * MAX_SHIFT).toFixed(1)}px, ${(cy * MAX_SHIFT * 0.7).toFixed(1)}px, 0) scale(1.03)`);
     if (inside || Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001) {
       raf = requestAnimationFrame(loop);
     } else {

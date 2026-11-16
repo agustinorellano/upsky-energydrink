@@ -4090,3 +4090,21 @@ body.page-product .site-header {
   .hero-cue svg { width: 26px; height: 26px; color: var(--primary-color); animation: cue-bounce 1.8s var(--ease-in-out) infinite; }
 }
 @media (prefers-reduced-motion: reduce) { .hero-cue svg { animation: none; } }
+
+/* ===== Home mobile · estructura: título, texto, foto del chico y abajo los CTA ===== */
+.hero-photo-mobile { display: none; }
+@media (max-width: 700px) {
+  .hero { min-height: 0; padding-bottom: 96px; align-items: flex-start; }
+  .hero-bg .hero-photo { display: none; }
+  .hero-grid { margin-top: 112px; padding-top: 0; }
+  .hero-photo-mobile { display: block; position: relative; margin: 2px -24px 0; height: 400px; overflow: hidden; pointer-events: none; }
+  .hero-photo-mobile .hero-photo {
+    display: block; position: static; inset: auto; width: 118%; max-width: none; height: 100%; margin-left: -9%;
+    object-fit: cover; object-position: 50% 24%; opacity: 1; transform-origin: 50% 60%;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 74%, transparent 100%);
+            mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 74%, transparent 100%);
+  }
+  .hero-sub { margin-bottom: 0; }
+  .hero-actions { margin-top: -6px; position: relative; z-index: 2; }
+}
+@media (max-width: 700px) { .hero-grid { margin-top: 100px; } .hero-photo-mobile { height: 420px; } }
