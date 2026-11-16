@@ -850,3 +850,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+// Slider de fotos en cards (scroll-snap): sincroniza los puntos y permite flechas de teclado.
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[data-slider]").forEach((s) => {
+    const track = s.querySelector(".media-slider-track");
+    const dots = Array.from(s.querySelectorAll(".media-slider-dots span"));
+    const hint = s.querySelector(".media-slider-hint");
+    const labels = ["Frente", "Espalda"];
+    track.addEventListener("scroll", () => {
+      const i = Math.round(track.scrollLeft / track.clientWidth);
+      dots.forEach((d, k) => d.classList.toggle("is-active", k === i));
+      if (hint && labels[i]) hint.textContent = labels.join(" · ");
+    }, { passive: true });
+    track.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") track.scrollBy({ left: track.clientWidth, behavior: "smooth" });
+      if (e.key === "ArrowLeft") track.scrollBy({ left: -track.clientWidth, behavior: "smooth" });
+    });
+  });
+});
