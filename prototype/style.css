@@ -4290,3 +4290,17 @@ body.page-product .site-header {
 .cart-drawer.is-empty .cart-items { justify-content: center; }
 @media (prefers-reduced-motion: reduce) { .cart-empty-plus { animation: none; } }
 @media (max-width: 520px) { .cart-drawer { top: 8px; right: 8px; bottom: 8px; width: calc(100% - 16px); border-radius: 24px; } }
+
+/* PRUEBA: botella del hero de Producto inclinada en diagonal hacia la derecha.
+   Para quitarla, borrar este bloque. */
+.pp-hero-media--light .pp-hero-media-inner { transform: rotate(14deg) scale(1.04); transform-origin: 50% 55%; }
+/* Con la inclinación se notaba el recuadro del video: se enmascara con una elipse centrada en la botella. */
+.pp-hero-media--light .pp-hero-media-inner img,
+.pp-hero-media--light .pp-hero-media-inner video {
+  -webkit-mask-image: radial-gradient(ellipse 36% 48% at 50% 52%, #000 62%, transparent 100%);
+          mask-image: radial-gradient(ellipse 36% 48% at 50% 52%, #000 62%, transparent 100%);
+  -webkit-mask-composite: source-over; mask-composite: add;
+}
+/* El carrito cerrado no debe proyectar sombra sobre el borde de la pantalla. */
+.cart-drawer { transition: transform var(--duration-drawer) var(--ease-drawer), box-shadow .2s; }
+.cart-drawer:not(.is-open) { box-shadow: none; }
