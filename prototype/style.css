@@ -3799,3 +3799,51 @@ body.page-product .site-header {
   .ev-slide[data-d="0"] .ev-info { flex-basis: 250px; }
   .ev-hero { padding-top: 98px; padding-bottom: 60px; }
 }
+
+/* ===== Eventos · hero en versión CLARA (variante .ev-hero--light) =====
+   Base clara cálida con una mezcla de magenta y negro: esquina superior oscura que se disuelve,
+   luces magenta abajo y a la derecha, y un rosa suave a la izquierda. Las tarjetas siguen siendo
+   negras para que contrasten. Para volver a la versión oscura basta quitar la clase del HTML. */
+.ev-hero--light { padding-bottom: 118px; }
+.ev-hero--light::before {
+  background:
+    radial-gradient(46% 58% at 4% 0%, rgba(10,10,12,.62), rgba(10,10,12,0) 100%),
+    radial-gradient(44% 56% at 98% 8%, rgba(236,31,122,.62), rgba(236,31,122,0) 100%),
+    radial-gradient(62% 52% at 50% 104%, rgba(236,31,122,.58), rgba(236,31,122,0) 100%),
+    radial-gradient(40% 46% at -2% 86%, rgba(255,128,184,.62), rgba(255,128,184,0) 100%),
+    radial-gradient(30% 36% at 78% 62%, rgba(10,10,12,.16), rgba(10,10,12,0) 100%),
+    #f8f0f4;
+  -webkit-mask-image: none; mask-image: none;
+}
+.ev-hero--light .ev-eyebrow { color: #c5105f; }
+.ev-hero--light .ev-eyebrow::before, .ev-hero--light .ev-eyebrow::after { background: #c5105f; }
+.ev-hero--light .ev-title { color: #0a0a0c; }
+.ev-hero--light .ev-title .page-hero-accent { color: #ec1f7a; }
+.ev-hero--light .ev-lead { color: #3b2530; font-weight: 500; }
+.ev-hero--light .ev-slide {
+  background: linear-gradient(160deg, #1c1c21, #0a0a0c);
+  border-color: rgba(255,255,255,.14);
+  box-shadow: 0 26px 60px rgba(40,5,25,.35);
+}
+.ev-hero--light .ev-slide[data-d="0"] { border-color: rgba(236,31,122,.8); box-shadow: 0 30px 80px rgba(40,5,25,.45), 0 0 0 4px rgba(236,31,122,.16), 0 0 70px rgba(236,31,122,.3); }
+.ev-hero--light .ev-slide[data-d="1"], .ev-hero--light .ev-slide[data-d="2"] { opacity: 1; }
+.ev-hero--light .ev-pill { background: rgba(10,10,12,.28); }
+.ev-hero--light .ev-pill.is-active { background: rgba(10,10,12,.2); }
+.ev-hero--light .ev-pill span { background: #0a0a0c; }
+.ev-hero--light .ev-cue { color: #0a0a0c; z-index: 3; }
+.ev-hero--light .ev-cue svg { color: #0a0a0c; }
+.ev-hero--light .curve-divider { z-index: 2; }
+@media (max-width: 760px) { .ev-hero--light { padding-bottom: 96px; } }
+/* Ajustes finos de la variante clara: esquina "vino" (magenta + negro) en vez de gris, y flecha sobre la curva. */
+.ev-hero--light::before {
+  background:
+    radial-gradient(44% 56% at 3% 0%, rgba(58,4,30,.78), rgba(58,4,30,0) 100%),
+    radial-gradient(44% 56% at 98% 8%, rgba(236,31,122,.62), rgba(236,31,122,0) 100%),
+    radial-gradient(62% 52% at 50% 104%, rgba(236,31,122,.58), rgba(236,31,122,0) 100%),
+    radial-gradient(40% 46% at -2% 86%, rgba(255,128,184,.62), rgba(255,128,184,0) 100%),
+    radial-gradient(30% 36% at 78% 62%, rgba(10,10,12,.12), rgba(10,10,12,0) 100%),
+    #f9f1f5;
+}
+.ev-hero--light .ev-cue { position: relative; left: auto; bottom: auto; transform: none; margin: 14px auto 0; width: max-content; }
+.ev-hero--light { padding-bottom: 104px; }
+@media (max-width: 760px) { .ev-hero--light .ev-cue { display: none; } }
