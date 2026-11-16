@@ -1247,3 +1247,70 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", sync);
   sync();
 });
+
+// Producto · "Lo que hay detrás de UP SKY": entrada, selector, conteo y parallax suave de la foto.
+document.addEventListener("DOMContentLoaded", () => {
+  const sec = document.getElementById("formula");
+  if (!sec || !sec.classList.contains("fm")) return;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const rows = Array.from(sec.querySelectorAll(".fm-row"));
+  const slides = Array.from(sec.querySelectorAll(".fm-slide"));
+
+  const count = (slide) => {
+    slide.querySelectorAll(".fm-num").forEach((el) => {
+      const to = parseFloat(el.dataset.to), dec = Number(el.dataset.dec || 0);
+      const fmt = (v) => v.toFixed(dec).replace(".", ",");
+      if (reduce) { el.textContent = fmt(to); return; }
+      const t0 = performance.now(), D = 900;
+      const step = (now) => {
+        const k = Math.min(1, (now - t0) / D), e = 1 - Math.pow(1 - k, 3);
+        el.textContent = fmt(to * e);
+        if (k < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+  };
+  const select = (i, focus) => {
+    rows.forEach((r, k) => {
+      const on = k === i;
+      r.classList.toggle("is-active", on);
+      r.setAttribute("aria-selected", String(on));
+      r.tabIndex = on ? 0 : -1;
+    });
+    slides.forEach((s, k) => s.classList.toggle("is-active", k === i));
+    count(slides[i]);
+    if (focus) rows[i].focus();
+  };
+  rows.forEach((r, i) => {
+    r.addEventListener("click", () => select(i));
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) r.addEventListener("mouseenter", () => select(i));
+    r.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown" || e.key === "ArrowRight") { e.preventDefault(); select((i + 1) % rows.length, true); }
+      if (e.key === "ArrowUp" || e.key === "ArrowLeft") { e.preventDefault(); select((i - 1 + rows.length) % rows.length, true); }
+    });
+  });
+
+  // entrada al aparecer en pantalla
+  let first = true;
+  new IntersectionObserver((en, obs) => {
+    if (!en[0].isIntersecting) return;
+    sec.classList.add("is-in");
+    if (first) { first = false; setTimeout(() => count(slides[0]), 500); }
+    obs.disconnect();
+  }, { threshold: 0.25 }).observe(sec);
+  if (reduce) slides.forEach(count);
+
+  // parallax leve de la foto (solo escritorio, sin "reducir movimiento")
+  const photo = sec.querySelector(".fm-photo");
+  if (photo && !reduce && window.matchMedia("(min-width: 901px) and (hover: hover)").matches) {
+    let ticking = false;
+    const upd = () => {
+      const r = sec.getBoundingClientRect(), vh = window.innerHeight;
+      const p = Math.max(-1, Math.min(1, (r.top + r.height / 2 - vh / 2) / vh));
+      photo.style.transform = `translate3d(0, ${(p * -34).toFixed(1)}px, 0)`;
+      ticking = false;
+    };
+    window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
+    upd();
+  }
+});
