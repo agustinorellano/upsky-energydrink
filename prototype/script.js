@@ -190,7 +190,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const clean = p.split("#")[0].replace(/\.html$/, "").replace(/\/$/, "");
       return clean === "" ? "index" : clean.replace(/^\//, "");
     };
-    const currentPath = normalizePath(window.location.pathname);
+    let currentPath = normalizePath(window.location.pathname);
+    if (currentPath.startsWith("evento-")) currentPath = "eventos"; // páginas de cada evento
     const pageLink = navLinkEls.find((a) => {
       const href = a.getAttribute("href") || "";
       return !href.startsWith("#") && normalizePath(href) === currentPath;
@@ -1115,11 +1116,52 @@ document.addEventListener("DOMContentLoaded", () => {
     const dx = e.clientX - x0; x0 = null;
     if (Math.abs(dx) > 48) go(cur + (dx < 0 ? 1 : -1), true);
   });
-  // botón "Ver detalle" -> abre el modal de la card de la agenda
-  track.querySelectorAll(".ev-more").forEach((b) => b.addEventListener("click", (e) => {
-    e.stopPropagation();
-    const card = document.querySelector(`.event-card[data-ev="${b.dataset.open}"]`);
-    if (card) card.click();
-  }));
+  // brillo especular "liquid" que sigue al cursor sobre la tarjeta activa
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    slides.forEach((sl) => sl.addEventListener("pointermove", (e) => {
+      const r = sl.getBoundingClientRect();
+      sl.style.setProperty("--mx", `${((e.clientX - r.left) / r.width) * 100}%`);
+      sl.style.setProperty("--my", `${((e.clientY - r.top) / r.height) * 100}%`);
+    }));
+  }
   render(); schedule();
+});
+
+// Compartir evento (cada evento es una página propia). [data-share] funciona en el carrusel,
+// la agenda y la página del evento. Móvil: hoja nativa. Escritorio: copia el enlace.
+document.addEventListener("DOMContentLoaded", () => {
+  const btns = document.querySelectorAll("[data-share]");
+  if (!btns.length) return;
+  let toast;
+  const say = (msg) => {
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.className = "share-toast";
+      toast.setAttribute("role", "status");
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.classList.add("is-visible");
+    clearTimeout(say.t);
+    say.t = setTimeout(() => toast.classList.remove("is-visible"), 2200);
+  };
+  const copy = async (text) => {
+    try { await navigator.clipboard.writeText(text); return true; } catch {
+      const ta = document.createElement("textarea");
+      ta.value = text; ta.style.cssText = "position:fixed;opacity:0";
+      document.body.appendChild(ta); ta.select();
+      let ok = false; try { ok = document.execCommand("copy"); } catch { /* sin portapapeles */ }
+      ta.remove(); return ok;
+    }
+  };
+  btns.forEach((b) => b.addEventListener("click", async (e) => {
+    e.preventDefault(); e.stopPropagation();
+    const url = new URL(b.dataset.url, location.href).href;
+    const title = b.dataset.title || "Evento UP SKY";
+    if (navigator.share) {
+      try { await navigator.share({ title: `${title} — UP SKY`, text: title, url }); return; }
+      catch (err) { if (err && err.name === "AbortError") return; }
+    }
+    say((await copy(url)) ? "Enlace del evento copiado" : "No se pudo copiar el enlace");
+  }));
 });

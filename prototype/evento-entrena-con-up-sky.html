@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrená con UP SKY — Eventos UP SKY</title>
+<meta property="og:title" content="Entrená con UP SKY — UP SKY Energy Drink">
+<meta property="og:description" content="Jornada de entrenamiento al aire libre con hidratación, energía y actividades para todos los niveles.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Archivo:ital,wdth,wght@1,100..125,700..900&family=Manrope:wght@400;500;600;700;800&display=swap">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header" id="header">
+  <div class="container header-inner">
+    <a href="index.html#inicio" class="logo">
+      <img src="assets/logo.png" alt="UP SKY Energy Drink" class="logo-img">
+    </a>
+
+    <nav class="main-nav" id="mainNav">
+      <span class="nav-blob" id="navBlob" aria-hidden="true"></span>
+      <a href="index.html#inicio">Inicio</a>
+      <a href="producto.html">Producto</a>
+      <a href="catalogo.html">Catálogo</a>
+      <a href="eventos.html">Eventos</a>
+      <a href="negocios.html">Para negocios</a>
+      <a href="index.html#contacto">Contacto</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="cart-button" id="cartButton" aria-label="Ver carrito" aria-haspopup="dialog">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6h15l-1.5 9h-12z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 6L5 3H2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="9.5" cy="19.5" r="1.4" fill="currentColor"/><circle cx="17.5" cy="19.5" r="1.4" fill="currentColor"/></svg>
+        <span class="cart-count" id="cartCount" hidden>0</span>
+      </button>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ========== MENÚ MOBILE (bottom sheet) ========== -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay" hidden></div>
+<nav class="mobile-nav-sheet" id="mobileNavSheet" aria-hidden="true">
+  <a href="index.html#inicio">Inicio</a>
+  <a href="producto.html">Producto</a>
+  <a href="catalogo.html">Catálogo</a>
+  <a href="eventos.html">Eventos</a>
+  <a href="negocios.html">Para negocios</a>
+  <a href="index.html#contacto">Contacto</a>
+</nav>
+
+
+<!-- ========== CARRITO ========== -->
+<div class="cart-overlay" id="cartOverlay" hidden></div>
+<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-label="Carrito de compra" aria-hidden="true">
+  <div class="cart-drawer-header">
+    <h3>Tu carrito</h3>
+    <button class="cart-close" id="cartClose" aria-label="Cerrar carrito">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p class="cart-empty" id="cartEmpty">Todavía no agregaste productos.</p>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total-row"><span>Total</span><span id="cartTotal">$0</span></div>
+
+    <form class="cart-shipping" id="shippingForm">
+      <p class="cart-shipping-label">Datos de envío</p>
+      <input type="text" id="shipName" placeholder="Nombre y apellido" autocomplete="name" required>
+      <input type="text" id="shipAddress" placeholder="Dirección (calle y número)" autocomplete="street-address" required>
+      <div class="cart-shipping-row">
+        <input type="text" id="shipCity" placeholder="Localidad" autocomplete="address-level2" required>
+        <input type="text" id="shipCP" placeholder="Código postal" autocomplete="postal-code" required>
+      </div>
+    </form>
+
+    <button class="btn btn-primary btn-block" id="checkoutBtn">Finalizar pedido por WhatsApp</button>
+    <button class="cart-clear" id="cartClear" type="button">Vaciar carrito</button>
+  </div>
+</aside>
+
+<!-- CONTENIDO DEMO: reemplazar fecha, lugar, descripción y portada cuando el evento esté confirmado. -->
+<section class="ev-hero ev-hero--light evp" id="evento">
+  <div class="container evp-grid">
+    <div class="evp-media">
+      <div class="evp-frame"><div class="ev-cover ev-cover--2" role="img" aria-label="Portada pendiente de Entrená con UP SKY"><!-- PORTADA PENDIENTE: foto o video del evento --><img src="assets/logo.png" alt="" width="370" height="255" loading="lazy"></div></div>
+    </div>
+    <div class="evp-copy">
+      <a href="eventos.html#agenda" class="evp-back">← Todos los eventos</a>
+      <p class="ev-kicker">Deporte · Aire libre</p>
+      <h1 class="evp-title">Entrená con UP SKY</h1>
+      <p class="ev-meta evp-meta"><span>Fecha a confirmar</span><span>Concordia</span></p>
+      <p class="evp-desc">Jornada de entrenamiento al aire libre con hidratación, energía y actividades para todos los niveles.</p>
+      <div class="ev-tags"><span class="ev-tag">Entrenamiento</span><span class="ev-tag">Comunidad</span></div>
+      <div class="evp-actions">
+        <button type="button" class="btn btn-primary evp-share" data-share data-url="evento-entrena-con-up-sky.html" data-title="Entrená con UP SKY"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="6" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="18" cy="19" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m8.3 10.8 7.4-4.4M8.3 13.2l7.4 4.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg> Compartir evento</button>
+        <a href="https://wa.me/5491160579579?text=Hola!%20Quiero%20saber%20m%C3%A1s%20del%20evento%20%22Entrená%20con%20UP%20SKY%22%20de%20UP%20SKY." target="_blank" rel="noopener" class="btn btn-outline evp-wa">Consultar por WhatsApp</a>
+      </div>
+      <a href="https://www.instagram.com/upskyenergydrink/" target="_blank" rel="noopener" class="evp-ig">Seguí las novedades en Instagram →</a>
+    </div>
+  </div>
+  <div class="curve-divider curve-divider--bottom" aria-hidden="true"><svg viewBox="0 0 1440 130" preserveAspectRatio="none"><path d="M0,130 L0,84 Q720,18 1440,84 L1440,130 Z" style="fill:#0a0a0c"/></svg></div>
+</section>
+
+<section class="section ev-agenda" id="mas-eventos">
+  <div class="container">
+    <div class="ev-agenda-head">
+      <div>
+        <p class="section-eyebrow">Agenda</p>
+        <h2 class="section-title">Más eventos</h2>
+      </div>
+      <div class="hero-actions"><a href="eventos.html#agenda" class="btn btn-outline">Ver todos los eventos</a></div>
+    </div>
+    <div class="event-grid ev-grid">
+      <article class="ev-card">
+        <div class="ev-card-media"><div class="ev-cover ev-cover--2" role="img" aria-label="Portada pendiente"><!-- PORTADA PENDIENTE --><img src="assets/logo.png" alt="" width="370" height="255" loading="lazy"></div><button type="button" class="share-btn" data-share data-url="evento-noche-up-sky.html" data-title="Noche UP SKY" aria-label="Compartir Noche UP SKY"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="6" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="18" cy="19" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m8.3 10.8 7.4-4.4M8.3 13.2l7.4 4.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div>
+        <div class="ev-card-body">
+          <p class="event-date">Fecha a confirmar · Concordia</p>
+          <h3><a href="evento-noche-up-sky.html" class="ev-card-link">Noche UP SKY</a></h3>
+          <p>Una noche de música y degustación de UP SKY bien fría, con premios y sorpresas para quienes se sumen.</p>
+        </div>
+      </article>
+      <article class="ev-card">
+        <div class="ev-card-media"><div class="ev-cover ev-cover--3" role="img" aria-label="Portada pendiente"><!-- PORTADA PENDIENTE --><img src="assets/logo.png" alt="" width="370" height="255" loading="lazy"></div><button type="button" class="share-btn" data-share data-url="evento-verano-en-la-costa.html" data-title="Verano en la costa" aria-label="Compartir Verano en la costa"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="6" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="18" cy="19" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m8.3 10.8 7.4-4.4M8.3 13.2l7.4 4.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div>
+        <div class="ev-card-body">
+          <p class="event-date">Fecha a confirmar · Costa del Uruguay</p>
+          <h3><a href="evento-verano-en-la-costa.html" class="ev-card-link">Verano en la costa</a></h3>
+          <p>Presencia de UP SKY en la playa durante el verano: vasos, descuentos y mucha energía.</p>
+        </div>
+      </article>
+      <article class="ev-card">
+        <div class="ev-card-media"><div class="ev-cover ev-cover--1" role="img" aria-label="Portada pendiente"><!-- PORTADA PENDIENTE --><img src="assets/logo.png" alt="" width="370" height="255" loading="lazy"></div><button type="button" class="share-btn" data-share data-url="evento-up-sky-en-tu-comercio.html" data-title="UP SKY en tu comercio" aria-label="Compartir UP SKY en tu comercio"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="6" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="18" cy="19" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m8.3 10.8 7.4-4.4M8.3 13.2l7.4 4.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div>
+        <div class="ev-card-body">
+          <p class="event-date">Fecha a confirmar · A coordinar</p>
+          <h3><a href="evento-up-sky-en-tu-comercio.html" class="ev-card-link">UP SKY en tu comercio</a></h3>
+          <p>Llevamos una degustación a tu kiosco, autoservicio o evento privado. Consultanos por disponibilidad.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="footer-band">
+    <div class="container footer-social">
+      <a href="https://wa.me/5491160579579" target="_blank" rel="noopener" class="footer-circle" aria-label="WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.31.653 4.47 1.786 6.307L4 29l7.86-1.75A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3Zm0 21.818a9.78 9.78 0 0 1-4.99-1.363l-.358-.213-4.663 1.039 1.02-4.55-.234-.372A9.77 9.77 0 0 1 5.182 15c0-5.964 4.858-10.818 10.822-10.818S26.818 9.036 26.818 15 21.968 24.818 16.004 24.818Zm5.98-7.34c-.327-.164-1.938-.957-2.239-1.066-.3-.11-.518-.164-.737.163-.218.328-.845 1.066-1.036 1.285-.19.218-.382.246-.709.082-.327-.164-1.379-.508-2.627-1.62-.971-.866-1.627-1.935-1.818-2.263-.19-.328-.02-.505.144-.668.148-.147.327-.382.49-.573.164-.192.218-.328.327-.546.109-.219.055-.41-.027-.573-.082-.164-.737-1.775-1.01-2.431-.266-.64-.537-.554-.737-.564l-.628-.011c-.218 0-.573.082-.873.41-.3.327-1.145 1.12-1.145 2.73 0 1.61 1.173 3.166 1.336 3.385.164.219 2.31 3.527 5.598 4.945.782.338 1.393.54 1.869.69.785.25 1.5.215 2.065.13.63-.094 1.938-.792 2.211-1.557.273-.765.273-1.42.191-1.557-.082-.137-.3-.219-.627-.383Z" fill="currentColor"/></svg></a>
+      <a href="https://www.instagram.com/upskyenergydrink/" target="_blank" rel="noopener" class="footer-circle" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+    </div>
+  </div>
+  <div class="footer-panel">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html#inicio" class="logo"><img src="assets/logo.png" alt="UP SKY Energy Drink" class="logo-img logo-img--lg" loading="lazy" decoding="async"></a>
+        <p>Energía en botella de vidrio de 355 cc.</p>
+      </div>
+      <nav class="footer-col" aria-label="Explorar">
+        <h3>Explorar</h3>
+        <a href="index.html#inicio">Inicio</a>
+        <a href="producto.html">Producto</a>
+        <a href="catalogo.html">Catálogo</a>
+        <a href="eventos.html">Eventos</a>
+        <a href="negocios.html">Para negocios</a>
+        <a href="index.html#contacto">Contacto</a>
+      </nav>
+      <div class="footer-col">
+        <h3>¿Querés pedir?</h3>
+        <a href="https://wa.me/5491160579579" target="_blank" rel="noopener" class="footer-pill">WhatsApp <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.31.653 4.47 1.786 6.307L4 29l7.86-1.75A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3Zm0 21.818a9.78 9.78 0 0 1-4.99-1.363l-.358-.213-4.663 1.039 1.02-4.55-.234-.372A9.77 9.77 0 0 1 5.182 15c0-5.964 4.858-10.818 10.822-10.818S26.818 9.036 26.818 15 21.968 24.818 16.004 24.818Zm5.98-7.34c-.327-.164-1.938-.957-2.239-1.066-.3-.11-.518-.164-.737.163-.218.328-.845 1.066-1.036 1.285-.19.218-.382.246-.709.082-.327-.164-1.379-.508-2.627-1.62-.971-.866-1.627-1.935-1.818-2.263-.19-.328-.02-.505.144-.668.148-.147.327-.382.49-.573.164-.192.218-.328.327-.546.109-.219.055-.41-.027-.573-.082-.164-.737-1.775-1.01-2.431-.266-.64-.537-.554-.737-.564l-.628-.011c-.218 0-.573.082-.873.41-.3.327-1.145 1.12-1.145 2.73 0 1.61 1.173 3.166 1.336 3.385.164.219 2.31 3.527 5.598 4.945.782.338 1.393.54 1.869.69.785.25 1.5.215 2.065.13.63-.094 1.938-.792 2.211-1.557.273-.765.273-1.42.191-1.557-.082-.137-.3-.219-.627-.383Z" fill="currentColor"/></svg></a>
+        <a href="https://www.instagram.com/upskyenergydrink/" target="_blank" rel="noopener" class="footer-pill">@upskyenergydrink <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+      </div>
+    </div>
+    <p class="footer-legal">© 2026 UP SKY Energy Drink – Marca registrada</p>
+  </div>
+</footer>
+
+<!-- ========== WHATSAPP FLOTANTE ========== -->
+<a
+  href="https://wa.me/5491160579579"
+  class="whatsapp-float"
+  target="_blank"
+  rel="noopener"
+  aria-label="Escribinos por WhatsApp"
+>
+  <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+    <path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.31.653 4.47 1.786 6.307L4 29l7.86-1.75A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3Zm0 21.818a9.78 9.78 0 0 1-4.99-1.363l-.358-.213-4.663 1.039 1.02-4.55-.234-.372A9.77 9.77 0 0 1 5.182 15c0-5.964 4.858-10.818 10.822-10.818S26.818 9.036 26.818 15 21.968 24.818 16.004 24.818Zm5.98-7.34c-.327-.164-1.938-.957-2.239-1.066-.3-.11-.518-.164-.737.163-.218.328-.845 1.066-1.036 1.285-.19.218-.382.246-.709.082-.327-.164-1.379-.508-2.627-1.62-.971-.866-1.627-1.935-1.818-2.263-.19-.328-.02-.505.144-.668.148-.147.327-.382.49-.573.164-.192.218-.328.327-.546.109-.219.055-.41-.027-.573-.082-.164-.737-1.775-1.01-2.431-.266-.64-.537-.554-.737-.564l-.628-.011c-.218 0-.573.082-.873.41-.3.327-1.145 1.12-1.145 2.73 0 1.61 1.173 3.166 1.336 3.385.164.219 2.31 3.527 5.598 4.945.782.338 1.393.54 1.869.69.785.25 1.5.215 2.065.13.63-.094 1.938-.792 2.211-1.557.273-.765.273-1.42.191-1.557-.082-.137-.3-.219-.627-.383Z" fill="currentColor"/>
+  </svg>
+</a>
+
+<script src="script.js"></script>
+</body>
+</html>

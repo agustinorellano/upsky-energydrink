@@ -3847,3 +3847,76 @@ body.page-product .site-header {
 .ev-hero--light .ev-cue { position: relative; left: auto; bottom: auto; transform: none; margin: 14px auto 0; width: max-content; }
 .ev-hero--light { padding-bottom: 104px; }
 @media (max-width: 760px) { .ev-hero--light .ev-cue { display: none; } }
+
+/* ============ Eventos: fondo blanco + tarjetas "liquid glass" + páginas de evento ============ */
+.ev-hero--light::before { background: #fff; }
+.ev-track { position: relative; isolation: isolate; }
+.ev-hero--light .ev-track::before, .ev-hero--light .ev-track::after {
+  content: ""; position: absolute; z-index: -1; border-radius: 50%; filter: blur(54px); pointer-events: none;
+  animation: lg-drift 14s ease-in-out infinite alternate;
+}
+.ev-hero--light .ev-track::before { width: 34%; height: 70%; left: 14%; top: 14%; background: radial-gradient(circle, rgba(236,31,122,.5), rgba(236,31,122,0) 70%); }
+.ev-hero--light .ev-track::after { width: 30%; height: 64%; right: 12%; bottom: 6%; background: radial-gradient(circle, rgba(255,120,176,.45), rgba(255,120,176,0) 70%); animation-duration: 18s; animation-direction: alternate-reverse; }
+.ev-hero--light .ev-slide {
+  background: linear-gradient(145deg, rgba(255,255,255,.72), rgba(255,255,255,.26));
+  -webkit-backdrop-filter: blur(22px) saturate(1.8); backdrop-filter: blur(22px) saturate(1.8);
+  border: 1px solid rgba(255,255,255,.95);
+  box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(236,31,122,.14), 0 24px 54px rgba(120,10,60,.16);
+}
+.ev-hero--light .ev-slide[data-d="0"] {
+  border-color: #fff;
+  box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(236,31,122,.2), 0 0 0 1px rgba(236,31,122,.28), 0 30px 70px rgba(120,10,60,.26);
+}
+.ev-hero--light .ev-slide::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .35s;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%), rgba(255,255,255,.7), rgba(255,255,255,0) 62%);
+}
+@media (hover: hover) and (pointer: fine) { .ev-hero--light .ev-slide[data-d="0"]:hover::after { opacity: 1; } }
+.ev-hero--light .ev-inner { background: transparent; }
+.ev-hero--light .ev-media, .ev-hero--light .ev-cover { border-radius: 20px; }
+.ev-hero--light .ev-info-in { background: transparent; }
+.ev-hero--light .ev-info h3, .ev-hero--light .ev-meta { color: #0a0a0c; }
+.ev-hero--light .ev-kicker { color: #c5105f; }
+.ev-hero--light .ev-desc { color: #4a3541; }
+.ev-hero--light .ev-tag { background: rgba(10,10,12,.06); border-color: rgba(10,10,12,.14); color: #0a0a0c; }
+.ev-hero--light .ev-slide[data-d="1"], .ev-hero--light .ev-slide[data-d="2"] { opacity: 1; }
+.ev-actions { display: flex; align-items: center; gap: 10px; margin-top: 6px; }
+.ev-actions .ev-more { margin-top: 0; }
+.ev-share { width: 44px; height: 44px; flex: none; border-radius: 50%; display: grid; place-items: center; cursor: pointer; color: #0a0a0c;
+  background: rgba(255,255,255,.7); border: 1px solid rgba(10,10,12,.16); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  transition: background .2s, color .2s, border-color .2s, transform .2s var(--ease-out); }
+.ev-share svg { width: 19px; height: 19px; }
+@media (hover: hover) and (pointer: fine) { .ev-share:hover { background: var(--primary-color); color: #fff; border-color: var(--primary-color); transform: scale(1.06); } }
+.ev-share:focus-visible { outline: 2px solid var(--primary-color); outline-offset: 2px; }
+
+/* Cards de la agenda (cada una lleva a su página y tiene su propio botón de compartir) */
+.ev-card { position: relative; background: var(--background-alt, #131316); border: 1px solid var(--border-color); border-radius: var(--radius); overflow: hidden; transition: border-color .2s, transform .35s var(--ease-out); }
+.ev-card-media { position: relative; }
+.ev-card .ev-cover { height: auto; aspect-ratio: 16 / 10; min-height: 0; border-radius: 0; border-bottom: 1px solid var(--border-color); }
+.ev-card-body { padding: 20px; }
+.ev-card-body h3 { margin: 0 0 8px; font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; }
+.ev-card-body p:last-child { margin: 0; color: var(--text-muted); font-size: .9rem; }
+.ev-card-link { color: inherit; }
+.ev-card-link::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.ev-card .share-btn { z-index: 3; }
+@media (hover: hover) and (pointer: fine) { .ev-card:hover { border-color: var(--primary-color); transform: translateY(-4px); } }
+.ev-card:focus-within { border-color: var(--primary-color); }
+
+/* Página de cada evento */
+.evp { padding: 120px 0 130px; text-align: left; }
+.evp-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+.evp-frame { padding: 12px; border-radius: 32px; background: linear-gradient(145deg, rgba(255,255,255,.75), rgba(255,255,255,.3)); border: 1px solid #fff;
+  box-shadow: inset 0 1px 0 #fff, 0 30px 70px rgba(120,10,60,.22), 0 0 0 1px rgba(236,31,122,.18); }
+.evp-frame .ev-cover { aspect-ratio: 4 / 3; height: auto; border-radius: 22px; }
+.evp-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+.evp-back { font-size: .85rem; font-weight: 800; letter-spacing: .06em; color: #0a0a0c; text-decoration: none; }
+.evp-title { margin: 0; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1; color: #0a0a0c; }
+.evp-meta { font-size: 1rem; }
+.evp-desc { margin: 0; font-size: 1.08rem; line-height: 1.6; color: #3b2530; max-width: 52ch; }
+.evp-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.evp-share { display: inline-flex; align-items: center; gap: 10px; }
+.evp-share svg { width: 18px; height: 18px; }
+.evp .btn-outline { color: #0a0a0c; border-color: #0a0a0c; }
+@media (hover: hover) and (pointer: fine) { .evp .btn-outline:hover { background: #0a0a0c; color: #fff; } }
+.evp-ig { font-weight: 700; font-size: .92rem; color: #c5105f; text-decoration: none; }
+@media (max-width: 860px) { .evp { padding: 104px 0 110px; } .evp-grid { grid-template-columns: 1fr; gap: 32px; } .evp-actions .btn { flex: 1 1 100%; text-align: center; justify-content: center; } }
