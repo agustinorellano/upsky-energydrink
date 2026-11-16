@@ -1026,7 +1026,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const photo = hero && hero.querySelector(".hero-photo");
   if (!photo) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  const hasMouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  // Sin mouse (celular/tablet): la foto se mueve sola, con un vaivén suave en 3D.
+  if (!hasMouse) {
+    let on = true, t0 = performance.now();
+    new IntersectionObserver((en) => { on = en[0].isIntersecting; }, { threshold: 0.05 }).observe(hero);
+    const idle = (now) => {
+      if (on && !document.hidden) {
+        const t = (now - t0) / 1000;
+        const x = Math.sin(t * 0.8) * 0.95;
+        const y = Math.cos(t * 0.55) * 0.7;
+        photo.style.transform =
+          `perspective(900px) rotateY(${(x * 8).toFixed(2)}deg) rotateX(${(-y * 6).toFixed(2)}deg) ` +
+          `translate3d(${(x * 10).toFixed(1)}px, ${(y * 8).toFixed(1)}px, 0) scale(1.05)`;
+      }
+      requestAnimationFrame(idle);
+    };
+    requestAnimationFrame(idle);
+    return;
+  }
 
   const MAX_ROT = 7;   // grados
   const MAX_SHIFT = 18; // px
