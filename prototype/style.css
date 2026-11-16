@@ -3920,3 +3920,91 @@ body.page-product .site-header {
 @media (hover: hover) and (pointer: fine) { .evp .btn-outline:hover { background: #0a0a0c; color: #fff; } }
 .evp-ig { font-weight: 700; font-size: .92rem; color: #c5105f; text-decoration: none; }
 @media (max-width: 860px) { .evp { padding: 104px 0 110px; } .evp-grid { grid-template-columns: 1fr; gap: 32px; } .evp-actions .btn { flex: 1 1 100%; text-align: center; justify-content: center; } }
+
+/* ================= Agenda (Eventos): bento editorial + cartel en movimiento ================= */
+.ev-agenda { position: relative; overflow: hidden; isolation: isolate; padding-top: 40px; }
+.ev-agenda::before, .ev-agenda::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; filter: blur(90px); pointer-events: none; animation: lg-drift 20s ease-in-out infinite alternate; }
+.ev-agenda::before { width: 560px; height: 560px; right: -140px; top: 160px; background: radial-gradient(circle, rgba(236,31,122,.34), rgba(236,31,122,0) 70%); }
+.ev-agenda::after { width: 520px; height: 520px; left: -160px; bottom: 80px; background: radial-gradient(circle, rgba(236,31,122,.22), rgba(236,31,122,0) 70%); animation-duration: 26s; animation-direction: alternate-reverse; }
+.ag-marquee { overflow: hidden; margin: 0 0 56px; padding: 6px 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+.ag-marquee-track { display: flex; align-items: center; gap: 34px; width: max-content; animation: ag-marquee 38s linear infinite; }
+.ag-marquee-track span { font-family: "Archivo", var(--font-display); font-style: italic; font-weight: 900; font-stretch: 125%; text-transform: uppercase; font-size: clamp(2.2rem, 5.4vw, 4.6rem); line-height: 1; white-space: nowrap; color: rgba(255,255,255,.92); }
+.ag-marquee-track span.is-out { color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.4); }
+.ag-bolt { width: clamp(26px, 3.4vw, 44px); height: clamp(26px, 3.4vw, 44px); flex: none; color: var(--primary-color); }
+@keyframes ag-marquee { to { transform: translateX(-50%); } }
+.ag-title { margin: 0 0 12px; font-family: "Archivo", var(--font-display); font-style: italic; font-weight: 900; font-stretch: 125%; text-transform: uppercase; line-height: 1; font-size: clamp(2.2rem, 4.6vw, 3.8rem); color: #fff; }
+.ag-title span { color: var(--primary-color); }
+
+.ag-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 270px; gap: 18px; }
+.ag-card {
+  position: relative; display: block; overflow: hidden; isolation: isolate; border-radius: 28px;
+  background: #0f0f12; border: 1px solid rgba(255,255,255,.12);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 24px 50px rgba(0,0,0,.45);
+  transition: transform .5s var(--ease-out), border-color .3s, box-shadow .3s;
+}
+.ag-card--feat { grid-column: span 2; grid-row: span 2; }
+.ag-card--wide { grid-column: span 2; }
+.ag-card .ev-cover { position: absolute; inset: 0; width: 100%; height: 100%; min-height: 0; aspect-ratio: auto; border: 0; border-radius: 0; align-items: start; padding-top: 14%; transition: transform .8s var(--ease-out); }
+.ag-card .ev-cover img { width: 34%; max-width: 150px; }
+.ag-card--feat .ev-cover img { max-width: 230px; width: 36%; }
+.ag-shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(10,10,12,0) 28%, rgba(10,10,12,.55) 58%, rgba(10,10,12,.94) 100%); }
+.ag-num { position: absolute; z-index: 1; right: 16px; bottom: 6px; font-family: "Archivo", var(--font-display); font-style: italic; font-weight: 900; font-stretch: 125%; font-size: 5.6rem; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.2); pointer-events: none; }
+.ag-card--feat .ag-num { font-size: 9rem; right: 24px; bottom: 10px; }
+.ag-date { position: absolute; z-index: 3; top: 16px; left: 16px; padding: 6px 14px; border-radius: 999px; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.28); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.ag-share { z-index: 4; }
+.ag-body { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; padding: 22px 24px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+.ag-kicker { margin: 0; font-size: .7rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--primary-color); }
+.ag-body h3 { margin: 0; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; line-height: 1.04; font-size: 1.45rem; color: #fff; }
+.ag-card--feat .ag-body h3 { font-size: clamp(2rem, 3.2vw, 2.8rem); }
+.ag-link { color: inherit; }
+.ag-link::after { content: ""; position: absolute; inset: 0; z-index: 2; }
+.ag-place { margin: 0; font-size: .88rem; color: rgba(255,255,255,.72); }
+.ag-desc { margin: 6px 0 4px; max-width: 44ch; color: rgba(255,255,255,.78); font-size: .98rem; line-height: 1.5; }
+.ag-card .ev-tags { margin-top: 2px; }
+.ag-card .ev-tag { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.22); color: #fff; }
+.ag-arrow { position: absolute; z-index: 3; right: 18px; top: 16px; width: 0; height: 0; opacity: 0; }
+.ag-card:not(.ag-cta)::after { content: ""; position: absolute; inset: 0; z-index: 2; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .35s; background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 0%), rgba(255,255,255,.16), rgba(255,255,255,0) 62%); }
+@media (hover: hover) and (pointer: fine) {
+  .ag-card:hover { transform: translateY(-6px); border-color: rgba(236,31,122,.7); box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 30px 70px rgba(0,0,0,.55), 0 0 60px rgba(236,31,122,.22); }
+  .ag-card:hover .ev-cover { transform: scale(1.07); }
+  .ag-card:hover::after { opacity: 1; }
+  .ag-card:hover .ag-num { -webkit-text-stroke-color: rgba(236,31,122,.7); }
+}
+.ag-card:focus-within { border-color: rgba(236,31,122,.7); }
+.ag-cta { background: linear-gradient(135deg, #ec1f7a, #a50f55); border-color: rgba(255,255,255,.3); text-decoration: none; color: #fff; display: grid; place-items: center; }
+.ag-cta::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(60% 80% at 100% 0%, rgba(255,255,255,.25), rgba(255,255,255,0) 70%); }
+.ag-cta-in { padding: 28px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; width: 100%; }
+.ag-cta-plus { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: #0a0a0c; color: #fff; transition: transform .4s var(--ease-out); }
+.ag-cta-plus svg { width: 26px; height: 26px; }
+.ag-cta h3 { margin: 6px 0 0; font-family: "Archivo", var(--font-display); font-style: italic; font-weight: 900; font-stretch: 125%; text-transform: uppercase; font-size: clamp(1.5rem, 2.4vw, 2.2rem); line-height: 1; }
+.ag-cta p { margin: 0; max-width: 34ch; color: rgba(255,255,255,.92); }
+.ag-cta-btn { background: #0a0a0c; color: #fff; margin-top: 8px; pointer-events: none; }
+@media (hover: hover) and (pointer: fine) { .ag-cta:hover .ag-cta-plus { transform: rotate(90deg) scale(1.08); } }
+@media (max-width: 1020px) {
+  .ag-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 300px; }
+  .ag-card--feat { grid-column: span 2; grid-row: span 1; }
+  .ag-card--wide { grid-column: span 2; }
+}
+@media (max-width: 640px) {
+  .ag-marquee { margin-bottom: 36px; }
+  .ag-grid { grid-template-columns: 1fr; grid-auto-rows: 320px; }
+  .ag-card--feat, .ag-card--wide { grid-column: auto; }
+  .ag-card--feat { grid-row: span 1; }
+  .ag-card--feat .ag-num { font-size: 6rem; }
+  .ag-desc { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+}
+@media (prefers-reduced-motion: reduce) { .ag-marquee-track, .ev-agenda::before, .ev-agenda::after { animation: none; } .ag-card, .ag-card .ev-cover { transition: none; } }
+/* Ajustes: el logo de portada no pisa la etiqueta de fecha, y el número fantasma es más sutil. */
+.ag-card .ev-cover { padding-top: 24%; }
+.ag-card .ev-cover img { width: 30%; max-width: 124px; }
+.ag-card--feat .ev-cover { padding-top: 15%; }
+.ag-num { font-size: 4.4rem; -webkit-text-stroke: 1.5px rgba(255,255,255,.13); right: 14px; bottom: 4px; }
+.ag-card--feat .ag-num { font-size: 9rem; }
+.ag-card--wide .ag-num { font-size: 6rem; }
+@media (max-width: 640px) {
+  .ag-grid { grid-auto-rows: 330px; }
+  .ag-card--feat { grid-row: span 1; }
+  .ag-card--feat .ev-cover { padding-top: 22%; }
+  .ag-card--feat .ev-cover img { width: 28%; max-width: 112px; }
+  .ag-card--feat .ag-desc, .ag-card--feat .ev-tags { display: none; }
+}

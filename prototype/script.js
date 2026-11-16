@@ -1165,3 +1165,13 @@ document.addEventListener("DOMContentLoaded", () => {
     say((await copy(url)) ? "Enlace del evento copiado" : "No se pudo copiar el enlace");
   }));
 });
+
+// Agenda: brillo que sigue al cursor sobre cada card (solo con mouse).
+document.addEventListener("DOMContentLoaded", () => {
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  document.querySelectorAll(".ag-card").forEach((c) => c.addEventListener("pointermove", (e) => {
+    const r = c.getBoundingClientRect();
+    c.style.setProperty("--mx", `${((e.clientX - r.left) / r.width) * 100}%`);
+    c.style.setProperty("--my", `${((e.clientY - r.top) / r.height) * 100}%`);
+  }));
+});
