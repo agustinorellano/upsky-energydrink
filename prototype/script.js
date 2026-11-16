@@ -559,7 +559,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Prototipo: sin backend ni pasarela de pago. El "checkout" arma un
   // mensaje de WhatsApp con el pedido, que es como ya opera la marca.
   const WHATSAPP_NUMBER = "5491160579579";
-  const CART_STORAGE_KEY = "upsky-cart";
+  const CART_STORAGE_KEY = "upsky-cart-v2";
 
   const cartButton = document.getElementById("cartButton");
   const cartCount = document.getElementById("cartCount");
@@ -575,6 +575,23 @@ document.addEventListener("DOMContentLoaded", () => {
   if (cartButton && cartDrawer) {
     const formatPrice = (value) =>
       "$" + value.toLocaleString("es-AR", { maximumFractionDigits: 0 });
+
+    // Descuentos por cantidad: item.tiers = [[cantidadMinima, porcentaje], ...]
+    const parseTiers = (str) =>
+      (str || "")
+        .split(",")
+        .map((t) => t.split(":").map(Number))
+        .filter((t) => t.length === 2 && t.every((n) => !Number.isNaN(n)))
+        .sort((a, b) => a[0] - b[0]);
+    const discountFor = (item) => {
+      let pct = 0;
+      (item.tiers || []).forEach(([min, p]) => {
+        if (item.qty >= min) pct = p;
+      });
+      return pct;
+    };
+    const unitPrice = (item) => Math.round(item.price * (1 - discountFor(item) / 100));
+    const lineTotal = (item) => unitPrice(item) * item.qty;
 
     const loadCart = () => {
       try {
@@ -596,7 +613,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderCart() {
       const ids = Object.keys(cart);
       const totalQty = ids.reduce((sum, id) => sum + cart[id].qty, 0);
-      const totalPrice = ids.reduce((sum, id) => sum + cart[id].qty * cart[id].price, 0);
+      const totalPrice = ids.reduce((sum, id) => sum + lineTotal(cart[id]), 0);
 
       cartCount.textContent = String(totalQty);
       cartCount.hidden = totalQty === 0;
@@ -616,7 +633,7 @@ document.addEventListener("DOMContentLoaded", () => {
         row.innerHTML = `
           <div>
             <p class="cart-item-name">${item.name}</p>
-            <p class="cart-item-price">${formatPrice(item.price)} c/u</p>
+            <p class="cart-item-price">${formatPrice(unitPrice(item))} c/u${discountFor(item) ? ` · <strong>${discountFor(item)}% OFF</strong>` : ""}</p>
             <div class="cart-item-qty">
               <button class="cart-qty-btn" type="button" data-action="decrease" aria-label="Restar">−</button>
               <span>${item.qty}</span>
@@ -626,7 +643,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <button class="cart-item-remove" type="button" data-action="remove">Quitar</button>
         `;
         row.querySelector('[data-action="increase"]').addEventListener("click", () => {
-          cart[id].qty += 1;
+          if (!cart[id].max || cart[id].qty < cart[id].max) cart[id].qty += 1;
           persistAndRender();
         });
         row.querySelector('[data-action="decrease"]').addEventListener("click", () => {
@@ -675,8 +692,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const valueEl = stepper.querySelector(".qty-value");
       stepper.querySelectorAll(".qty-btn").forEach((btn) => {
         btn.addEventListener("click", () => {
+          const max = Number(stepper.closest("[data-max]")?.dataset.max) || Infinity;
           let qty = Number(valueEl.textContent) || 1;
-          qty = btn.dataset.action === "increase" ? qty + 1 : Math.max(1, qty - 1);
+          qty = btn.dataset.action === "increase" ? Math.min(max, qty + 1) : Math.max(1, qty - 1);
           valueEl.textContent = qty;
         });
       });
@@ -691,8 +709,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const qtyEl = card.querySelector(".qty-value");
         const addQty = qtyEl ? Number(qtyEl.textContent) || 1 : 1;
 
-        if (!cart[id]) cart[id] = { name, price, qty: 0 };
+        const max = Number(card.dataset.max) || 0;
+        if (!cart[id]) cart[id] = { name, price, qty: 0, tiers: parseTiers(card.dataset.tiers), max };
         cart[id].qty += addQty;
+        if (max) cart[id].qty = Math.min(max, cart[id].qty);
         if (qtyEl) qtyEl.textContent = "1";
         persistAndRender();
       });
@@ -708,8 +728,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (shippingForm && !shippingForm.reportValidity()) return;
 
-      const lines = ids.map((id) => `- ${cart[id].name} x${cart[id].qty}`);
-      const total = ids.reduce((sum, id) => sum + cart[id].qty * cart[id].price, 0);
+      const lines = ids.map((id) => {
+        const d = discountFor(cart[id]);
+        return `- ${cart[id].name} x${cart[id].qty}${d ? ` (${d}% OFF)` : ""}`;
+      });
+      const total = ids.reduce((sum, id) => sum + lineTotal(cart[id]), 0);
 
       let message =
         "Hola! Quiero hacer este pedido:\n" +
