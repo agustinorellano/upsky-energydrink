@@ -4614,3 +4614,8 @@ html.ua-open .ua-launcher, html.ua-open .whatsapp-float, html.ua-open .wa-nudge 
 .ua-reset svg { width: 18px; height: 18px; }
 @media (prefers-reduced-motion: reduce) { .ua-prices .ua-price, .ua-cards .ua-card { animation: none; } }
 .ua-price img[src*="logo"] { object-fit: contain; padding: 5px; }
+
+/* Chips: todas las opciones visibles de una (sin scroll horizontal), en varias filas compactas. */
+.ua-chips { flex-wrap: wrap; overflow: visible; max-height: none; -webkit-mask-image: none; mask-image: none; scroll-snap-type: none; gap: 6px; padding: 8px 14px 10px; }
+.ua-chip { flex: 0 1 auto; white-space: normal; text-align: center; padding: 7px 12px; font-size: .78rem; line-height: 1.2; }
+.ua-log { min-height: 120px; }
