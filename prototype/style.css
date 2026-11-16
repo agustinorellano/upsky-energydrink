@@ -4304,3 +4304,23 @@ body.page-product .site-header {
 /* El carrito cerrado no debe proyectar sombra sobre el borde de la pantalla. */
 .cart-drawer { transition: transform var(--duration-drawer) var(--ease-drawer), box-shadow .2s; }
 .cart-drawer:not(.is-open) { box-shadow: none; }
+
+/* ===== Eventos · corrección de bug de renderizado en el carrusel =====
+   El desenfoque animado de las manchas + backdrop-filter de las tarjetas hacía que el navegador
+   pintara una capa rosada/blanca encima de la mitad inferior de la tarjeta activa.
+   Se reemplaza por degradés estáticos y vidrio con fondo semi-opaco (sin backdrop-filter ni filter). */
+.ev-hero--light .ev-track::before, .ev-hero--light .ev-track::after { filter: none; animation: none; }
+.ev-hero--light .ev-track::before { background: radial-gradient(closest-side, rgba(236,31,122,.22), rgba(236,31,122,0)); }
+.ev-hero--light .ev-track::after { background: radial-gradient(closest-side, rgba(255,120,176,.2), rgba(255,120,176,0)); }
+.ev-hero--light .ev-slide {
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+  background: linear-gradient(145deg, rgba(255,255,255,.96), rgba(253,238,246,.9));
+  will-change: auto; transform: none;
+}
+.ev-hero--light .ev-slide::after { display: none; }
+.ev-hero--light .ev-share, .ev-hero--light .ev-arrow { -webkit-backdrop-filter: none; backdrop-filter: none; background: #fff; }
+@media (hover: hover) and (pointer: fine) {
+  .ev-hero--light .ev-arrow:hover, .ev-hero--light .ev-share:hover { background: var(--primary-color); color: #fff; border-color: var(--primary-color); }
+}
+/* Eventos (hero blanco): el nav translúcido se veía gris sobre el blanco; queda negro sólido, como en Producto. */
+body:has(.ev-hero--light) .site-header { background: #0a0a0c; -webkit-backdrop-filter: none; backdrop-filter: none; border-color: rgba(255,255,255,.1); box-shadow: 0 14px 34px rgba(0,0,0,.35); }
