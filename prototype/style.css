@@ -4553,3 +4553,7 @@ html.ua-open .ua-launcher, html.ua-open .whatsapp-float, html.ua-open .wa-nudge 
 /* Los z-index internos de los carruseles (hasta 1000 en Comunidad) pasaban por encima del asistente, el carrito y el menú.
    Se encierran en su propio contexto de apilado. */
 .ugc-grid-wrap, .ugc-carousel, .tt-stage, .ev-carousel { isolation: isolate; }
+
+/* Ícono del asistente (burbuja con rayo): centrado óptico — la cola de la burbuja pesa abajo, se compensa con un leve desplazamiento. */
+.ua-launcher svg { width: 32px; height: 32px; transform: translateY(-1px); }
+.ua-avatar svg { width: 26px; height: 26px; transform: translateY(-1px); }

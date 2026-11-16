@@ -75,6 +75,7 @@
   const onPage = (name) => location.pathname.replace(/\.html$/, "").endsWith("/" + name) || location.pathname.endsWith(name + ".html");
 
   const IC = {
+    chat: '<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 16a8 8 0 0 1 8-8h32a8 8 0 0 1 8 8v20a8 8 0 0 1-8 8H31L19 55V44h-3a8 8 0 0 1-8-8z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M35 13 23 28h8l-3 11 13-16h-8z" fill="currentColor"/></svg>',
     bolt: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z" fill="currentColor"/></svg>',
     close: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
     send: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12 20 4l-4 16-4-6z" fill="currentColor"/></svg>',
@@ -89,7 +90,7 @@
   launcher.className = "ua-launcher";
   launcher.setAttribute("aria-label", "Abrir el Asistente UP SKY");
   launcher.setAttribute("aria-expanded", "false");
-  launcher.innerHTML = `${IC.bolt}<span class="ua-launcher-tip">Asistente</span>`;
+  launcher.innerHTML = `${IC.chat}<span class="ua-launcher-tip">Asistente</span>`;
 
   const panel = document.createElement("section");
   panel.className = "ua-panel";
@@ -98,7 +99,7 @@
   panel.setAttribute("aria-hidden", "true");
   panel.innerHTML = `
     <header class="ua-head">
-      <span class="ua-avatar">${IC.bolt}</span>
+      <span class="ua-avatar">${IC.chat}</span>
       <div class="ua-head-t"><strong>Asistente UP SKY</strong><small>Respuestas al instante</small></div>
       <button type="button" class="ua-x" aria-label="Cerrar el asistente">${IC.close}</button>
     </header>
