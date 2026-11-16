@@ -1424,3 +1424,32 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => { label.textContent = "Copiar"; btn.classList.remove("is-done"); }, 1800);
   });
 });
+
+// Producto · "Información del producto": pestañas (Nutrición / Ingredientes / Envase / Consumo) y acceso al asistente.
+document.addEventListener("DOMContentLoaded", () => {
+  const tabs = Array.from(document.querySelectorAll(".pi-tab"));
+  if (tabs.length) {
+    const select = (k, focus) => {
+      tabs.forEach((t) => {
+        const on = t.dataset.k === k;
+        t.classList.toggle("is-active", on);
+        t.setAttribute("aria-selected", String(on));
+        t.tabIndex = on ? 0 : -1;
+        if (on && focus) t.focus();
+      });
+      document.querySelectorAll(".pi-panel").forEach((p) => {
+        const on = p.id === `pi-${k}`;
+        p.hidden = !on;
+        p.classList.toggle("is-active", on);
+      });
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener("click", () => select(t.dataset.k));
+      t.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") { e.preventDefault(); select(tabs[(i + 1) % tabs.length].dataset.k, true); }
+        if (e.key === "ArrowLeft") { e.preventDefault(); select(tabs[(i - 1 + tabs.length) % tabs.length].dataset.k, true); }
+      });
+    });
+  }
+  document.querySelectorAll("[data-open-assistant]").forEach((b) => b.addEventListener("click", () => window.upskyAssistant && window.upskyAssistant.open()));
+});

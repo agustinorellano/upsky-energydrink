@@ -4671,3 +4671,27 @@ html.ua-open .ua-launcher, html.ua-open .whatsapp-float, html.ua-open .wa-nudge 
 /* Carrusel de Comunidad: capas más livianas para que no se trabe. */
 .ugc-card { will-change: transform, opacity; contain: layout paint; backface-visibility: hidden; }
 .ugc-card-media { background: #0f0f12; }
+
+/* ===== Producto · Información del producto (pestañas) ===== */
+#info .pp-nutri-grid { margin: 8px 0 34px; }
+.pi-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 26px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,.12); }
+.pi-tab { padding: 11px 22px; border-radius: 999px; border: 1px solid rgba(255,255,255,.2); background: transparent; color: rgba(255,255,255,.75); font: 700 .92rem var(--font-body); cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+.pi-tab.is-active { background: var(--primary-color); border-color: var(--primary-color); color: #fff; }
+@media (hover: hover) and (pointer: fine) { .pi-tab:not(.is-active):hover { border-color: #fff; color: #fff; } }
+.pi-tab:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.pi-panel { animation: pi-in .4s var(--ease-out); }
+.pi-panel[hidden] { display: none; }
+@keyframes pi-in { from { opacity: 0; transform: translateY(10px); } }
+.pi-panel > p:first-child, .pi-lead { margin: 0 0 18px; color: rgba(255,255,255,.78); max-width: 70ch; line-height: 1.6; }
+.pi-panel .tech-panel-note { color: rgba(255,255,255,.6); }
+.pi-panel .sustain-list { margin-top: 4px; }
+.pf-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+@media (max-width: 640px) { .pi-tabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 -24px 22px; padding: 0 24px 14px; } .pi-tabs::-webkit-scrollbar { display: none; } .pi-tab { flex: none; padding: 10px 18px; font-size: .86rem; } .pf-cta .btn { width: 100%; text-align: center; } }
+@media (prefers-reduced-motion: reduce) { .pi-panel { animation: none; } }
+.pi-panel .qs-attr-icon { flex: none; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; border: 1.5px solid var(--primary-color); color: var(--primary-color); }
+.pi-panel .qs-attr-icon svg { width: 18px; height: 18px; }
+.pi-panel .ficha-attr { display: flex; align-items: flex-start; gap: 14px; }
+.pi-panel .ficha-attr strong { display: block; color: #fff; margin-bottom: 2px; }
+.pi-panel .ficha-attr p { margin: 0; color: rgba(255,255,255,.72); }
+.pi-panel .ficha-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 40px; margin-top: 6px; }
+@media (max-width: 700px) { .pi-panel .ficha-grid { grid-template-columns: 1fr; } }
