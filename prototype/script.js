@@ -858,6 +858,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const dots = Array.from(s.querySelectorAll(".media-slider-dots span"));
     const hint = s.querySelector(".media-slider-hint");
     const labels = ["Frente", "Espalda"];
+    const prev = s.querySelector(".media-slider-arrow--prev");
+    const next = s.querySelector(".media-slider-arrow--next");
+    const go = (dir) => track.scrollBy({ left: dir * track.clientWidth, behavior: "smooth" });
+    prev && prev.addEventListener("click", (e) => { e.stopPropagation(); go(-1); });
+    next && next.addEventListener("click", (e) => { e.stopPropagation(); go(1); });
+    const sync = () => {
+      const i = Math.round(track.scrollLeft / track.clientWidth);
+      if (prev) prev.hidden = i <= 0;
+      if (next) next.hidden = i >= dots.length - 1;
+    };
+    sync();
+    track.addEventListener("scroll", sync, { passive: true });
     track.addEventListener("scroll", () => {
       const i = Math.round(track.scrollLeft / track.clientWidth);
       dots.forEach((d, k) => d.classList.toggle("is-active", k === i));

@@ -3599,3 +3599,19 @@ body.page-product .site-footer { margin-top: -56px; position: relative; }
   .media-slider-dots { bottom: 12px; }
 }
 @media (prefers-reduced-motion: reduce) { .is-shared-target { animation: none; } }
+
+/* Flechas del slider de fotos (siempre visibles; la del extremo se oculta). */
+.media-slider-arrow {
+  position: absolute; top: 50%; z-index: 6; transform: translateY(-50%);
+  width: 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(255,255,255,.3);
+  background: rgba(10,10,12,.6); color: #fff; cursor: pointer; display: grid; place-items: center;
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  transition: background .2s, border-color .2s, transform .2s var(--ease-out);
+}
+.media-slider-arrow[hidden] { display: none; }
+.media-slider-arrow svg { width: 18px; height: 18px; }
+.media-slider-arrow--prev { left: 10px; } .media-slider-arrow--next { right: 10px; }
+.media-slider-arrow:active { transform: translateY(-50%) scale(.92); }
+.media-slider-arrow:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) { .media-slider-arrow:hover { background: var(--primary-color); border-color: var(--primary-color); } }
+@media (max-width: 700px) { .media-slider-arrow { width: 30px; height: 30px; } .media-slider-arrow svg { width: 15px; height: 15px; } .media-slider-arrow--prev { left: 6px; } .media-slider-arrow--next { right: 6px; } }
