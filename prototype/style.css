@@ -3615,3 +3615,11 @@ body.page-product .site-footer { margin-top: -56px; position: relative; }
 .media-slider-arrow:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 @media (hover: hover) and (pointer: fine) { .media-slider-arrow:hover { background: var(--primary-color); border-color: var(--primary-color); } }
 @media (max-width: 700px) { .media-slider-arrow { width: 30px; height: 30px; } .media-slider-arrow svg { width: 15px; height: 15px; } .media-slider-arrow--prev { left: 6px; } .media-slider-arrow--next { right: 6px; } }
+
+/* Producto: sobre los fondos blancos el nav translúcido se veía gris; acá se mantiene negro sólido. */
+body.page-product .site-header {
+  background: #0a0a0c;
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+  border-color: rgba(255,255,255,.1);
+  box-shadow: 0 14px 34px rgba(0,0,0,.35);
+}
