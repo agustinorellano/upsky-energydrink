@@ -4626,3 +4626,8 @@ html.ua-open .ua-launcher, html.ua-open .whatsapp-float, html.ua-open .wa-nudge 
 .ua-avatar::before { content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.55); animation: ua-ring 2.8s ease-out infinite; pointer-events: none; }
 @keyframes ua-ring { 0% { transform: scale(.88); opacity: .75; } 80%, 100% { transform: scale(1.28); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .ua-avatar::before { animation: none; opacity: .4; transform: none; } }
+
+/* Botón de WhatsApp del chat: color primario de la marca y logo completo de WhatsApp. */
+.ua-human { background: var(--primary-color); border-color: var(--primary-color); color: #fff; box-shadow: 0 8px 22px rgba(236,31,122,.35); }
+.ua-human svg { width: 22px; height: 22px; color: #fff; }
+@media (hover: hover) and (pointer: fine) { .ua-human:hover { background: #ff3490; border-color: #ff3490; } }
