@@ -4455,3 +4455,22 @@ body:has(#mayorista) #ya-podes { padding: 72px 0 96px; }
   .mobile-nav-sheet .mobile-nav-cta { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; margin-top: 6px; padding: 14px 20px; border-radius: 999px; background: var(--primary-color); color: #fff; font-weight: 700; text-decoration: none; }
   .mobile-nav-cta svg { width: 20px; height: 20px; }
 }
+
+/* Aviso discreto sobre el botón flotante de WhatsApp (solo escritorio). */
+.wa-nudge { display: none; }
+@media (min-width: 901px) and (hover: hover) {
+  .wa-nudge {
+    display: flex; align-items: flex-start; gap: 6px; position: fixed; z-index: 61; right: 24px; bottom: 96px; max-width: 250px;
+    padding: 10px 8px 10px 14px; border-radius: 16px 16px 4px 16px; background: #fff; color: #0a0a0c;
+    box-shadow: 0 12px 34px rgba(0,0,0,.35); border: 1px solid rgba(0,0,0,.06);
+    opacity: 0; transform: translateY(8px) scale(.97); pointer-events: none; transform-origin: 100% 100%;
+    transition: opacity .35s, transform .4s var(--ease-out);
+  }
+  .wa-nudge.is-on { opacity: 1; transform: none; pointer-events: auto; }
+  .wa-nudge-link { display: block; color: inherit; text-decoration: none; line-height: 1.3; }
+  .wa-nudge-link strong { display: block; font-size: .86rem; font-weight: 800; }
+  .wa-nudge-link span { display: block; font-size: .78rem; color: #5c5c66; margin-top: 1px; }
+  .wa-nudge-close { flex: none; width: 22px; height: 22px; border-radius: 50%; border: 0; background: transparent; color: #8a8a94; font-size: .7rem; cursor: pointer; line-height: 1; }
+  .wa-nudge-close:hover { background: rgba(0,0,0,.07); color: #0a0a0c; }
+}
+@media (prefers-reduced-motion: reduce) { .wa-nudge { transition: opacity .3s; transform: none !important; } }

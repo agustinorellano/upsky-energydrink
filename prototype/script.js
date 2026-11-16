@@ -1314,3 +1314,51 @@ document.addEventListener("DOMContentLoaded", () => {
     upd();
   }
 });
+
+// Aviso discreto sobre el botón flotante de WhatsApp (solo escritorio): aparece de vez en cuando,
+// unos segundos, para recordar que se puede escribir. Se puede cerrar y no vuelve en esa sesión.
+document.addEventListener("DOMContentLoaded", () => {
+  const fab = document.querySelector(".whatsapp-float");
+  if (!fab) return;
+  if (!window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 901px)").matches) return;
+  try { if (sessionStorage.getItem("upsky-wa-nudge") === "off") return; } catch { /* sin storage */ }
+
+  const msgs = [
+    ["¿Querés hacer un pedido?", "Escribinos por WhatsApp"],
+    ["¿Tenés dudas?", "Te respondemos por WhatsApp"],
+    ["¿Sos comercio?", "Consultá precios por mayor"],
+  ];
+  const bubble = document.createElement("div");
+  bubble.className = "wa-nudge";
+  bubble.setAttribute("role", "status");
+  bubble.innerHTML =
+    '<a class="wa-nudge-link" target="_blank" rel="noopener"><strong></strong><span></span></a>' +
+    '<button type="button" class="wa-nudge-close" aria-label="Cerrar aviso">✕</button>';
+  document.body.appendChild(bubble);
+  const link = bubble.querySelector(".wa-nudge-link");
+  link.href = fab.href;
+
+  let i = 0, hideT, showT;
+  const hide = () => bubble.classList.remove("is-on");
+  const show = () => {
+    if (document.hidden || document.getElementById("cartDrawer")?.classList.contains("is-open")) { schedule(20000); return; }
+    const m = msgs[i++ % msgs.length];
+    link.querySelector("strong").textContent = m[0];
+    link.querySelector("span").textContent = m[1];
+    bubble.classList.add("is-on");
+    clearTimeout(hideT);
+    hideT = setTimeout(() => { hide(); schedule(50000); }, 7000);
+  };
+  const schedule = (ms) => { clearTimeout(showT); showT = setTimeout(show, ms); };
+  bubble.querySelector(".wa-nudge-close").addEventListener("click", () => {
+    hide(); clearTimeout(hideT); clearTimeout(showT);
+    try { sessionStorage.setItem("upsky-wa-nudge", "off"); } catch { /* sin storage */ }
+  });
+  link.addEventListener("click", () => {
+    hide(); clearTimeout(hideT); clearTimeout(showT);
+    try { sessionStorage.setItem("upsky-wa-nudge", "off"); } catch { /* sin storage */ }
+  });
+  bubble.addEventListener("mouseenter", () => clearTimeout(hideT));
+  bubble.addEventListener("mouseleave", () => { hideT = setTimeout(() => { hide(); schedule(50000); }, 2500); });
+  schedule(14000);
+});
