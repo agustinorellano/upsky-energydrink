@@ -4557,3 +4557,11 @@ html.ua-open .ua-launcher, html.ua-open .whatsapp-float, html.ua-open .wa-nudge 
 /* Ícono del asistente (burbuja con rayo): centrado óptico — la cola de la burbuja pesa abajo, se compensa con un leve desplazamiento. */
 .ua-launcher svg { width: 32px; height: 32px; transform: translateY(-1px); }
 .ua-avatar svg { width: 26px; height: 26px; transform: translateY(-1px); }
+
+/* Asistente: ícono de persona y botón flotante más grande. */
+.ua-launcher { width: 68px; height: 68px; right: 22px; bottom: 22px; }
+.ua-launcher svg { width: 40px; height: 40px; transform: none; }
+.ua-avatar svg { width: 24px; height: 24px; transform: none; }
+.ua-launcher-tip { right: 80px; }
+.wa-nudge { bottom: 104px !important; }
+@media (max-width: 900px) { .ua-launcher { width: 60px; height: 60px; right: 14px; bottom: 14px; } .ua-launcher svg { width: 34px; height: 34px; } }
