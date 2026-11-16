@@ -46,7 +46,7 @@
     ["persona", ["persona", "humano", "asesor", "vendedor", "whatsapp", "wpp", "hablar con", "contactar", "reclamo", "atencion"]],
     ["pedir", ["pedir", "pedido", "comprar", "compra", "quiero", "carrito", "agregar", "sumar"]],
     ["precios", ["precio", "precios", "cuanto", "cuesta", "vale", "costo", "descuento", "oferta"]],
-    ["mayor", ["mayor", "mayorista", "comercio", "kiosco", "revender", "revendedor", "distribuidor", "pallet", "negocio", "30 packs"]],
+    ["comercio", ["mayor", "mayorista", "comercio", "kiosco", "revender", "revendedor", "distribuidor", "pallet", "negocio", "30 packs"]],
     ["pago", ["pago", "pagar", "transferencia", "tarjeta", "medios de pago", "efectivo", "envio", "enviar", "entrega", "delivery", "zona", "concordia"]],
     ["eventos", ["evento", "eventos", "fecha", "agenda", "degustacion", "activacion"]],
     ["cafeina", ["cafeina", "mg de cafeina", "cuanta cafeina"]],
@@ -174,7 +174,7 @@
     { label: "Quiero pedir", primary: true, run: () => go("pedir") },
     { label: "Precios y descuentos", run: () => go("precios") },
     { label: "Sobre el producto", run: () => go("producto") },
-    { label: "Soy comercio", run: () => go("mayor") },
+    { label: "Soy comercio", run: () => go("comercio") },
     { label: "Eventos", run: () => go("eventos") },
     { label: "Hablar con una persona", run: () => go("persona") },
   ];
@@ -223,8 +223,28 @@
     menu: async () => { state.topic = ""; refreshHuman(); await say("¿Qué necesitás?"); setChips(MENU()); },
     pedir: async () => {
       state.topic = "quiero hacer un pedido"; refreshHuman("Quiero hacer un pedido.");
+      await say("Te llevo al <b>catálogo</b>, donde elegís tus productos y los sumás al carrito.");
+      setChips([
+        { label: "Ir al catálogo", primary: true, run: () => go("pedir") },
+        { label: "Agregar desde acá", run: () => go("pedirchat") },
+        ...back(),
+      ]);
+      navigate("catalogo.html", "#productos");
+    },
+    pedirchat: async () => {
       await say("Elegí qué querés sumar al carrito. También podés escribirme, por ejemplo: <i>“agregar 2 packs”</i>.", (m) => { m.insertAdjacentHTML("beforeend", productCards(["pack", "vaso-negro", "vaso-rosa", "remera"])); bindAdd(m); });
-      setChips([{ label: "Ver precios y descuentos", run: () => go("precios") }, { label: "Soy comercio", run: () => go("mayor") }, ...back()]);
+      setChips([{ label: "Ir al catálogo", primary: true, run: () => go("pedir") }, ...back()]);
+    },
+    comercio: async () => {
+      state.topic = "compra por mayor"; refreshHuman("Soy comercio y quiero comprar por mayor.");
+      await say("Te llevo a <b>Para negocios</b>, donde elegís el volumen (desde 30 packs o pallets de 192) y comprás por mayor.");
+      setChips([
+        { label: "Ir a Para negocios", primary: true, run: () => go("comercio") },
+        { label: "Ver precios por mayor", run: () => go("mayor") },
+        { label: "Hablar con una persona", run: () => go("persona") },
+        ...back(),
+      ]);
+      navigate("negocios.html", "#mayorista");
     },
     precios: async () => {
       state.topic = "precios"; refreshHuman("Quería consultar precios.");
@@ -259,7 +279,7 @@
       state.topic = "precios por mayor"; refreshHuman("Soy comercio y quiero precios por mayor.");
       await say("Precios por mayor, <b>sin envío</b>:" + PRICES_MAYOR() + '<p class="ua-note">Distribución en Concordia y alrededores. Pago por transferencia bancaria.</p>', (m) => m.insertAdjacentHTML("beforeend", productCards(["mayor30"])));
       log.querySelectorAll(".ua-add").forEach((b) => { if (!b._b) { b._b = 1; b.addEventListener("click", () => addToCart(b.dataset.k, 1, b)); } });
-      setChips([{ label: "Ver Negocios", primary: true, run: () => { location.href = onPage("negocios") ? "#mayorista" : "negocios.html#mayorista"; if (onPage("negocios")) close(); } }, { label: "Hablar con una persona", run: () => go("persona") }, ...back()]);
+      setChips([{ label: "Comprar por mayor", primary: true, run: () => go("comercio") }, { label: "Hablar con una persona", run: () => go("persona") }, ...back()]);
     },
     eventos: async () => {
       state.topic = "eventos"; refreshHuman("Quiero llevar UP SKY a mi evento.");
@@ -295,6 +315,15 @@
     };
   });
 
+  // Lleva a otra sección/página (y cierra el chat si ya estamos en ella).
+  function navigate(page, hash) {
+    const here = onPage(page.replace(".html", ""));
+    setTimeout(() => {
+      if (here) { close(); const t = document.querySelector(hash); if (t) t.scrollIntoView({ behavior: "smooth" }); }
+      else location.href = `${page}${hash}`;
+    }, reduce ? 0 : 900);
+  }
+
   function go(id) { state.unknown = 0; (NODES[id] || NODES.menu)(); }
 
   /* ------------------------------ TEXTO LIBRE ------------------------------ */
@@ -317,6 +346,7 @@
     for (const [node, words] of KEYS) {
       let s = 0;
       for (const w of words) { if (q.includes(w)) s += w.length > 4 ? 2 : 1; }
+      if (node === "comercio") s *= 2; // "quiero comprar por mayor" debe ir a Negocios, no al catálogo
       if (s > bestScore) { bestScore = s; best = node; }
     }
     if (best) { state.unknown = 0; (NODES[best] || NODES.menu)(); return; }
