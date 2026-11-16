@@ -66,8 +66,17 @@
     <button class="cart-close" id="cartClose" aria-label="Cerrar carrito">✕</button>
   </div>
   <div class="cart-items" id="cartItems">
-    <p class="cart-empty" id="cartEmpty">Todavía no agregaste productos.</p>
+    <div class="cart-empty" id="cartEmpty">
+      <a href="catalogo.html#productos" class="cart-empty-plus" aria-label="Sumar productos desde el catálogo" data-cart-link><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></a>
+      <p class="cart-empty-title">Tu carrito está vacío</p>
+      <p class="cart-empty-sub">Sumá productos desde el catálogo y armá tu pedido.</p>
+      <a href="catalogo.html#productos" class="btn btn-primary" data-cart-link>Ver el catálogo</a>
+    </div>
   </div>
+  <a href="catalogo.html#productos" class="cart-add-more" id="cartAddMore" data-cart-link>
+    <span class="cart-add-more-plus" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+    <span>Sumar productos<small>Seguí eligiendo en el catálogo</small></span>
+  </a>
   <div class="cart-footer">
     <div class="cart-total-row"><span>Total</span><span id="cartTotal">$0</span></div>
 

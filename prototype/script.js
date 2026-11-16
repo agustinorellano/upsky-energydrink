@@ -620,6 +620,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const totalQty = ids.reduce((sum, id) => sum + cart[id].qty, 0);
       const totalPrice = ids.reduce((sum, id) => sum + lineTotal(cart[id]), 0);
 
+      cartDrawer.classList.toggle("is-empty", ids.length === 0);
       cartCount.textContent = String(totalQty);
       cartCount.hidden = totalQty === 0;
       cartTotalEl.textContent = formatPrice(totalPrice);
@@ -645,7 +646,10 @@ document.addEventListener("DOMContentLoaded", () => {
               <button class="cart-qty-btn" type="button" data-action="increase" aria-label="Sumar">+</button>
             </div>
           </div>
-          <button class="cart-item-remove" type="button" data-action="remove">Quitar</button>
+          <div class="cart-item-side">
+            <span class="cart-item-total">${formatPrice(lineTotal(item))}</span>
+            <button class="cart-item-remove" type="button" data-action="remove">Quitar</button>
+          </div>
         `;
         row.querySelector('[data-action="increase"]').addEventListener("click", () => {
           if (!cart[id].max || cart[id].qty < cart[id].max) cart[id].qty += 1;
@@ -680,6 +684,16 @@ document.addEventListener("DOMContentLoaded", () => {
       cartOverlay.hidden = true;
     }
 
+    cartDrawer.querySelectorAll("[data-cart-link]").forEach((a) =>
+      a.addEventListener("click", (e) => {
+        const onCatalog = /catalogo(\.html)?$/.test(location.pathname);
+        closeCart();
+        if (onCatalog) {
+          e.preventDefault();
+          document.getElementById("productos")?.scrollIntoView({ behavior: "smooth" });
+        }
+      })
+    );
     cartButton.addEventListener("click", openCart);
     cartClose.addEventListener("click", closeCart);
     cartOverlay.addEventListener("click", closeCart);
