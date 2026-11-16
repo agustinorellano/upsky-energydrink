@@ -1054,3 +1054,72 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   hero.addEventListener("pointerleave", () => { tx = 0; ty = 0; inside = false; kick(); });
 });
+
+// Eventos: carrusel del hero (la tarjeta activa se expande, las vecinas se achican).
+// Avanza solo con una barra de progreso; se pausa con el mouse. Click/swipe/teclas para moverlo.
+document.addEventListener("DOMContentLoaded", () => {
+  const hero = document.querySelector(".ev-hero");
+  const track = document.getElementById("evTrack");
+  if (!hero || !track) return;
+  const slides = Array.from(track.querySelectorAll(".ev-slide"));
+  const pills = Array.from(document.querySelectorAll("#evPills .ev-pill"));
+  const N = slides.length;
+  const DUR = 6000;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let cur = 0, timer = 0, userStopped = false;
+  hero.style.setProperty("--ev-dur", `${DUR}ms`);
+
+  const render = () => {
+    slides.forEach((s, i) => {
+      // Posición circular respecto de la activa: vecinas a ambos lados, así la activa queda centrada.
+      const rel = (i - cur + N) % N;
+      const d = Math.min(rel, N - rel);
+      const opposite = N % 2 === 0 && rel === N / 2; // con cantidad par, la "opuesta" se oculta
+      s.style.order = String(rel <= N / 2 ? rel : rel - N);
+      s.dataset.d = d === 0 ? "0" : opposite || d >= 3 ? "far" : String(d);
+      s.setAttribute("aria-hidden", d === 0 ? "false" : "true");
+    });
+    pills.forEach((p, i) => {
+      p.classList.toggle("is-active", i === cur);
+      p.setAttribute("aria-selected", String(i === cur));
+    });
+    // Los lugares vacíos a los lados no se achican solos: se compensa con el desplazamiento del track.
+  };
+  const schedule = () => {
+    clearTimeout(timer);
+    if (reduce || userStopped) return;
+    timer = setTimeout(() => { if (!hero.classList.contains("is-paused") && !document.hidden) go(cur + 1, false); else schedule(); }, DUR);
+  };
+  const go = (i, byUser) => {
+    cur = (i + N) % N;
+    if (byUser) userStopped = true;
+    // reinicia la animación de la barra
+    pills.forEach((p) => { const sp = p.firstElementChild; sp.style.animation = "none"; void sp.offsetWidth; sp.style.animation = ""; });
+    render();
+    schedule();
+  };
+
+  slides.forEach((s, i) => s.addEventListener("click", (e) => { if (i !== cur) { e.preventDefault(); go(i, true); } }));
+  pills.forEach((p, i) => p.addEventListener("click", () => go(i, true)));
+  hero.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") go(cur + 1, true);
+    if (e.key === "ArrowLeft") go(cur - 1, true);
+  });
+  track.addEventListener("mouseenter", () => hero.classList.add("is-paused"));
+  track.addEventListener("mouseleave", () => { hero.classList.remove("is-paused"); });
+  // swipe
+  let x0 = null;
+  track.addEventListener("pointerdown", (e) => { x0 = e.clientX; });
+  track.addEventListener("pointerup", (e) => {
+    if (x0 === null) return;
+    const dx = e.clientX - x0; x0 = null;
+    if (Math.abs(dx) > 48) go(cur + (dx < 0 ? 1 : -1), true);
+  });
+  // botón "Ver detalle" -> abre el modal de la card de la agenda
+  track.querySelectorAll(".ev-more").forEach((b) => b.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const card = document.querySelector(`.event-card[data-ev="${b.dataset.open}"]`);
+    if (card) card.click();
+  }));
+  render(); schedule();
+});

@@ -84,28 +84,143 @@
   </div>
 </aside>
 
-<!-- ========== BANNER ========== -->
-<div class="page-banner page-banner--top">
-  <!-- IMAGEN DEL BANNER PENDIENTE: al cargarla, agregar acá un
-       <img src="assets/..." alt="..." class="page-banner-img"> (panorámica ~2,3:1, imagen a la derecha y el lado izquierdo oscuro para el texto) -->
-  <div class="page-banner-caption">
-    <p class="page-hero-eyebrow">UP SKY · Eventos</p>
-    <h1 class="page-hero-title"><span>Sumate al</span> <span class="page-hero-accent">movimiento.</span></h1>
-    <p class="page-hero-lead">Activaciones, degustaciones y presencia de UP SKY. Enterate primero de las próximas fechas.</p>
-    <a href="https://www.instagram.com/upskyenergydrink/" target="_blank" rel="noopener" class="btn btn-primary page-hero-cta">Seguinos en Instagram
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
+<!-- ========== HERO · EVENTOS (carrusel) ========== -->
+<!-- CONTENIDO DEMO: los eventos, fechas y portadas son de ejemplo. Al tener los reales, reemplazar
+     cada .ev-slide (hero) y .event-card (agenda) y cambiar .ev-cover por <img> o <video>. -->
+<section class="ev-hero" id="inicio-eventos" aria-roledescription="carrusel" aria-label="Eventos principales">
+  <div class="container ev-hero-head">
+    <p class="page-hero-eyebrow ev-eyebrow">UP SKY · Eventos</p>
+    <h1 class="page-hero-title ev-title"><span>Sumate al</span> <span class="page-hero-accent">movimiento.</span></h1>
+    <p class="ev-lead">Activaciones, degustaciones y presencia de UP SKY. Enterate primero de las próximas fechas.</p>
   </div>
-</div>
 
-<!-- ========== EVENTOS ========== -->
-<section class="section events-soon" id="eventos">
-  <div class="container events-soon-inner">
-    <p class="section-eyebrow">Agenda</p>
-    <h2 class="section-title">La agenda se está armando.</h2>
-    <p class="section-lead">Activaciones, degustaciones y presencia de UP SKY en eventos. Muy pronto vas a encontrar acá las próximas fechas.</p>
-    <div class="hero-actions">
-      <a href="negocios.html" class="btn btn-primary">Llevá UP SKY a tu evento</a>
+  <div class="ev-carousel" id="evCarousel">
+    <div class="ev-track" id="evTrack">
+      <article class="ev-slide" data-i="0" aria-label="Noche UP SKY">
+        <div class="ev-inner">
+          <div class="ev-media"><div class="ev-cover ev-cover--1" role="img" aria-label="Portada pendiente de Noche UP SKY"><!-- PORTADA PENDIENTE: foto o video del evento --><img src="assets/logo.png" alt="" width="370" height="255" loading="lazy"></div></div>
+          <div class="ev-info"><div class="ev-info-in">
+            <p class="ev-kicker">Noche · Activación</p>
+            <h3>Noche UP SKY</h3>
+            <p class="ev-meta"><span>Fecha a confirmar</span><span>Concordia</span></p>
+            <p class="ev-desc">Una noche de música y degustación de UP SKY bien fría, con premios y sorpresas para quienes se sumen.</p>
+            <div class="ev-tags"><span class="ev-tag">Degustación</span><span class="ev-tag">Música</span></div>
+            <button type="button" class="btn btn-primary ev-more" data-open="0">Ver detalle <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div></div>
+        </div>
+      </article>
+      <article class="ev-slide" data-i="1" aria-label="Entrená con UP SKY">
+        <div class="ev-inner">
+          <div class="ev-media"><div class="ev-cover ev-cover--2" role="img" aria-label="Portada pendiente de Entrená con UP SKY"><!-- PORTADA PENDIENTE: foto o video del evento --><img src="assets/logo.png" alt="" width="370" height="255" loading="lazy"></div></div>
+          <div class="ev-info"><div class="ev-info-in">
+            <p class="ev-kicker">Deporte · Aire libre</p>
+            <h3>Entrená con UP SKY</h3>
+            <p class="ev-meta"><span>Fecha a confirmar</span><span>Concordia</span></p>
+            <p class="ev-desc">Jornada de entrenamiento al aire libre con hidratación, energía y actividades para todos los niveles.</p>
+            <div class="ev-tags"><span class="ev-tag">Entrenamiento</span><span class="ev-tag">Comunidad</span></div>
+            <button type="button" class="btn btn-primary ev-more" data-open="1">Ver detalle <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div></div>
+        </div>
+      </article>
+      <article class="ev-slide" data-i="2" aria-label="Verano en la costa">
+        <div class="ev-inner">
+          <div class="ev-media"><div class="ev-cover ev-cover--3" role="img" aria-label="Portada pendiente de Verano en la costa"><!-- PORTADA PENDIENTE: foto o video del evento --><img src="assets/logo.png" alt="" width="370" height="255" loading="lazy"></div></div>
+          <div class="ev-info"><div class="ev-info-in">
+            <p class="ev-kicker">Playa · Temporada</p>
+            <h3>Verano en la costa</h3>
+            <p class="ev-meta"><span>Fecha a confirmar</span><span>Costa del Uruguay</span></p>
+            <p class="ev-desc">Presencia de UP SKY en la playa durante el verano: vasos, descuentos y mucha energía.</p>
+            <div class="ev-tags"><span class="ev-tag">Verano</span><span class="ev-tag">Vasos UP SKY</span></div>
+            <button type="button" class="btn btn-primary ev-more" data-open="2">Ver detalle <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div></div>
+        </div>
+      </article>
+      <article class="ev-slide" data-i="3" aria-label="UP SKY en tu comercio">
+        <div class="ev-inner">
+          <div class="ev-media"><div class="ev-cover ev-cover--1" role="img" aria-label="Portada pendiente de UP SKY en tu comercio"><!-- PORTADA PENDIENTE: foto o video del evento --><img src="assets/logo.png" alt="" width="370" height="255" loading="lazy"></div></div>
+          <div class="ev-info"><div class="ev-info-in">
+            <p class="ev-kicker">Degustación · Puntos de venta</p>
+            <h3>UP SKY en tu comercio</h3>
+            <p class="ev-meta"><span>Fecha a confirmar</span><span>A coordinar</span></p>
+            <p class="ev-desc">Llevamos una degustación a tu kiosco, autoservicio o evento privado. Consultanos por disponibilidad.</p>
+            <div class="ev-tags"><span class="ev-tag">Para negocios</span><span class="ev-tag">A coordinar</span></div>
+            <button type="button" class="btn btn-primary ev-more" data-open="3">Ver detalle <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+  <div class="ev-pills" id="evPills" role="tablist" aria-label="Elegir evento"><button type="button" class="ev-pill" data-i="0" aria-label="Ir al evento 1"><span></span></button><button type="button" class="ev-pill" data-i="1" aria-label="Ir al evento 2"><span></span></button><button type="button" class="ev-pill" data-i="2" aria-label="Ir al evento 3"><span></span></button><button type="button" class="ev-pill" data-i="3" aria-label="Ir al evento 4"><span></span></button></div>
+
+  <a href="#agenda" class="scroll-cue ev-cue" aria-label="Ver todos los eventos">
+    <span>Todos los eventos</span>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</section>
+
+<!-- ========== AGENDA ========== -->
+<section class="section ev-agenda" id="agenda">
+  <div class="container">
+    <div class="ev-agenda-head">
+      <div>
+        <p class="section-eyebrow">Agenda</p>
+        <h2 class="section-title">Próximos eventos</h2>
+        <p class="section-lead">Fechas y lugares se publican acá apenas se confirman. Tocá un evento para ver el detalle.</p>
+      </div>
+      <div class="hero-actions">
+        <a href="https://www.instagram.com/upskyenergydrink/" target="_blank" rel="noopener" class="btn btn-primary">Seguinos en Instagram</a>
+        <a href="negocios.html" class="btn btn-outline">Llevá UP SKY a tu evento</a>
+      </div>
+    </div>
+    <div class="event-grid">
+      <article class="event-card" data-ev="0" tabindex="0" role="button" aria-label="Ver Noche UP SKY">
+        <div class="ev-cover ev-cover--1 placeholder-event" role="img" aria-label="Portada pendiente"><!-- PORTADA PENDIENTE --><img src="assets/logo.png" alt="" width="370" height="255" loading="lazy"></div>
+        <div class="event-card-body">
+          <p class="event-date">Fecha a confirmar · Concordia</p>
+          <h3>Noche UP SKY</h3>
+          <p>Una noche de música y degustación de UP SKY bien fría, con premios y sorpresas para quienes se sumen.</p>
+        </div>
+      </article>
+      <article class="event-card" data-ev="1" tabindex="0" role="button" aria-label="Ver Entrená con UP SKY">
+        <div class="ev-cover ev-cover--2 placeholder-event" role="img" aria-label="Portada pendiente"><!-- PORTADA PENDIENTE --><img src="assets/logo.png" alt="" width="370" height="255" loading="lazy"></div>
+        <div class="event-card-body">
+          <p class="event-date">Fecha a confirmar · Concordia</p>
+          <h3>Entrená con UP SKY</h3>
+          <p>Jornada de entrenamiento al aire libre con hidratación, energía y actividades para todos los niveles.</p>
+        </div>
+      </article>
+      <article class="event-card" data-ev="2" tabindex="0" role="button" aria-label="Ver Verano en la costa">
+        <div class="ev-cover ev-cover--3 placeholder-event" role="img" aria-label="Portada pendiente"><!-- PORTADA PENDIENTE --><img src="assets/logo.png" alt="" width="370" height="255" loading="lazy"></div>
+        <div class="event-card-body">
+          <p class="event-date">Fecha a confirmar · Costa del Uruguay</p>
+          <h3>Verano en la costa</h3>
+          <p>Presencia de UP SKY en la playa durante el verano: vasos, descuentos y mucha energía.</p>
+        </div>
+      </article>
+      <article class="event-card" data-ev="3" tabindex="0" role="button" aria-label="Ver UP SKY en tu comercio">
+        <div class="ev-cover ev-cover--1 placeholder-event" role="img" aria-label="Portada pendiente"><!-- PORTADA PENDIENTE --><img src="assets/logo.png" alt="" width="370" height="255" loading="lazy"></div>
+        <div class="event-card-body">
+          <p class="event-date">Fecha a confirmar · A coordinar</p>
+          <h3>UP SKY en tu comercio</h3>
+          <p>Llevamos una degustación a tu kiosco, autoservicio o evento privado. Consultanos por disponibilidad.</p>
+        </div>
+      </article>
+      <article class="event-card" data-ev="4" tabindex="0" role="button" aria-label="Ver Festival de la comunidad">
+        <div class="ev-cover ev-cover--2 placeholder-event" role="img" aria-label="Portada pendiente"><!-- PORTADA PENDIENTE --><img src="assets/logo.png" alt="" width="370" height="255" loading="lazy"></div>
+        <div class="event-card-body">
+          <p class="event-date">Fecha a confirmar · Por definir</p>
+          <h3>Festival de la comunidad</h3>
+          <p>Un encuentro con la comunidad UP SKY: música en vivo, sorteos y la mejor energía.</p>
+        </div>
+      </article>
+      <article class="event-card" data-ev="5" tabindex="0" role="button" aria-label="Ver Competencias y torneos">
+        <div class="ev-cover ev-cover--3 placeholder-event" role="img" aria-label="Portada pendiente"><!-- PORTADA PENDIENTE --><img src="assets/logo.png" alt="" width="370" height="255" loading="lazy"></div>
+        <div class="event-card-body">
+          <p class="event-date">Fecha a confirmar · Por definir</p>
+          <h3>Competencias y torneos</h3>
+          <p>Acompañamos torneos y competencias locales con hidratación y energía para los equipos.</p>
+        </div>
+      </article>
     </div>
   </div>
 </section>
