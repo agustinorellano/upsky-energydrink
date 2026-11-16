@@ -778,6 +778,34 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     });
 
+    // API para el Asistente UP SKY: sumar al carrito y abrir el panel desde el chat.
+    window.upskyCart = {
+      add({ id, name, price, qty = 1, tiers = [], max = 0, group = "" }) {
+        if (!cart[id]) cart[id] = { name, price, qty: 0, tiers, max, group };
+        cart[id].qty += qty;
+        if (max) cart[id].qty = Math.min(max, cart[id].qty);
+        persistAndRender();
+        const ids = Object.keys(cart);
+        return {
+          qty: cart[id].qty,
+          unit: unitPrice(cart[id]),
+          discount: discountFor(cart[id]),
+          count: ids.reduce((n, k) => n + cart[k].qty, 0),
+          total: ids.reduce((n, k) => n + lineTotal(cart[k]), 0),
+          totalText: formatPrice(ids.reduce((n, k) => n + lineTotal(cart[k]), 0)),
+        };
+      },
+      summary() {
+        const ids = Object.keys(cart);
+        return {
+          lines: ids.map((k) => ({ name: cart[k].name, qty: cart[k].qty })),
+          count: ids.reduce((n, k) => n + cart[k].qty, 0),
+          totalText: formatPrice(ids.reduce((n, k) => n + lineTotal(cart[k]), 0)),
+        };
+      },
+      open: openCart,
+    };
+
     renderCart();
   }
 
@@ -1324,9 +1352,9 @@ document.addEventListener("DOMContentLoaded", () => {
   try { if (sessionStorage.getItem("upsky-wa-nudge") === "off") return; } catch { /* sin storage */ }
 
   const msgs = [
-    ["¿Querés hacer un pedido?", "Escribinos por WhatsApp"],
-    ["¿Tenés dudas?", "Te respondemos por WhatsApp"],
-    ["¿Sos comercio?", "Consultá precios por mayor"],
+    ["Hola, soy el Asistente UP SKY", "¿Te ayudo con tu pedido?"],
+    ["¿Dudas sobre UP SKY?", "Preguntame lo que quieras"],
+    ["¿Sos comercio?", "Te cuento los precios por mayor"],
   ];
   const bubble = document.createElement("div");
   bubble.className = "wa-nudge";
@@ -1354,7 +1382,8 @@ document.addEventListener("DOMContentLoaded", () => {
     hide(); clearTimeout(hideT); clearTimeout(showT);
     try { sessionStorage.setItem("upsky-wa-nudge", "off"); } catch { /* sin storage */ }
   });
-  link.addEventListener("click", () => {
+  link.addEventListener("click", (e) => {
+    if (window.upskyAssistant) { e.preventDefault(); window.upskyAssistant.open(); }
     hide(); clearTimeout(hideT); clearTimeout(showT);
     try { sessionStorage.setItem("upsky-wa-nudge", "off"); } catch { /* sin storage */ }
   });
