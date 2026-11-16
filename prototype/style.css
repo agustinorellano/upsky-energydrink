@@ -4237,3 +4237,9 @@ body.page-product .site-header {
 
 /* Agenda sin cartel en movimiento: el título arranca más cerca del hero. */
 .ev-agenda { padding-top: 96px; }
+
+/* Catálogo mobile: sin el botón "Pedir por WhatsApp" del banner (queda la card de compra rápida). */
+@media (max-width: 900px) {
+  #catalogo .page-hero-cta { display: none; }
+  #catalogo .page-hero-lead { margin-bottom: 0; }
+}
