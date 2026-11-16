@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // en mobile, varios <video autoplay> compitiendo apenas carga la
   // página suelen hacer que el navegador se niegue a reproducir
   // alguno; forzamos el play() recién cuando cada uno entra en pantalla.
-  const autoplayVideos = document.querySelectorAll("video[autoplay], video[data-autoplay]");
+  const autoplayVideos = document.querySelectorAll("video[autoplay]:not(.ugc-card-media), video[data-autoplay]:not(.ugc-card-media)");
   if (autoplayVideos.length && "IntersectionObserver" in window) {
     const videoObserver = new IntersectionObserver(
       (entries) => {
@@ -347,6 +347,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let lastDragT = 0;
     let velocity = 0; // px/s, decae tras soltar
     let lastFrameT = null;
+    let carouselVisible = false;
+    new IntersectionObserver((en) => { carouselVisible = en[0].isIntersecting; }, { rootMargin: "80px" }).observe(ugcCarousel);
 
     function measure() {
       containerW = ugcCarousel.clientWidth;
@@ -373,7 +375,15 @@ document.addEventListener("DOMContentLoaded", () => {
         card.style.transform = `translate(-50%, -50%) translate(${wrapped}px, 0) scale(${scale})`;
         card.style.zIndex = String(1000 - Math.round(d * 100));
         card.style.opacity = String(Math.max(0.3, opacity));
-        card.style.filter = d > 0.35 ? `saturate(${(1 - 0.5 * d).toFixed(2)})` : "";
+        // Rendimiento: solo se reproducen las tarjetas cercanas al centro; el resto queda pausado en su póster.
+        const v = card._v || (card._v = card.querySelector("video"));
+        if (v) {
+          const want = carouselVisible && d < 0.5;
+          if (want !== card._play) {
+            card._play = want;
+            if (want) v.play().catch(() => {}); else v.pause();
+          }
+        }
       });
     }
 
@@ -400,7 +410,7 @@ document.addEventListener("DOMContentLoaded", () => {
           velocity = 0;
         }
       }
-      layout();
+      if (carouselVisible || nudge) layout(); else if (cards.some((c) => c._play)) layout();
       requestAnimationFrame(tick);
     }
 
