@@ -3623,3 +3623,9 @@ body.page-product .site-header {
   border-color: rgba(255,255,255,.1);
   box-shadow: 0 14px 34px rgba(0,0,0,.35);
 }
+
+/* Slider con fotos de estudio sobre blanco: borde sutil y sello oscuro legible. */
+.media-slider--light { background: #fff; }
+.media-slider--light .media-slider-track img { object-position: 50% 50%; }
+.media-slider--light .media-slider-dots span { background: rgba(10,10,12,.28); }
+.media-slider--light .media-slider-dots span.is-active { background: #0a0a0c; }

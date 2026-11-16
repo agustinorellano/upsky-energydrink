@@ -856,9 +856,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("[data-slider]").forEach((s) => {
     const track = s.querySelector(".media-slider-track");
     const dots = Array.from(s.querySelectorAll(".media-slider-dots span"));
-    const hint = s.querySelector(".media-slider-hint");
-    const labels = ["Frente", "Espalda"];
-    const prev = s.querySelector(".media-slider-arrow--prev");
+        const prev = s.querySelector(".media-slider-arrow--prev");
     const next = s.querySelector(".media-slider-arrow--next");
     const go = (dir) => track.scrollBy({ left: dir * track.clientWidth, behavior: "smooth" });
     prev && prev.addEventListener("click", (e) => { e.stopPropagation(); go(-1); });
@@ -873,8 +871,23 @@ document.addEventListener("DOMContentLoaded", () => {
     track.addEventListener("scroll", () => {
       const i = Math.round(track.scrollLeft / track.clientWidth);
       dots.forEach((d, k) => d.classList.toggle("is-active", k === i));
-      if (hint && labels[i]) hint.textContent = labels.join(" · ");
     }, { passive: true });
+    // Avance automático (data-autoplay = ms). Se pausa con mouse/foco/touch y fuera de pantalla.
+    const delay = Number(s.dataset.autoplay) || 0;
+    if (delay && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      let paused = false, visible = false, timer;
+      const tick = () => {
+        if (paused || !visible || document.hidden) return;
+        const i = Math.round(track.scrollLeft / track.clientWidth);
+        track.scrollTo({ left: (i + 1) % dots.length * track.clientWidth, behavior: "smooth" });
+      };
+      const start = () => { clearInterval(timer); timer = setInterval(tick, delay); };
+      new IntersectionObserver((en) => { visible = en[0].isIntersecting; }, { threshold: 0.5 }).observe(s);
+      ["mouseenter", "focusin", "touchstart", "pointerdown"].forEach((ev) => s.addEventListener(ev, () => { paused = true; }, { passive: true }));
+      ["mouseleave", "focusout"].forEach((ev) => s.addEventListener(ev, () => { paused = false; start(); }));
+      s.addEventListener("touchend", () => { setTimeout(() => { paused = false; start(); }, 4000); }, { passive: true });
+      start();
+    }
     track.addEventListener("keydown", (e) => {
       if (e.key === "ArrowRight") track.scrollBy({ left: track.clientWidth, behavior: "smooth" });
       if (e.key === "ArrowLeft") track.scrollBy({ left: -track.clientWidth, behavior: "smooth" });
