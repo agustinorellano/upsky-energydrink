@@ -1,0 +1,36 @@
+const { chromium } = require('playwright');
+const D='/tmp/claude-0/-home-user-upsky-energydrink/a72c7d1a-44ed-5552-9d7e-4f323e22388b/scratchpad/deliv';
+const U='http://localhost:7970/';
+(async()=>{const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium'});
+const hide='.whatsapp-float,.wa-nudge{display:none!important}';
+async function shot(name,page,vp,fn,opts={}){
+  const ctx=await b.newContext({viewport:vp,deviceScaleFactor:opts.dsf||1.5,hasTouch:!!opts.mobile,isMobile:!!opts.mobile});
+  const p=await ctx.newPage();await p.goto(U+page,{waitUntil:'load'});await p.waitForTimeout(1200);
+  await p.addStyleTag({content:hide});
+  if(fn) await fn(p);
+  await p.waitForTimeout(2800);
+  await p.screenshot({path:`${D}/${name}.png`});await ctx.close();
+}
+const sc=(sel,off=-100)=>async p=>{await p.evaluate(([s,o])=>window.scrollTo(0,document.querySelector(s).getBoundingClientRect().top+scrollY+o),[sel,off]);};
+const DV={width:1440,height:860}, MV={width:390,height:844};
+await shot('home-d','index.html',DV);
+await shot('home-m','index.html',MV,null,{mobile:true,dsf:2});
+await shot('home-feat-d','index.html',DV,sc('#formatos',-40));
+await shot('home-feat-m','index.html',MV,sc('#formatos',20),{mobile:true,dsf:2});
+await shot('prod-d','producto.html',DV);
+await shot('prod-m','producto.html',MV,null,{mobile:true,dsf:2});
+await shot('prod-form-d','producto.html',DV,sc('#formula',-30));
+await shot('cat-d','catalogo.html',DV);
+await shot('cat-m','catalogo.html',MV,null,{mobile:true,dsf:2});
+await shot('cat-grid-d','catalogo.html',DV,sc('#productos',-100));
+await shot('cat-grid-m','catalogo.html',MV,sc('#productos',-90),{mobile:true,dsf:2});
+await shot('ev-d','eventos.html',DV);
+await shot('ev-m','eventos.html',MV,null,{mobile:true,dsf:2});
+await shot('ev-ag-d','eventos.html',DV,sc('#agenda',-60));
+await shot('evp-d','evento-noche-up-sky.html',DV);
+await shot('neg-d','negocios.html',DV);
+await shot('neg-m','negocios.html',MV,null,{mobile:true,dsf:2});
+await shot('cart-full-d','catalogo.html',DV,async p=>{await p.evaluate(()=>localStorage.clear());await p.reload();await p.addStyleTag({content:hide});await p.waitForTimeout(600);await p.click('[data-id=pack1] .btn-add');await p.click('[data-id=pack1] [data-action=increase]');await p.click('[data-id=pack1] [data-action=increase]');await p.click('[data-id=pack1] [data-action=increase]');await p.click('[data-id=pack1] .btn-add');await p.click('#cartButton');});
+await shot('cart-empty-m','catalogo.html',MV,async p=>{await p.evaluate(()=>localStorage.clear());await p.reload();await p.addStyleTag({content:hide});await p.waitForTimeout(600);await p.click('#cartButton');},{mobile:true,dsf:2});
+await shot('wa-nudge-d','catalogo.html',DV,async p=>{await p.addStyleTag({content:'.whatsapp-float{display:flex!important}.wa-nudge{display:flex!important}'});await p.evaluate(()=>{const n=document.querySelector('.wa-nudge');n.querySelector('strong').textContent='¿Querés hacer un pedido?';n.querySelector('span').textContent='Escribinos por WhatsApp';n.classList.add('is-on');});});
+await b.close();console.log('ok');})();
