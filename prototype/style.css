@@ -3684,3 +3684,6 @@ body.page-product .site-header {
   .home-widgets { grid-template-columns: repeat(2, minmax(0, 270px)); justify-content: center; }
   .more-card { grid-column: 1 / -1; flex-direction: row; justify-content: center; min-height: 0; padding: 18px !important; gap: 18px; }
 }
+
+/* Hero: base para el efecto 3D (transform controlado por JS). */
+.hero-photo { transform-origin: 50% 55%; will-change: transform; backface-visibility: hidden; }

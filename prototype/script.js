@@ -1017,3 +1017,40 @@ document.addEventListener("DOMContentLoaded", () => {
     select(0);
   });
 });
+
+// Hero: efecto 3D al mover el mouse. La foto se inclina y se desplaza levemente
+// siguiendo el cursor (con suavizado). Solo con mouse y sin "reducir movimiento".
+document.addEventListener("DOMContentLoaded", () => {
+  const hero = document.querySelector(".hero");
+  const photo = hero && hero.querySelector(".hero-photo");
+  if (!photo) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+  const MAX_ROT = 7;   // grados
+  const MAX_SHIFT = 18; // px
+  let tx = 0, ty = 0, cx = 0, cy = 0, raf = 0, inside = false;
+
+  const loop = () => {
+    cx += (tx - cx) * 0.08;
+    cy += (ty - cy) * 0.08;
+    photo.style.transform =
+      `perspective(1100px) rotateY(${(cx * MAX_ROT).toFixed(2)}deg) rotateX(${(-cy * MAX_ROT).toFixed(2)}deg) ` +
+      `translate3d(${(cx * MAX_SHIFT).toFixed(1)}px, ${(cy * MAX_SHIFT * 0.7).toFixed(1)}px, 0) scale(1.03)`;
+    if (inside || Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001) {
+      raf = requestAnimationFrame(loop);
+    } else {
+      raf = 0;
+    }
+  };
+  const kick = () => { if (!raf) raf = requestAnimationFrame(loop); };
+
+  hero.addEventListener("pointermove", (e) => {
+    const r = hero.getBoundingClientRect();
+    tx = ((e.clientX - r.left) / r.width - 0.5) * 2;   // -1 .. 1
+    ty = ((e.clientY - r.top) / r.height - 0.5) * 2;
+    inside = true;
+    kick();
+  });
+  hero.addEventListener("pointerleave", () => { tx = 0; ty = 0; inside = false; kick(); });
+});
