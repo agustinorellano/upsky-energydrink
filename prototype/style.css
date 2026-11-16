@@ -4542,3 +4542,10 @@ html.ua-open .ua-launcher, html.ua-open .whatsapp-float, html.ua-open .wa-nudge 
   .ua-panel { right: 8px; left: 8px; bottom: 8px; width: auto; height: min(78vh, 640px); border-radius: 24px; }
 }
 @media (prefers-reduced-motion: reduce) { .ua-panel, .ua-msg { transition: opacity .2s; animation: none; transform: none !important; } .ua-typing i { animation: none; } }
+
+/* El botón flotante de WhatsApp se oculta: el contacto por WhatsApp vive en el Asistente, en el nav ("Pedir por WhatsApp") y en el footer.
+   Para volver a mostrarlo, borrar este bloque. */
+.whatsapp-float { display: none !important; }
+.ua-launcher { bottom: 24px; }
+.wa-nudge { bottom: 96px !important; }
+@media (max-width: 900px) { .ua-launcher { bottom: 16px; } }
