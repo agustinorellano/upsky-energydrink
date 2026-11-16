@@ -126,38 +126,56 @@
     <p class="section-lead">Una muestra de lo que encontrás en el catálogo completo.</p>
 
     <div class="home-widgets">
-      <article class="product-card qs-reveal">
+      <article class="product-card qs-reveal" data-id="pack1" data-name="1 pack de energizante (6 botellas 355cc)" data-price="14500" data-tiers="5:5" data-max="10">
         <div class="product-card-media">
           <img src="assets/pack-energizante.webp" alt="Pack de botellas de UP SKY Energy Drink" class="placeholder-product-thumb" width="800" height="800" loading="lazy" decoding="async">
         </div>
         <div class="product-card-body">
           <p class="price-name">1 pack de energizante<span>6 botellas 355cc c/u</span></p>
           <p class="price-value">$14.500</p>
-          <a href="catalogo.html#minorista" class="btn btn-primary">Ver en el catálogo</a>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn" data-action="decrease" aria-label="Restar">−</button>
+            <span class="qty-value">1</span>
+            <button type="button" class="qty-btn" data-action="increase" aria-label="Sumar">+</button>
+          </div>
+          <button class="btn btn-primary btn-add" type="button">Agregar al carrito</button>
         </div>
       </article>
 
-      <article class="product-card qs-reveal">
+      <article class="product-card qs-reveal" data-id="vaso-negro" data-base-id="vaso" data-base-name="1 vaso UP SKY" data-name="1 vaso UP SKY (negro)" data-price="3200" data-tiers="5:5,10:10" data-group="vaso">
         <div class="product-card-media">
-          <img src="assets/vaso-playa-3.webp" alt="Persona con un vaso rosa de UP SKY en la playa" class="placeholder-product-thumb" width="800" height="800" loading="lazy" decoding="async">
+          <div class="media-slider media-slider--light" data-slider data-autoplay="3500">
+            <div class="media-slider-track" tabindex="0" aria-label="Fotos del vaso: negro y rosa">
+              <img src="assets/vaso-negro-foto.webp" alt="Vaso negro de UP SKY con el logo en rosa y gotas de agua" width="1205" height="1300" loading="lazy" decoding="async">
+              <img src="assets/vaso-rosa-foto.webp" alt="Vaso rosa de UP SKY con el logo en negro y gotas de agua" width="1205" height="1300" loading="lazy" decoding="async">
+            </div>
+            <button type="button" class="media-slider-arrow media-slider-arrow--prev" aria-label="Foto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button type="button" class="media-slider-arrow media-slider-arrow--next" aria-label="Foto siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="media-slider-dots" aria-hidden="true"><span class="is-active"></span><span></span></div>
+          </div>
         </div>
         <div class="product-card-body">
           <p class="price-name">1 vaso UP SKY<span>Edición especial</span></p>
+          <div class="color-picker" role="radiogroup" aria-label="Color del vaso">
+            <span class="color-picker-label">Color</span>
+            <button type="button" class="color-opt is-selected" role="radio" aria-checked="true" data-color="negro" data-index="0"><i class="sw sw--negro"></i>Negro</button>
+            <button type="button" class="color-opt" role="radio" aria-checked="false" data-color="rosa" data-index="1"><i class="sw sw--rosa"></i>Rosa</button>
+          </div>
           <p class="price-value">$3.200</p>
-          <a href="catalogo.html#minorista" class="btn btn-primary">Ver en el catálogo</a>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn" data-action="decrease" aria-label="Restar">−</button>
+            <span class="qty-value">1</span>
+            <button type="button" class="qty-btn" data-action="increase" aria-label="Sumar">+</button>
+          </div>
+          <button class="btn btn-primary btn-add" type="button">Agregar al carrito</button>
         </div>
       </article>
 
-      <article class="product-card qs-reveal">
-        <div class="product-card-media"><span class="product-badge">Para negocios</span>
-          <div class="product-tile-brand placeholder-product-thumb" role="img" aria-label="Pallet de packs UP SKY"><!-- IMAGEN PENDIENTE: foto del pallet --><img src="assets/logo.png" alt="" width="370" height="255" loading="lazy"></div>
-        </div>
-        <div class="product-card-body">
-          <p class="price-name">1 pallet · 192 packs<span>Para revender</span></p>
-          <p class="price-value">$2.304.000</p>
-          <a href="negocios.html#mayorista" class="btn btn-outline">Ver precios por mayor</a>
-        </div>
-      </article>
+      <a href="catalogo.html#productos" class="product-card more-card qs-reveal" aria-label="Ver todo el catálogo">
+        <span class="more-card-plus" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+        <span class="more-card-title">Ver todo el catálogo</span>
+        <span class="more-card-sub">Remeras, más packs y precios por mayor</span>
+      </a>
     </div>
   </div>
   <div class="curve-divider curve-divider--bottom" aria-hidden="true"><svg viewBox="0 0 1440 130" preserveAspectRatio="none"><path d="M0,130 L0,90 Q720,50 1440,90 L1440,130 Z" style="fill:#0a0a0c"/></svg></div>

@@ -160,7 +160,7 @@
           <button class="btn btn-primary btn-add" type="button">Agregar al carrito</button>
         </div>
       </article>
-      <article class="product-card" data-id="vaso1" data-name="1 vaso UP SKY" data-price="3200" data-tiers="5:5,10:10">
+      <article class="product-card" id="vaso1" data-id="vaso-negro" data-base-id="vaso" data-base-name="1 vaso UP SKY" data-name="1 vaso UP SKY (negro)" data-price="3200" data-tiers="5:5,10:10" data-group="vaso">
         <div class="product-card-media">
           <div class="media-slider media-slider--light" data-slider data-autoplay="3500">
             <div class="media-slider-track" tabindex="0" aria-label="Fotos del vaso: negro y rosa">
@@ -175,6 +175,11 @@
         </div>
         <div class="product-card-body">
           <p class="price-name">1 vaso UP SKY<span>Edición especial</span></p>
+          <div class="color-picker" role="radiogroup" aria-label="Color del vaso">
+            <span class="color-picker-label">Color</span>
+            <button type="button" class="color-opt is-selected" role="radio" aria-checked="true" data-color="negro" data-index="0"><i class="sw sw--negro"></i>Negro</button>
+            <button type="button" class="color-opt" role="radio" aria-checked="false" data-color="rosa" data-index="1"><i class="sw sw--rosa"></i>Rosa</button>
+          </div>
           <p class="price-value">$3.200</p>
           <p class="price-note">Precio sin envío</p>
           <ul class="price-tiers"><li><b>5% OFF</b> desde 5 vasos</li><li><b>10% OFF</b> desde 10 vasos</li></ul>

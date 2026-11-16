@@ -584,9 +584,13 @@ document.addEventListener("DOMContentLoaded", () => {
         .filter((t) => t.length === 2 && t.every((n) => !Number.isNaN(n)))
         .sort((a, b) => a[0] - b[0]);
     const discountFor = (item) => {
+      // Los productos de un mismo grupo (ej. vaso negro + vaso rosa) suman cantidad para la escala.
+      const qty = item.group
+        ? Object.values(cart).filter((x) => x.group === item.group).reduce((n, x) => n + x.qty, 0)
+        : item.qty;
       let pct = 0;
       (item.tiers || []).forEach(([min, p]) => {
-        if (item.qty >= min) pct = p;
+        if (qty >= min) pct = p;
       });
       return pct;
     };
@@ -710,7 +714,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const addQty = qtyEl ? Number(qtyEl.textContent) || 1 : 1;
 
         const max = Number(card.dataset.max) || 0;
-        if (!cart[id]) cart[id] = { name, price, qty: 0, tiers: parseTiers(card.dataset.tiers), max };
+        if (!cart[id]) cart[id] = { name, price, qty: 0, tiers: parseTiers(card.dataset.tiers), max, group: card.dataset.group || "" };
         cart[id].qty += addQty;
         if (max) cart[id].qty = Math.min(max, cart[id].qty);
         if (qtyEl) qtyEl.textContent = "1";
@@ -859,8 +863,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const prev = s.querySelector(".media-slider-arrow--prev");
     const next = s.querySelector(".media-slider-arrow--next");
     const go = (dir) => track.scrollBy({ left: dir * track.clientWidth, behavior: "smooth" });
-    prev && prev.addEventListener("click", (e) => { e.stopPropagation(); go(-1); });
-    next && next.addEventListener("click", (e) => { e.stopPropagation(); go(1); });
+    const touched = () => { s.dataset.userTouched = "1"; };
+    prev && prev.addEventListener("click", (e) => { e.stopPropagation(); touched(); go(-1); });
+    next && next.addEventListener("click", (e) => { e.stopPropagation(); touched(); go(1); });
+    track.addEventListener("touchstart", touched, { passive: true });
+    track.addEventListener("pointerdown", touched, { passive: true });
+    let lastIdx = 0;
     const sync = () => {
       const i = Math.round(track.scrollLeft / track.clientWidth);
       if (prev) prev.hidden = i <= 0;
@@ -871,13 +879,17 @@ document.addEventListener("DOMContentLoaded", () => {
     track.addEventListener("scroll", () => {
       const i = Math.round(track.scrollLeft / track.clientWidth);
       dots.forEach((d, k) => d.classList.toggle("is-active", k === i));
+      if (i !== lastIdx) {
+        lastIdx = i;
+        s.dispatchEvent(new CustomEvent("slidechange", { detail: { index: i } }));
+      }
     }, { passive: true });
     // Avance automático (data-autoplay = ms). Se pausa con mouse/foco/touch y fuera de pantalla.
     const delay = Number(s.dataset.autoplay) || 0;
     if (delay && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       let paused = false, visible = false, timer;
       const tick = () => {
-        if (paused || !visible || document.hidden) return;
+        if (paused || !visible || document.hidden || s.dataset.userTouched) return;
         const i = Math.round(track.scrollLeft / track.clientWidth);
         track.scrollTo({ left: (i + 1) % dots.length * track.clientWidth, behavior: "smooth" });
       };
@@ -889,6 +901,7 @@ document.addEventListener("DOMContentLoaded", () => {
       start();
     }
     track.addEventListener("keydown", (e) => {
+      touched();
       if (e.key === "ArrowRight") track.scrollBy({ left: track.clientWidth, behavior: "smooth" });
       if (e.key === "ArrowLeft") track.scrollBy({ left: -track.clientWidth, behavior: "smooth" });
     });
@@ -935,7 +948,7 @@ document.addEventListener("DOMContentLoaded", () => {
   cards.forEach((card) => {
     const media = card.querySelector(".product-card-media");
     if (!media) return;
-    if (!card.id) card.id = card.dataset.id;
+    if (!card.id) card.id = card.dataset.baseId || card.dataset.id;
     const name = card.dataset.name || "UP SKY";
     const btn = document.createElement("button");
     btn.type = "button";
@@ -969,4 +982,38 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => target.classList.remove("is-shared-target"), 2400);
     }, 400);
   }
+});
+
+// Selector de color del vaso: la foto que se ve es el color que se compra.
+// Mientras la persona no elige, la galería avanza sola y la selección acompaña a la foto.
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".product-card[data-base-id]").forEach((card) => {
+    const picker = card.querySelector(".color-picker");
+    const slider = card.querySelector("[data-slider]");
+    if (!picker) return;
+    const opts = Array.from(picker.querySelectorAll(".color-opt"));
+    const select = (i) => {
+      const opt = opts[i];
+      if (!opt) return;
+      opts.forEach((o) => {
+        const on = o === opt;
+        o.classList.toggle("is-selected", on);
+        o.setAttribute("aria-checked", String(on));
+      });
+      card.dataset.id = `${card.dataset.baseId}-${opt.dataset.color}`;
+      card.dataset.name = `${card.dataset.baseName} (${opt.dataset.color})`;
+    };
+    opts.forEach((opt, i) => {
+      opt.addEventListener("click", () => {
+        select(i);
+        if (slider) {
+          slider.dataset.userTouched = "1";
+          const track = slider.querySelector(".media-slider-track");
+          track.scrollTo({ left: i * track.clientWidth, behavior: "smooth" });
+        }
+      });
+    });
+    if (slider) slider.addEventListener("slidechange", (e) => select(e.detail.index));
+    select(0);
+  });
 });
