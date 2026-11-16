@@ -4565,3 +4565,4 @@ html.ua-open .ua-launcher, html.ua-open .whatsapp-float, html.ua-open .wa-nudge 
 .ua-launcher-tip { right: 80px; }
 .wa-nudge { bottom: 104px !important; }
 @media (max-width: 900px) { .ua-launcher { width: 60px; height: 60px; right: 14px; bottom: 14px; } .ua-launcher svg { width: 34px; height: 34px; } }
+.ua-launcher svg, .ua-avatar svg { transform: translateY(-1px); }

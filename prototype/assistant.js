@@ -75,7 +75,7 @@
   const onPage = (name) => location.pathname.replace(/\.html$/, "").endsWith("/" + name) || location.pathname.endsWith(name + ".html");
 
   const IC = {
-    chat: '<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="21" r="11" fill="currentColor"/><path d="M10 56c0-12.2 9.8-21 22-21s22 8.8 22 21z" fill="currentColor"/></svg>',
+    chat: '<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="10" fill="currentColor"/><path d="M11 58c0-11.6 9.4-19 21-19s21 7.4 21 19z" fill="currentColor"/><path d="M19 25v-2a13 13 0 0 1 26 0v2" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"/><rect x="14.5" y="24" width="7" height="11" rx="3.5" fill="currentColor"/><rect x="42.5" y="24" width="7" height="11" rx="3.5" fill="currentColor"/><path d="M46 34c0 6-4 8-9 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="35" cy="42" r="2.6" fill="currentColor"/></svg>',
     bolt: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z" fill="currentColor"/></svg>',
     close: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
     send: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12 20 4l-4 16-4-6z" fill="currentColor"/></svg>',
