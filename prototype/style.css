@@ -4619,3 +4619,10 @@ html.ua-open .ua-launcher, html.ua-open .whatsapp-float, html.ua-open .wa-nudge 
 .ua-chips { flex-wrap: wrap; overflow: visible; max-height: none; -webkit-mask-image: none; mask-image: none; scroll-snap-type: none; gap: 6px; padding: 8px 14px 10px; }
 .ua-chip { flex: 0 1 auto; white-space: normal; text-align: center; padding: 7px 12px; font-size: .78rem; line-height: 1.2; }
 .ua-log { min-height: 120px; }
+
+/* Avatar del asistente: sin punto verde; un anillo suave que "respira" en los colores de la marca. */
+.ua-online { display: none; }
+.ua-avatar { box-shadow: 0 0 0 3px rgba(255,255,255,.16), 0 8px 20px rgba(236,31,122,.45); }
+.ua-avatar::before { content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.55); animation: ua-ring 2.8s ease-out infinite; pointer-events: none; }
+@keyframes ua-ring { 0% { transform: scale(.88); opacity: .75; } 80%, 100% { transform: scale(1.28); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .ua-avatar::before { animation: none; opacity: .4; transform: none; } }
