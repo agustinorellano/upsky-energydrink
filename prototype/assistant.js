@@ -23,6 +23,7 @@
     sabor: ["¿Qué sabores hay?", "Un sabor original a frutilla, con esencias naturales y una textura gasificada fina."],
     vidrio: ["¿Por qué botella de vidrio?", "Porque el vidrio no deja residuos de metales ni polímeros que puedan alterar el sabor, y el envase es 100% reciclable."],
     beneficios: ["¿Qué beneficios tiene?", "Aporta un estímulo energético que ayuda al rendimiento físico y mental: aumenta el estado de alerta y la concentración y reduce la fatiga. Los azúcares dan un combustible inmediato en esfuerzos intensos."],
+    origen: ["¿Es de industria nacional?", "Sí, UP SKY es <b>Industria Argentina</b>. Se presenta en botella de vidrio de 355 cc."],
     donde: ["¿Dónde puedo comprar?", "Desde el catálogo de esta web. Nosotros te direccionamos al distribuidor más cercano a tu domicilio."],
     quienes: ["¿Quiénes pueden consumirla?", "Jóvenes y adultos que busquen más rendimiento físico y mental: deportistas, estudiantes y trabajadores. Es un producto para mayores de 18 años y no se recomienda consumirlo en exceso."],
   };
@@ -61,6 +62,7 @@
     ["sabor", ["sabor", "sabores", "frutilla", "gusto"]],
     ["vidrio", ["vidrio", "reciclable", "reciclar", "ambiente"]],
     ["beneficios", ["beneficio", "beneficios", "para que sirve", "efecto", "rendimiento", "energia"]],
+    ["origen", ["industria", "nacional", "argentina", "argentino", "hecha en", "hecho en", "origen", "fabrica", "producido"]],
     ["donde", ["donde comprar", "donde consigo", "donde puedo", "donde venden", "puntos de venta"]],
     ["quienes", ["quien puede", "quienes pueden", "menor", "edad", "embarazada", "deportista", "mayores"]],
     ["saludo", ["hola", "buenas", "buen dia", "buenas tardes", "buenas noches", "que tal"]],

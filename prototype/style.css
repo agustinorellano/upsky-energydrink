@@ -4695,3 +4695,8 @@ html.ua-open .ua-launcher, html.ua-open .whatsapp-float, html.ua-open .wa-nudge 
 .pi-panel .ficha-attr p { margin: 0; color: rgba(255,255,255,.72); }
 .pi-panel .ficha-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 40px; margin-top: 6px; }
 @media (max-width: 700px) { .pi-panel .ficha-grid { grid-template-columns: 1fr; } }
+
+.footer-ar { display: inline-block; margin-top: 6px; color: #fff; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; }
+.pp-made { display: inline-flex; align-items: center; gap: 10px; margin: 22px 0 0; font-size: .78rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); }
+.pp-made-dot { width: 22px; height: 2px; background: var(--primary-color); }
+@media (max-width: 900px) { .pp-made { justify-content: center; margin-top: 14px; font-size: .62rem; } }
