@@ -4108,3 +4108,35 @@ body.page-product .site-header {
   .hero-actions { margin-top: -6px; position: relative; z-index: 2; }
 }
 @media (max-width: 700px) { .hero-grid { margin-top: 100px; } .hero-photo-mobile { height: 420px; } }
+
+/* ===== Productos destacados · mobile: carrusel horizontal tipo e-commerce (scroll hacia la derecha) ===== */
+@media (max-width: 760px) {
+  .home-widgets {
+    display: flex; flex-direction: row; gap: 14px; margin: 28px -24px 0; padding: 4px 24px 22px;
+    overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scroll-padding-left: 24px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none; overscroll-behavior-x: contain;
+  }
+  .home-widgets::-webkit-scrollbar { display: none; }
+  .home-widgets::before, .home-widgets::after { display: none; }
+  .home-widgets .product-card {
+    flex: 0 0 74%; max-width: 300px; flex-direction: column; scroll-snap-align: start; scroll-snap-stop: always; padding: 8px; border-radius: 24px;
+  }
+  .home-widgets .product-card-media { flex: none; width: 100%; border-radius: 18px; background: #fff; }
+  .home-widgets .placeholder-product-thumb { aspect-ratio: 1 / 1; border-radius: 0; }
+  .home-widgets .media-slider { aspect-ratio: 1 / 1; height: auto; }
+  .home-widgets .media-slider-arrow, .home-widgets .media-slider-dots { display: flex; }
+  .home-widgets .media-slider-arrow { width: 28px; height: 28px; }
+  .home-widgets .product-card-body { padding: 12px 10px 10px; gap: 6px; }
+  .home-widgets .price-name { font-size: .92rem; }
+  .home-widgets .price-name span { font-size: .76rem; }
+  .home-widgets .price-value { font-size: 1.25rem; }
+  .home-widgets .color-picker-label { display: inline; }
+  .home-widgets .color-opt { padding: 4px 11px 4px 5px; font-size: .76rem; }
+  .home-widgets .color-opt .sw { width: 16px; height: 16px; }
+  .home-widgets .product-card-body .btn { width: 100%; padding: 10px 16px; font-size: .85rem; margin-top: auto; }
+  .home-widgets .more-card { flex: 0 0 58%; flex-direction: column; justify-content: center; text-align: center; padding: 20px !important; gap: 10px; }
+  .home-widgets .more-card-plus { width: 64px; height: 64px; }
+  .home-widgets .more-card-plus svg { width: 30px; height: 30px; }
+  .home-widgets .more-card-title { font-size: 1.2rem; }
+  .home-widgets .more-card-sub { font-size: .8rem; max-width: 22ch; }
+}
