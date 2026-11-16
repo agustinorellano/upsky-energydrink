@@ -3674,3 +3674,13 @@ body.page-product .site-header {
   .more-card-plus { width: 44px; height: 44px; flex: none; } .more-card-plus svg { width: 22px; height: 22px; }
   .more-card-title { font-size: 1.05rem; } .more-card-sub { font-size: .72rem; max-width: none; }
 }
+
+/* Home: 3 productos destacados + card "+" a la derecha. */
+@media (min-width: 1021px) {
+  .home-widgets { grid-template-columns: repeat(3, minmax(0, 270px)) minmax(0, 190px); justify-content: center; }
+  .more-card { padding: 20px 14px !important; }
+}
+@media (min-width: 761px) and (max-width: 1020px) {
+  .home-widgets { grid-template-columns: repeat(2, minmax(0, 270px)); justify-content: center; }
+  .more-card { grid-column: 1 / -1; flex-direction: row; justify-content: center; min-height: 0; padding: 18px !important; gap: 18px; }
+}
