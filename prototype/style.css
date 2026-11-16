@@ -4443,3 +4443,15 @@ body:has(#mayorista) #ya-podes { padding: 72px 0 96px; }
 @media (max-width: 520px) { .bx-how-steps { grid-template-columns: 1fr; } .bx-how-n { margin-bottom: 18px; font-size: 2.6rem; } .bx-how-foot .btn { width: 100%; text-align: center; } }
 .bx-how-steps .bx-how-n { display: block; width: auto; height: auto; border-radius: 0; background: none; margin-bottom: 38px; font-size: 3.2rem; color: transparent; }
 @media (max-width: 520px) { .bx-how-steps .bx-how-n { margin-bottom: 18px; font-size: 2.6rem; } }
+
+/* Nav: "Contacto" se reemplaza por un botón de acción (Pedir por WhatsApp). */
+.nav-cta { display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; border-radius: 999px; background: var(--primary-color); color: #fff !important; font-weight: 700; font-size: .85rem; white-space: nowrap; text-decoration: none; box-shadow: 0 8px 22px rgba(236,31,122,.35); transition: transform .2s var(--ease-out), background .2s; }
+.nav-cta svg { width: 17px; height: 17px; flex: none; }
+@media (hover: hover) and (pointer: fine) { .nav-cta:hover { background: #ff3490; transform: translateY(-1px); } }
+@media (max-width: 1100px) { .nav-cta span { display: none; } .nav-cta { width: 40px; height: 40px; padding: 0; justify-content: center; } }
+@media (max-width: 900px) { .nav-cta { display: none; } }
+.mobile-nav-cta { display: none; }
+@media (max-width: 900px) {
+  .mobile-nav-sheet .mobile-nav-cta { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; margin-top: 6px; padding: 14px 20px; border-radius: 999px; background: var(--primary-color); color: #fff; font-weight: 700; text-decoration: none; }
+  .mobile-nav-cta svg { width: 20px; height: 20px; }
+}
