@@ -4140,3 +4140,41 @@ body.page-product .site-header {
   .home-widgets .more-card-title { font-size: 1.2rem; }
   .home-widgets .more-card-sub { font-size: .8rem; max-width: 22ch; }
 }
+
+/* ===== Destacados mobile: cards chicas (estilo Mercado Libre) + flechas ===== */
+.hw-wrap { position: relative; }
+.hw-arrow { display: none; }
+@media (max-width: 760px) {
+  .home-widgets { gap: 10px; padding: 4px 24px 18px; }
+  .home-widgets .product-card { flex: 0 0 43%; max-width: 176px; padding: 6px; border-radius: 16px; }
+  .home-widgets .product-card-media { border-radius: 12px; }
+  .home-widgets .product-card-body { padding: 8px 6px 6px; gap: 4px; }
+  .home-widgets .price-name { font-size: .76rem; line-height: 1.25; font-weight: 500; }
+  .home-widgets .price-name span { font-size: .66rem; margin-top: 1px; }
+  .home-widgets .price-value { font-size: 1.1rem; order: -1; margin: 2px 0 0; }
+  .home-widgets .price-name { order: 0; }
+  .home-widgets .color-picker { gap: 5px; margin: 0; }
+  .home-widgets .color-picker-label { display: none; }
+  .home-widgets .color-opt { padding: 2px 8px 2px 3px; font-size: .64rem; border-width: 1px; gap: 4px; }
+  .home-widgets .color-opt .sw { width: 12px; height: 12px; }
+  .home-widgets .qty-stepper { gap: 6px; padding: 2px 6px; }
+  .home-widgets .qty-btn { width: 20px; height: 20px; font-size: .85rem; }
+  .home-widgets .qty-value { font-size: .8rem; }
+  .home-widgets .product-card-body .btn { padding: 8px 10px; font-size: .72rem; }
+  .home-widgets .media-slider-arrow, .home-widgets .media-slider-dots { display: none; }
+  .home-widgets .more-card { flex: 0 0 40%; max-width: 160px; padding: 14px !important; gap: 8px; }
+  .home-widgets .more-card-plus { width: 48px; height: 48px; }
+  .home-widgets .more-card-plus svg { width: 24px; height: 24px; }
+  .home-widgets .more-card-title { font-size: .98rem; }
+  .home-widgets .more-card-sub { font-size: .7rem; }
+  .hw-arrow {
+    display: grid; place-items: center; position: absolute; z-index: 5; top: 38%; transform: translateY(-50%);
+    width: 38px; height: 38px; border-radius: 50%; border: 0; cursor: pointer; color: #0a0a0c; background: #fff;
+    box-shadow: 0 6px 18px rgba(0,0,0,.28);
+    transition: transform .2s var(--ease-out), opacity .2s;
+  }
+  .hw-arrow[hidden] { display: none; }
+  .hw-arrow svg { width: 20px; height: 20px; }
+  .hw-arrow--prev { left: 6px; } .hw-arrow--next { right: 6px; }
+  .hw-arrow:active { transform: translateY(-50%) scale(.92); }
+}

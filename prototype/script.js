@@ -1208,3 +1208,26 @@ document.addEventListener("DOMContentLoaded", () => {
     c.style.setProperty("--my", `${((e.clientY - r.top) / r.height) * 100}%`);
   }));
 });
+
+// Productos destacados (mobile): flechas del carrusel horizontal.
+document.addEventListener("DOMContentLoaded", () => {
+  const wrap = document.querySelector(".hw-wrap");
+  const track = wrap && wrap.querySelector(".home-widgets");
+  if (!track) return;
+  const prev = wrap.querySelector(".hw-arrow--prev");
+  const next = wrap.querySelector(".hw-arrow--next");
+  const step = () => {
+    const c = track.querySelector(".product-card");
+    return c ? (c.getBoundingClientRect().width + 10) * 1.6 : track.clientWidth * 0.7;
+  };
+  const sync = () => {
+    const max = track.scrollWidth - track.clientWidth - 2;
+    prev.hidden = track.scrollLeft <= 4;
+    next.hidden = track.scrollLeft >= max;
+  };
+  prev.addEventListener("click", () => track.scrollBy({ left: -step(), behavior: "smooth" }));
+  next.addEventListener("click", () => track.scrollBy({ left: step(), behavior: "smooth" }));
+  track.addEventListener("scroll", sync, { passive: true });
+  window.addEventListener("resize", sync);
+  sync();
+});
