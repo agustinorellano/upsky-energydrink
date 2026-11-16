@@ -353,7 +353,7 @@ document.addEventListener("DOMContentLoaded", () => {
       cardW = cards[0].getBoundingClientRect().width || cardW;
       // mismo rango relativo al ancho de card que en desktop (0.88x a 1.27x),
       // así en mobile no se superponen ni pierden la curvatura del cilindro
-      pitch = Math.max(cardW * 0.88, Math.min(cardW * 1.2667, containerW / 6.2));
+      pitch = cardW * 1.22;
     }
     measure();
     window.addEventListener("resize", measure);
@@ -364,24 +364,34 @@ document.addEventListener("DOMContentLoaded", () => {
       const maxD = Math.max(1, containerW / 2);
       cards.forEach((card, i) => {
         const raw = i * pitch - scrollX;
-        // envuelve dentro de (-half, half] para loop infinito sin duplicar nodos
+        // envuelve dentro de (-half, half] para loop infinito sin saltos visibles
         let wrapped = ((raw % total) + total) % total;
         if (wrapped > half) wrapped -= total;
         const d = Math.min(1, Math.abs(wrapped) / maxD);
-        const scale = 1 + 0.46 * d * d; // crece hacia los bordes, como el interior de un cilindro
-        const x = wrapped;
-        const opacity = 1 - 0.55 * Math.pow(d, 3); // se desvanece apenas cerca del borde del marco
-        card.style.transform = `translate(-50%, -50%) translate(${x}px, 0) scale(${scale})`;
+        const scale = 1.16 - 0.4 * d; // la del medio es la más grande; las de los costados se achican
+        const opacity = 1 - 0.65 * d * d;
+        card.style.transform = `translate(-50%, -50%) translate(${wrapped}px, 0) scale(${scale})`;
         card.style.zIndex = String(1000 - Math.round(d * 100));
-        card.style.opacity = String(Math.max(0.35, opacity));
+        card.style.opacity = String(Math.max(0.3, opacity));
+        card.style.filter = d > 0.35 ? `saturate(${(1 - 0.5 * d).toFixed(2)})` : "";
       });
     }
+
+    // Flechas: desplazan una tarjeta con una animación corta
+    let nudge = null;
+    const goBy = (dir) => { nudge = { from: scrollX, to: scrollX + dir * pitch, t0: performance.now() }; velocity = 0; };
+    document.getElementById("commPrev")?.addEventListener("click", () => goBy(-1));
+    document.getElementById("commNext")?.addEventListener("click", () => goBy(1));
 
     function tick(now) {
       if (lastFrameT === null) lastFrameT = now;
       const dt = (now - lastFrameT) / 1000;
       lastFrameT = now;
-      if (!reduceMotionUgc && !dragging) {
+      if (nudge) {
+        const k = Math.min(1, (performance.now() - nudge.t0) / 550), e = 1 - Math.pow(1 - k, 3);
+        scrollX = nudge.from + (nudge.to - nudge.from) * e;
+        if (k >= 1) nudge = null;
+      } else if (!reduceMotionUgc && !dragging) {
         scrollX += AUTO_SPEED * dt;
         if (Math.abs(velocity) > 2) {
           scrollX += velocity * dt;
@@ -1390,4 +1400,17 @@ document.addEventListener("DOMContentLoaded", () => {
   bubble.addEventListener("mouseenter", () => clearTimeout(hideT));
   bubble.addEventListener("mouseleave", () => { hideT = setTimeout(() => { hide(); schedule(50000); }, 2500); });
   schedule(14000);
+});
+
+// Comunidad: copiar el hashtag.
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("commTagCopy"), tag = document.getElementById("commTag");
+  if (!btn || !tag) return;
+  btn.addEventListener("click", async () => {
+    const label = btn.querySelector("span");
+    try { await navigator.clipboard.writeText(tag.textContent.trim()); label.textContent = "¡Copiado!"; }
+    catch { label.textContent = "Seleccioná y copiá"; }
+    btn.classList.add("is-done");
+    setTimeout(() => { label.textContent = "Copiar"; btn.classList.remove("is-done"); }, 1800);
+  });
 });

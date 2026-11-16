@@ -4646,3 +4646,24 @@ html.ua-open .ua-launcher, html.ua-open .whatsapp-float, html.ua-open .wa-nudge 
   .hero-cue svg { width: 26px; height: 26px; color: var(--primary-color); animation: cue-bounce 1.8s var(--ease-in-out) infinite; }
 }
 @media (hover: hover) and (pointer: fine) { .hero-cue:hover { color: #fff; } }
+
+/* ===== Comunidad: carrusel centrado, hashtag destacado y cierre con Instagram ===== */
+#lifestyle { padding-top: 96px; padding-bottom: 80px; }
+.comm-title { margin: 0 0 10px; text-align: center; font-family: "Archivo", var(--font-display); font-style: italic; font-weight: 900; font-stretch: 125%; text-transform: uppercase; line-height: 1; font-size: clamp(1.8rem, 4.2vw, 3.3rem); color: #fff; }
+.comm-title span { color: var(--primary-color); }
+.comm-lead { margin: 0 0 22px; text-align: center; color: rgba(255,255,255,.7); font-size: 1.02rem; }
+.comm-tag { display: flex; align-items: center; justify-content: center; gap: 0; width: fit-content; margin: 0 auto; border-radius: 999px; background: rgba(236,31,122,.12); border: 1.5px solid rgba(236,31,122,.7); overflow: hidden; }
+.comm-tag-text { padding: 12px 22px; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.1rem, 2.4vw, 1.5rem); letter-spacing: .02em; color: #fff; }
+.comm-tag-copy { display: inline-flex; align-items: center; gap: 8px; align-self: stretch; padding: 0 18px; border: 0; border-left: 1.5px solid rgba(236,31,122,.7); background: var(--primary-color); color: #fff; font: 800 .82rem var(--font-body); cursor: pointer; transition: background .2s; }
+.comm-tag-copy svg { width: 17px; height: 17px; }
+.comm-tag-copy.is-done { background: #fff; color: #0a0a0c; }
+@media (hover: hover) and (pointer: fine) { .comm-tag-copy:hover { background: #ff3490; } }
+#lifestyle .ugc-grid-wrap { margin-top: 36px; }
+.ugc-card { width: clamp(132px, 17vw, 228px); }
+.ugc-carousel { height: clamp(300px, 42vw, 520px); }
+.comm-arrow { position: absolute; z-index: 3000; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255,255,255,.25); background: rgba(10,10,12,.7); color: #fff; cursor: pointer; display: grid; place-items: center; transition: background .2s, border-color .2s; }
+.comm-arrow svg { width: 22px; height: 22px; }
+.comm-arrow--prev { left: max(12px, calc(50% - 560px)); } .comm-arrow--next { right: max(12px, calc(50% - 560px)); }
+@media (hover: hover) and (pointer: fine) { .comm-arrow:hover { background: var(--primary-color); border-color: var(--primary-color); } }
+.comm-foot { display: flex; justify-content: center; margin-top: 8px; }
+@media (max-width: 700px) { #lifestyle { padding-top: 76px; padding-bottom: 60px; } .comm-arrow { width: 38px; height: 38px; top: 46%; } .comm-arrow--prev { left: 6px; } .comm-arrow--next { right: 6px; } .ugc-card { width: clamp(120px, 34vw, 160px); } .ugc-carousel { height: 340px; } }
