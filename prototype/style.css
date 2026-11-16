@@ -4700,3 +4700,8 @@ html.ua-open .ua-launcher, html.ua-open .whatsapp-float, html.ua-open .wa-nudge 
 .pp-made { display: inline-flex; align-items: center; gap: 10px; margin: 22px 0 0; font-size: .78rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); }
 .pp-made-dot { width: 22px; height: 2px; background: var(--primary-color); }
 @media (max-width: 900px) { .pp-made { justify-content: center; margin-top: 14px; font-size: .62rem; } }
+
+/* Producto: la página es clara, así que la banda blanca del footer se funde con
+   el fondo (sin esquinas negras detrás); solo queda el panel negro curvo. */
+body.page-product .site-footer { background: transparent; margin-top: 0; }
+body.page-product .footer-band { background: transparent; border-radius: 0; }
