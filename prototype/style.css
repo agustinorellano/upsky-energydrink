@@ -4646,19 +4646,3 @@ html.ua-open .ua-launcher, html.ua-open .whatsapp-float, html.ua-open .wa-nudge 
   .hero-cue svg { width: 26px; height: 26px; color: var(--primary-color); animation: cue-bounce 1.8s var(--ease-in-out) infinite; }
 }
 @media (hover: hover) and (pointer: fine) { .hero-cue:hover { color: #fff; } }
-
-/* Hero del home: la botella se "ilumina". Una segunda copia de la foto, más clara, se mezcla en pantalla solo sobre la botella
-   (máscara radial). Se mueve junto con la foto (comparte el efecto 3D). */
-.hero-photo.hero-photo--glow {
-  filter: brightness(1.6) contrast(1.08) saturate(1.15);
-  mix-blend-mode: screen; pointer-events: none;
-  -webkit-mask-image: radial-gradient(ellipse 24% 40% at 71% 50%, #000 35%, rgba(0,0,0,.5) 62%, transparent 100%);
-          mask-image: radial-gradient(ellipse 24% 40% at 71% 50%, #000 35%, rgba(0,0,0,.5) 62%, transparent 100%);
-  -webkit-mask-composite: source-over; mask-composite: add;
-  animation: hero-glow 5s ease-in-out infinite alternate;
-}
-@keyframes hero-glow { from { opacity: .75; } to { opacity: 1; } }
-@media (max-width: 700px) {
-  .hero-photo-mobile .hero-photo.hero-photo--glow { position: absolute; top: 0; left: -9%; width: 118%; margin-left: 0; height: 100%; }
-}
-@media (prefers-reduced-motion: reduce) { .hero-photo.hero-photo--glow { animation: none; } }
