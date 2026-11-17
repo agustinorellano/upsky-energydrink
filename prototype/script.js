@@ -1453,3 +1453,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   document.querySelectorAll("[data-open-assistant]").forEach((b) => b.addEventListener("click", () => window.upskyAssistant && window.upskyAssistant.open()));
 });
+
+// Eventos: filtro por categoría
+document.addEventListener("DOMContentLoaded", () => {
+  const grid = document.getElementById("evGrid");
+  if (!grid) return;
+  const chips = document.querySelectorAll(".evf");
+  const empty = document.getElementById("evEmpty");
+  chips.forEach((c) => c.addEventListener("click", () => {
+    const f = c.dataset.f;
+    chips.forEach((x) => { const on = x === c; x.classList.toggle("is-on", on); x.setAttribute("aria-pressed", on ? "true" : "false"); });
+    let n = 0;
+    grid.querySelectorAll(".evc").forEach((e) => { const show = f === "todos" || e.dataset.cat === f; e.hidden = !show; if (show) n++; });
+    if (empty) empty.hidden = n > 0;
+  }));
+});
