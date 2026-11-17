@@ -4826,7 +4826,21 @@ body.page-product #formula, body.page-product #info { border-radius: var(--sheet
 /* ===== Eventos: calendario ===== */
 .cal {
   margin-top: clamp(44px, 5vw, 72px); border-radius: 28px; padding: clamp(22px, 3.4vw, 44px); color: #fff; position: relative; overflow: hidden; isolation: isolate;
-  background: linear-gradient(180deg, rgba(10,10,12,.78), rgba(10,10,12,.92)), url("assets/hero-banner-nightout.jpg") center / cover no-repeat, #0a0a0c;
+  background: #0a0a0c;
+}
+/* Fondo líquido: manchas magenta suaves sobre negro, sin imagen. */
+.cal::before {
+  content: ""; position: absolute; inset: -20%; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(38% 34% at 86% 8%, rgba(236,31,122,.55), transparent 70%),
+    radial-gradient(30% 28% at 70% 38%, rgba(190,20,110,.28), transparent 72%),
+    radial-gradient(34% 36% at 8% 92%, rgba(236,31,122,.38), transparent 70%),
+    radial-gradient(22% 22% at 30% 60%, rgba(120,10,80,.30), transparent 75%);
+  filter: blur(18px);
+}
+.cal::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(236,31,122,.28), inset 0 1px 0 rgba(255,255,255,.12);
 }
 .cal-head { display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: flex-end; justify-content: space-between; margin-bottom: 22px; }
 .cal-k { color: #ec1f7a; font-weight: 800; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 8px; }
@@ -4842,7 +4856,7 @@ body.page-product #formula, body.page-product #info { border-radius: var(--sheet
 .cal-dow, .cal-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: clamp(6px, 1vw, 14px); }
 .cal-dow { margin-bottom: 10px; text-align: center; color: #a3a3ab; font-weight: 700; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; }
 .cal-day {
-  aspect-ratio: 1.7 / 1; border-radius: clamp(10px, 1.2vw, 18px); border: 0; padding: 0; background: rgba(255,255,255,.08); color: rgba(255,255,255,.55);
+  aspect-ratio: 1.7 / 1; border-radius: clamp(10px, 1.2vw, 18px); border: 0; padding: 0; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); color: rgba(255,255,255,.6);
   display: flex; flex-direction: column; align-items: center; justify-content: center; font: 600 clamp(.85rem, 1.5vw, 1.35rem) var(--font-body, inherit); cursor: default; position: relative;
 }
 .cal-day.is-empty { background: transparent; }
@@ -4851,8 +4865,8 @@ body.page-product #formula, body.page-product #info { border-radius: var(--sheet
 .cal-day.has-ev b { font-size: clamp(1rem, 2.1vw, 1.9rem); line-height: 1; }
 .cal-day.has-ev small { font-size: clamp(.55rem, .9vw, .78rem); font-weight: 600; line-height: 1.15; margin-top: 4px; padding: 0 6px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .cal-day.has-ev:hover { transform: translateY(-3px); }
-.cal-day.has-ev.is-sel { background: #ec1f7a; color: #fff; }
-.cal-detail { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 18px 28px; align-items: center; justify-content: space-between; padding: 20px 24px; border-radius: 20px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); }
+.cal-day.has-ev.is-sel { background: #ec1f7a; color: #fff; box-shadow: 0 10px 30px rgba(236,31,122,.55); }
+.cal-detail { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 18px 28px; align-items: center; justify-content: space-between; padding: 20px 24px; border-radius: 20px; background: rgba(255,255,255,.07); border: 1px solid rgba(236,31,122,.35); box-shadow: 0 0 40px rgba(236,31,122,.18); }
 .cal-detail[hidden] { display: none; }
 .cal-detail h3 { margin: 0 0 4px; font-family: var(--font-display); font-weight: 600; font-size: 1.6rem; color: #fff; }
 .cal-detail p { margin: 0; color: #c3c3cb; }
