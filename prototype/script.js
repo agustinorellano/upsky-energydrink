@@ -1468,3 +1468,53 @@ document.addEventListener("DOMContentLoaded", () => {
     if (empty) empty.hidden = n > 0;
   }));
 });
+
+// Eventos: calendario con "Agendar" (Google Calendar o archivo .ics)
+document.addEventListener("DOMContentLoaded", () => {
+  const grid = document.getElementById("calGrid");
+  if (!grid) return;
+  const evs = Array.from(document.querySelectorAll(".evc[data-date]")).map((a) => ({
+    date: a.dataset.date, time: a.dataset.time || "10:00",
+    title: a.querySelector("h3").textContent.trim(),
+    place: a.querySelector(".evc-place").textContent.trim(),
+    url: a.querySelector("h3 a").getAttribute("href"),
+  })).sort((x, y) => x.date.localeCompare(y.date));
+  if (!evs.length) return;
+  const monthEl = document.getElementById("calMonth"), detail = document.getElementById("calDetail");
+  const prev = document.getElementById("calPrev"), next = document.getElementById("calNext");
+  const pad = (n) => String(n).padStart(2, "0");
+  const key = (y, m) => y * 12 + m;
+  const todayD = new Date(), todayS = `${todayD.getFullYear()}-${pad(todayD.getMonth() + 1)}-${pad(todayD.getDate())}`;
+  const first = evs.find((e) => e.date >= todayS) || evs[0];
+  const keys = evs.map((e) => key(+e.date.slice(0, 4), +e.date.slice(5, 7) - 1));
+  const minK = Math.min(...keys), maxK = Math.max(...keys);
+  let cur = key(+first.date.slice(0, 4), +first.date.slice(5, 7) - 1), sel = null;
+  const stamp = (e, mins) => { const [h, m] = e.time.split(":").map(Number); const t = h * 60 + m + mins; return e.date.replace(/-/g, "") + "T" + pad(Math.floor(t / 60) % 24) + pad(t % 60) + "00"; };
+  const gcal = (e) => "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(e.title + " · UP SKY") + "&dates=" + stamp(e, 0) + "/" + stamp(e, 120) + "&location=" + encodeURIComponent(e.place) + "&details=" + encodeURIComponent("Evento de UP SKY Energy Drink. Más info: " + new URL(e.url, location.href).href);
+  const ics = (e) => "data:text/calendar;charset=utf-8," + encodeURIComponent(["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//UP SKY//Eventos//ES", "BEGIN:VEVENT", "UID:" + e.url + "@upsky", "DTSTAMP:" + stamp(e, 0), "DTSTART:" + stamp(e, 0), "DTEND:" + stamp(e, 120), "SUMMARY:" + e.title + " · UP SKY", "LOCATION:" + e.place, "END:VEVENT", "END:VCALENDAR"].join("\r\n"));
+  const show = (e) => {
+    sel = e.date;
+    const d = new Date(e.date + "T12:00:00");
+    detail.hidden = false;
+    detail.innerHTML = `<div><h3>${e.title}</h3><p>${d.toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long" })} · ${e.time} h · ${e.place}</p></div><div class="cal-acts"><a class="btn btn-primary" href="${gcal(e)}" target="_blank" rel="noopener">Agendar en Google Calendar</a><a class="btn btn-outline" href="${ics(e)}" download="${e.url.replace(".html", "")}.ics">Descargar .ics</a><a class="btn btn-outline" href="${e.url}">Ver evento</a></div>`;
+    render();
+  };
+  function render() {
+    const y = Math.floor(cur / 12), m = cur % 12;
+    monthEl.textContent = new Date(y, m, 1).toLocaleDateString("es-AR", { month: "long", year: "numeric" });
+    const lead = (new Date(y, m, 1).getDay() + 6) % 7, days = new Date(y, m + 1, 0).getDate();
+    let html = "";
+    for (let i = 0; i < lead; i++) html += '<span class="cal-day is-empty"></span>';
+    for (let d = 1; d <= days; d++) {
+      const ds = `${y}-${pad(m + 1)}-${pad(d)}`, e = evs.find((x) => x.date === ds);
+      const cls = "cal-day" + (e ? " has-ev" : "") + (ds === todayS ? " is-today" : "") + (sel === ds ? " is-sel" : "");
+      html += e ? `<button type="button" class="${cls}" data-d="${ds}" aria-label="${e.title}, ${d}"><b>${d}</b><small>${e.title}</small></button>` : `<span class="${cls}">${d}</span>`;
+    }
+    grid.innerHTML = html;
+    prev.disabled = cur <= minK; next.disabled = cur >= maxK;
+  }
+  grid.addEventListener("click", (ev) => { const b = ev.target.closest(".has-ev"); if (b) show(evs.find((x) => x.date === b.dataset.d)); });
+  prev.addEventListener("click", () => { if (cur > minK) { cur--; render(); } });
+  next.addEventListener("click", () => { if (cur < maxK) { cur++; render(); } });
+  render();
+});
