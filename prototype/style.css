@@ -4728,3 +4728,15 @@ body.page-product #formula, body.page-product #momentos, body.page-product #info
   margin-top: calc(-1 * var(--sheet-r));
 }
 body.page-product #momentos, body.page-product #producto-faq { background: #fff; }
+
+/* Transiciones v2: curva arriba y abajo. Las secciones claras (en páginas
+   oscuras) y las oscuras (en la página clara de Producto) son bloques con las
+   cuatro esquinas redondeadas; el fondo de la página asoma en las esquinas. */
+#formatos, #lifestyle, #faq-home, #contacto, .ev-agenda,
+body.page-product #formula, body.page-product #momentos, body.page-product #info, body.page-product #producto-faq {
+  margin-top: 0; border-radius: 0; z-index: auto;
+}
+#formatos, #faq-home, .ev-hero--light { border-radius: var(--sheet-r); }
+.ev-hero--light { border-radius: 0 0 var(--sheet-r) var(--sheet-r); }
+body.page-product .pp-dark { border-radius: var(--sheet-r); }
+body.page-product #formula, body.page-product #info { border-radius: var(--sheet-r); }
