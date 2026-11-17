@@ -1,4 +1,4 @@
-# Entregable de funcionalidades de la web UP SKY — PENDIENTE (pausado)
+# Entregable de funcionalidades de la web UP SKY — PENDIENTE (versión 1 hecha, falta Producto)
 
 Documento para el cliente (UP SKY) que explique todo lo que tiene la página, para que las funciones no pasen desapercibidas.
 Se guarda en Drive y es el entregable final cuando se publique la página.
@@ -20,3 +20,8 @@ títulos en Archivo itálica, capturas reales en marco de navegador/celular, com
 
 ## Capturas
 `capturas.js` (Playwright) genera las 20 capturas desde el sitio local (`npx serve -l 7970 prototype`). Esperar ~2,8 s por captura para que terminen las animaciones de entrada.
+
+## Estado (17/11/2026)
+Se generó `UPSKY-entregable.pdf` (22 láminas 1920x1080) con todas las secciones menos Producto, que figura "En desarrollo".
+Fuentes para regenerarlo en `fuente/` (`cap.js` captura y mide componentes, `gen.py` + `content.py` arman las láminas, `shot.js pdf` exporta).
+Falta: sumar las láminas de Producto cuando esté terminada, y subir el PDF a Drive.
