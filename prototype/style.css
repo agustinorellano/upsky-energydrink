@@ -4718,3 +4718,13 @@ body.page-product .footer-band { background: transparent; border-radius: 0; }
   margin-top: calc(-1 * var(--sheet-r));
 }
 #lifestyle, #contacto, .ev-agenda { background: #0a0a0c; }
+
+/* Producto: mismas transiciones que el resto del sitio (hojas con esquinas
+   redondeadas), sin cortes diagonales. */
+body.page-product .pp-dark { clip-path: none; }
+body.page-product #formula, body.page-product #momentos, body.page-product #info, body.page-product #producto-faq {
+  position: relative; z-index: 1;
+  border-radius: var(--sheet-r) var(--sheet-r) 0 0;
+  margin-top: calc(-1 * var(--sheet-r));
+}
+body.page-product #momentos, body.page-product #producto-faq { background: #fff; }
