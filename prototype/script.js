@@ -1469,52 +1469,41 @@ document.addEventListener("DOMContentLoaded", () => {
   }));
 });
 
-// Eventos: calendario con "Agendar" (Google Calendar o archivo .ics)
+// Eventos: banner del próximo evento (con cuenta regresiva) y agenda en lista, con "Agendar"
 document.addEventListener("DOMContentLoaded", () => {
-  const grid = document.getElementById("calGrid");
-  if (!grid) return;
+  const list = document.getElementById("aglList"), nxt = document.getElementById("nxt");
+  if (!list || !nxt) return;
+  const pad = (n) => String(n).padStart(2, "0");
   const evs = Array.from(document.querySelectorAll(".evc[data-date]")).map((a) => ({
     date: a.dataset.date, time: a.dataset.time || "10:00",
     title: a.querySelector("h3").textContent.trim(),
     place: a.querySelector(".evc-place").textContent.trim(),
     url: a.querySelector("h3 a").getAttribute("href"),
-  })).sort((x, y) => x.date.localeCompare(y.date));
-  if (!evs.length) return;
-  const monthEl = document.getElementById("calMonth"), detail = document.getElementById("calDetail");
-  const prev = document.getElementById("calPrev"), next = document.getElementById("calNext");
-  const pad = (n) => String(n).padStart(2, "0");
-  const key = (y, m) => y * 12 + m;
-  const todayD = new Date(), todayS = `${todayD.getFullYear()}-${pad(todayD.getMonth() + 1)}-${pad(todayD.getDate())}`;
-  const first = evs.find((e) => e.date >= todayS) || evs[0];
-  const keys = evs.map((e) => key(+e.date.slice(0, 4), +e.date.slice(5, 7) - 1));
-  const minK = Math.min(...keys), maxK = Math.max(...keys);
-  let cur = key(+first.date.slice(0, 4), +first.date.slice(5, 7) - 1), sel = null;
+  })).sort((x, y) => (x.date + x.time).localeCompare(y.date + y.time));
+  const when = (e) => new Date(e.date + "T" + e.time + ":00");
   const stamp = (e, mins) => { const [h, m] = e.time.split(":").map(Number); const t = h * 60 + m + mins; return e.date.replace(/-/g, "") + "T" + pad(Math.floor(t / 60) % 24) + pad(t % 60) + "00"; };
   const gcal = (e) => "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(e.title + " · UP SKY") + "&dates=" + stamp(e, 0) + "/" + stamp(e, 120) + "&location=" + encodeURIComponent(e.place) + "&details=" + encodeURIComponent("Evento de UP SKY Energy Drink. Más info: " + new URL(e.url, location.href).href);
   const ics = (e) => "data:text/calendar;charset=utf-8," + encodeURIComponent(["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//UP SKY//Eventos//ES", "BEGIN:VEVENT", "UID:" + e.url + "@upsky", "DTSTAMP:" + stamp(e, 0), "DTSTART:" + stamp(e, 0), "DTEND:" + stamp(e, 120), "SUMMARY:" + e.title + " · UP SKY", "LOCATION:" + e.place, "END:VEVENT", "END:VCALENDAR"].join("\r\n"));
-  const show = (e) => {
-    sel = e.date;
-    const d = new Date(e.date + "T12:00:00");
-    detail.hidden = false;
-    detail.innerHTML = `<div><h3>${e.title}</h3><p>${d.toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long" })} · ${e.time} h · ${e.place}</p></div><div class="cal-acts"><a class="btn btn-primary" href="${gcal(e)}" target="_blank" rel="noopener">Agendar en Google Calendar</a><a class="btn btn-outline" href="${ics(e)}" download="${e.url.replace(".html", "")}.ics">Descargar .ics</a><a class="btn btn-outline" href="${e.url}">Ver evento</a></div>`;
-    render();
+  const fname = (e) => e.url.replace(".html", "") + ".ics";
+  const longDate = (e) => when(e).toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long" });
+  const upcoming = evs.filter((e) => when(e) >= new Date());
+  const shown = upcoming.length ? upcoming : evs;
+  // Agenda en lista
+  list.innerHTML = shown.map((e) => {
+    const d = when(e);
+    return `<article class="agl-row"><div class="agl-date"><b>${d.getDate()}</b><span>${d.toLocaleDateString("es-AR", { month: "short" }).replace(".", "")}</span></div><div class="agl-body"><h3><a href="${e.url}">${e.title}</a></h3><p>${longDate(e)} · ${e.time} h · ${e.place}</p></div><details class="agm"><summary class="btn btn-outline">Agendar</summary><div class="agm-pop"><a href="${gcal(e)}" target="_blank" rel="noopener">Google Calendar</a><a href="${ics(e)}" download="${fname(e)}">Apple / Outlook (.ics)</a></div></details></article>`;
+  }).join("");
+  document.addEventListener("click", (ev) => document.querySelectorAll(".agm[open]").forEach((d) => { if (!d.contains(ev.target)) d.open = false; }));
+  // Banner del próximo evento
+  if (!upcoming.length) return;
+  const n = upcoming[0];
+  nxt.hidden = false;
+  nxt.innerHTML = `<div class="nxt-main"><p class="cal-k">Próximo evento</p><h2>${n.title}</h2><p class="nxt-meta">${longDate(n)} · ${n.time} h · ${n.place}</p><div class="nxt-acts"><a class="btn btn-primary" href="${gcal(n)}" target="_blank" rel="noopener">Agendar en Google Calendar</a><a class="btn btn-outline" href="${ics(n)}" download="${fname(n)}">Descargar .ics</a><a class="btn btn-outline" href="${n.url}">Ver evento</a></div></div><div class="nxt-count" id="nxtCount" aria-label="Cuenta regresiva"></div>`;
+  const count = document.getElementById("nxtCount");
+  const tick = () => {
+    let s = Math.max(0, Math.floor((when(n) - new Date()) / 60000));
+    const d = Math.floor(s / 1440), h = Math.floor((s % 1440) / 60), m = s % 60;
+    count.innerHTML = [[d, "días"], [h, "horas"], [m, "min"]].map(([v, l]) => `<div><b>${pad(v)}</b><span>${l}</span></div>`).join("");
   };
-  function render() {
-    const y = Math.floor(cur / 12), m = cur % 12;
-    monthEl.textContent = new Date(y, m, 1).toLocaleDateString("es-AR", { month: "long", year: "numeric" });
-    const lead = (new Date(y, m, 1).getDay() + 6) % 7, days = new Date(y, m + 1, 0).getDate();
-    let html = "";
-    for (let i = 0; i < lead; i++) html += '<span class="cal-day is-empty"></span>';
-    for (let d = 1; d <= days; d++) {
-      const ds = `${y}-${pad(m + 1)}-${pad(d)}`, e = evs.find((x) => x.date === ds);
-      const cls = "cal-day" + (e ? " has-ev" : "") + (ds === todayS ? " is-today" : "") + (sel === ds ? " is-sel" : "");
-      html += e ? `<button type="button" class="${cls}" data-d="${ds}" aria-label="${e.title}, ${d}"><b>${d}</b><small>${e.title}</small></button>` : `<span class="${cls}">${d}</span>`;
-    }
-    grid.innerHTML = html;
-    prev.disabled = cur <= minK; next.disabled = cur >= maxK;
-  }
-  grid.addEventListener("click", (ev) => { const b = ev.target.closest(".has-ev"); if (b) show(evs.find((x) => x.date === b.dataset.d)); });
-  prev.addEventListener("click", () => { if (cur > minK) { cur--; render(); } });
-  next.addEventListener("click", () => { if (cur < maxK) { cur++; render(); } });
-  render();
+  tick(); setInterval(tick, 30000);
 });

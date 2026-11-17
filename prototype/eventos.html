@@ -107,6 +107,7 @@
 
 <section class="evl-sheet" id="agenda">
   <div class="container">
+    <div class="nxt" id="nxt" hidden></div>
     <div class="evl-bar">
       <div class="evl-filters" role="group" aria-label="Filtrar eventos"><button type="button" class="evf is-on" data-f="todos" aria-pressed="true">Todos</button><button type="button" class="evf" data-f="noche" aria-pressed="false">Noche</button><button type="button" class="evf" data-f="deporte" aria-pressed="false">Deporte</button><button type="button" class="evf" data-f="playa" aria-pressed="false">Playa</button><button type="button" class="evf" data-f="comercio" aria-pressed="false">Comercio</button><button type="button" class="evf" data-f="comunidad" aria-pressed="false">Comunidad</button></div>
       <a href="https://www.instagram.com/upskyenergydrink/" target="_blank" rel="noopener" class="btn btn-outline evl-ig">Seguinos en Instagram</a>
@@ -177,22 +178,13 @@
     <p class="evl-empty" id="evEmpty" hidden>No hay eventos en esta categoría por ahora.</p>
 
 
-    <section class="cal" id="calendario" aria-label="Calendario de eventos">
-      <div class="cal-head">
-        <div>
-          <p class="cal-k">Calendario</p>
-          <h2 class="cal-title">Agendá los próximos <span>eventos</span></h2>
-        </div>
-        <div class="cal-nav">
-          <button type="button" class="cal-btn" id="calPrev" aria-label="Mes anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <span class="cal-month" id="calMonth" aria-live="polite"></span>
-          <button type="button" class="cal-btn" id="calNext" aria-label="Mes siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        </div>
+    <section class="agl" id="calendario" aria-label="Agenda de próximos eventos">
+      <div class="agl-head">
+        <p class="cal-k">Agenda</p>
+        <h2 class="agl-title">Próximas <span>fechas</span></h2>
       </div>
-      <div class="cal-dow" aria-hidden="true"><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span></div>
-      <div class="cal-grid" id="calGrid"></div>
-      <div class="cal-detail" id="calDetail" hidden></div>
-      <p class="cal-demo">Fechas de demostración: se actualizan cuando se confirmen los eventos.</p>
+      <div class="agl-list" id="aglList"></div>
+      <p class="agl-demo">Fechas de demostración: se actualizan cuando se confirmen los eventos.</p>
     </section>
 
     <a href="negocios.html" class="evl-cta qs-reveal">

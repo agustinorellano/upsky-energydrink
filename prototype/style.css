@@ -4882,3 +4882,55 @@ body.page-product #formula, body.page-product #info { border-radius: var(--sheet
   .cal-head { align-items: flex-start; }
   .cal-acts, .cal-acts .btn { width: 100%; }
 }
+
+/* ===== Eventos: banner del próximo evento + agenda en lista ===== */
+.nxt {
+  position: relative; overflow: hidden; isolation: isolate; border-radius: 28px; color: #fff; background: #0a0a0c;
+  padding: clamp(24px, 3.6vw, 48px); margin-bottom: clamp(28px, 3.4vw, 44px);
+  display: flex; flex-wrap: wrap; gap: 24px 40px; align-items: center; justify-content: space-between;
+}
+.nxt[hidden] { display: none; }
+.nxt::before { content: ""; position: absolute; inset: -20%; z-index: -1; pointer-events: none; filter: blur(18px);
+  background: radial-gradient(38% 40% at 90% 10%, rgba(236,31,122,.6), transparent 70%), radial-gradient(34% 36% at 6% 100%, rgba(236,31,122,.35), transparent 70%); }
+.nxt::after { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; box-shadow: inset 0 0 0 1px rgba(236,31,122,.3), inset 0 1px 0 rgba(255,255,255,.12); }
+.nxt h2 { font-family: 'Archivo', var(--font-display); font-style: italic; font-weight: 900; text-transform: uppercase; font-size: clamp(1.7rem, 3.4vw, 2.9rem); line-height: 1; margin: 0 0 10px; color: #fff; }
+.nxt-meta { margin: 0 0 20px; color: #d0d0d6; font-size: 1.05rem; }
+.nxt-acts { display: flex; flex-wrap: wrap; gap: 10px; }
+.nxt-acts .btn { padding: 11px 20px; font-size: .9rem; }
+.nxt-acts .btn-outline { color: #fff; border-color: rgba(255,255,255,.5); }
+.nxt-count { display: flex; gap: 12px; }
+.nxt-count div { min-width: 86px; padding: 16px 10px; border-radius: 18px; text-align: center; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); }
+.nxt-count b { display: block; font-family: var(--font-display); font-weight: 600; font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1; }
+.nxt-count span { display: block; margin-top: 6px; color: #a3a3ab; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+
+.agl { margin-top: clamp(44px, 5vw, 72px); }
+.agl .cal-k { margin: 0 0 8px; }
+.agl-title { font-family: 'Archivo', var(--font-display); font-style: italic; font-weight: 900; text-transform: uppercase; font-size: clamp(1.6rem, 3vw, 2.5rem); line-height: 1; margin: 0 0 22px; color: #0a0a0c; }
+.agl-title span { color: #ec1f7a; }
+.agl-row { display: grid; grid-template-columns: 84px minmax(0, 1fr) auto; gap: 22px; align-items: center; padding: 18px 0; border-top: 1px solid #e4e4e9; }
+.agl-row:last-child { border-bottom: 1px solid #e4e4e9; }
+.agl-date { width: 84px; height: 84px; border-radius: 20px; background: #0a0a0c; color: #fff; display: grid; place-content: center; text-align: center; box-shadow: 0 8px 24px rgba(236,31,122,.25); }
+.agl-date b { font-family: var(--font-display); font-weight: 600; font-size: 2.1rem; line-height: 1; }
+.agl-date span { color: #ec1f7a; font-weight: 800; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; margin-top: 4px; }
+.agl-body h3 { margin: 0 0 4px; font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; line-height: 1.15; }
+.agl-body h3 a { color: #0a0a0c; }
+.agl-body h3 a:hover { color: #ec1f7a; }
+.agl-body p { margin: 0; color: #5c5c66; }
+.agm { position: relative; }
+.agm summary { list-style: none; cursor: pointer; padding: 11px 22px; }
+.agm summary::-webkit-details-marker { display: none; }
+.agm-pop { position: absolute; right: 0; top: calc(100% + 8px); z-index: 5; min-width: 230px; padding: 8px; border-radius: 16px; background: #0a0a0c; box-shadow: 0 20px 50px rgba(0,0,0,.35); display: grid; }
+.agm-pop a { color: #fff; padding: 12px 14px; border-radius: 10px; font-weight: 600; }
+.agm-pop a:hover { background: #ec1f7a; }
+.agl-demo { margin: 16px 0 0; color: #8e8e98; font-size: .82rem; }
+@media (max-width: 600px) {
+  .nxt { border-radius: 22px; }
+  .nxt-count { width: 100%; } .nxt-count div { flex: 1; min-width: 0; }
+  .nxt-acts, .nxt-acts .btn { width: 100%; }
+  .agl-row { grid-template-columns: 64px minmax(0, 1fr); gap: 6px 16px; }
+  .agl-date { width: 64px; height: 64px; border-radius: 16px; grid-row: 1 / 3; }
+  .agl-date b { font-size: 1.6rem; }
+  .agl-body h3 { font-size: 1.2rem; }
+  .agm { grid-column: 2; } .agm summary { display: inline-block; padding: 8px 18px; font-size: .85rem; }
+  .agm-pop { left: 0; right: auto; }
+}
