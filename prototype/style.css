@@ -4809,7 +4809,15 @@ body.page-product #formula, body.page-product #info { border-radius: var(--sheet
 @media (max-width: 960px) { .evl-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 600px) {
   .evl-top { padding: 150px 0 130px; }
-  .evl-grid { grid-template-columns: 1fr; gap: 32px; }
+  .evl-grid { grid-template-columns: 1fr; gap: 18px; }
+  .evc { display: grid; grid-template-columns: 124px minmax(0, 1fr); grid-template-rows: auto auto auto; column-gap: 16px; align-content: center; align-items: center; }
+  .evc-media { grid-row: 1 / 4; grid-column: 1; aspect-ratio: 1 / 1; border-radius: 18px; }
+  .evc-arrow { display: none; }
+  .evc-share { top: 8px; right: auto; left: 8px; width: 30px; height: 30px; }
+  .evc-share svg { width: 14px; height: 14px; }
+  .evc-meta { grid-column: 2; margin: 0 0 6px; flex-wrap: wrap; gap: 8px; align-self: end; }
+  .evc h3 { grid-column: 2; margin: 0 0 6px; font-size: 1.25rem; }
+  .evc-place { grid-column: 2; margin: 0; align-self: start; font-size: .78rem; }
   .evl-ig { width: 100%; }
   .evl-cta .btn { width: 100%; }
 }
