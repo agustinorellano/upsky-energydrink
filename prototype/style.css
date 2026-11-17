@@ -4934,3 +4934,6 @@ body.page-product #formula, body.page-product #info { border-radius: var(--sheet
   .agm { grid-column: 2; } .agm summary { display: inline-block; padding: 8px 18px; font-size: .85rem; }
   .agm-pop { left: 0; right: auto; }
 }
+
+/* Contenido del CMS: lo que se oculta desde el panel no se muestra. */
+.product-card[hidden], .price-card[hidden], .more-card[hidden] { display: none !important; }

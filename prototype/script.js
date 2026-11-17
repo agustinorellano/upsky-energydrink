@@ -726,35 +726,35 @@ document.addEventListener("DOMContentLoaded", () => {
       persistAndRender();
     });
 
-    // Steppers de cantidad en las cards del catálogo
-    document.querySelectorAll(".qty-stepper").forEach((stepper) => {
-      const valueEl = stepper.querySelector(".qty-value");
-      stepper.querySelectorAll(".qty-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const max = Number(stepper.closest("[data-max]")?.dataset.max) || Infinity;
-          let qty = Number(valueEl.textContent) || 1;
-          qty = btn.dataset.action === "increase" ? Math.min(max, qty + 1) : Math.max(1, qty - 1);
-          valueEl.textContent = qty;
-        });
-      });
-    });
+    // Steppers de cantidad y "Agregar al carrito" (delegado: también funciona en cards creadas por el CMS)
+    document.addEventListener("click", (e) => {
+      const qb = e.target.closest(".qty-btn");
+      if (qb) {
+        const stepper = qb.closest(".qty-stepper");
+        const valueEl = stepper && stepper.querySelector(".qty-value");
+        if (!valueEl) return;
+        const max = Number(stepper.closest("[data-max]")?.dataset.max) || Infinity;
+        let qty = Number(valueEl.textContent) || 1;
+        qty = qb.dataset.action === "increase" ? Math.min(max, qty + 1) : Math.max(1, qty - 1);
+        valueEl.textContent = qty;
+        return;
+      }
+      const button = e.target.closest(".btn-add");
+      if (!button) return;
+      const card = button.closest("[data-id]");
+      if (!card) return;
+      const id = card.dataset.id;
+      const name = card.dataset.name;
+      const price = Number(card.dataset.price);
+      const qtyEl = card.querySelector(".qty-value");
+      const addQty = qtyEl ? Number(qtyEl.textContent) || 1 : 1;
 
-    document.querySelectorAll(".btn-add").forEach((button) => {
-      button.addEventListener("click", () => {
-        const card = button.closest("[data-id]");
-        const id = card.dataset.id;
-        const name = card.dataset.name;
-        const price = Number(card.dataset.price);
-        const qtyEl = card.querySelector(".qty-value");
-        const addQty = qtyEl ? Number(qtyEl.textContent) || 1 : 1;
-
-        const max = Number(card.dataset.max) || 0;
-        if (!cart[id]) cart[id] = { name, price, qty: 0, tiers: parseTiers(card.dataset.tiers), max, group: card.dataset.group || "" };
-        cart[id].qty += addQty;
-        if (max) cart[id].qty = Math.min(max, cart[id].qty);
-        if (qtyEl) qtyEl.textContent = "1";
-        persistAndRender();
-      });
+      const max = Number(card.dataset.max) || 0;
+      if (!cart[id]) cart[id] = { name, price, qty: 0, tiers: parseTiers(card.dataset.tiers), max, group: card.dataset.group || "" };
+      cart[id].qty += addQty;
+      if (max) cart[id].qty = Math.min(max, cart[id].qty);
+      if (qtyEl) qtyEl.textContent = "1";
+      persistAndRender();
     });
 
     // Datos de envío: se piden siempre antes de mandar el pedido,
@@ -1454,25 +1454,30 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("[data-open-assistant]").forEach((b) => b.addEventListener("click", () => window.upskyAssistant && window.upskyAssistant.open()));
 });
 
-// Eventos: filtro por categoría
+// Eventos: filtro por categoría (delegado: los filtros y las cards pueden venir del CMS)
 document.addEventListener("DOMContentLoaded", () => {
   const grid = document.getElementById("evGrid");
-  if (!grid) return;
-  const chips = document.querySelectorAll(".evf");
+  const bar = document.querySelector(".evl-filters");
+  if (!grid || !bar) return;
   const empty = document.getElementById("evEmpty");
-  chips.forEach((c) => c.addEventListener("click", () => {
+  bar.addEventListener("click", (ev) => {
+    const c = ev.target.closest(".evf");
+    if (!c) return;
     const f = c.dataset.f;
-    chips.forEach((x) => { const on = x === c; x.classList.toggle("is-on", on); x.setAttribute("aria-pressed", on ? "true" : "false"); });
+    bar.querySelectorAll(".evf").forEach((x) => { const on = x === c; x.classList.toggle("is-on", on); x.setAttribute("aria-pressed", on ? "true" : "false"); });
     let n = 0;
     grid.querySelectorAll(".evc").forEach((e) => { const show = f === "todos" || e.dataset.cat === f; e.hidden = !show; if (show) n++; });
     if (empty) empty.hidden = n > 0;
-  }));
+  });
 });
 
 // Eventos: banner del próximo evento (con cuenta regresiva) y agenda en lista, con "Agendar"
-document.addEventListener("DOMContentLoaded", () => {
+(() => {
+  let tickTimer;
+  const run = () => {
   const list = document.getElementById("aglList"), nxt = document.getElementById("nxt");
   if (!list || !nxt) return;
+  clearInterval(tickTimer);
   const pad = (n) => String(n).padStart(2, "0");
   const evs = Array.from(document.querySelectorAll(".evc[data-date]")).map((a) => ({
     date: a.dataset.date, time: a.dataset.time || "10:00",
@@ -1495,7 +1500,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }).join("");
   document.addEventListener("click", (ev) => document.querySelectorAll(".agm[open]").forEach((d) => { if (!d.contains(ev.target)) d.open = false; }));
   // Banner del próximo evento
-  if (!upcoming.length) return;
+  if (!upcoming.length) { nxt.hidden = true; return; }
   const n = upcoming[0];
   nxt.hidden = false;
   nxt.innerHTML = `<div class="nxt-main"><p class="cal-k">Próximo evento</p><h2>${n.title}</h2><p class="nxt-meta">${longDate(n)} · ${n.time} h · ${n.place}</p><div class="nxt-acts"><a class="btn btn-primary" href="${gcal(n)}" target="_blank" rel="noopener">Agendar en Google Calendar</a><a class="btn btn-outline" href="${ics(n)}" download="${fname(n)}">Descargar .ics</a><a class="btn btn-outline" href="${n.url}">Ver evento</a></div></div><div class="nxt-count" id="nxtCount" aria-label="Cuenta regresiva"></div>`;
@@ -1505,5 +1510,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const d = Math.floor(s / 1440), h = Math.floor((s % 1440) / 60), m = s % 60;
     count.innerHTML = [[d, "días"], [h, "horas"], [m, "min"]].map(([v, l]) => `<div><b>${pad(v)}</b><span>${l}</span></div>`).join("");
   };
-  tick(); setInterval(tick, 30000);
-});
+  tick(); tickTimer = setInterval(tick, 30000);
+  };
+  document.addEventListener("DOMContentLoaded", run);
+  document.addEventListener("upsky:events-updated", run);
+})();
