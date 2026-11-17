@@ -4705,3 +4705,16 @@ html.ua-open .ua-launcher, html.ua-open .whatsapp-float, html.ua-open .wa-nudge 
    el fondo (sin esquinas negras detrás); solo queda el panel negro curvo. */
 body.page-product .site-footer { background: transparent; margin-top: 0; }
 body.page-product .footer-band { background: transparent; border-radius: 0; }
+
+/* Transiciones entre secciones: sin curvas ni diagonales. La sección que entra
+   se apoya sobre la anterior como una "hoja" con las esquinas superiores
+   redondeadas (mismo criterio que el footer). */
+:root { --sheet-r: clamp(28px, 3.4vw, 56px); }
+.curve-divider { display: none !important; }
+#formatos, #lifestyle, #faq-home, #contacto, .ev-agenda {
+  position: relative;
+  z-index: 1;
+  border-radius: var(--sheet-r) var(--sheet-r) 0 0;
+  margin-top: calc(-1 * var(--sheet-r));
+}
+#lifestyle, #contacto, .ev-agenda { background: #0a0a0c; }
