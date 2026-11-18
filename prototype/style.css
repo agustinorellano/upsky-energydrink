@@ -5087,8 +5087,8 @@ body:has(.tyc-sheet) .footer-band, body:has(.evl-sheet) .footer-band { border-ra
 body:has(.evl-sheet) .footer-band { background: #f6f6f8; }
 
 /* ===== Botón de arrepentimiento ===== */
-.footer-pill--arrep { background: transparent; border-color: rgba(236,31,122,.7); color: #fff; justify-content: center; text-align: center; }
-.footer-pill--arrep:hover { background: var(--primary-color); border-color: var(--primary-color); }
+.footer-arrep { display: inline-block; margin-left: 10px; padding: 3px 12px; border: 1px solid rgba(236,31,122,.7); border-radius: 999px; font-size: .78rem; color: #fff !important; text-decoration: none !important; line-height: 1.5; }
+.footer-arrep:hover { background: var(--primary-color); border-color: var(--primary-color); }
 .arr-lead { max-width: 56ch; margin: 18px 0 0; color: #d9d9df; font-size: 1.1rem; line-height: 1.55; }
 .arr-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
 .arr-info h2, .arr-form h2 { margin: 0 0 18px; font-family: var(--font-display); font-weight: 600; font-size: 1.7rem; color: #0a0a0c; }
