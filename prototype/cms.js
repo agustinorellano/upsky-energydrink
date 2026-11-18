@@ -210,6 +210,18 @@
     if (cover && e.imagen_1) cover.innerHTML = `<img src="${esc(e.imagen_1)}" alt="${esc(e.nombre)}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">`;
   }
 
+  // Cards con página propia: tocar la foto o el nombre abre /p/... (sin pisar botones, selectores ni deslizamientos).
+  let down = null;
+  document.addEventListener("pointerdown", (e) => { down = { x: e.clientX, y: e.clientY }; }, true);
+  document.addEventListener("click", (e) => {
+    const card = e.target.closest(".product-card[data-share-url], .price-card[data-share-url]");
+    if (!card || e.defaultPrevented) return;
+    if (e.target.closest("button, a, input, .color-picker, .qty-stepper")) return;
+    if (!e.target.closest(".product-card-media, .price-name")) return;
+    if (down && Math.hypot(e.clientX - down.x, e.clientY - down.y) > 8) return;
+    location.href = card.dataset.shareUrl;
+  });
+
   load().then((db) => {
     if (!db.__seeded) return; // base sin cargar: se deja el contenido del HTML
     products(db.productos || []);

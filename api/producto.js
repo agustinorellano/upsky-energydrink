@@ -44,9 +44,11 @@ function cartId(item, all) {
 function page(item, all, origin) {
   const mayor = item.section === "mayorista";
   const imgs = [1, 2, 3, 4].map((n) => item["imagen_" + n]).filter(Boolean);
+  const colors = !mayor && item.tipo === "Vaso" ? String(item.colores || "").split(",").map((c) => c.trim()).filter(Boolean) : [];
+  const colorImg = (c, i) => (imgs[i] ? imgs[i] : "assets/vaso-" + slugify(c) + "-foto.webp");
   const defImg = mayor ? "assets/pack-energizante.webp" : DEFAULT_IMG[item.tipo] || "assets/logo.png";
   const abs = (u) => (/^https?:\/\//.test(u) ? u : origin + "/" + u.replace(/^\//, ""));
-  const main = imgs[0] || defImg;
+  const main = (colors.length > 1 ? colorImg(colors[0], 0) : imgs[0]) || defImg;
   const canon = `${origin}/p/${slugify(item.nombre)}-${item.id}`;
   const unit = mayor ? "packs" : UNIT[item.tipo] || "unidades";
   const color = !mayor && item.tipo === "Vaso" ? String(item.colores || "").split(",")[0].trim().toLowerCase() : "";
@@ -75,7 +77,8 @@ function page(item, all, origin) {
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(desc)}">
 <meta name="twitter:image" content="${esc(abs(main))}">`;
-  const thumbs = imgs.length > 1 ? `<div class="pd-thumbs">${imgs.map((u, i) => `<button type="button" class="pd-thumb${i === 0 ? " is-on" : ""}" data-src="${esc(u)}" aria-label="Ver foto ${i + 1}"><img src="${esc(u)}" alt="" loading="lazy"></button>`).join("")}</div>` : "";
+  const picker = colors.length > 1 ? `<div class="color-picker pd-colors" role="radiogroup" aria-label="Color"><span class="color-picker-label">Color</span>${colors.map((c, i) => `<button type="button" class="color-opt${i === 0 ? " is-selected" : ""}" role="radio" aria-checked="${i === 0}" data-color="${esc(slugify(c))}" data-label="${esc(c.toLowerCase())}" data-img="${esc(colorImg(c, i))}"><i class="sw sw--${esc(slugify(c))}"></i>${esc(c)}</button>`).join("")}</div>` : "";
+  const thumbs = !picker && imgs.length > 1 ? `<div class="pd-thumbs">${imgs.map((u, i) => `<button type="button" class="pd-thumb${i === 0 ? " is-on" : ""}" data-src="${esc(u)}" aria-label="Ver foto ${i + 1}"><img src="${esc(u)}" alt="" loading="lazy"></button>`).join("")}</div>` : "";
   const maxAttr = !mayor && Number(item.max_por_pedido) ? ` data-max="${Number(item.max_por_pedido)}"` : "";
   const html = `
 <section class="pd">
@@ -93,6 +96,7 @@ function page(item, all, origin) {
       <p class="pd-note">Precio sin envío</p>
       ${item.descripcion ? `<p class="pd-desc">${esc(item.descripcion)}</p>` : ""}
       ${li.length ? `<ul class="pd-tiers">${li.join("")}</ul>` : ""}
+      ${picker}
       <div class="pd-buy" data-id="${esc(cartId(item, all))}" data-name="${esc(cartName)}" data-price="${Number(item.precio) || 0}" data-tiers="${esc(tiers.join(","))}"${maxAttr}>
         <div class="qty-stepper">
           <button type="button" class="qty-btn" data-action="decrease" aria-label="Restar">−</button>
@@ -109,8 +113,12 @@ function page(item, all, origin) {
     </div>
   </div>
 </section>`;
+  const rows = String(item.detalles || "").split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+  const specs = rows.filter((l) => /^[^:]{1,40}:\s*\S/.test(l)).map((l) => { const i = l.indexOf(":"); return `<div><dt>${esc(l.slice(0, i).trim())}</dt><dd>${esc(l.slice(i + 1).trim())}</dd></div>`; });
+  const bullets = rows.filter((l) => !/^[^:]{1,40}:\s*\S/.test(l)).map((l) => `<li>${esc(l)}</li>`);
+  const more = rows.length ? `<section class="pd-more"><div class="container"><h2>Detalles del producto</h2><div class="pd-more-grid">${specs.length ? `<dl class="pd-specs">${specs.join("")}</dl>` : ""}${bullets.length ? `<ul class="pd-bullets">${bullets.join("")}</ul>` : ""}</div></div></section>` : "";
   const ld = `<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "Product", name: item.nombre, description: desc, image: [abs(main)], offers: { "@type": "Offer", priceCurrency: "ARS", price: Number(item.precio) || 0, availability: "https://schema.org/InStock", url: canon } }).replace(/</g, "\\u003c")}</script>`;
-  return { head, main: html + "\n" + ld };
+  return { head, main: html + "\n" + more + "\n" + ld };
 }
 
 function send(res, code, body, cache) {
