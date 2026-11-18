@@ -658,7 +658,7 @@ document.addEventListener("DOMContentLoaded", () => {
         row.className = "cart-item";
         row.innerHTML = `
           <div>
-            <p class="cart-item-name">${item.name}</p>
+            <p class="cart-item-name">${String(item.name).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]))}</p>
             <p class="cart-item-price">${formatPrice(unitPrice(item))} c/u${discountFor(item) ? ` · <strong>${discountFor(item)}% OFF</strong>` : ""}</p>
             <div class="cart-item-qty">
               <button class="cart-qty-btn" type="button" data-action="decrease" aria-label="Restar">−</button>
