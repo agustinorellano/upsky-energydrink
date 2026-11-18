@@ -5037,3 +5037,13 @@ body.page-product #formula, body.page-product #info { border-radius: var(--sheet
 #mayorista { border-radius: var(--sheet-r); }
 #mayorista { background: #fff; }
 #mayorista .price-card { box-shadow: 0 2px 16px rgba(10,10,12,.07); }
+
+/* Para negocios: el banner ocupa toda la pantalla, con la flecha "Ver productos". */
+.page-banner--neg { min-height: calc(100vh / 0.9); min-height: calc(100svh / 0.9); padding: 140px 0 250px; }
+.page-banner--neg .pbn-benefits { bottom: 110px; }
+.page-banner--neg .hero-cue { bottom: 36px; }
+@media (max-width: 800px) {
+  .page-banner--neg { padding: 130px 0 120px; display: flex; flex-direction: column; justify-content: center; align-items: stretch; }
+  .page-banner--neg .pbn-benefits { margin-top: 32px; bottom: auto; }
+  .page-banner--neg .hero-cue { bottom: 28px; }
+}
