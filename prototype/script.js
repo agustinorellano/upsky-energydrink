@@ -1019,21 +1019,30 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.setAttribute("aria-label", `Compartir ${name}`);
     btn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="6" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="18" cy="19" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m8.3 10.8 7.4-4.4M8.3 13.2l7.4 4.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
     media.appendChild(btn);
+  });
 
-    btn.addEventListener("click", async (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const url = `${location.origin}${location.pathname}#${card.id}`;
-      if (navigator.share) {
-        try {
-          await navigator.share({ title: "UP SKY Energy Drink", text: name, url });
-          return;
-        } catch (err) {
-          if (err && err.name === "AbortError") return;
-        }
+  // Delegado: también funciona en cards creadas por el CMS. Si la card tiene enlace propio
+  // (data-share-url, /p/...), se comparte ese; si no, el enlace a la card dentro de la página.
+  document.addEventListener("click", async (e) => {
+    const btn = e.target.closest(".product-grid .share-btn, .price-grid .share-btn");
+    if (!btn) return;
+    const card = btn.closest("[data-id]");
+    if (!card) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const name = card.dataset.baseName || card.dataset.shareTitle || card.dataset.name || "UP SKY";
+    const url = card.dataset.shareUrl
+      ? new URL(card.dataset.shareUrl, location.origin).href
+      : `${location.origin}${location.pathname}#${card.id}`;
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: "UP SKY Energy Drink", text: name, url });
+        return;
+      } catch (err) {
+        if (err && err.name === "AbortError") return;
       }
-      showToast((await copy(url)) ? "Enlace copiado" : "No se pudo copiar el enlace");
-    });
+    }
+    showToast((await copy(url)) ? "Enlace copiado" : "No se pudo copiar el enlace");
   });
 
   // Si llegan desde un enlace compartido, llevar a la card y resaltarla un momento.
@@ -1251,7 +1260,9 @@ document.addEventListener("DOMContentLoaded", () => {
       ta.remove(); return ok;
     }
   };
-  btns.forEach((b) => b.addEventListener("click", async (e) => {
+  document.addEventListener("click", async (e) => {
+    const b = e.target.closest("[data-share]");
+    if (!b) return;
     e.preventDefault(); e.stopPropagation();
     const url = new URL(b.dataset.url, location.href).href;
     const title = b.dataset.title || "Evento UP SKY";
@@ -1259,8 +1270,8 @@ document.addEventListener("DOMContentLoaded", () => {
       try { await navigator.share({ title: `${title} — UP SKY`, text: title, url }); return; }
       catch (err) { if (err && err.name === "AbortError") return; }
     }
-    say((await copy(url)) ? "Enlace del evento copiado" : "No se pudo copiar el enlace");
-  }));
+    say((await copy(url)) ? "Enlace copiado" : "No se pudo copiar el enlace");
+  });
 });
 
 // Agenda: brillo que sigue al cursor sobre cada card (solo con mouse).

@@ -10,6 +10,8 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const slug = (s) => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40);
+  const shareUrl = (p) => "/p/" + slug(p.nombre) + "-" + p.id;
   const money = (n) => "$" + Number(n).toLocaleString("es-AR");
   const list = (s) => String(s || "").split(",").map((x) => x.trim()).filter(Boolean);
   const MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
@@ -33,6 +35,7 @@
   const SEL = { Pack: '[data-id="pack1"]', Vaso: "#vaso1, [data-base-id=vaso]", Remera: '[data-id="remera1"]' };
 
   function applyProduct(card, p, home) {
+    if (p.id) { card.dataset.shareUrl = shareUrl(p); card.dataset.shareTitle = p.nombre; }
     const unit = UNIT[p.tipo] || "unidades";
     const nameEl = $(".price-name", card);
     if (nameEl) {
@@ -130,6 +133,7 @@
           c.dataset.id = "mayor-" + String(p.id).slice(0, 8);
           grid.appendChild(c);
         }
+        c.dataset.shareUrl = shareUrl(p); c.dataset.shareTitle = p.nombre;
         const nm = $(".price-name", c);
         nm.firstChild.textContent = p.nombre || "";
         $("span", nm).textContent = p.presentacion || "";
