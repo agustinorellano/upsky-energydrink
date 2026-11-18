@@ -5028,5 +5028,7 @@ body.page-product #formula, body.page-product #info { border-radius: var(--sheet
   .pbn-benefits li:nth-child(odd) { border-left: 0; }
   .pbn-benefits li + li { border-left: 1px solid rgba(255,255,255,.14); }
 }
-/* Mientras no esté la imagen del banner, el fondo mantiene un resplandor magenta. */
-.page-banner--neg { background: radial-gradient(40% 55% at 82% 40%, rgba(236,31,122,.32), transparent 72%), #0a0a0c; }
+@media (max-width: 800px) {
+  .page-banner--neg .page-hero-title { font-size: clamp(1.7rem, 7.4vw, 3rem); }
+  .page-banner--neg { padding-bottom: 90px; }
+}
