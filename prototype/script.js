@@ -1479,28 +1479,41 @@ document.addEventListener("DOMContentLoaded", () => {
     url: a.querySelector("h3 a").getAttribute("href"),
   })).sort((x, y) => (x.date + x.time).localeCompare(y.date + y.time));
 
+  const splitGrid = () => {
+    const grid = document.getElementById("evGrid");
+    if (!grid) return;
+    const now = new Date();
+    const cards = Array.from(grid.querySelectorAll(".evc"));
+    const key = (c) => (c.dataset.date ? c.dataset.date + (c.dataset.time || "") : "9999");
+    const upcoming = cards.filter((c) => !c.dataset.date || when({ date: c.dataset.date, time: c.dataset.time || "10:00" }) >= now);
+    upcoming.sort((a, b) => key(a).localeCompare(key(b)));
+    upcoming.forEach((c) => grid.appendChild(c));
+    cards.forEach((c) => { c.hidden = !upcoming.slice(0, 3).includes(c); });
+    const empty = document.getElementById("evEmpty");
+    if (empty) { empty.hidden = upcoming.length > 0; empty.textContent = "No hay eventos próximos por ahora."; }
+  };
+
   const renderList = () => {
     const list = document.getElementById("aglList"), empty = document.getElementById("aglEmpty");
     if (!list) return;
     const now = new Date();
-    const evs = read();
-    const shown = evs.filter((e) => (tab === "past") === (when(e) < now));
-    if (tab === "past") shown.reverse();
+    const shown = read().filter((e) => when(e) >= now).slice(3); // los 3 primeros van arriba; el resto, acá
     list.innerHTML = shown.map((e, i) => {
-      const state = tab === "past" ? "Finalizado" : i === 0 ? "Próximo evento" : "Próximamente";
-      const add = tab === "past" ? "" : `<details class="agm"><summary class="btn btn-outline">Agendar</summary><div class="agm-pop"><a href="${gcal(e)}" target="_blank" rel="noopener">Google Calendar</a><a href="${ics(e)}" download="${fname(e)}">Apple / Outlook (.ics)</a></div></details>`;
+      const state = "Próximamente";
+      const add = `<details class="agm"><summary class="btn btn-outline">Agendar</summary><div class="agm-pop"><a href="${gcal(e)}" target="_blank" rel="noopener">Google Calendar</a><a href="${ics(e)}" download="${fname(e)}">Apple / Outlook (.ics)</a></div></details>`;
       const noImg = e.img.endsWith("logo.png");
       return `<article class="agc"><a href="${esc(e.url)}" class="agc-media" aria-label="Ver ${esc(e.title)}"><img src="${esc(e.img)}" alt="" loading="lazy" decoding="async"${noImg ? ' style="object-fit:contain;padding:22%"' : ""}></a>
         <div class="agc-body"><h3><a href="${esc(e.url)}">${esc(e.title)}</a></h3><p class="agc-when">${CAL}<span>${esc(shortDate(e))}</span></p><p class="agc-cat"><b>${esc(e.cat || "Evento")}</b>${e.place ? `<span> · ${esc(e.place)}</span>` : ""}</p></div>
         <div class="agc-foot">${CLOCK}<span>${state}</span>${add}</div></article>`;
     }).join("");
-    if (empty) { empty.hidden = shown.length > 0; empty.textContent = tab === "past" ? "Todavía no hay eventos anteriores." : "No hay eventos próximos por ahora."; }
+    if (empty) { empty.hidden = shown.length > 0; empty.textContent = "No hay más fechas por ahora."; }
   };
 
   const run = () => {
     const nxt = document.getElementById("nxt");
     if (!document.getElementById("aglList") || !nxt) return;
     clearInterval(tickTimer);
+    splitGrid();
     renderList();
     // Banner del próximo evento
     const upcoming = read().filter((e) => when(e) >= new Date());
