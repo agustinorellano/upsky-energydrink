@@ -4937,3 +4937,57 @@ body.page-product #formula, body.page-product #info { border-radius: var(--sheet
 
 /* Contenido del CMS: lo que se oculta desde el panel no se muestra. */
 .product-card[hidden], .price-card[hidden], .more-card[hidden] { display: none !important; }
+
+/* ===== Eventos v4: banner integrado + cards tipo ficha + pestañas ===== */
+.evl-top {
+  background: #0a0a0c; padding: 200px 0 190px; overflow: hidden;
+}
+.evl-top::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: url("assets/hero-banner-nightout.jpg") calc(100% + 140px) center / auto 112% no-repeat;
+  -webkit-mask-image: linear-gradient(90deg, transparent 22%, #000 70%), linear-gradient(180deg, #000 58%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 22%, #000 70%), linear-gradient(180deg, #000 58%, transparent 100%);
+  -webkit-mask-composite: source-in; mask-composite: intersect;
+}
+.evl-top::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(42% 70% at 82% 38%, rgba(236,31,122,.30), transparent 72%), radial-gradient(40% 60% at 4% 100%, rgba(236,31,122,.16), transparent 70%);
+}
+@media (max-width: 700px) {
+  .evl-top { padding: 150px 0 150px; }
+  .evl-top::before { background-position: 72% center; opacity: .5; -webkit-mask-image: linear-gradient(180deg, #000 45%, transparent 100%); mask-image: linear-gradient(180deg, #000 45%, transparent 100%); }
+}
+
+.evl-sheet { background: #f6f6f8; }
+.evl-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 26px; }
+.evl-h { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.9rem, 3vw, 2.5rem); line-height: 1; margin: 0; color: #0a0a0c; }
+.evl-tabs { display: inline-flex; background: #ececf0; border-radius: 999px; padding: 4px; }
+.evt { border: 0; background: transparent; padding: 10px 22px; border-radius: 999px; font: 600 .92rem var(--font-body, inherit); color: #6b6b75; cursor: pointer; transition: background .2s, color .2s; }
+.evt.is-on { background: #fff; color: #0a0a0c; box-shadow: 0 1px 5px rgba(10,10,12,.12); }
+.evl-ig { margin-left: auto; }
+.evl-grid { gap: 28px; }
+.evc { background: #fff; border-radius: 18px; box-shadow: 0 2px 16px rgba(10,10,12,.07); overflow: hidden; display: flex; flex-direction: column; position: relative; }
+.evc-media { aspect-ratio: 16 / 10; border-radius: 0; }
+.evc-media::after { background: none; }
+.evc-body { padding: 18px 20px 16px; flex: 1; }
+.evc h3 { margin: 0 0 12px; font-size: 1.3rem; }
+.evc-when { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; color: #2a2a30; font-weight: 600; font-size: .95rem; }
+.evc-when svg { width: 20px; height: 20px; flex: none; }
+.evc-cat { margin: 0; font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; color: #6b6b75; }
+.evc-cat b { color: #ec1f7a; font-weight: 800; }
+.evc-cat .evc-place { display: inline; margin: 0; gap: 0; color: inherit; font-size: inherit; letter-spacing: inherit; font-weight: inherit; }
+.evc-cat .evc-place::before { content: " · "; }
+.evc-foot { display: flex; align-items: center; gap: 10px; padding: 14px 20px; border-top: 1px solid #ececf0; color: #2a2a30; font-weight: 600; font-size: .92rem; }
+.evc-foot svg { width: 20px; height: 20px; flex: none; }
+@media (max-width: 600px) {
+  .evl-grid { gap: 14px; }
+  .evc { display: grid; grid-template-columns: 112px minmax(0, 1fr); grid-template-rows: 1fr auto; }
+  .evc-media { grid-column: 1; grid-row: 1 / 3; aspect-ratio: auto; height: 100%; min-height: 128px; }
+  .evc-body { grid-column: 2; grid-row: 1; padding: 14px 14px 10px; }
+  .evc-foot { grid-column: 2; grid-row: 2; padding: 10px 14px; font-size: .85rem; }
+  .evc h3 { grid-column: auto; margin: 0 0 8px; font-size: 1.1rem; }
+  .evc-when { margin: 0 0 8px; font-size: .85rem; }
+  .evc-when svg, .evc-foot svg { width: 17px; height: 17px; }
+  .evc-share { top: 8px; left: 8px; right: auto; }
+  .evl-ig { margin-left: 0; width: 100%; }
+}

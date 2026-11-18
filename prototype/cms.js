@@ -156,10 +156,12 @@
   const dateLabel = (e) => {
     if (!e.fecha) return "Fecha a confirmar";
     const [y, m, d] = e.fecha.split("-").map(Number);
-    return `${d} ${MESES[m - 1]}${e.hora ? " · " + e.hora + " h" : ""}`;
+    return `${d} ${MESES[m - 1]} ${y}${e.hora ? " · " + e.hora + " h" : ""}`;
   };
   const SHARE = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="6" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="18" cy="19" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m8.3 10.8 7.4-4.4M8.3 13.2l7.4 4.4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
   const PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.800 12 21 12 21Z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="9.5" r="2.4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
+  const CAL = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 10h16M9 3v4M15 3v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+  const CLOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
   const ARROW = '<svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
   function events(items) {
@@ -169,19 +171,16 @@
     grid.innerHTML = sorted.map((e, i) => {
       const href = `evento.html#${encodeURIComponent(e.id)}`;
       const img = e.imagen_1 ? `<img src="${esc(e.imagen_1)}" alt="" loading="lazy" decoding="async">` : `<img src="assets/logo.png" alt="" style="object-fit:contain;padding:22%;background:radial-gradient(60% 60% at 50% 50%,rgba(236,31,122,.35),#0a0a0c)">`;
-      return `<article class="evc qs-reveal is-visible" data-cat="${esc((e.categoria || "").toLowerCase())}" ${e.fecha ? `data-date="${esc(e.fecha)}" data-time="${esc(e.hora || "10:00")}"` : ""} style="--d:${i * 70}ms">
-        <a href="${href}" class="evc-media" aria-label="Ver ${esc(e.nombre)}">${img}<span class="evc-arrow" aria-hidden="true">${ARROW}</span></a>
+      return `<article class="evc qs-reveal is-visible" ${e.fecha ? `data-date="${esc(e.fecha)}" data-time="${esc(e.hora || "10:00")}"` : ""} style="--d:${i * 70}ms">
+        <a href="${href}" class="evc-media" aria-label="Ver ${esc(e.nombre)}">${img}</a>
         <button type="button" class="share-btn evc-share" data-share data-url="${href}" data-title="${esc(e.nombre)}" aria-label="Compartir ${esc(e.nombre)}">${SHARE}</button>
-        <div class="evc-meta"><span class="evc-tag">${esc(e.categoria || "Evento")}</span><span class="evc-date">${esc(dateLabel(e))}</span></div>
-        <h3><a href="${href}">${esc(e.nombre)}</a></h3>
-        <p class="evc-place">${PIN}${esc(e.lugar || "A confirmar")}</p></article>`;
+        <div class="evc-body">
+          <h3><a href="${href}">${esc(e.nombre)}</a></h3>
+          <p class="evc-when">${CAL}<span>${esc(dateLabel(e))}</span></p>
+          <p class="evc-cat"><b>${esc(e.categoria || "Evento")}</b><span class="evc-place">${esc(e.lugar || "A confirmar")}</span></p>
+        </div>
+        <div class="evc-foot">${CLOCK}<span class="evc-state">Próximo evento</span></div></article>`;
     }).join("");
-    // Filtros según las categorías que existan
-    const cats = [...new Set(sorted.map((e) => e.categoria).filter(Boolean))];
-    const bar = $(".evl-filters");
-    if (bar) bar.innerHTML = ['<button type="button" class="evf is-on" data-f="todos" aria-pressed="true">Todos</button>']
-      .concat(cats.map((c) => `<button type="button" class="evf" data-f="${esc(c.toLowerCase())}" aria-pressed="false">${esc(c)}</button>`)).join("");
-    const empty = $("#evEmpty"); if (empty) empty.hidden = sorted.length > 0;
     document.dispatchEvent(new CustomEvent("upsky:events-updated"));
   }
 

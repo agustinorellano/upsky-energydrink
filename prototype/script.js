@@ -1454,22 +1454,45 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("[data-open-assistant]").forEach((b) => b.addEventListener("click", () => window.upskyAssistant && window.upskyAssistant.open()));
 });
 
-// Eventos: filtro por categoría (delegado: los filtros y las cards pueden venir del CMS)
-document.addEventListener("DOMContentLoaded", () => {
-  const grid = document.getElementById("evGrid");
-  const bar = document.querySelector(".evl-filters");
-  if (!grid || !bar) return;
-  const empty = document.getElementById("evEmpty");
-  bar.addEventListener("click", (ev) => {
-    const c = ev.target.closest(".evf");
-    if (!c) return;
-    const f = c.dataset.f;
-    bar.querySelectorAll(".evf").forEach((x) => { const on = x === c; x.classList.toggle("is-on", on); x.setAttribute("aria-pressed", on ? "true" : "false"); });
-    let n = 0;
-    grid.querySelectorAll(".evc").forEach((e) => { const show = f === "todos" || e.dataset.cat === f; e.hidden = !show; if (show) n++; });
-    if (empty) empty.hidden = n > 0;
+// Eventos: pestañas Próximamente / Anteriormente (delegado: las cards pueden venir del CMS)
+(() => {
+  let tab = "next";
+  const apply = () => {
+    const grid = document.getElementById("evGrid");
+    if (!grid) return;
+    const d = new Date(), today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    const cards = Array.from(grid.querySelectorAll(".evc"));
+    let first = true, n = 0;
+    cards.forEach((c) => {
+      const past = !!c.dataset.date && c.dataset.date < today;
+      const show = tab === "past" ? past : !past;
+      c.hidden = !show;
+      if (show) n++;
+      const st = c.querySelector(".evc-state");
+      if (st) {
+        if (past) st.textContent = "Finalizado";
+        else if (!c.dataset.date) st.textContent = "Fecha a confirmar";
+        else if (first) { st.textContent = "Próximo evento"; first = false; }
+        else st.textContent = "Próximamente";
+      }
+    });
+    const empty = document.getElementById("evEmpty");
+    if (empty) { empty.hidden = n > 0; empty.textContent = tab === "past" ? "Todavía no hay eventos anteriores." : "No hay eventos próximos por ahora."; }
+  };
+  document.addEventListener("DOMContentLoaded", () => {
+    const bar = document.querySelector(".evl-tabs");
+    if (!bar) return;
+    bar.addEventListener("click", (ev) => {
+      const t = ev.target.closest(".evt");
+      if (!t) return;
+      tab = t.dataset.t;
+      bar.querySelectorAll(".evt").forEach((x) => { const on = x === t; x.classList.toggle("is-on", on); x.setAttribute("aria-pressed", on ? "true" : "false"); });
+      apply();
+    });
+    apply();
   });
-});
+  document.addEventListener("upsky:events-updated", apply);
+})();
 
 // Eventos: banner del próximo evento (con cuenta regresiva) y agenda en lista, con "Agendar"
 (() => {
