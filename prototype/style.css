@@ -5079,3 +5079,9 @@ body.page-product #formula, body.page-product #info { border-radius: var(--sheet
   .tyc-toc ol { grid-template-columns: 1fr; }
   .tyc-top .page-hero-title { font-size: clamp(1.7rem, 7.2vw, 3rem); }
 }
+
+/* Páginas que terminan en un bloque blanco (Términos y Eventos): el bloque y la banda
+   blanca del footer se unen en una sola superficie, sin esquinas negras en el medio. */
+.tyc-sheet, .evl-sheet { border-radius: var(--sheet-r) var(--sheet-r) 0 0; margin-bottom: 0; padding-bottom: 24px; }
+body:has(.tyc-sheet) .footer-band, body:has(.evl-sheet) .footer-band { border-radius: 0; padding-top: 12px; }
+body:has(.evl-sheet) .footer-band { background: #f6f6f8; }
