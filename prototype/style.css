@@ -5032,3 +5032,8 @@ body.page-product #formula, body.page-product #info { border-radius: var(--sheet
   .page-banner--neg .page-hero-title { font-size: clamp(1.7rem, 7.4vw, 3rem); }
   .page-banner--neg { padding-bottom: 90px; }
 }
+
+/* Para negocios: la compra por mayor es un bloque claro con esquinas redondeadas. */
+#mayorista { border-radius: var(--sheet-r); }
+#mayorista { background: #fff; }
+#mayorista .price-card { box-shadow: 0 2px 16px rgba(10,10,12,.07); }
