@@ -172,15 +172,13 @@
       const href = `evento.html#${encodeURIComponent(e.id)}`;
       const img = e.imagen_1 ? `<img src="${esc(e.imagen_1)}" alt="" loading="lazy" decoding="async">` : `<img src="assets/logo.png" alt="" style="object-fit:contain;padding:22%;background:radial-gradient(60% 60% at 50% 50%,rgba(236,31,122,.35),#0a0a0c)">`;
       return `<article class="evc qs-reveal is-visible" ${e.fecha ? `data-date="${esc(e.fecha)}" data-time="${esc(e.hora || "10:00")}"` : ""} style="--d:${i * 70}ms">
-        <a href="${href}" class="evc-media" aria-label="Ver ${esc(e.nombre)}">${img}</a>
+        <a href="${href}" class="evc-media" aria-label="Ver ${esc(e.nombre)}">${img}<span class="evc-arrow" aria-hidden="true">${ARROW}</span></a>
         <button type="button" class="share-btn evc-share" data-share data-url="${href}" data-title="${esc(e.nombre)}" aria-label="Compartir ${esc(e.nombre)}">${SHARE}</button>
-        <div class="evc-body">
-          <h3><a href="${href}">${esc(e.nombre)}</a></h3>
-          <p class="evc-when">${CAL}<span>${esc(dateLabel(e))}</span></p>
-          <p class="evc-cat"><b>${esc(e.categoria || "Evento")}</b><span class="evc-place">${esc(e.lugar || "A confirmar")}</span></p>
-        </div>
-        <div class="evc-foot">${CLOCK}<span class="evc-state">Próximo evento</span></div></article>`;
+        <div class="evc-meta"><span class="evc-tag">${esc(e.categoria || "Evento")}</span><span class="evc-date">${esc(dateLabel(e))}</span></div>
+        <h3><a href="${href}">${esc(e.nombre)}</a></h3>
+        <p class="evc-place">${PIN}${esc(e.lugar || "A confirmar")}</p></article>`;
     }).join("");
+    const empty = $("#evEmpty"); if (empty) empty.hidden = sorted.length > 0;
     document.dispatchEvent(new CustomEvent("upsky:events-updated"));
   }
 

@@ -1454,87 +1454,80 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("[data-open-assistant]").forEach((b) => b.addEventListener("click", () => window.upskyAssistant && window.upskyAssistant.open()));
 });
 
-// Eventos: pestañas Próximamente / Anteriormente (delegado: las cards pueden venir del CMS)
+// Eventos: banner del próximo evento (con cuenta regresiva) y agenda "Próximas fechas" en cards, con "Agendar"
 (() => {
-  let tab = "next";
-  const apply = () => {
-    const grid = document.getElementById("evGrid");
-    if (!grid) return;
-    const d = new Date(), today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-    const cards = Array.from(grid.querySelectorAll(".evc"));
-    let first = true, n = 0;
-    cards.forEach((c) => {
-      const past = !!c.dataset.date && c.dataset.date < today;
-      const show = tab === "past" ? past : !past;
-      c.hidden = !show;
-      if (show) n++;
-      const st = c.querySelector(".evc-state");
-      if (st) {
-        if (past) st.textContent = "Finalizado";
-        else if (!c.dataset.date) st.textContent = "Fecha a confirmar";
-        else if (first) { st.textContent = "Próximo evento"; first = false; }
-        else st.textContent = "Próximamente";
-      }
-    });
-    const empty = document.getElementById("evEmpty");
-    if (empty) { empty.hidden = n > 0; empty.textContent = tab === "past" ? "Todavía no hay eventos anteriores." : "No hay eventos próximos por ahora."; }
-  };
-  document.addEventListener("DOMContentLoaded", () => {
-    const bar = document.querySelector(".evl-tabs");
-    if (!bar) return;
-    bar.addEventListener("click", (ev) => {
-      const t = ev.target.closest(".evt");
-      if (!t) return;
-      tab = t.dataset.t;
-      bar.querySelectorAll(".evt").forEach((x) => { const on = x === t; x.classList.toggle("is-on", on); x.setAttribute("aria-pressed", on ? "true" : "false"); });
-      apply();
-    });
-    apply();
-  });
-  document.addEventListener("upsky:events-updated", apply);
-})();
-
-// Eventos: banner del próximo evento (con cuenta regresiva) y agenda en lista, con "Agendar"
-(() => {
-  let tickTimer;
-  const run = () => {
-  const list = document.getElementById("aglList"), nxt = document.getElementById("nxt");
-  if (!list || !nxt) return;
-  clearInterval(tickTimer);
+  let tickTimer, tab = "next";
+  const CAL = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 10h16M9 3v4M15 3v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+  const CLOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
   const pad = (n) => String(n).padStart(2, "0");
-  const evs = Array.from(document.querySelectorAll(".evc[data-date]")).map((a) => ({
-    date: a.dataset.date, time: a.dataset.time || "10:00",
-    title: a.querySelector("h3").textContent.trim(),
-    place: a.querySelector(".evc-place").textContent.trim(),
-    url: a.querySelector("h3 a").getAttribute("href"),
-  })).sort((x, y) => (x.date + x.time).localeCompare(y.date + y.time));
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
   const when = (e) => new Date(e.date + "T" + e.time + ":00");
   const stamp = (e, mins) => { const [h, m] = e.time.split(":").map(Number); const t = h * 60 + m + mins; return e.date.replace(/-/g, "") + "T" + pad(Math.floor(t / 60) % 24) + pad(t % 60) + "00"; };
   const gcal = (e) => "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(e.title + " · UP SKY") + "&dates=" + stamp(e, 0) + "/" + stamp(e, 120) + "&location=" + encodeURIComponent(e.place) + "&details=" + encodeURIComponent("Evento de UP SKY Energy Drink. Más info: " + new URL(e.url, location.href).href);
   const ics = (e) => "data:text/calendar;charset=utf-8," + encodeURIComponent(["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//UP SKY//Eventos//ES", "BEGIN:VEVENT", "UID:" + e.url + "@upsky", "DTSTAMP:" + stamp(e, 0), "DTSTART:" + stamp(e, 0), "DTEND:" + stamp(e, 120), "SUMMARY:" + e.title + " · UP SKY", "LOCATION:" + e.place, "END:VEVENT", "END:VCALENDAR"].join("\r\n"));
-  const fname = (e) => e.url.replace(".html", "") + ".ics";
+  const fname = (e) => e.url.replace(/[#?].*$/, "").replace(".html", "") + ".ics";
   const longDate = (e) => when(e).toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long" });
-  const upcoming = evs.filter((e) => when(e) >= new Date());
-  const shown = upcoming.length ? upcoming : evs;
-  // Agenda en lista
-  list.innerHTML = shown.map((e) => {
-    const d = when(e);
-    return `<article class="agl-row"><div class="agl-date"><b>${d.getDate()}</b><span>${d.toLocaleDateString("es-AR", { month: "short" }).replace(".", "")}</span></div><div class="agl-body"><h3><a href="${e.url}">${e.title}</a></h3><p>${longDate(e)} · ${e.time} h · ${e.place}</p></div><details class="agm"><summary class="btn btn-outline">Agendar</summary><div class="agm-pop"><a href="${gcal(e)}" target="_blank" rel="noopener">Google Calendar</a><a href="${ics(e)}" download="${fname(e)}">Apple / Outlook (.ics)</a></div></details></article>`;
-  }).join("");
-  document.addEventListener("click", (ev) => document.querySelectorAll(".agm[open]").forEach((d) => { if (!d.contains(ev.target)) d.open = false; }));
-  // Banner del próximo evento
-  if (!upcoming.length) { nxt.hidden = true; return; }
-  const n = upcoming[0];
-  nxt.hidden = false;
-  nxt.innerHTML = `<div class="nxt-main"><p class="cal-k">Próximo evento</p><h2>${n.title}</h2><p class="nxt-meta">${longDate(n)} · ${n.time} h · ${n.place}</p><div class="nxt-acts"><a class="btn btn-primary" href="${gcal(n)}" target="_blank" rel="noopener">Agendar en Google Calendar</a><a class="btn btn-outline" href="${ics(n)}" download="${fname(n)}">Descargar .ics</a><a class="btn btn-outline" href="${n.url}">Ver evento</a></div></div><div class="nxt-count" id="nxtCount" aria-label="Cuenta regresiva"></div>`;
-  const count = document.getElementById("nxtCount");
-  const tick = () => {
-    let s = Math.max(0, Math.floor((when(n) - new Date()) / 60000));
-    const d = Math.floor(s / 1440), h = Math.floor((s % 1440) / 60), m = s % 60;
-    count.innerHTML = [[d, "días"], [h, "horas"], [m, "min"]].map(([v, l]) => `<div><b>${pad(v)}</b><span>${l}</span></div>`).join("");
+  const shortDate = (e) => { const [y, m, d] = e.date.split("-").map(Number); return `${d} ${MESES[m - 1]} ${y} · ${e.time} h`; };
+
+  const read = () => Array.from(document.querySelectorAll(".evc[data-date]")).map((a) => ({
+    date: a.dataset.date, time: a.dataset.time || "10:00",
+    title: a.querySelector("h3").textContent.trim(),
+    place: (a.querySelector(".evc-place")?.textContent || "").trim(),
+    cat: (a.querySelector(".evc-tag")?.textContent || "").trim(),
+    img: a.querySelector(".evc-media img")?.getAttribute("src") || "assets/logo.png",
+    url: a.querySelector("h3 a").getAttribute("href"),
+  })).sort((x, y) => (x.date + x.time).localeCompare(y.date + y.time));
+
+  const renderList = () => {
+    const list = document.getElementById("aglList"), empty = document.getElementById("aglEmpty");
+    if (!list) return;
+    const now = new Date();
+    const evs = read();
+    const shown = evs.filter((e) => (tab === "past") === (when(e) < now));
+    if (tab === "past") shown.reverse();
+    list.innerHTML = shown.map((e, i) => {
+      const state = tab === "past" ? "Finalizado" : i === 0 ? "Próximo evento" : "Próximamente";
+      const add = tab === "past" ? "" : `<details class="agm"><summary class="btn btn-outline">Agendar</summary><div class="agm-pop"><a href="${gcal(e)}" target="_blank" rel="noopener">Google Calendar</a><a href="${ics(e)}" download="${fname(e)}">Apple / Outlook (.ics)</a></div></details>`;
+      const noImg = e.img.endsWith("logo.png");
+      return `<article class="agc"><a href="${esc(e.url)}" class="agc-media" aria-label="Ver ${esc(e.title)}"><img src="${esc(e.img)}" alt="" loading="lazy" decoding="async"${noImg ? ' style="object-fit:contain;padding:22%"' : ""}></a>
+        <div class="agc-body"><h3><a href="${esc(e.url)}">${esc(e.title)}</a></h3><p class="agc-when">${CAL}<span>${esc(shortDate(e))}</span></p><p class="agc-cat"><b>${esc(e.cat || "Evento")}</b>${e.place ? `<span> · ${esc(e.place)}</span>` : ""}</p></div>
+        <div class="agc-foot">${CLOCK}<span>${state}</span>${add}</div></article>`;
+    }).join("");
+    if (empty) { empty.hidden = shown.length > 0; empty.textContent = tab === "past" ? "Todavía no hay eventos anteriores." : "No hay eventos próximos por ahora."; }
   };
-  tick(); tickTimer = setInterval(tick, 30000);
+
+  const run = () => {
+    const nxt = document.getElementById("nxt");
+    if (!document.getElementById("aglList") || !nxt) return;
+    clearInterval(tickTimer);
+    renderList();
+    // Banner del próximo evento
+    const upcoming = read().filter((e) => when(e) >= new Date());
+    if (!upcoming.length) { nxt.hidden = true; return; }
+    const n = upcoming[0];
+    nxt.hidden = false;
+    nxt.innerHTML = `<div class="nxt-main"><p class="cal-k">Próximo evento</p><h2>${esc(n.title)}</h2><p class="nxt-meta">${esc(longDate(n))} · ${n.time} h · ${esc(n.place)}</p><div class="nxt-acts"><a class="btn btn-primary" href="${gcal(n)}" target="_blank" rel="noopener">Agendar en Google Calendar</a><a class="btn btn-outline" href="${ics(n)}" download="${fname(n)}">Descargar .ics</a><a class="btn btn-outline" href="${esc(n.url)}">Ver evento</a></div></div><div class="nxt-count" id="nxtCount" aria-label="Cuenta regresiva"></div>`;
+    const count = document.getElementById("nxtCount");
+    const tick = () => {
+      const s = Math.max(0, Math.floor((when(n) - new Date()) / 60000));
+      const d = Math.floor(s / 1440), h = Math.floor((s % 1440) / 60), m = s % 60;
+      count.innerHTML = [[d, "días"], [h, "horas"], [m, "min"]].map(([v, l]) => `<div><b>${pad(v)}</b><span>${l}</span></div>`).join("");
+    };
+    tick(); tickTimer = setInterval(tick, 30000);
   };
-  document.addEventListener("DOMContentLoaded", run);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const bar = document.querySelector(".agl-head .evl-tabs");
+    if (bar) bar.addEventListener("click", (ev) => {
+      const t = ev.target.closest(".evt");
+      if (!t) return;
+      tab = t.dataset.t;
+      bar.querySelectorAll(".evt").forEach((x) => { const on = x === t; x.classList.toggle("is-on", on); x.setAttribute("aria-pressed", on ? "true" : "false"); });
+      renderList();
+    });
+    run();
+  });
   document.addEventListener("upsky:events-updated", run);
+  document.addEventListener("click", (ev) => document.querySelectorAll(".agm[open]").forEach((d) => { if (!d.contains(ev.target)) d.open = false; }));
 })();
