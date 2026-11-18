@@ -5047,3 +5047,35 @@ body.page-product #formula, body.page-product #info { border-radius: var(--sheet
   .page-banner--neg .pbn-benefits { margin-top: 32px; bottom: auto; }
   .page-banner--neg .hero-cue { bottom: 28px; }
 }
+
+/* ===== Términos y condiciones ===== */
+.footer-legal a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.footer-legal a:hover { color: #fff; }
+.tyc-top { position: relative; padding: 170px 0 110px; background: radial-gradient(40% 70% at 85% 30%, rgba(236,31,122,.28), transparent 72%), #0a0a0c; }
+.tyc-updated { margin: 18px 0 0; color: #a3a3ab; font-size: .95rem; }
+.tyc-sheet {
+  --background-color: #fff; --text-color: #0a0a0c; --text-muted: #5c5c66; --border-color: #e4e4e9;
+  position: relative; z-index: 1; background: #fff; color: #0a0a0c; border-radius: var(--sheet-r);
+  margin-top: calc(-1 * var(--sheet-r)); padding: clamp(40px, 5vw, 72px) 0 clamp(56px, 6vw, 96px);
+}
+.tyc-grid { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
+.tyc-toc { position: sticky; top: 110px; font-size: .92rem; }
+.tyc-toc p { margin: 0 0 12px; font-weight: 800; font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: #ec1f7a; }
+.tyc-toc ol { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; color: #8a8a94; }
+.tyc-toc a { color: #3a3a42; }
+.tyc-toc a:hover { color: #ec1f7a; }
+.tyc-doc { max-width: 760px; }
+.tyc-block { padding: 6px 0 26px; scroll-margin-top: 110px; }
+.tyc-block + .tyc-block { border-top: 1px solid #ececf0; padding-top: 28px; }
+.tyc-block h2 { display: flex; align-items: baseline; gap: 14px; margin: 0 0 14px; font-family: var(--font-display); font-weight: 600; font-size: 1.6rem; color: #0a0a0c; }
+.tyc-block h2 span { color: #ec1f7a; font-size: 1rem; letter-spacing: .08em; }
+.tyc-block p, .tyc-block li { color: #3a3a42; line-height: 1.65; font-size: 1rem; }
+.tyc-block ul { margin: 0 0 12px; padding-left: 1.2em; display: grid; gap: 6px; }
+.tyc-block a { color: #ec1f7a; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 800px) {
+  .tyc-top { padding: 120px 0 90px; }
+  .tyc-grid { grid-template-columns: 1fr; }
+  .tyc-toc { position: static; }
+  .tyc-toc ol { grid-template-columns: 1fr; }
+  .tyc-top .page-hero-title { font-size: clamp(1.7rem, 7.2vw, 3rem); }
+}
