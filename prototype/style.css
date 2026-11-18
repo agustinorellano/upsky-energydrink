@@ -5000,3 +5000,33 @@ body.page-product #formula, body.page-product #info { border-radius: var(--sheet
   .agc-foot .agm summary { padding: 6px 14px; }
   .agc-foot .agm-pop { right: auto; left: 0; }
 }
+
+/* ===== Para negocios: banner con imagen de fondo y beneficios ===== */
+.page-banner--neg { min-height: clamp(620px, 52vw, 760px); padding: 150px 0 190px; align-items: center; background: #0a0a0c; }
+.page-banner--neg::before { display: none; }
+.page-banner--neg .page-banner-img { object-position: right center; }
+.page-banner--neg::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(90deg, #0a0a0c 0%, rgba(10,10,12,.88) 30%, rgba(10,10,12,0) 62%), linear-gradient(180deg, rgba(10,10,12,0) 60%, #0a0a0c 100%);
+}
+.page-banner--neg .page-hero-lead { max-width: 40ch; }
+.pbn-benefits {
+  position: absolute; z-index: 3; left: 50%; bottom: 34px; transform: translateX(-50%);
+  width: min(100% - 48px, var(--max-width)); margin: 0; padding: 0; list-style: none;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+}
+.pbn-benefits li { display: grid; justify-items: center; text-align: center; gap: 4px; padding: 6px 18px; }
+.pbn-benefits li + li { border-left: 1px solid rgba(255,255,255,.14); }
+.pbn-benefits svg { width: 38px; height: 38px; margin-bottom: 8px; color: #fff; }
+.pbn-benefits b { font-size: 1.02rem; color: #fff; }
+.pbn-benefits span { font-size: .88rem; color: #b9b9c2; }
+@media (max-width: 800px) {
+  .page-banner--neg { min-height: 0; padding: 130px 0 40px; display: block; }
+  .page-banner--neg .page-banner-img { object-position: 78% top; height: 62%; opacity: .55; }
+  .page-banner--neg::after { background: linear-gradient(180deg, rgba(10,10,12,.2) 0%, #0a0a0c 62%); }
+  .pbn-benefits { position: relative; left: auto; bottom: auto; transform: none; width: auto; margin: 36px 24px 0; grid-template-columns: 1fr 1fr; gap: 20px 0; }
+  .pbn-benefits li:nth-child(odd) { border-left: 0; }
+  .pbn-benefits li + li { border-left: 1px solid rgba(255,255,255,.14); }
+}
+/* Mientras no esté la imagen del banner, el fondo mantiene un resplandor magenta. */
+.page-banner--neg { background: radial-gradient(40% 55% at 82% 40%, rgba(236,31,122,.32), transparent 72%), #0a0a0c; }
