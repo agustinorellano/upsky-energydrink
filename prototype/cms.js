@@ -30,6 +30,31 @@
     } finally { clearTimeout(t); }
   }
 
+  /* ---------- Promociones ---------- */
+  // La base ya devuelve solo las promociones vigentes (fecha de inicio y de fin). Acá solo se aplican.
+  let PROMOS = [];
+  const promoFor = (p) => {
+    const ok = PROMOS.filter((pr) => Number(pr.descuento) >= 1 && Number(pr.descuento) <= 90 && (!pr.producto || pr.producto === p.id));
+    return ok.sort((a, b) => Number(b.descuento) - Number(a.descuento))[0] || null;
+  };
+  const promoPrice = (p) => {
+    const pr = promoFor(p), base = Number(p.precio);
+    return { pr, base, fin: pr ? Math.round(base * (1 - Number(pr.descuento) / 100)) : base };
+  };
+  const priceHtml = ({ pr, base, fin }) => (pr ? `<s class="promo-old">${money(base)}</s> ${money(fin)}` : money(base));
+
+  function promoBanner(promos) {
+    const pr = promos.slice().sort((a, b) => Number(b.descuento) - Number(a.descuento))[0];
+    const host = $(".section-shop .page-banner") || $(".hw-wrap");
+    if (!pr || !host || $(".promo-strip")) return;
+    const hasta = pr.ocultar_desde && !isNaN(Date.parse(pr.ocultar_desde)) ? new Date(pr.ocultar_desde).toLocaleDateString("es-AR", { day: "numeric", month: "long" }) : "";
+    const el = document.createElement("aside");
+    el.className = "promo-strip";
+    el.setAttribute("role", "note");
+    el.innerHTML = `${pr.imagen_1 ? `<img class="promo-strip-img" src="${esc(pr.imagen_1)}" alt="" width="56" height="56" loading="lazy">` : ""}<div class="promo-strip-copy"><span class="promo-strip-tag">Promo</span><b>${esc(pr.nombre)}</b>${pr.texto ? `<span>${esc(pr.texto)}</span>` : ""}${hasta ? `<small>Hasta el ${esc(hasta)}</small>` : ""}</div><span class="promo-strip-off">-${Number(pr.descuento)}%</span>`;
+    host.classList.contains("page-banner") ? host.after(el) : host.before(el);
+  }
+
   /* ---------- Catálogo / destacados del inicio ---------- */
   const UNIT = { Pack: "packs", Vaso: "vasos", Remera: "remeras" };
   const SEL = { Pack: '[data-id="pack1"]', Vaso: "#vaso1, [data-base-id=vaso]", Remera: '[data-id="remera1"]' };
@@ -50,7 +75,8 @@
     } else {
       card.dataset.name = p.nombre + (p.presentacion && p.tipo === "Pack" ? ` (${p.presentacion})` : "");
     }
-    if (p.precio) { card.dataset.price = p.precio; const v = $(".price-value", card); if (v) v.textContent = money(p.precio); }
+    const pp = promoPrice(p);
+    if (p.precio) { card.dataset.price = pp.fin; const v = $(".price-value", card); if (v) v.innerHTML = priceHtml(pp); }
     const tiers = [];
     if (Number(p.desc_desde_5)) tiers.push(`5:${Number(p.desc_desde_5)}`);
     if (Number(p.desc_desde_10)) tiers.push(`10:${Number(p.desc_desde_10)}`);
@@ -64,8 +90,12 @@
       if (Number(p.max_por_pedido)) li.push(`<li>Máximo ${Number(p.max_por_pedido)} por pedido</li>`);
       ul.innerHTML = li.join("");
     }
-    const badge = $(".product-badge", card);
-    if (badge) { badge.textContent = p.etiqueta || ""; badge.hidden = !p.etiqueta; }
+    let badge = $(".product-badge", card);
+    if (!badge && pp.pr) { // las cards sin etiqueta no traen el espacio: se crea solo mientras dura la promo
+      const media = $(".product-card-media", card);
+      if (media) { media.insertAdjacentHTML("afterbegin", '<span class="product-badge" hidden></span>'); badge = $(".product-badge", media); }
+    }
+    if (badge) { badge.textContent = pp.pr ? `-${Number(pp.pr.descuento)}%` : (p.etiqueta || ""); badge.hidden = !(pp.pr || p.etiqueta); }
     if (p.imagen_1 && !$(".media-slider", card)) { const im = $(".product-card-media img", card); if (im) im.src = p.imagen_1; }
     if (p.descripcion && !$(".price-desc", card)) { /* la descripción se usa solo en productos nuevos */ }
   }
@@ -106,6 +136,18 @@
         cards.forEach((c) => { c.hidden = true; });
       }
     });
+    // La compra rápida del catálogo usa el mismo precio, nombre y descuentos que la card del pack.
+    const qb = $('.quick-buy[data-id="pack1"]'), pk = items.find((x) => x.tipo === "Pack");
+    if (qb && pk) {
+      const pp = promoPrice(pk), d5 = Number(pk.desc_desde_5);
+      qb.dataset.name = pk.nombre + (pk.presentacion ? ` (${pk.presentacion})` : "");
+      qb.dataset.price = pp.fin;
+      qb.dataset.tiers = [d5 && `5:${d5}`, Number(pk.desc_desde_10) && `10:${Number(pk.desc_desde_10)}`].filter(Boolean).join(",");
+      if (Number(pk.max_por_pedido)) qb.dataset.max = pk.max_por_pedido; else delete qb.dataset.max;
+      const qn = $(".quick-buy-name", qb); if (qn) qn.textContent = pk.nombre;
+      const qs = $(".quick-buy-sub", qb); if (qs) qs.textContent = [pk.presentacion, d5 && `${d5}% OFF desde 5 packs`].filter(Boolean).join(" · ");
+      const qp = $(".quick-buy-price", qb); if (qp) qp.innerHTML = priceHtml(pp);
+    }
     // 2) Productos nuevos: se agregan al catálogo (y al inicio si son destacados)
     const tpl = $('.product-card[data-id="pack1"]', catGrid || document);
     items.filter((x) => !used.has(x.id)).forEach((p) => {
@@ -226,7 +268,9 @@
 
   load().then((db) => {
     if (!db.__seeded) return; // base sin cargar: se deja el contenido del HTML
+    PROMOS = db.promos || [];
     products(db.productos || []);
+    promoBanner(PROMOS);
     wholesale(db.mayorista || [], db.pasos_negocios || []);
     events(db.eventos || []);
     eventDetail(db.eventos || []);
