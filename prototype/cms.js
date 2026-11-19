@@ -117,7 +117,9 @@
       }
     });
     // En el inicio entran 3 productos destacados: el resto queda solo en el catálogo.
-    if (homeGrid) $$(".product-card", homeGrid).filter((x) => !x.hidden).slice(3).forEach((x) => { x.hidden = true; });
+    if (homeGrid) $$(".product-card:not(.more-card)", homeGrid).filter((x) => !x.hidden).slice(3).forEach((x) => { x.hidden = true; });
+    // La card "+" (Ver todo el catálogo) siempre se muestra, tenga el CMS el contenido que tenga.
+    $$(".more-card").forEach((x) => { x.hidden = false; });
   }
 
   /* ---------- Para negocios ---------- */
