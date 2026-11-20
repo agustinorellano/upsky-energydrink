@@ -309,31 +309,29 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Lifestyle: interacciones simuladas en las cards UGC (like + compartir)
-  document.querySelectorAll(".ugc-like, .ugc-save").forEach((btn) => {
-    const countEl = btn.querySelector(".ugc-action-count");
-    const base = parseInt(btn.dataset.base || "0", 10);
-    const activeClass = btn.classList.contains("ugc-like") ? "is-liked" : "is-saved";
-    btn.addEventListener("click", () => {
-      const active = btn.classList.toggle(activeClass);
-      btn.setAttribute("aria-pressed", active ? "true" : "false");
-      if (countEl) countEl.textContent = String(base + (active ? 1 : 0));
-    });
-  });
-
-  document.querySelectorAll(".ugc-comment").forEach((btn) => {
-    btn.addEventListener("click", () => {
+  // (delegado: las cards también pueden venir del CMS después de cargar la página)
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".ugc-like, .ugc-save, .ugc-comment");
+    if (!btn) return;
+    if (btn.classList.contains("ugc-comment")) {
       btn.classList.remove("is-tapped");
       void btn.offsetWidth;
       btn.classList.add("is-tapped");
-    });
+      return;
+    }
+    const countEl = btn.querySelector(".ugc-action-count");
+    const base = parseInt(btn.dataset.base || "0", 10);
+    const active = btn.classList.toggle(btn.classList.contains("ugc-like") ? "is-liked" : "is-saved");
+    btn.setAttribute("aria-pressed", active ? "true" : "false");
+    if (countEl) countEl.textContent = String(base + (active ? 1 : 0));
   });
 
   // Lifestyle: carrusel curvo de videos UGC (arco tipo cilindro, drag + momentum + auto-scroll)
   const ugcCarousel = document.getElementById("ugcCarousel");
   const ugcTrack = document.getElementById("ugcTrack");
   if (ugcCarousel && ugcTrack) {
-    const cards = Array.from(ugcTrack.children);
-    const N = cards.length;
+    let cards = Array.from(ugcTrack.children);
+    let N = cards.length;
     const reduceMotionUgc = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const AUTO_SPEED = 26; // px/s, auto-scroll hacia la izquierda
     let cardW = 150; // ancho real de la card, medido en measure() (responsive vía CSS clamp)
@@ -413,6 +411,15 @@ document.addEventListener("DOMContentLoaded", () => {
       if (carouselVisible || nudge) layout(); else if (cards.some((c) => c._play)) layout();
       requestAnimationFrame(tick);
     }
+
+    // El CMS puede reemplazar las tarjetas: se vuelven a leer y se recoloca todo
+    ugcTrack.addEventListener("ugc:refresh", () => {
+      cards = Array.from(ugcTrack.children);
+      N = cards.length;
+      if (!N) return;
+      measure();
+      layout();
+    });
 
     // Posición inicial antes del primer frame animado (evita el flash en -9999px)
     layout();
