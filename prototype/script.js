@@ -586,7 +586,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ---------- Carrito ----------
   // Prototipo: sin backend ni pasarela de pago. El "checkout" arma un
   // mensaje de WhatsApp con el pedido, que es como ya opera la marca.
-  const WHATSAPP_NUMBER = "5491160579579";
+  const WHATSAPP_NUMBER = "5493454143901";
   const CART_STORAGE_KEY = "upsky-cart-v2";
 
   const cartButton = document.getElementById("cartButton");

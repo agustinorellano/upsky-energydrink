@@ -3,7 +3,7 @@
 (() => {
   "use strict";
 
-  const WA = "5491160579579";
+  const WA = "5493454143901";
   const money = (n) => "$" + n.toLocaleString("es-AR");
 
   /* ------------------------------ CONTENIDO ------------------------------ */

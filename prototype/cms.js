@@ -253,7 +253,7 @@
     const sh = $(".evp-share", root);
     if (sh) { sh.dataset.url = `evento.html#${encodeURIComponent(e.id)}`; sh.dataset.title = e.nombre; }
     const wa = $('a[href^="https://wa.me"]', root);
-    if (wa) wa.href = `https://wa.me/5491160579579?text=${encodeURIComponent(`Hola! Quiero saber más del evento "${e.nombre}" de UP SKY.`)}`;
+    if (wa) wa.href = `https://wa.me/5493454143901?text=${encodeURIComponent(`Hola! Quiero saber más del evento "${e.nombre}" de UP SKY.`)}`;
     const cover = $(".evp-frame", root);
     if (cover && e.imagen_1) cover.innerHTML = `<img src="${esc(e.imagen_1)}" alt="${esc(e.nombre)}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">`;
   }

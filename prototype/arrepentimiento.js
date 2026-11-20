@@ -12,6 +12,6 @@
       "Pedido / producto: " + g("pedido"), g("compra") && "Fecha de compra: " + g("compra"),
       g("recepcion") && "Fecha de recepción: " + g("recepcion"), g("motivo") && "Motivo: " + g("motivo")].filter(Boolean).join("\n");
     if (via === "mail") location.href = "mailto:upskyenergydrink@gmail.com?subject=" + encodeURIComponent("Botón de arrepentimiento - " + g("nombre")) + "&body=" + encodeURIComponent(lines);
-    else window.open("https://wa.me/5491160579579?text=" + encodeURIComponent(lines), "_blank", "noopener");
+    else window.open("https://wa.me/5493454143901?text=" + encodeURIComponent(lines), "_blank", "noopener");
   });
 })();
