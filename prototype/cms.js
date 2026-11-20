@@ -284,6 +284,33 @@
     track.dispatchEvent(new Event("ugc:refresh"));
   }
 
+  /* ---------- Fotos y videos fijos del sitio ---------- */
+  function slots(items) {
+    const by = {};
+    items.forEach((x) => { if (x.slot) by[x.slot] = x; });
+    const setImg = (sel, url, all) => {
+      if (!okMedia(url)) return;
+      (all ? $$(sel) : [$(sel)]).forEach((im) => { if (im && im.getAttribute("src") !== url) im.src = url; });
+    };
+    if (by.inicio_hero) setImg("img.hero-photo", by.inicio_hero.imagen_1, true);
+    if (by.negocios_hero) setImg(".page-banner-img", by.negocios_hero.imagen_1);
+    if (by.producto_ingredientes) setImg(".fm-photo img", by.producto_ingredientes.imagen_1);
+    [1, 2, 3].forEach((n) => {
+      if (by["producto_momento_" + n]) setImg(`.pp-moment-card:nth-of-type(${n}) img`, by["producto_momento_" + n].imagen_1);
+    });
+    const pv = by.producto_video;
+    if (pv) {
+      setImg(".pp-hero-media-mobile", pv.imagen_1);
+      const v = $(".pp-hero-media-desktop"), src = v && $("source", v);
+      if (v && src && okMedia(pv.video) && src.getAttribute("src") !== pv.video) {
+        if (okMedia(pv.portada)) v.poster = pv.portada;
+        src.src = pv.video;
+        v.load();
+        v.play().catch(() => {});
+      }
+    }
+  }
+
   load().then((db) => {
     if (!db.__seeded) return; // base sin cargar: se deja el contenido del HTML
     PROMOS = db.promos || [];
@@ -293,5 +320,6 @@
     events(db.eventos || []);
     eventDetail(db.eventos || []);
     community(db.comunidad || []);
+    slots(db.sitio || []);
   }).catch(() => { /* sin conexión: queda el contenido del HTML */ });
 })();
