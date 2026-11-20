@@ -5188,3 +5188,8 @@ body:has(.evl-sheet) .footer-band { background: #f6f6f8; }
 .promo-strip-copy small { color: #ff8fc2; font-size: 0.78rem; }
 .promo-strip-off { font-family: var(--font-display); font-size: 2rem; font-weight: 700; font-style: italic; white-space: nowrap; }
 @media (max-width: 600px) { .promo-strip { padding: 12px 14px; gap: 12px; } .promo-strip-off { font-size: 1.5rem; } }
+
+/* Encuadre de las fotos de eventos (los banderines y el neón no quedan centrados). */
+.evc-media img[src$="evento-banderin-vertical.webp"], .agc-media img[src$="evento-banderin-vertical.webp"] { object-position: 50% 14%; }
+.evc-media img[src$="evento-banderin.webp"], .agc-media img[src$="evento-banderin.webp"] { object-position: 88% 62%; }
+.evc-media img[src$="evento-neon.webp"], .agc-media img[src$="evento-neon.webp"] { object-position: 82% 78%; }

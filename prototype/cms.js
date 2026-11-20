@@ -215,6 +215,10 @@
   function events(items) {
     const grid = $("#evGrid");
     if (!grid) return;
+    // Si un evento del CMS no tiene portada propia, usa la foto de la card del mismo nombre.
+    const fallback = {};
+    $$(".evc").forEach((a) => { const t = $("h3", a); const i = $(".evc-media img", a); if (t && i) fallback[t.textContent.trim()] = i.getAttribute("src"); });
+    items.forEach((e) => { if (!e.imagen_1 && fallback[e.nombre]) e.imagen_1 = fallback[e.nombre]; });
     const sorted = items.slice().sort((a, b) => (a.fecha || "9999").localeCompare(b.fecha || "9999"));
     grid.innerHTML = sorted.map((e, i) => {
       const href = `evento.html#${encodeURIComponent(e.id)}`;
