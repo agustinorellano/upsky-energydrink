@@ -269,7 +269,7 @@
   /* ---------- Comunidad (videos) ---------- */
   const HEART = '<path d="M12 20.5s-7.5-4.6-10-9.3C.5 7.8 2.3 4.5 5.7 4.5c2 0 3.5 1.1 4.3 2.6.8-1.5 2.3-2.6 4.3-2.6 3.4 0 5.2 3.3 3.7 6.7-2.5 4.7-10 9.3-10 9.3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>';
   const MARK = '<path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4-7 4V4.5a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>';
-  const okMedia = (u) => /^https:\/\/[a-z0-9-]+\.supabase\.co\//.test(String(u || ""));
+  const okMedia = (u) => /^https:\/\/[a-z0-9-]+\.supabase\.co\//.test(String(u || "")) || /^assets\/[\w.-]+\.(mp4|webm|mov|jpe?g|png|webp)$/.test(String(u || ""));
   function community(items) {
     const track = $("#ugcTrack");
     const vids = items.filter((v) => okMedia(v.video));
