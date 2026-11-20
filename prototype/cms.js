@@ -266,6 +266,24 @@
     location.href = card.dataset.shareUrl;
   });
 
+  /* ---------- Comunidad (videos) ---------- */
+  const HEART = '<path d="M12 20.5s-7.5-4.6-10-9.3C.5 7.8 2.3 4.5 5.7 4.5c2 0 3.5 1.1 4.3 2.6.8-1.5 2.3-2.6 4.3-2.6 3.4 0 5.2 3.3 3.7 6.7-2.5 4.7-10 9.3-10 9.3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>';
+  const MARK = '<path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4-7 4V4.5a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>';
+  const okMedia = (u) => /^https:\/\/[a-z0-9-]+\.supabase\.co\//.test(String(u || ""));
+  function community(items) {
+    const track = $("#ugcTrack");
+    const vids = items.filter((v) => okMedia(v.video));
+    if (!track || !vids.length) return; // sin videos cargados en el CMS se deja el contenido del HTML
+    const btn = (cls, label, icon) => `<button class="ugc-action ${cls}" type="button" aria-label="${label}"${cls === "ugc-comment" ? "" : ' aria-pressed="false"'}><span class="ugc-action-icon-wrap"><svg class="ugc-action-icon" viewBox="0 0 24 24" aria-hidden="true">${icon}</svg></span></button>`;
+    track.innerHTML = vids.map((v) => {
+      const poster = okMedia(v.portada) ? esc(v.portada) : "";
+      return `<article class="ugc-card kb-zoom"${poster ? ` style="background-image:url('${poster}')"` : ""}>
+        <video class="ugc-card-media" data-autoplay muted loop playsinline preload="none"${poster ? ` poster="${poster}"` : ""} aria-label="${esc(v.titulo || "Video de la comunidad UP SKY")}"><source src="${esc(v.video)}"></video>
+        <div class="ugc-card-overlay"><span class="ugc-handle">${esc(v.usuario || "@upskyenergydrink")}</span><div class="ugc-actions">${btn("ugc-like", "Me gusta", HEART)}${btn("ugc-save", "Guardar", MARK)}</div></div></article>`;
+    }).join("");
+    track.dispatchEvent(new Event("ugc:refresh"));
+  }
+
   load().then((db) => {
     if (!db.__seeded) return; // base sin cargar: se deja el contenido del HTML
     PROMOS = db.promos || [];
@@ -274,5 +292,6 @@
     wholesale(db.mayorista || [], db.pasos_negocios || []);
     events(db.eventos || []);
     eventDetail(db.eventos || []);
+    community(db.comunidad || []);
   }).catch(() => { /* sin conexión: queda el contenido del HTML */ });
 })();
