@@ -1538,7 +1538,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!upcoming.length) { nxt.hidden = true; return; }
     const n = upcoming[0];
     nxt.hidden = false;
-    nxt.innerHTML = `<div class="nxt-main"><p class="cal-k">Próximo evento</p><h2>${esc(n.title)}</h2><p class="nxt-meta">${esc(longDate(n))} · ${n.time} h · ${esc(n.place)}</p><div class="nxt-acts"><a class="btn btn-primary" href="${gcal(n)}" target="_blank" rel="noopener">Agendar en Google Calendar</a><a class="btn btn-outline" href="${ics(n)}" download="${fname(n)}">Descargar .ics</a><a class="btn btn-outline" href="${esc(n.url)}">Ver evento</a></div></div><div class="nxt-count" id="nxtCount" aria-label="Cuenta regresiva"></div>`;
+    nxt.innerHTML = `<div class="nxt-main"><p class="cal-k">Próximo evento</p><h2>${esc(n.title)}</h2><p class="nxt-meta">${esc(longDate(n))} · ${n.time} h · ${esc(n.place)}</p><div class="nxt-acts"><a class="btn btn-primary" href="${esc(n.url)}">Ver evento</a></div></div><div class="nxt-count" id="nxtCount" aria-label="Cuenta regresiva"></div>`;
     const count = document.getElementById("nxtCount");
     const tick = () => {
       const s = Math.max(0, Math.floor((when(n) - new Date()) / 60000));

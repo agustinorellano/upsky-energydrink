@@ -5193,3 +5193,69 @@ body:has(.evl-sheet) .footer-band { background: #f6f6f8; }
 .evc-media img[src$="evento-banderin-vertical.webp"], .agc-media img[src$="evento-banderin-vertical.webp"] { object-position: 50% 14%; }
 .evc-media img[src$="evento-banderin.webp"], .agc-media img[src$="evento-banderin.webp"] { object-position: 88% 62%; }
 .evc-media img[src$="evento-neon.webp"], .agc-media img[src$="evento-neon.webp"] { object-position: 82% 78%; }
+
+/* ===== Ajustes de noviembre: Eventos, Para negocios y mobile ===== */
+/* Eventos: el hero sin foto, con degradé magenta como el resto de las secciones. */
+.evl-top { background: radial-gradient(52% 78% at 84% 22%, rgba(236,31,122,.42), transparent 72%), radial-gradient(40% 60% at 4% 100%, rgba(236,31,122,.18), transparent 70%), #0a0a0c; }
+.evl-top::before, .evl-top::after { content: none !important; display: none; }
+
+/* Para negocios: 3 beneficios en escritorio; en mobile solo los 2 de volumen. */
+.pbn-benefits { grid-template-columns: repeat(3, 1fr); }
+
+@media (max-width: 800px) {
+  .pbn-benefits li.pbn-wa { display: none; }
+  .pbn-benefits { grid-template-columns: 1fr 1fr; }
+  .pbn-benefits li { padding: 4px 12px; }
+  .pbn-benefits svg { width: 30px; height: 30px; margin-bottom: 4px; }
+  .pbn-benefits b { font-size: .95rem; } .pbn-benefits span { font-size: .8rem; }
+}
+
+@media (max-width: 640px) {
+  /* Eventos: banner de próximo evento más chico */
+  .nxt { padding: 16px 18px; gap: 12px; margin-bottom: 18px; border-radius: 18px; }
+  .nxt .cal-k { margin-bottom: 4px; font-size: .68rem; }
+  .nxt h2 { font-size: 1.35rem; margin-bottom: 4px; }
+  .nxt-meta { font-size: .85rem; margin: 0 0 10px; }
+  .nxt-acts .btn { padding: 9px 16px; font-size: .85rem; width: auto; }
+  .nxt-count { gap: 8px; }
+  .nxt-count div { padding: 8px 4px; border-radius: 12px; }
+  .nxt-count b { font-size: 1.35rem; } .nxt-count span { font-size: .62rem; margin-top: 3px; }
+
+  /* Para negocios: cards de compra mayorista compactas */
+  #mayorista .price-grid { gap: 14px; }
+  #mayorista .price-card { display: grid; grid-template-columns: 104px minmax(0, 1fr); align-items: stretch; }
+  #mayorista .price-card .product-card-media { grid-row: 1; min-height: 0; height: 100%; }
+  #mayorista .price-card .product-card-media img, #mayorista .price-card .product-tile-brand { height: 100%; aspect-ratio: auto; border-radius: 0; }
+  #mayorista .product-tile-brand { display: grid; place-items: center; }
+  #mayorista .product-tile-brand img { width: 78%; height: auto; object-fit: contain; }
+  #mayorista .price-card-body { padding: 12px 14px; gap: 6px; }
+  #mayorista .price-name { font-size: .95rem; }
+  #mayorista .price-name span { font-size: .78rem; }
+  #mayorista .price-value { font-size: 1.35rem; }
+  #mayorista .price-note, #mayorista .price-tiers { font-size: .76rem; }
+  #mayorista .qty-stepper { transform: scale(.88); transform-origin: left center; }
+  #mayorista .btn-add { padding: 9px 12px; font-size: .82rem; }
+
+  /* Producto: La fórmula entra en una pantalla, sin scroll para ver la animación */
+  body.page-product #formula { padding-top: 84px; padding-bottom: 34px; }
+  .fm-grid { gap: 14px; }
+  .fm-photo { aspect-ratio: 16 / 7; border-radius: 20px; }
+  .fm-eyebrow { margin-bottom: 4px; }
+  .fm-title { font-size: 1.7rem; margin: 0 0 4px; }
+  .fm-lead { margin: 0 0 10px; font-size: .9rem; }
+  .fm-list { display: grid; grid-template-columns: 1fr 1fr; column-gap: 14px; }
+  .fm-row { padding: 9px 0; font-size: 1rem; }
+  .fm-row-n { width: 20px; font-size: .64rem; }
+  .fm-panel { min-height: 0; margin-top: 12px; }
+  .fm-big { font-size: 2.6rem; }
+  .fm-desc { font-size: .88rem; }
+  .fm-more { margin-top: 10px; font-size: .85rem; }
+
+  /* Producto: Momentos, más chico y en horizontal (se desliza) */
+  body.page-product #momentos { padding-top: 44px; padding-bottom: 44px; }
+  .pp-moments-grid { display: flex; grid-template-columns: none; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -24px; padding: 0 24px 6px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .pp-moments-grid::-webkit-scrollbar { display: none; }
+  .pp-moment-card { flex: 0 0 68%; aspect-ratio: 4 / 5; max-height: 250px; scroll-snap-align: start; border-radius: 16px; }
+  .pp-moment-body { padding: 14px; }
+  .pp-moment-title { font-size: 1.1rem; }
+}
