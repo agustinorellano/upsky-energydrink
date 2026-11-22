@@ -2231,7 +2231,7 @@ img.placeholder-event { display: block; width: 100%; object-fit: cover; border: 
 
 @media (max-width: 760px) {
   .ugc-carousel { height: clamp(190px, 58vw, 260px); }
-  .ugc-comments { display: none; }
+  .ugc-comments { display: block; }
 }
 
 @media (prefers-reduced-motion: reduce) {
