@@ -278,12 +278,15 @@
     const track = $("#ugcTrack");
     const vids = items.filter((v) => okMedia(v.video));
     if (!track || !vids.length) return; // sin videos cargados en el CMS se deja el contenido del HTML
-    const btn = (cls, label, icon) => `<button class="ugc-action ${cls}" type="button" aria-label="${label}"${cls === "ugc-comment" ? "" : ' aria-pressed="false"'}><span class="ugc-action-icon-wrap"><svg class="ugc-action-icon" viewBox="0 0 24 24" aria-hidden="true">${icon}</svg></span></button>`;
-    track.innerHTML = vids.map((v) => {
+    const COMMENT = '<path d="M21 11.5a8.4 8.4 0 0 1-8.9 8.4 9 9 0 0 1-3.6-.7L3 20l1-5a8.3 8.3 0 0 1-1-4.5A8.4 8.4 0 0 1 11.9 3a8.5 8.5 0 0 1 9.1 8.5Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>';
+    const btn = (cls, label, icon, n) => `<button class="ugc-action ${cls}" type="button" aria-label="${label}"${cls === "ugc-comment" ? "" : ` aria-pressed="false" data-base="${n}"`}><span class="ugc-action-icon-wrap"><svg class="ugc-action-icon" viewBox="0 0 24 24" aria-hidden="true">${icon}</svg></span><span class="ugc-action-count">${n}</span></button>`;
+    const seed = (v, k) => { const t = String(v.titulo || v.video || ""); let h = k; for (let i = 0; i < t.length; i++) h = (h * 31 + t.charCodeAt(i)) % 997; return h; };
+    track.innerHTML = vids.map((v, i) => {
+      const lk = 120 + seed(v, 7) % 380, cm = 12 + seed(v, 3) % 60, sv = 40 + seed(v, 5) % 120;
       const poster = okMedia(v.portada) ? esc(v.portada) : "";
       return `<article class="ugc-card kb-zoom"${poster ? ` style="background-image:url('${poster}')"` : ""}>
         <video class="ugc-card-media" data-autoplay muted loop playsinline preload="none"${poster ? ` poster="${poster}"` : ""} aria-label="${esc(v.titulo || "Video de la comunidad UP SKY")}"><source src="${esc(v.video)}"></video>
-        <div class="ugc-card-overlay"><span class="ugc-handle">${esc(v.usuario || "@upskyenergydrink")}</span><div class="ugc-actions">${btn("ugc-like", "Me gusta", HEART)}${btn("ugc-save", "Guardar", MARK)}</div></div></article>`;
+        <div class="ugc-card-overlay"><span class="ugc-handle">${esc(v.usuario || "@upskyenergydrink")}</span><div class="ugc-actions">${btn("ugc-like", "Me gusta", HEART, lk)}${btn("ugc-comment", "Comentarios", COMMENT, cm)}${btn("ugc-save", "Guardar", MARK, sv)}</div></div></article>`;
     }).join("");
     track.dispatchEvent(new Event("ugc:refresh"));
   }
