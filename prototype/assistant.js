@@ -12,6 +12,7 @@
     "vaso-negro": { id: "vaso-negro", name: "1 vaso UP SKY (negro)", short: "Vaso UP SKY negro", sub: "Edición especial", price: 3200, tiers: [[5, 5], [10, 10]], group: "vaso", img: "assets/vaso-negro-foto.webp" },
     "vaso-rosa": { id: "vaso-rosa", name: "1 vaso UP SKY (rosa)", short: "Vaso UP SKY rosa", sub: "Edición especial", price: 3200, tiers: [[5, 5], [10, 10]], group: "vaso", img: "assets/vaso-rosa-foto.webp" },
     remera: { id: "remera1", name: "1 remera UP SKY", short: "Remera UP SKY", sub: "Algodón negro", price: 36500, tiers: [[5, 3], [10, 6]], img: "assets/remera-frente.webp" },
+    pallet: { id: "mayorpallet", name: "1 pallet (192 packs de 6 botellas 355cc c/u)", short: "1 pallet · 192 packs", sub: "6 botellas 355cc c/u", price: 2304000, tiers: [], img: "assets/logo.png" },
     mayor30: { id: "mayor30", name: "30 packs de energizante (6 botellas 355cc c/u)", short: "30 packs por mayor", sub: "6 botellas 355cc c/u", price: 388500, tiers: [], img: "assets/pack-energizante.webp" },
   };
 
@@ -25,6 +26,13 @@
     beneficios: ["¿Qué beneficios tiene?", "Aporta un estímulo energético que ayuda al rendimiento físico y mental: aumenta el estado de alerta y la concentración y reduce la fatiga. Los azúcares dan un combustible inmediato en esfuerzos intensos."],
     origen: ["¿Es de industria nacional?", "Sí, UP SKY es <b>Industria Argentina</b>. Se presenta en botella de vidrio de 355 cc."],
     donde: ["¿Dónde puedo comprar?", "Desde el catálogo de esta web. Nosotros te direccionamos al distribuidor más cercano a tu domicilio."],
+    envios: ["¿Hacen envíos?", "Sí, hacemos envíos. Distribuimos en Concordia y alrededores, y coordinamos el costo y el plazo por WhatsApp. Los precios publicados no incluyen envío."],
+    ubicacion: ["¿Dónde están?", "Estamos en <b>San Luis 318, Concordia, Entre Ríos</b>."],
+    contacto: ["¿Cómo los contacto?", "Por WhatsApp (el botón de abajo), por email a <b>upskyenergydrink@gmail.com</b> o por Instagram <b>@upskyenergydrink</b>."],
+    arrepentimiento: ["¿Puedo arrepentirme de una compra?", "Sí. Si compraste a distancia, podés revocar la compra dentro de los <b>10 días corridos</b> de recibir el producto, sin costo. Usá el <a href=\"arrepentimiento.html\">Botón de arrepentimiento</a>."],
+    conservacion: ["¿Cómo se conserva?", "Una vez abierta, se recomienda consumirla en el día y conservarla refrigerada."],
+    consumo: ["¿Cuánto puedo tomar?", "No se recomienda consumirla en exceso y es un producto para <b>mayores de 18 años</b>. Si tenés una condición de salud o estás embarazada o en lactancia, consultá antes con tu médico."],
+    terminos: ["Términos y condiciones", "Podés leerlos completos en <a href=\"terminos.html\">Términos y condiciones</a>."],
     quienes: ["¿Quiénes pueden consumirla?", "Jóvenes y adultos que busquen más rendimiento físico y mental: deportistas, estudiantes y trabajadores. Es un producto para mayores de 18 años y no se recomienda consumirlo en exceso."],
   };
 
@@ -48,7 +56,14 @@
     ["pedir", ["pedir", "pedido", "comprar", "compra", "quiero", "carrito", "agregar", "sumar"]],
     ["precios", ["precio", "precios", "cuanto", "cuesta", "vale", "costo", "descuento", "oferta"]],
     ["comercio", ["mayor", "mayorista", "comercio", "kiosco", "revender", "revendedor", "distribuidor", "pallet", "negocio", "30 packs"]],
-    ["pago", ["pago", "pagar", "transferencia", "tarjeta", "medios de pago", "efectivo", "envio", "enviar", "entrega", "delivery", "zona", "concordia"]],
+    ["pago", ["pago", "pagar", "transferencia", "tarjeta", "medios de pago", "efectivo", "cbu", "alias", "deposito"]],
+    ["envios", ["envio", "envios", "enviar", "envian", "entrega", "entregan", "delivery", "zona", "domicilio", "despacho", "llega", "llegan", "hacen envios"]],
+    ["ubicacion", ["direccion", "donde estan", "donde queda", "ubicacion", "local", "sucursal", "san luis", "concordia", "entre rios"]],
+    ["contacto", ["contacto", "email", "correo", "instagram", "telefono", "numero", "redes"]],
+    ["arrepentimiento", ["arrepent", "devolver", "devolucion", "reembolso", "garantia", "revocar", "cambiar el producto"]],
+    ["conservacion", ["conservar", "conserva", "refrigerar", "heladera", "vencimiento", "vence", "duracion", "dura", "una vez abierta", "abierta", "abierto", "fecha de vencimiento"]],
+    ["consumo", ["cuanto puedo tomar", "cuantas puedo tomar", "por dia", "al dia", "dosis", "exceso", "embarazo", "embarazada", "lactancia", "amamantando", "hipertension", "medico", "presion"]],
+    ["terminos", ["terminos", "condiciones", "politica", "privacidad", "datos personales", "legales"]],
     ["eventos", ["evento", "eventos", "fecha", "agenda", "degustacion", "activacion"]],
     ["cafeina", ["cafeina", "mg de cafeina", "cuanta cafeina"]],
     ["calorias", ["caloria", "calorias", "kcal", "azucar", "azucares", "carbohidrato", "light", "zero"]],
@@ -64,7 +79,7 @@
     ["beneficios", ["beneficio", "beneficios", "para que sirve", "efecto", "rendimiento", "energia"]],
     ["origen", ["industria", "nacional", "argentina", "argentino", "hecha en", "hecho en", "origen", "fabrica", "producido"]],
     ["donde", ["donde comprar", "donde consigo", "donde puedo", "donde venden", "puntos de venta"]],
-    ["quienes", ["quien puede", "quienes pueden", "menor", "edad", "embarazada", "deportista", "mayores"]],
+    ["quienes", ["quien puede", "quienes pueden", "menor", "edad", "deportista", "mayores"]],
     ["saludo", ["hola", "buenas", "buen dia", "buenas tardes", "buenas noches", "que tal"]],
     ["gracias", ["gracias", "genial", "perfecto", "listo", "ok"]],
   ];
@@ -86,7 +101,7 @@
   };
 
   /* ------------------------------ ESTADO / DOM ------------------------------ */
-  const state = { open: false, unknown: 0, topic: "", busy: false, started: false };
+  const state = { open: false, unknown: 0, topic: "", busy: false, started: false, lastProduct: null };
 
   const launcher = document.createElement("button");
   launcher.type = "button";
@@ -183,15 +198,32 @@
   const back = (extra = []) => [...extra, { label: "Volver al menú", run: () => go("menu") }];
 
   const priceRows = (rows) => `<div class="ua-prices">${rows.map((r) => `<div class="ua-price"><img src="${r.img}" alt="" loading="lazy"><div><b>${r.name}</b><small>${r.note}</small></div><em>${r.price}</em></div>`).join("")}</div>`;
+  const tierNote = (p) => { const t = p.tiers.map(([n, d]) => `${d}% OFF desde ${n}`); return t.join(" · ") + (p.max ? (t.length ? " · " : "") + `máx. ${p.max}` : ""); };
   const PRICES = () => priceRows([
-    { img: PRODUCTS.pack.img, name: "Pack de 6 botellas", note: "5% OFF desde 5 packs · máx. 10", price: money(PRODUCTS.pack.price) },
-    { img: PRODUCTS["vaso-negro"].img, name: "Vaso UP SKY", note: "5% OFF desde 5 · 10% OFF desde 10", price: money(PRODUCTS["vaso-negro"].price) },
-    { img: PRODUCTS.remera.img, name: "Remera UP SKY", note: "3% OFF desde 5 · 6% OFF desde 10", price: money(PRODUCTS.remera.price) },
+    { img: PRODUCTS.pack.img, name: "Pack de 6 botellas", note: tierNote(PRODUCTS.pack), price: money(PRODUCTS.pack.price) },
+    { img: PRODUCTS["vaso-negro"].img, name: "Vaso UP SKY", note: tierNote(PRODUCTS["vaso-negro"]), price: money(PRODUCTS["vaso-negro"].price) },
+    { img: PRODUCTS.remera.img, name: "Remera UP SKY", note: tierNote(PRODUCTS.remera), price: money(PRODUCTS.remera.price) },
   ]);
   const PRICES_MAYOR = () => priceRows([
     { img: PRODUCTS.pack.img, name: "30 packs de energizante", note: "4% OFF desde 31 packs · consultá por WhatsApp", price: money(PRODUCTS.mayor30.price) },
-    { img: "assets/logo.png", name: "1 pallet · 192 packs", note: "6 botellas de 355 cc c/u", price: "$2.304.000" },
+    { img: PRODUCTS.pallet.img, name: "1 pallet · 192 packs", note: "6 botellas de 355 cc c/u", price: money(PRODUCTS.pallet.price) },
   ]);
+
+  // Precios y descuentos del CMS: si el sitio los cambió, el asistente responde lo mismo que la web.
+  function applyCatalog(db) {
+    if (!db) return;
+    const tiers = (p) => [[5, +p.desc_desde_5], [10, +p.desc_desde_10]].filter(([, d]) => d > 0);
+    const set = (keys, p) => keys.forEach((k) => { if (!PRODUCTS[k] || !p || !(+p.precio > 0)) return; PRODUCTS[k].price = +p.precio; PRODUCTS[k].tiers = tiers(p); PRODUCTS[k].max = +p.max_por_pedido || 0; });
+    const prods = db.productos || [];
+    set(["pack"], prods.find((x) => x.tipo === "Pack"));
+    set(["vaso-negro", "vaso-rosa"], prods.find((x) => x.tipo === "Vaso"));
+    set(["remera"], prods.find((x) => x.tipo === "Remera"));
+    const may = db.mayorista || [];
+    if (may[0] && +may[0].precio > 0) PRODUCTS.mayor30.price = +may[0].precio;
+    if (may[1] && +may[1].precio > 0) PRODUCTS.pallet.price = +may[1].precio;
+  }
+  document.addEventListener("upsky:catalog", () => applyCatalog(window.upskyCatalog));
+  if (window.upskyCatalog) applyCatalog(window.upskyCatalog);
 
   const linkBtn = (href, label, ext) => `<a class="ua-link" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ""}>${label}</a>`;
 
@@ -329,29 +361,189 @@
   function go(id) { state.unknown = 0; (NODES[id] || NODES.menu)(); }
 
   /* ------------------------------ TEXTO LIBRE ------------------------------ */
-  function parseOrder(q) {
-    const m = q.match(/(\d{1,3}|un|una|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez)\s+(packs?|six ?packs?|vasos?|remeras?)(?:\s+(negro|rosa))?/);
-    const words = { un: 1, una: 1, dos: 2, tres: 3, cuatro: 4, cinco: 5, seis: 6, siete: 7, ocho: 8, nueve: 9, diez: 10 };
-    if (!m) return null;
-    const qty = words[m[1]] || parseInt(m[1], 10);
-    if (!qty || qty > 99) return null;
-    let key = m[2].startsWith("pack") || m[2].startsWith("six") ? "pack" : m[2].startsWith("vaso") ? `vaso-${m[3] || "negro"}` : "remera";
-    return { key, qty };
+  // Motor de comprensión por reglas: normaliza, tolera errores de tipeo, entiende varias
+  // preguntas en una, recuerda el último producto y calcula totales con descuento.
+  const ACTION = new Set(["persona", "pedir", "comercio", "saludo", "gracias"]);
+  const SYN = { wpp: "whatsapp", wsp: "whatsapp", guasap: "whatsapp", whats: "whatsapp", plata: "precio", sale: "cuesta", salen: "cuesta", cuestan: "cuesta", valen: "vale", barata: "precio", barato: "precio", mail: "email", ig: "instagram", insta: "instagram", mayoristas: "mayorista", kioscos: "kiosco" };
+  const NOFUZZY = new Set(["cuando", "donde", "como", "quien", "quienes", "cuanto", "cuanta"]);
+  const stem = (w) => (w.length > 3 ? w.replace(/s$/, "") : w);
+  const lev = (a, b) => {
+    if (Math.abs(a.length - b.length) > 1) return 2;
+    const d = Array.from({ length: a.length + 1 }, (_, i) => [i]);
+    for (let j = 1; j <= b.length; j++) d[0][j] = j;
+    for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    return d[a.length][b.length];
+  };
+  const tokenize = (q) => q.split(" ").map((t) => SYN[t] || t).filter(Boolean);
+  // Devuelve [puntaje, índice del token usado]: cada palabra de la consulta suma una sola vez por tema.
+  const kwScore = (kw, toks, joined) => {
+    if (kw.includes(" ")) return joined.includes(kw) ? [2, -1] : [0, -1];
+    const k = stem(kw);
+    let best = [0, -1];
+    toks.forEach((t, i) => {
+      const s = stem(t);
+      let sc = 0;
+      if (s === k) sc = kw.length > 4 ? 2 : 1;
+      else if (kw.length >= 5 && s.length >= 4 && !NOFUZZY.has(t)) {
+        if (kw.length >= 7 && s.startsWith(k)) sc = 2; // "arrepentirme" ~ "arrepent"
+        else if (s.startsWith(k) || (s.length >= 5 && k.startsWith(s)) || lev(s, k) <= 1) sc = 1.5;
+      }
+      if (sc > best[0]) best = [sc, i];
+    });
+    return best;
+  };
+  const scoreAll = (q) => {
+    const toks = tokenize(q), joined = toks.join(" ");
+    const out = {};
+    for (const [node, words] of KEYS) {
+      let s = 0;
+      const used = new Map();
+      for (const w of words) {
+        const [sc, i] = kwScore(w, toks, joined);
+        if (!sc) continue;
+        if (i < 0) s += sc; else if (sc > (used.get(i) || 0)) used.set(i, sc);
+      }
+      used.forEach((v) => { s += v; });
+      if (node === "comercio") s *= 2; // "quiero comprar por mayor" debe ir a Negocios, no al catálogo
+      if (s > 0) out[node] = s;
+    }
+    return out;
+  };
+
+  const NUM = { un: 1, una: 1, dos: 2, tres: 3, cuatro: 4, cinco: 5, seis: 6, siete: 7, ocho: 8, nueve: 9, diez: 10, once: 11, doce: 12, quince: 15, veinte: 20, treinta: 30 };
+  function parseOrders(q) {
+    const re = /(\d{1,3}|un|una|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez|once|doce|quince|veinte|treinta)\s+(packs?|six ?packs?|vasos?|remeras?)(?:\s+(negro|rosa|negros|rosas))?/g;
+    const out = [];
+    let m;
+    while ((m = re.exec(q))) {
+      const qty = NUM[m[1]] || parseInt(m[1], 10);
+      if (!qty || qty > 999) continue;
+      const color = (m[3] || "").startsWith("rosa") ? "rosa" : "negro";
+      const key = m[2].startsWith("pack") || m[2].startsWith("six") ? "pack" : m[2].startsWith("vaso") ? `vaso-${color}` : "remera";
+      const ex = out.find((o) => o.key === key);
+      if (ex) ex.qty += qty; else out.push({ key, qty });
+    }
+    return out;
+  }
+
+  // Producto mencionado (o recordado de la charla, para preguntas como "¿y en rosa?").
+  function detectProduct(q) {
+    if (/\b(vasos?)\b/.test(q)) return /\brosa\b/.test(q) ? "vaso-rosa" : /\bnegro\b/.test(q) ? "vaso-negro" : "vaso";
+    if (/\b(packs?|six ?packs?|botellas?)\b/.test(q)) return "pack";
+    if (/\b(remeras?|camisetas?|merch)\b/.test(q)) return "remera";
+    if (/\b(rosa|negro)\b/.test(q) && state.lastProduct && state.lastProduct.startsWith("vaso")) return /\brosa\b/.test(q) ? "vaso-rosa" : "vaso-negro";
+    return null;
+  }
+
+  const tierText = (p) => {
+    const t = p.tiers.map(([n, d]) => `${d}% OFF desde ${n}`);
+    return (t.length ? t.join(" · ") : "") + (p.max ? (t.length ? " · " : "") + `máx. ${p.max} por pedido` : "");
+  };
+  const discountFor = (p, qty) => p.tiers.reduce((d, [n, pc]) => (qty >= n ? Math.max(d, pc) : d), 0);
+  const lineCalc = (p, qty) => { const d = discountFor(p, qty); return { d, total: Math.round(p.price * qty * (1 - d / 100)) }; };
+
+  const productDesc = (key) => {
+    const p = PRODUCTS[key === "vaso" ? "vaso-negro" : key];
+    const desc = {
+      pack: `El <b>pack de 6 botellas</b> de 355 cc cuesta <b>${money(p.price)}</b> sin envío.`,
+      vaso: `El <b>vaso UP SKY</b> (edición especial) viene en negro y rosa y cuesta <b>${money(p.price)}</b> sin envío.`,
+      remera: `La <b>remera UP SKY</b> es de algodón negro con el logo y cuesta <b>${money(p.price)}</b> sin envío.`,
+    }[p.group === "vaso" ? "vaso" : key] || `<b>${p.short}</b>: ${money(p.price)} sin envío.`;
+    return desc + (tierText(p) ? `<br>${tierText(p)}.` : "");
+  };
+
+  async function productInfo(key) {
+    state.lastProduct = key;
+    const keys = key === "vaso" ? ["vaso-negro", "vaso-rosa"] : [key];
+    const p = PRODUCTS[keys[0]];
+    state.topic = p.short; refreshHuman(`Consulta sobre: ${p.short}.`);
+    await say(productDesc(key), (m) => { m.insertAdjacentHTML("beforeend", productCards(keys)); bindAdd(m); });
+    setChips([{ label: "Quiero pedir", primary: true, run: () => go("pedir") }, { label: "Ver todos los precios", run: () => go("precios") }, ...back()]);
+  }
+
+  async function quote(orders) {
+    let total = 0, notes = [];
+    const lines = orders.map((o) => {
+      const p = PRODUCTS[o.key];
+      let qty = o.qty;
+      if (p.max && qty > p.max) { notes.push(`El máximo por pedido de ${p.short.toLowerCase()} es ${p.max}. Para cantidades mayores conviene comprar por mayor (desde 30 packs).`); qty = p.max; }
+      const c = lineCalc(p, qty);
+      total += c.total;
+      return `${qty} × ${p.short}: <b>${money(c.total)}</b>${c.d ? ` (${c.d}% OFF)` : ""}`;
+    });
+    state.lastProduct = orders[0].key.startsWith("vaso") ? "vaso" : orders[0].key;
+    state.topic = "cotización de pedido"; refreshHuman("Quiero cotizar un pedido.");
+    await say(`<b>Cotización</b> (sin envío):<br>${lines.join("<br>")}<br>Total: <b>${money(total)}</b>${notes.length ? `<p class="ua-note">${notes.join(" ")}</p>` : ""}`);
+    setChips([{ label: "Agregar al carrito", primary: true, run: () => addMany(orders) }, { label: "Precios por mayor", run: () => go("mayor") }, ...back()]);
+  }
+
+  async function addMany(orders) {
+    if (orders.length === 1) { addToCart(orders[0].key, orders[0].qty); return; }
+    if (!window.upskyCart) { await say("No pude acceder al carrito en esta página. Podés sumarlo desde el catálogo."); return; }
+    let r;
+    const names = orders.map((o) => {
+      const p = PRODUCTS[o.key];
+      r = window.upskyCart.add({ id: p.id, name: p.name, price: p.price, qty: o.qty, tiers: p.tiers.map((t) => t.slice()), max: p.max || 0, group: p.group || "" });
+      return `${o.qty} × ${p.short}`;
+    });
+    state.topic = "mi pedido"; refreshHuman("Quiero finalizar un pedido.");
+    await say(`Listo, sumé al carrito: ${names.join(", ")}.<br>Total del carrito: <b>${r.totalText}</b>.`);
+    setChips([
+      { label: "Ver mi carrito", primary: true, run: () => { window.upskyCart.open(); close(); } },
+      { label: "Sumar otro producto", run: () => go("pedir") },
+      ...back(),
+    ]);
+  }
+
+  // Varias preguntas en una: se responden juntas.
+  const infoText = (k) => {
+    if (k === "precios") return "<b>Precios (sin envío)</b>" + PRICES();
+    if (k === "cafeina" || k === "calorias") return T.cafeina + "<br>" + T.calorias;
+    if (k === "vidrio") return FAQ.vidrio[1] + "<br>" + FAQ.sabor[1];
+    if (k === "mayor") return "<b>Por mayor</b>" + PRICES_MAYOR();
+    if (T[k]) return T[k];
+    return FAQ[k] ? FAQ[k][1] : "";
+  };
+  async function answerMulti(keys, lead) {
+    const uniq = []; keys.forEach((k) => { const kk = k === "calorias" ? "cafeina" : k; if (!uniq.includes(kk)) uniq.push(kk); });
+    state.topic = uniq.join(" y "); refreshHuman(`Tengo una consulta sobre: ${uniq.join(", ")}.`);
+    await say([lead, ...uniq.map(infoText)].filter(Boolean).join("<br><br>"));
+    setChips([{ label: "Quiero pedir", primary: true, run: () => go("pedir") }, { label: "Otra pregunta", run: () => go("faq") }, { label: "Hablar con una persona", run: () => go("persona") }, ...back()]);
   }
 
   function answer(raw) {
     const q = norm(raw);
     if (!q) return;
-    const ord = /(agreg|suma|quiero|pone|dame|necesito|comprar|pedir)/.test(q) ? parseOrder(q) : null;
-    if (ord) { addToCart(ord.key, ord.qty); return; }
-    let best = null, bestScore = 0;
-    for (const [node, words] of KEYS) {
-      let s = 0;
-      for (const w of words) { if (q.includes(w)) s += w.length > 4 ? 2 : 1; }
-      if (node === "comercio") s *= 2; // "quiero comprar por mayor" debe ir a Negocios, no al catálogo
-      if (s > bestScore) { bestScore = s; best = node; }
+    const orders = parseOrders(q);
+    const wantsPrice = /\b(cuanto|cuesta|sale|salen|vale|valen|total|precio|precios|costo|cotiza\w*)\b/.test(q);
+    const wantsAdd = /\b(agreg\w*|suma\w*|pone\w*|anota\w*|dame|llevo|quiero|necesito|comprar|pedir|pido)\b/.test(q);
+    const strongAdd = /\b(agreg\w*|suma\w*|pone\w*|anota\w*)\b/.test(q);
+    if (orders.length && wantsPrice && !strongAdd) { state.unknown = 0; quote(orders); return; }
+    if (orders.length && wantsAdd) { state.unknown = 0; state.lastProduct = orders[0].key; addMany(orders); return; }
+
+    const prod = detectProduct(q);
+    const scores = scoreAll(q);
+    const entries = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+    const infos = entries.filter(([n]) => !ACTION.has(n));
+    const bestInfo = infos[0], top = entries[0];
+
+    if (top && ACTION.has(top[0]) && (!bestInfo || top[1] > bestInfo[1])) { state.unknown = 0; if (prod) state.lastProduct = prod; (NODES[top[0]] || NODES.menu)(); return; }
+    if (bestInfo) {
+      state.unknown = 0;
+      // "¿cuánto sale el vaso?" / "¿y cuánto sale?": precio del producto de la charla, no la lista completa
+      if (bestInfo[0] === "precios" && (prod || (state.lastProduct && tokenize(q).length <= 4 && (/^y /.test(q) || /\b(cuanto|cuesta|sale|vale)\b/.test(q))))) {
+        const pk = prod || state.lastProduct;
+        const others = infos.filter(([n, sc]) => n !== "precios" && sc >= 2).slice(0, 2).map(([n]) => n);
+        if (others.length) { state.lastProduct = pk; answerMulti(others, productDesc(pk)); } else productInfo(pk);
+        return;
+      }
+      const picks = infos.filter(([, s], i) => i === 0 || s >= 2).slice(0, 3).map(([n]) => n);
+      if (prod) state.lastProduct = prod;
+      if (picks.length > 1) answerMulti(picks); else (NODES[picks[0]] || NODES.menu)();
+      return;
     }
-    if (best) { state.unknown = 0; (NODES[best] || NODES.menu)(); return; }
+    if (prod) { state.unknown = 0; productInfo(prod); return; }
+
     state.unknown += 1;
     state.topic = raw.slice(0, 80);
     refreshHuman(`Tengo esta consulta: "${raw.slice(0, 120)}".`);
@@ -360,7 +552,7 @@
         await say("Mejor te paso con alguien del equipo, así te responden bien.", (m) => m.insertAdjacentHTML("beforeend", linkBtn(human.href, "Abrir WhatsApp", true)));
         setChips(MENU());
       } else {
-        await say("No estoy seguro de haberte entendido. Probá con otra palabra, o elegí una opción:");
+        await say("No estoy seguro de haberte entendido. Probá con otras palabras, por ejemplo <i>“cuánto sale 12 vasos”</i> o <i>“tiene alcohol y cuánta cafeína”</i>, o elegí una opción:");
         setChips([...MENU().slice(0, 4), { label: "Hablar con una persona", run: () => go("persona") }]);
       }
     })();

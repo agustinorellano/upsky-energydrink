@@ -317,6 +317,7 @@
 
   load().then((db) => {
     if (!db.__seeded) return; // base sin cargar: se deja el contenido del HTML
+    window.upskyCatalog = db; document.dispatchEvent(new Event("upsky:catalog"));
     PROMOS = db.promos || [];
     products(db.productos || []);
     promoBanner(PROMOS);
