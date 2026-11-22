@@ -64,9 +64,9 @@ phones('Catálogo','Catálogo en <span>celular</span>','Banner con compra rápid
 ('cat-grid-m','cat-grid-m','02 · Productos',[('card','Card de producto','Foto, nombre, precio, cantidad y botón en la misma card.','tl',0),('tiers','Descuentos','Escalas visibles antes de agregar.')])],PW=330)
 # ---- eventos
 desk('Eventos','Eventos · <span>banner y próximo evento</span>','Contenido de demostración: los eventos, fechas y portadas reales se cargan cuando el cliente los defina.','ev-d','ev-d','upsky.com.ar/eventos',[
-('title','Título sobre foto de marca','La foto se funde con el negro y el título queda sobre la zona oscura.','tl')],'Eventos')
+('title','Título sobre fondo magenta','Fondo negro con degradé magenta, igual que las otras secciones.','tl')],'Eventos')
 desk('Eventos','Eventos · <span>próximo evento y listado</span>','El visitante ve primero lo más cercano, con cuenta regresiva, y debajo los eventos con foto, fecha, categoría y lugar.','ev-list-d','ev-list-d','upsky.com.ar/eventos#agenda',[
-('nxt','Banner del próximo evento','Elige solo el evento más cercano. Permite agendarlo en Google Calendar, descargar el archivo .ics para Apple y Outlook, o abrir su página.','tl',0),
+('nxt','Banner del próximo evento','Elige solo el evento más cercano y lleva a su página con el botón “Ver evento”.','tl',0),
 ('count','Cuenta regresiva','Días, horas y minutos que faltan, actualizados solos.','tl'),
 ('card','Card de evento','Foto, categoría, fecha, nombre y lugar. Lleva a la página del evento.','tl',0),
 ('share','Compartir','Cada evento se puede compartir con un toque.','tr')],'Eventos')
@@ -81,7 +81,7 @@ desk('Eventos','Página de <span>cada evento</span>','Cada evento tiene su propi
 desk('Para negocios','Para negocios · <span>banner</span>','Ocupa toda la pantalla y resume la propuesta. Pensada para comercios y distribuidores.','neg-d','neg-d','upsky.com.ar/negocios',[
 ('title','Título','“Llevá UP SKY a tu negocio”, con acento de color.','tl'),
 ('cta','“Ver precios y comprar”','Baja directo a los precios por mayor.','tl'),
-('ben','Beneficios','Desde 30 packs, pallets de 192 packs, pedido por WhatsApp y pago por transferencia.','tl',0),
+('ben','Beneficios','Desde 30 packs, pallets de 192 packs y pedido por WhatsApp.','tl',0),
 ('cue','Indicador “Ver productos”','Flecha animada que invita a seguir bajando.','tr')],'Para negocios')
 desk('Para negocios','Para negocios · <span>compra mayorista</span>','Dos formatos de volumen sobre un bloque claro, con compra directa al carrito.','neg-buy-d','neg-buy-d','upsky.com.ar/negocios#mayorista',[
 ('c30','30 packs','$388.500 por 30 packs de 6 botellas. Cada card tiene su propia página para compartir.','tl',0),
@@ -103,9 +103,9 @@ desk('Carrito','Carrito de <span>compra</span>','Panel lateral disponible en tod
 ('total','Total','Se actualiza con cada cambio.','tl'),
 ('form','Datos de envío','Nombre, dirección, localidad y código postal.','tl'),
 ('btn','Finalizar por WhatsApp','Arma el pedido completo y abre el chat con todo escrito.','tl')],'Carrito')
-desk('Asistente UP SKY','Asistente <span>UP SKY</span>','Chat guiado, sin inteligencia artificial: responde con contenido definido por la marca y siempre ofrece hablar con una persona.','bot-d','bot-d','upsky.com.ar/catalogo',[
+desk('Asistente UP SKY','Asistente <span>UP SKY</span>','Chat guiado, sin inteligencia artificial. Entiende errores de tipeo y varias preguntas juntas, recuerda el producto, calcula totales con descuento y siempre ofrece hablar con una persona.','bot-d','bot-d','upsky.com.ar/catalogo',[
 ('head','Encabezado','Identifica al asistente, permite reiniciar la conversación y cerrarla.','tl'),
-('log','Conversación','Responde consultas y muestra los precios con foto, descuento y botón para sumar al carrito.','tl',0),
+('log','Conversación','Responde consultas, cotiza cantidades con descuento y muestra los precios con foto y botón para sumar al carrito.','tl',0),
 ('chips','Opciones rápidas','Atajos para continuar sin escribir, como “Quiero pedir” o “Precios por mayor”.','tl'),
 ('form','Escribir una consulta','También entiende preguntas escritas con sus propias palabras.','tl'),
 ('human','Hablar con una persona','Pasa a WhatsApp con el contexto del carrito ya escrito.','tl')],'Asistente UP SKY')
