@@ -35,7 +35,7 @@
       <a href="https://wa.me/5493454143901?text=Hola%21%20Quiero%20hacer%20un%20pedido%20de%20UP%20SKY.%20%C2%BFMe%20ayudan%3F" target="_blank" rel="noopener" class="nav-cta"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.31.653 4.47 1.786 6.307L4 29l7.86-1.75A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3Zm0 21.818a9.78 9.78 0 0 1-4.99-1.363l-.358-.213-4.663 1.039 1.02-4.55-.234-.372A9.77 9.77 0 0 1 5.182 15c0-5.964 4.858-10.818 10.822-10.818S26.818 9.036 26.818 15 21.968 24.818 16.004 24.818Zm5.98-7.34c-.327-.164-1.938-.957-2.239-1.066-.3-.11-.518-.164-.737.163-.218.328-.845 1.066-1.036 1.285-.19.218-.382.246-.709.082-.327-.164-1.379-.508-2.627-1.62-.971-.866-1.627-1.935-1.818-2.263-.19-.328-.02-.505.144-.668.148-.147.327-.382.49-.573.164-.192.218-.328.327-.546.109-.219.055-.41-.027-.573-.082-.164-.737-1.775-1.01-2.431-.266-.64-.537-.554-.737-.564l-.628-.011c-.218 0-.573.082-.873.41-.3.327-1.145 1.12-1.145 2.73 0 1.61 1.173 3.166 1.336 3.385.164.219 2.31 3.527 5.598 4.945.782.338 1.393.54 1.869.69.785.25 1.5.215 2.065.13.63-.094 1.938-.792 2.211-1.557.273-.765.273-1.42.191-1.557-.082-.137-.3-.219-.627-.383Z" fill="currentColor"/></svg><span>Pedir por WhatsApp</span></a>
       <button class="cart-button" id="cartButton" aria-label="Ver carrito" aria-haspopup="dialog">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6h15l-1.5 9h-12z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 6L5 3H2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="9.5" cy="19.5" r="1.4" fill="currentColor"/><circle cx="17.5" cy="19.5" r="1.4" fill="currentColor"/></svg>
-        <span class="cart-count" id="cartCount" hidden>0</span>
+        <span class="cart-count" id="cartCount" aria-hidden="true" hidden>0</span>
       </button>
 
       <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
@@ -47,7 +47,7 @@
 
 <!-- ========== MENÚ MOBILE (bottom sheet) ========== -->
 <div class="mobile-nav-overlay" id="mobileNavOverlay" hidden></div>
-<nav class="mobile-nav-sheet" id="mobileNavSheet" aria-hidden="true">
+<nav class="mobile-nav-sheet" id="mobileNavSheet" aria-hidden="true" inert>
   <a href="index.html#inicio">Inicio</a>
   <a href="producto.html">Producto</a>
   <a href="catalogo.html">Catálogo</a>
@@ -59,7 +59,7 @@
 
 <!-- ========== CARRITO ========== -->
 <div class="cart-overlay" id="cartOverlay" hidden></div>
-<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-label="Carrito de compra" aria-hidden="true">
+<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-label="Carrito de compra" aria-hidden="true" inert>
   <div class="cart-drawer-header">
     <h3>Tu carrito</h3>
     <button class="cart-close" id="cartClose" aria-label="Cerrar carrito">✕</button>
@@ -95,6 +95,7 @@
 </aside>
 
 <!-- ========== CATÁLOGO / PRODUCTOS (tienda) ========== -->
+<main id="contenido">
 <section class="section section-shop" id="catalogo">
   <div class="container">
     <div class="page-banner">
@@ -133,7 +134,7 @@
         </aside>
       </div>
 
-      <a href="#productos" class="scroll-cue" aria-label="Ver todos los productos">
+      <a href="#productos" class="scroll-cue">
         <span>Más productos</span>
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -142,7 +143,7 @@
     <div class="shop-section-header" id="productos">
       <div>
         <p class="section-eyebrow">Nuestros productos</p>
-        <h3 class="section-title">Energía en cada formato</h3>
+        <h2 class="section-title">Energía en cada formato</h2>
       </div>
       <ul class="shop-badges">
         <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z" fill="currentColor"/></svg>Más energía</li>
@@ -243,6 +244,8 @@
 
   </div>
 </section>
+
+</main>
 
 <!-- ========== FOOTER ========== -->
 <footer class="site-footer">

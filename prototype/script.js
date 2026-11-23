@@ -9,12 +9,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const openMobileNav = () => {
     mobileNavSheet?.classList.add("is-open");
     mobileNavSheet?.setAttribute("aria-hidden", "false");
+    if (mobileNavSheet) mobileNavSheet.inert = false;
     if (mobileNavOverlay) mobileNavOverlay.hidden = false;
     document.body.style.overflow = "hidden";
   };
   const closeMobileNav = () => {
     mobileNavSheet?.classList.remove("is-open");
     mobileNavSheet?.setAttribute("aria-hidden", "true");
+    if (mobileNavSheet) mobileNavSheet.inert = true;
     if (mobileNavOverlay) mobileNavOverlay.hidden = true;
     document.body.style.overflow = "";
   };
@@ -703,11 +705,13 @@ document.addEventListener("DOMContentLoaded", () => {
     function openCart() {
       cartDrawer.classList.add("is-open");
       cartDrawer.setAttribute("aria-hidden", "false");
+      cartDrawer.inert = false;
       cartOverlay.hidden = false;
     }
     function closeCart() {
       cartDrawer.classList.remove("is-open");
       cartDrawer.setAttribute("aria-hidden", "true");
+      cartDrawer.inert = true;
       cartOverlay.hidden = true;
     }
 
@@ -1403,15 +1407,18 @@ document.addEventListener("DOMContentLoaded", () => {
   document.body.appendChild(bubble);
   const link = bubble.querySelector(".wa-nudge-link");
   link.href = fab.href;
+  bubble.setAttribute("aria-hidden", "true");
+  bubble.inert = true; // oculto: nadie puede llegar con Tab a un aviso que no se ve
 
   let i = 0, hideT, showT;
-  const hide = () => bubble.classList.remove("is-on");
+  const hide = () => { bubble.classList.remove("is-on"); bubble.setAttribute("aria-hidden", "true"); bubble.inert = true; };
   const show = () => {
     if (document.hidden || document.getElementById("cartDrawer")?.classList.contains("is-open")) { schedule(20000); return; }
     const m = msgs[i++ % msgs.length];
     link.querySelector("strong").textContent = m[0];
     link.querySelector("span").textContent = m[1];
     bubble.classList.add("is-on");
+    bubble.removeAttribute("aria-hidden"); bubble.inert = false;
     clearTimeout(hideT);
     hideT = setTimeout(() => { hide(); schedule(50000); }, 7000);
   };
