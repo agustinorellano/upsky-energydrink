@@ -5273,3 +5273,4 @@ body:has(.evl-sheet) .footer-band { background: #f6f6f8; }
 .fm-row.is-active .fm-row-n { color: var(--primary-on-dark); }
 .fm-list:has(.fm-row.is-active) .fm-row:not(.is-active) { color: rgba(255,255,255,.62); }
 .fm-big i { color: var(--primary-on-dark); }
+.ugc-action { min-width: 24px; min-height: 24px; }
