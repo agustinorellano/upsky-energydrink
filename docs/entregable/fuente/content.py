@@ -126,7 +126,7 @@ desk('Legales','Legales · <span>botón de arrepentimiento</span>','Pensado para
 ('wa','Enviar','Abre WhatsApp o el correo con el mensaje ya armado.','tl')],'Legales')
 desk('Legales','Legales · <span>términos y condiciones</span>','Página con índice y 13 puntos: pagos, envíos, arrepentimiento, datos personales y más. Texto de referencia para revisar con un asesor legal.','tyc-d','tyc-d','upsky.com.ar/terminos',[
 ('toc','Índice','Enlaces para ir directo a cada punto.','tl',0),
-('doc','Texto completo','Con los datos del negocio. Falta completar razón social, CUIT, plazos y tribunal.','tl',0)],'Legales')
+('doc','Texto completo','Con los datos del negocio. Datos del negocio completos.','tl',0)],'Legales')
 # ---- transversales
 add(top('Funciones transversales')+'<h2>Funciones <span>transversales</span></h2><p class="sub">Presentes en todas las páginas. Cuidan la experiencia aunque nadie las nombre.</p><div class="grid" style="grid-template-columns:repeat(3,1fr)">'+
  c('Compra','Pedir por WhatsApp','Botón en el menú con el mensaje de pedido ya escrito. En celular, el menú se abre en un panel con las mismas opciones.',1)+

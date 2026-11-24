@@ -26,7 +26,7 @@
     beneficios: ["¿Qué beneficios tiene?", "Aporta un estímulo energético que ayuda al rendimiento físico y mental: aumenta el estado de alerta y la concentración y reduce la fatiga. Los azúcares dan un combustible inmediato en esfuerzos intensos."],
     origen: ["¿Es de industria nacional?", "Sí, UP SKY es <b>Industria Argentina</b>. Se presenta en botella de vidrio de 355 cc."],
     donde: ["¿Dónde puedo comprar?", "Desde el catálogo de esta web. Nosotros te direccionamos al distribuidor más cercano a tu domicilio."],
-    envios: ["¿Hacen envíos?", "Sí, hacemos envíos. Distribuimos en Concordia y alrededores, y coordinamos el costo y el plazo por WhatsApp. Los precios publicados no incluyen envío."],
+    envios: ["¿Hacen envíos?", "Sí, hacemos envíos. Enviamos a todo el país: despachamos dentro de los 7 días y la entrega final depende del destino. Coordinamos el costo por WhatsApp. Los precios publicados no incluyen envío."],
     ubicacion: ["¿Dónde están?", "Estamos en <b>San Luis 318, Concordia, Entre Ríos</b>."],
     contacto: ["¿Cómo los contacto?", "Por WhatsApp (el botón de abajo), por email a <b>upskyenergydrink@gmail.com</b> o por Instagram <b>@upskyenergydrink</b>."],
     arrepentimiento: ["¿Puedo arrepentirme de una compra?", "Sí. Si compraste a distancia, podés revocar la compra dentro de los <b>10 días corridos</b> de recibir el producto, sin costo. Usá el <a href=\"arrepentimiento.html\">Botón de arrepentimiento</a>."],
@@ -43,8 +43,8 @@
     vitaminas: "Tiene vitaminas B3 (3 mg cada 100 ml) y B6 (0,6 mg cada 100 ml), y ácido ascórbico (vitamina C), que además ayuda a preservar el sabor.",
     ingredientes: "Agua carbonatada, sacarosa, glucosa, taurina, conservante (benzoato de sodio), saborizante, cafeína, antioxidante (ácido ascórbico), acidulante (ácido cítrico), regulador de acidez (bicarbonato de sodio) y vitaminas B3 y B6. Es el listado del rótulo.",
     precios: "<b>Precios (sin envío)</b><br>Pack de 6 botellas: <b>$14.500</b> (5% OFF desde 5 packs, máx. 10)<br>Vaso UP SKY: <b>$3.200</b> (5% OFF desde 5, 10% OFF desde 10)<br>Remera UP SKY: <b>$36.500</b> (3% OFF desde 5, 6% OFF desde 10)",
-    mayor: "<b>Por mayor</b><br>30 packs: <b>$388.500</b> (4% OFF desde 31 packs, consultá por WhatsApp)<br>1 pallet de 192 packs: <b>$2.304.000</b><br>Distribución en Concordia y alrededores. Pago por transferencia bancaria. Precios sin envío.",
-    pago: "El pago es por <b>transferencia bancaria</b> únicamente. Los precios no incluyen envío y la entrega la coordinamos por WhatsApp. Distribuimos en Concordia y alrededores.",
+    mayor: "<b>Por mayor</b><br>30 packs: <b>$388.500</b> (4% OFF desde 31 packs, consultá por WhatsApp)<br>1 pallet de 192 packs: <b>$2.304.000</b><br>Envíos a todo el país. Pago por transferencia bancaria. Precios sin envío.",
+    pago: "El pago es por <b>transferencia bancaria</b> únicamente. Los precios no incluyen envío y la entrega la coordinamos por WhatsApp. Enviamos a todo el país.",
     eventos: "Estamos armando la agenda de eventos. Las fechas y lugares se publican apenas se confirman.",
     saludo: "Hola, ¿cómo va? Contame qué necesitás.",
     gracias: "De nada. Si necesitás algo más, acá estoy.",
@@ -311,7 +311,7 @@
     },
     mayor: async () => {
       state.topic = "precios por mayor"; refreshHuman("Soy comercio y quiero precios por mayor.");
-      await say("Precios por mayor, <b>sin envío</b>:" + PRICES_MAYOR() + '<p class="ua-note">Distribución en Concordia y alrededores. Pago por transferencia bancaria.</p>', (m) => m.insertAdjacentHTML("beforeend", productCards(["mayor30"])));
+      await say("Precios por mayor, <b>sin envío</b>:" + PRICES_MAYOR() + '<p class="ua-note">Envíos a todo el país. Pago por transferencia bancaria.</p>', (m) => m.insertAdjacentHTML("beforeend", productCards(["mayor30"])));
       log.querySelectorAll(".ua-add").forEach((b) => { if (!b._b) { b._b = 1; b.addEventListener("click", () => addToCart(b.dataset.k, 1, b)); } });
       setChips([{ label: "Comprar por mayor", primary: true, run: () => go("comercio") }, { label: "Hablar con una persona", run: () => go("persona") }, ...back()]);
     },
